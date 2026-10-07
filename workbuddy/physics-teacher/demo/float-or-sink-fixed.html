@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>浮還是沉？——密度互動小實驗</title>
+<style>
+:root{
+  --bg:#eaf4fb; --card:#ffffff; --ink:#1e3a4c; --muted:#5b7488;
+  --accent:#0284c7; --accent-soft:#e0f2fe;
+  --float:#059669; --sink:#dc2626;
+  --surface:70px; --tankH:340px; --tankW:240px; --objH:64px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  background:linear-gradient(180deg,#e4f2fb,#f7fbff);
+  color:var(--ink); min-height:100vh; padding:26px 14px 60px;
+}
+header{text-align:center; margin-bottom:20px;}
+h1{font-size:1.9rem; letter-spacing:.06em; color:#0c4a6e;}
+.subtitle{color:var(--muted); margin-top:6px; font-size:1.02rem;}
+.controls{
+  max-width:860px; margin:0 auto 18px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+}
+.group{
+  background:var(--card); border-radius:18px; padding:14px 16px 16px;
+  box-shadow:0 4px 14px rgba(2,132,199,.10); flex:1; min-width:300px;
+}
+.group h2{font-size:1.02rem; color:#0c4a6e; margin-bottom:10px; letter-spacing:.05em;}
+.btns{display:flex; flex-wrap:wrap; gap:8px;}
+.btns button{
+  flex:1; min-width:86px; cursor:pointer; border:2px solid #cfe3ee; background:#f6fbfe;
+  border-radius:14px; padding:8px 6px; font-family:inherit; color:var(--ink);
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  transition:transform .12s, border-color .15s, background .15s;
+}
+.btns button:hover{transform:translateY(-2px); border-color:#7cc4e8;}
+.btns button.active{border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 3px rgba(2,132,199,.12);}
+.btns .emoji{font-size:1.7rem; line-height:1.2;}
+.btns .bname{font-size:.95rem; font-weight:700;}
+.btns .brho{font-size:.78rem; color:var(--muted);}
+
+main{
+  max-width:860px; margin:0 auto; display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:stretch;
+}
+.tank-col{
+  background:var(--card); border-radius:18px; padding:20px 24px;
+  box-shadow:0 4px 14px rgba(2,132,199,.10);
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+.tank{
+  position:relative; width:var(--tankW); height:var(--tankH);
+  background:rgba(255,255,255,.35); border:3px solid #b9dbe9; border-top:none;
+  border-radius:0 0 26px 26px; overflow:visible;
+}
+.liquid{
+  position:absolute; left:0; right:0; top:var(--surface); bottom:0;
+  border-radius:0 0 22px 22px;
+  background:linear-gradient(180deg,#a5e3f7,#38bdf8);
+  transition:background .4s;
+}
+.liquid::before{
+  content:""; position:absolute; top:-2px; left:0; right:0; height:4px;
+  background:rgba(255,255,255,.75); border-radius:50%;
+}
+.obj{
+  position:absolute; left:88px; top:-90px; width:var(--objH); height:var(--objH);
+  background:rgba(255,255,255,.92); border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.1rem; z-index:3;
+  box-shadow:0 3px 10px rgba(30,58,76,.25);
+}
+.obj.bob{animation:bob 2.6s ease-in-out .1s infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.bubble{
+  position:absolute; background:rgba(255,255,255,.8); border-radius:50%;
+  animation:rise 1.6s ease-out forwards; pointer-events:none; z-index:2;
+}
+@keyframes rise{to{transform:translateY(-160px); opacity:0;}}
+.ripple{
+  position:absolute; width:36px; height:12px; border:3px solid rgba(255,255,255,.9);
+  border-radius:50%; left:102px; top:64px; pointer-events:none; z-index:2;
+  animation:ripple .9s ease-out forwards;
+}
+@keyframes ripple{from{transform:scale(.4); opacity:1;} to{transform:scale(2.6); opacity:0;}}
+.liquid-tag{
+  font-size:.9rem; color:var(--muted);
+  background:#f1f8fc; border-radius:10px; padding:4px 12px;
+}
+.verdict{
+  font-size:1.35rem; font-weight:800; letter-spacing:.05em;
+  padding:8px 22px; border-radius:14px; transition:all .3s;
+}
+.verdict.float{color:var(--float); background:#ecfdf5; border:2px solid #a7f3d0;}
+.verdict.sink{color:var(--sink); background:#fef2f2; border:2px solid #fecaca;}
+
+.info{
+  flex:1; min-width:300px; max-width:430px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.card{
+  background:var(--card); border-radius:18px; padding:16px 18px;
+  box-shadow:0 4px 14px rgba(2,132,199,.10);
+}
+.density-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:7px 2px; font-size:1.04rem;
+}
+.density-row b{font-variant-numeric:tabular-nums; font-size:1.12rem;}
+.density-row + .density-row{border-top:1px dashed #d8e8f2;}
+.density-row .name{display:flex; align-items:center; gap:8px;}
+.compare{
+  text-align:center; font-size:1.25rem; font-weight:800; padding:8px 0 2px;
+  font-variant-numeric:tabular-nums;
+}
+.compare.float{color:var(--float);}
+.compare.sink{color:var(--sink);}
+.explain{
+  font-size:1.12rem; line-height:1.75; color:var(--ink);
+}
+.near-note{
+  margin-top:8px; font-size:.98rem; color:#92400e; background:#fffbeb;
+  border-radius:10px; padding:8px 12px; line-height:1.6; display:none;
+}
+.hint{font-size:.95rem; color:var(--muted); line-height:1.7;}
+footer{
+  max-width:860px; margin:18px auto 0; text-align:center;
+  color:var(--muted); font-size:.85rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧪 浮還是沉？</h1>
+  <p class="subtitle">先猜一猜，再選擇物件和液體，看看你猜得對不對！</p>
+</header>
+
+<section class="controls">
+  <div class="group">
+    <h2>① 選一件物件</h2>
+    <div class="btns" id="objectBtns"></div>
+  </div>
+  <div class="group">
+    <h2>② 選一種液體</h2>
+    <div class="btns" id="liquidBtns"></div>
+  </div>
+</section>
+
+<main>
+  <div class="tank-col">
+    <div class="tank" id="tank">
+      <div class="liquid" id="liquid"></div>
+      <div class="obj" id="obj">🪵</div>
+    </div>
+    <div class="liquid-tag" id="liquidTag">💧 清水</div>
+    <div class="verdict float" id="verdict">✨ 會浮！</div>
+  </div>
+
+  <aside class="info">
+    <div class="card">
+      <div class="density-row">
+        <span class="name" id="objName">🪵 木塊</span>
+        <span><b id="objRho">600</b> kg/m³</span>
+      </div>
+      <div class="density-row">
+        <span class="name" id="liqName">💧 清水</span>
+        <span><b id="liqRho">1,000</b> kg/m³</span>
+      </div>
+      <div class="compare" id="compare">600 &lt; 1,000</div>
+    </div>
+    <div class="card">
+      <p class="explain" id="explain"></p>
+      <p class="near-note" id="nearNote"></p>
+    </div>
+    <div class="card hint">
+      💡 <b>規則很簡單：</b><br>
+      物件密度 ＜ 液體密度 → 會浮<br>
+      物件密度 ＞ 液體密度 → 會沉<br>
+      （浮的時候，物件浸入液體的體積比例 = 物件密度 ÷ 液體密度）
+    </div>
+  </aside>
+</main>
+
+<footer>密度採用 SI 國際單位制：kg/m³（千克每立方米）。數值為教學用近似值。</footer>
+
+<script>
+const OBJECTS=[
+  {id:"wood",     name:"木塊",   emoji:"🪵", rho:600},
+  {id:"ice",      name:"冰塊",   emoji:"🧊", rho:917},
+  {id:"plastic",  name:"塑膠瓶", emoji:"🧴", rho:950},
+  {id:"aluminum", name:"鋁罐",   emoji:"🥫", rho:2700},
+  {id:"iron",     name:"鐵釘",   emoji:"🔩", rho:7870},
+];
+const LIQUIDS=[
+  {id:"water", name:"清水", emoji:"💧", rho:1000, light:"#a5e3f7", deep:"#38bdf8"},
+  {id:"salt",  name:"鹽水", emoji:"🧂", rho:1030, light:"#b6d4fb", deep:"#60a5fa"},
+  {id:"oil",   name:"食油", emoji:"🫗", rho:920,  light:"#fde9b0", deep:"#f4c344"},
+];
+
+const TANK_H=340, OBJ_H=64, SURFACE=70, OBJ_X=88;
+let curObj="wood", curLiq="water";
+
+const tank=document.getElementById("tank");
+const obj=document.getElementById("obj");
+const liquid=document.getElementById("liquid");
+
+function fmt(n){return n.toLocaleString("en-US");}
+
+function buildButtons(){
+  const ob=document.getElementById("objectBtns");
+  OBJECTS.forEach(o=>{
+    const b=document.createElement("button");
+    b.dataset.id=o.id;
+    b.innerHTML=`<span class="emoji">${o.emoji}</span><span class="bname">${o.name}</span><span class="brho">${fmt(o.rho)} kg/m³</span>`;
+    b.addEventListener("click",()=>{curObj=o.id; render(true);});
+    ob.appendChild(b);
+  });
+  const lb=document.getElementById("liquidBtns");
+  LIQUIDS.forEach(l=>{
+    const b=document.createElement("button");
+    b.dataset.id=l.id;
+    b.innerHTML=`<span class="emoji">${l.emoji}</span><span class="bname">${l.name}</span><span class="brho">${fmt(l.rho)} kg/m³</span>`;
+    b.addEventListener("click",()=>{curLiq=l.id; render(true);});
+    lb.appendChild(b);
+  });
+}
+
+function spawnRipple(){
+  const r=document.createElement("div");
+  r.className="ripple";
+  tank.appendChild(r);
+  setTimeout(()=>r.remove(),950);
+}
+function spawnBubble(baseTop){
+  const b=document.createElement("div");
+  b.className="bubble";
+  const s=4+Math.random()*7;
+  b.style.width=s+"px"; b.style.height=s+"px";
+  b.style.left=(OBJ_X+8+Math.random()*48)+"px";
+  b.style.top=(baseTop+40+Math.random()*18)+"px";
+  tank.appendChild(b);
+  setTimeout(()=>b.remove(),1700);
+}
+
+function render(animate){
+  const o=OBJECTS.find(x=>x.id===curObj);
+  const l=LIQUIDS.find(x=>x.id===curLiq);
+  const floats=o.rho<l.rho;
+
+  document.querySelectorAll("#objectBtns button").forEach(b=>b.classList.toggle("active",b.dataset.id===o.id));
+  document.querySelectorAll("#liquidBtns button").forEach(b=>b.classList.toggle("active",b.dataset.id===l.id));
+
+  obj.textContent=o.emoji;
+  liquid.style.background=`linear-gradient(180deg, ${l.light} 0%, ${l.deep} 100%)`;
+
+  let top;
+  if(floats){
+    const f=o.rho/l.rho;                 // 浮：浸入比例 = ρ物/ρ液
+    top=SURFACE-OBJ_H*(1-f);
+  }else{
+    top=TANK_H-OBJ_H-10;
+  }
+
+  if(animate){
+    obj.classList.remove("bob");
+    obj.style.transition="none";
+    obj.style.top="-90px";
+    void obj.offsetHeight;               // 強制重繪，令起點生效
+    setTimeout(()=>{
+      obj.style.transition=`top 1.6s ${floats?"cubic-bezier(.25,1.15,.45,1)":"cubic-bezier(.5,.05,.6,.95)"}`;
+      obj.style.top=top+"px";
+    },260);
+    setTimeout(spawnRipple,620);
+    if(!floats){for(let i=0;i<6;i++){setTimeout(()=>spawnBubble(top),750+i*230);}}
+    setTimeout(()=>{if(floats)obj.classList.add("bob");},1950);
+  }else{
+    obj.style.top=top+"px";
+  }
+
+  document.getElementById("objName").textContent=`${o.emoji} ${o.name}`;
+  document.getElementById("liqName").textContent=`${l.emoji} ${l.name}`;
+  document.getElementById("objRho").textContent=fmt(o.rho);
+  document.getElementById("liqRho").textContent=fmt(l.rho);
+  document.getElementById("liquidTag").textContent=`${l.emoji} ${l.name}`;
+
+  const cmp=document.getElementById("compare");
+  cmp.innerHTML=`${fmt(o.rho)} ${floats?"&lt;":"&gt;"} ${fmt(l.rho)}`;
+  cmp.className="compare "+(floats?"float":"sink");
+
+  const v=document.getElementById("verdict");
+  v.textContent=floats?"✨ 會浮！":"⬇️ 會沉！";
+  v.className="verdict "+(floats?"float":"sink");
+
+  document.getElementById("explain").textContent = floats
+    ? `${o.name}的密度（${fmt(o.rho)} kg/m³）比${l.name}（${fmt(l.rho)} kg/m³）小，所以會浮。`
+    : `${o.name}的密度（${fmt(o.rho)} kg/m³）比${l.name}（${fmt(l.rho)} kg/m³）大，所以會沉。`;
+
+  const near=document.getElementById("nearNote");
+  const ratio=o.rho/l.rho;
+  if(floats && ratio>0.9){
+    near.style.display="block";
+    near.textContent=`👀 留意：兩個密度好接近，${o.name}幾乎完全浸入${l.name}，只露出好少一部分！`;
+  }else{
+    near.style.display="none";
+  }
+}
+
+buildButtons();
+render(true);
+</script>
+<p style="text-align:center;font-size:12px;color:#888;margin:16px">AI 生成（WorkBuddy 中國版，2026年10月8日），粵語字詞已改為書面語 · 澳門科學館 Oscar 製作</p>
+</body>
+</html>
