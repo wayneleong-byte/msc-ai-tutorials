@@ -82,6 +82,17 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
   .stage{padding:10px 8px 90px}
   .nav button{min-width:72px;padding:10px 14px}
 }
+/* lightbox: click-to-enlarge */
+.slide img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,15,16,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 12px 40px;cursor:zoom-out;-webkit-tap-highlight-color:transparent}
+.lb.open{display:flex;animation:lbIn .18s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb img{max-width:min(1600px,98vw);max-height:calc(100vh - 100px);width:auto;height:auto;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 10px 50px rgba(0,0,0,.5);touch-action:pinch-zoom}
+.lb-cap{color:#e8f4f2;font-size:.85rem;margin-top:10px;text-align:center;max-width:92vw;line-height:1.5}
+.lb-close{position:absolute;top:10px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.3rem;cursor:pointer}
+.lb-close:hover,.lb-close:focus-visible{background:rgba(255,255,255,.32);outline:2px solid #7fddd4}
+.lb-hint{position:absolute;top:18px;left:16px;color:rgba(255,255,255,.6);font-size:.75rem}
+.zoom-note{font-size:.78rem;color:var(--muted);margin:4px 0 0}
 </style>
 </head>
 <body>
@@ -120,6 +131,7 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>學力依據：第56/2017號社會文化司司長批示附件一〈初中教育階段中文基本學力要求（第一語文即教學語文）〉</li>
 <li>所有示範文本均為<strong>自撰</strong>，不含真實學生個資</li>
 <li>截圖已遮蓋電郵、頭像、個人姓名等私隱資料</li>
+<li>點擊任何截圖可放大；按 Esc 或點擊畫面即可關閉</li>
 </ul>
 <p class="links-inline">官方網站：<a href="https://www.briskteaching.com" target="_blank" rel="noopener">briskteaching.com</a>　｜　說明中心：<a href="https://help.briskteaching.com/hc/en-us" target="_blank" rel="noopener">help.briskteaching.com</a></p>
 
@@ -765,6 +777,51 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 
   const hash=parseInt(location.hash.replace('#',''),10);
   go((hash>=1&&hash<=total)?hash-1:0);
+})();
+</script>
+<script>/* lightbox: click/tap any slide image to enlarge; Esc, click or tap closes.
+   While open, a capture-phase key handler swallows keys so slide navigation
+   cannot fire behind the overlay; after closing, keyboard nav works as before. */
+(function(){
+  const lb=document.createElement('div');
+  lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','放大圖片');
+  lb.innerHTML='<span class="lb-hint">按 Esc 或點擊任何位置關閉</span><button type="button" class="lb-close" aria-label="關閉">✕</button><img alt=""><div class="lb-cap"></div>';
+  document.body.appendChild(lb);
+  const big=lb.querySelector('img'),cap=lb.querySelector('.lb-cap'),closeBtn=lb.querySelector('.lb-close');
+  let lastFocus=null,isOpen=false;
+  function open(img){
+    big.src=img.currentSrc||img.src;big.alt=img.alt||'';
+    const fig=img.closest('figure');const fc=fig&&fig.querySelector('figcaption');
+    const sim=img.closest('.sim');const sc=sim&&sim.querySelector('.sim-cap');
+    cap.textContent=(fc&&fc.textContent)||(sc&&sc.textContent)||img.alt||'';
+    lastFocus=document.activeElement;isOpen=true;lb.classList.add('open');closeBtn.focus({preventScroll:true});
+  }
+  function close(){
+    if(!isOpen)return;isOpen=false;lb.classList.remove('open');big.removeAttribute('src');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.slide img').forEach(img=>{
+    img.setAttribute('tabindex','0');img.setAttribute('role','button');
+    if(!img.title)img.title='點擊放大';
+  });
+  document.addEventListener('click',e=>{
+    if(isOpen)return;
+    const img=e.target.closest&&e.target.closest('.slide img');
+    if(img){e.preventDefault();open(img);}
+  });
+  lb.addEventListener('click',e=>{e.stopPropagation();close();});
+  window.addEventListener('keydown',e=>{
+    if(isOpen){
+      e.stopImmediatePropagation();
+      if(e.key==='Escape'||e.key==='Enter'||e.key===' '){e.preventDefault();close();}
+      else if(e.key.indexOf('Arrow')===0||e.key==='PageUp'||e.key==='PageDown'||e.key==='Home'||e.key==='End'||e.key==='Tab'){e.preventDefault();}
+      return;
+    }
+    const a=document.activeElement;
+    if(e.key==='Enter'&&a&&a.matches&&a.matches('.slide img')){e.preventDefault();e.stopImmediatePropagation();open(a);}
+  },true);
+  ['touchstart','touchend'].forEach(t=>lb.addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+  window.__lightbox={open,close,isOpen:()=>isOpen};
 })();
 </script>
 </body>

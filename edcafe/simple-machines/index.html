@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edcafe AI 小五常識「簡單機械」教程｜澳門科學館</title>
+<style>
+:root{--bg:#0b2e2f;--panel:#0f3d3e;--accent:#1a9e8f;--accent2:#f0b429;--text:#1a1a1a;--muted:#5a6670;--card:#fff;--warn:#b33;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+.app{display:flex;flex-direction:column;height:100%}
+.topbar{display:flex;align-items:center;gap:12px;padding:8px 14px;background:var(--panel);color:#fff;flex-shrink:0;z-index:20}
+.topbar .brand{font-weight:700;font-size:.95rem;white-space:nowrap}
+.progress-wrap{flex:1;height:6px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7fddd4);transition:width .25s}
+.counter{font-size:.85rem;opacity:.9;min-width:4.5em;text-align:right}
+.btn-icon{background:rgba(255,255,255,.12);border:0;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem}
+.btn-icon:hover{background:rgba(255,255,255,.22)}
+.btn-icon:disabled{opacity:.35;cursor:default}
+.stage{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 80px}
+.slide{display:none;max-width:980px;margin:0 auto;background:var(--card);border-radius:var(--radius);padding:28px 32px 36px;box-shadow:0 10px 40px rgba(0,0,0,.25);min-height:min(70vh,720px)}
+.slide.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide h2{font-size:clamp(1.25rem,2.5vw,1.65rem);color:var(--panel);margin-bottom:14px;line-height:1.35}
+.slide h3{font-size:1.05rem;margin:16px 0 8px;color:var(--panel)}
+.slide p,.slide li{line-height:1.7;font-size:.98rem}
+.bullets{margin:10px 0 14px 1.2em}.bullets.compact li{margin:.25em 0}.bullets.warn li{margin:.45em 0}
+.tips{margin:14px 0;padding:12px 16px;background:#f3faf9;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;list-style:none}
+.tips li{margin:.35em 0;font-size:.92rem;color:#2a4a4a}
+.note{font-size:.9rem;color:var(--muted);margin:10px 0;line-height:1.6}
+.links-inline{margin:12px 0;font-size:.92rem}.links-inline a{color:var(--accent);word-break:break-all}
+.badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;vertical-align:middle;font-weight:600;margin-left:6px}
+.badge.free{background:#e6f5f3;color:#0f6e66}
+.badge.unclear{background:#fff3cd;color:#856404}
+.badge.paid{background:#fde8e8;color:#9b1c1c}
+.paid-list .badge{margin-left:8px}
+.prompt-box{margin:14px 0;border:1px solid #d5e5e3;border-radius:10px;overflow:hidden;background:#fafcfc}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#e8f4f2;font-size:.85rem;font-weight:600;color:var(--panel)}
+.copy-btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.8rem}
+.copy-btn:hover{filter:brightness(1.08)}.copy-btn.copied{background:#2d6a4f}
+.prompt-text{padding:12px 14px;white-space:pre-wrap;word-break:break-word;font-size:.88rem;line-height:1.65;max-height:180px;overflow:auto;font-family:inherit}
+.shots{display:grid;gap:14px;margin:14px 0}
+@media(min-width:700px){.shots{grid-template-columns:1fr 1fr}}
+.shot{margin:0}.shot img{width:100%;height:auto;border-radius:8px;border:1px solid #e0e8e7;display:block}
+.shot figcaption{font-size:.75rem;color:var(--muted);margin-top:4px}
+.sim{margin:14px 0}.sim-stage{position:relative;border-radius:8px;overflow:hidden;border:1px solid #e0e8e7;background:#111}
+.sim-img{width:100%;display:block;vertical-align:top}
+.sim-cursor{position:absolute;width:18px;height:18px;margin-left:-4px;margin-top:-2px;pointer-events:none;opacity:0;z-index:5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' stroke='%23111' stroke-width='1.2' d='M4 3l7 17 2.2-6.3L19 12z'/%3E%3C/svg%3E") no-repeat center/contain;
+  filter:drop-shadow(1px 2px 2px rgba(0,0,0,.45));transition:left .6s cubic-bezier(.22,.68,0,1.1),top .6s cubic-bezier(.22,.68,0,1.1)}
+.sim-ripple{position:absolute;width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);pointer-events:none;opacity:0;z-index:4;transform:translate(-50%,-50%);margin-left:4px;margin-top:4px}
+.sim-ripple.on{animation:ripple .45s ease-out}
+@keyframes ripple{0%{opacity:.9;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+.sim-type{position:absolute;background:rgba(255,255,255,.92);border:1px solid var(--accent);border-radius:6px;padding:6px 8px;font-size:11px;line-height:1.4;color:#222;pointer-events:none;opacity:0;z-index:3;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.replay-btn{margin-top:8px;background:#eef7f6;border:1px solid #b8d9d5;color:var(--panel);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.replay-btn:hover{background:#dff0ee}
+.cover{text-align:center;padding:48px 12px 24px}
+.cover-badge{display:inline-block;background:#e6f5f3;color:var(--accent);padding:6px 14px;border-radius:99px;font-size:.85rem;margin-bottom:20px}
+.cover h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--panel);line-height:1.25;margin-bottom:16px}
+.cover-sub{font-size:1.1rem;color:var(--muted);line-height:1.7}
+.cover-meta{margin-top:24px;color:var(--muted);font-size:.95rem}
+.credit{margin-top:20px;font-size:.9rem;color:var(--panel);font-weight:600}
+.footer-credit{position:fixed;bottom:52px;left:0;right:0;text-align:center;font-size:.72rem;color:rgba(255,255,255,.45);pointer-events:none;z-index:5}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:10px;padding:10px;background:rgba(11,46,47,.92);backdrop-filter:blur(8px);z-index:30}
+.nav button{background:var(--accent);color:#fff;border:0;padding:10px 22px;border-radius:10px;font-size:1rem;cursor:pointer;min-width:100px}
+.nav button:hover{filter:brightness(1.08)}.nav button:disabled{opacity:.4;cursor:default}
+.nav .toc-btn{background:rgba(255,255,255,.15)}
+.toc{columns:1;margin:8px 0 16px 1.2em}@media(min-width:640px){.toc{columns:2}}
+.toc li{margin:.35em 0;break-inside:avoid}.toc a{color:var(--accent);text-decoration:none;cursor:pointer}.toc a:hover{text-decoration:underline}
+.hint{font-size:.88rem;color:var(--muted)}
+.req-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0}
+.req-table th,.req-table td{border:1px solid #d5e0df;padding:8px 10px;text-align:left;vertical-align:top}
+.req-table th{background:#e8f4f2;color:var(--panel)}
+.req-table td:first-child{white-space:nowrap;font-weight:600;width:7em}
+.toc-drawer{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:stretch;justify-content:flex-end}
+.toc-drawer.open{display:flex}
+.toc-panel{width:min(360px,92vw);background:#fff;padding:20px;overflow:auto;box-shadow:-4px 0 24px rgba(0,0,0,.2)}
+.toc-panel h3{margin-bottom:12px;color:var(--panel)}
+.toc-panel ol{margin-left:1.2em}.toc-panel a{color:var(--accent);text-decoration:none;display:block;padding:4px 0;cursor:pointer}
+@media(max-width:600px){
+  .slide{padding:18px 16px 28px;border-radius:10px}
+  .stage{padding:10px 8px 90px}
+  .nav button{min-width:72px;padding:10px 14px}
+}
+
+.credit-line{margin-top:1.5rem;font-size:.8rem;opacity:.75;color:var(--panel);font-weight:600}
+.shots.one{grid-template-columns:1fr}
+.sim-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+.sim-cap{font-size:.75rem;color:var(--muted)}
+.sim-bar .replay-btn{margin-top:0}
+.demo-banner{background:#fff4d6;border:2px dashed #e0a100;color:#7a5300;font-weight:700;padding:10px 14px;border-radius:10px;margin:0 0 14px;font-size:.98rem;text-align:center}
+.req-table tr.hl td{background:#fffbe6}
+.req-table tr.demo-row td{background:#fff8e6}
+.plan-table td:first-child,.mat-table td:first-child{white-space:normal;width:auto}
+.mat-table a,.req-table a{color:var(--accent);word-break:break-all}
+.bullets a{color:var(--accent);word-break:break-all}
+.drive-link{font-weight:600}
+/* lightbox: click-to-enlarge */
+.slide img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,15,16,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 12px 40px;cursor:zoom-out;-webkit-tap-highlight-color:transparent}
+.lb.open{display:flex;animation:lbIn .18s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb img{max-width:min(1600px,98vw);max-height:calc(100vh - 100px);width:auto;height:auto;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 10px 50px rgba(0,0,0,.5);touch-action:pinch-zoom}
+.lb-cap{color:#e8f4f2;font-size:.85rem;margin-top:10px;text-align:center;max-width:92vw;line-height:1.5}
+.lb-close{position:absolute;top:10px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.3rem;cursor:pointer}
+.lb-close:hover,.lb-close:focus-visible{background:rgba(255,255,255,.32);outline:2px solid #7fddd4}
+.lb-hint{position:absolute;top:18px;left:16px;color:rgba(255,255,255,.6);font-size:.75rem}
+.zoom-note{font-size:.78rem;color:var(--muted);margin:4px 0 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <a class="brand" href="../" style="color:#fff;text-decoration:none" title="返回 Edcafe 教程目錄">Edcafe · 小五常識</a>
+    <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+    <span class="counter" id="counter">1 / 44</span>
+    <button type="button" class="btn-icon" id="toc-open" title="目錄" aria-label="目錄">☰</button>
+  </div>
+  <div class="stage">
+<section class="slide active" data-title="封面" id="s1">
+<div class="cover">
+<div class="cover-badge">澳門科學館 · 教師／同工培訓</div>
+<h1>Edcafe AI<br>互動教程</h1>
+<p class="cover-sub">建立 AI 聊天機器人、測驗、詞語卡、閱讀活動與評分器<br>示範：小學五年級常識「簡單機械」</p>
+<p class="cover-meta">2026年10月 · 繁體中文（澳門書面語）</p>
+<p class="credit">澳門科學館 Oscar 製作</p>
+<p class="hint" style="margin-top:18px">← → 鍵、畫面下方按鈕或左右滑動翻頁；點擊任何截圖可放大</p>
+</div>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="目錄" id="s2">
+<h2>目錄</h2>
+<ol class="toc" id="toc-list"></ol><p class="hint">點擊標題跳轉；右上角 ☰ 亦可隨時開啟目錄。</p>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="關於本教程" id="s3">
+<h2>關於本教程</h2>
+<ul class="bullets"><li>對象：澳門小學教師、澳門科學館教育同工</li><li>工具：<strong>Edcafe AI</strong>（網頁版，<a href="https://www.edcafe.ai" target="_blank" rel="noopener">edcafe.ai</a>；應用程式 <a href="https://app.edcafe.ai" target="_blank" rel="noopener">app.edcafe.ai</a>）</li><li>示範課題：小學五年級常識「簡單機械」（槓桿、滑輪、輪軸、斜面、楔、螺旋）</li><li>學力依據：第52/2024號社會文化司司長批示附件二〈小學教育階段常識基本學力要求〉</li><li>案例一：學生用「簡單機械學習助手」聊天機器人（知識庫＋闖關遊戲＋語音）</li><li>案例二：「五年甲班班主任小助手」客服式機器人——<strong>全部為虛構示範資料</strong></li><li>其餘工具（測驗、YouTube 測驗、詞語卡、閱讀活動、評分器、摘要筆記、教案）各一頁；付費工具只展示鎖定畫面</li><li>實測帳戶為 <strong>Free 方案</strong>；截圖已遮蓋帳戶名稱、頭像及學生加入用的 QR code／連結</li></ul><p class="note">所有知識庫素材均為自撰或虛構，可在「知識庫素材」一頁下載。AI 生成內容只作示範，使用前請教師核實。</p><p class="zoom-note">提示：點擊任何截圖可放大；按 Esc 或點擊畫面即可關閉。</p>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="登入 Edcafe" id="s4">
+<h2>登入 Edcafe</h2>
+<p>打開 <a href="https://app.edcafe.ai/auth/login" target="_blank" rel="noopener">app.edcafe.ai/auth/login</a>，按 <strong>Continue with Google</strong>（亦可用 Microsoft 或電郵）。登入後會進入「My Library」。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 76.2, &quot;y&quot;: 39.1, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/02-login.png" alt="登入頁：按 Continue with Google" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">登入頁：按 Continue with Google</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/01-home.png" alt="官方網站首頁 edcafe.ai" loading="lazy"><figcaption>官方網站首頁 edcafe.ai</figcaption></figure><figure class="shot"><img src="assets/07-cleared-library.png" alt="登入後的 My Library（Create New 選單）" loading="lazy"><figcaption>登入後的 My Library（Create New 選單）</figcaption></figure></div><ul class="tips"><li>首次登入會問你是哪類使用者（creator type），之後可隨時探索其他工具。</li><li>如帳戶內有舊練習或舊學生提交，可先在 My Library 刪除，再錄製或示範（本教程開始前已清理舊內容，相關畫面不公開）。</li><li>學生<strong>不需要</strong>註冊 Edcafe 帳戶：官方說明 “Students don't need an Edcafe account. They type their name and start chatting”。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="方案與用量" id="s5">
+<h2>方案與用量</h2>
+<p>左側選單 <strong>Account</strong> 可看到方案。官方收費頁：<a href="https://www.edcafe.ai/pricing" target="_blank" rel="noopener">edcafe.ai/pricing</a>（2026年10月7日讀取，價錢為按年繳付的每月價，頁面未註明幣種）。</p><table class="req-table plan-table"><thead><tr><th>項目</th><th>Free（$0）</th><th>Pro（$7.99／月）</th><th>Premium（$14.99／月）</th></tr></thead><tbody>
+<tr><td>每月 AI 生成次數</td><td>100 <span class="badge unclear">有限額</span></td><td>1000</td><td>無限</td></tr>
+<tr><td>自訂聊天機器人</td><td>3 個 <span class="badge unclear">有限額</span></td><td>20 個</td><td>無限</td></tr>
+<tr><td>Assignment Grader</td><td>3 個 <span class="badge unclear">有限額</span></td><td>20 個</td><td>無限</td></tr>
+<tr><td>每個測驗／機器人／評分器參與人數</td><td>40 <span class="badge unclear">有限額</span></td><td>200</td><td>1000</td></tr>
+<tr><td>上載檔案作 AI 知識庫</td><td>收費頁列為 Pro；<strong>實測 Free 帳戶可上載</strong></td><td>✔</td><td>✔</td></tr>
+<tr><td>匯出（Export）、Teaching Resources、AI Slides、AI Image、AI Text to Speech</td><td>✘ <span class="badge paid">付費</span></td><td>✔</td><td>✔</td></tr>
+<tr><td>學校 DPA、SOC 2、LMS 整合、專人支援</td><td>✘</td><td>✘</td><td>✔（for Schools）</td></tr>
+</tbody></table><div class="shots"><figure class="shot"><img src="assets/06-plan.png" alt="Account 頁：Free／Pro／Premium" loading="lazy"><figcaption>Account 頁：Free／Pro／Premium</figcaption></figure></div><ul class="tips"><li>本教程整個示範（案例一、二及各工具）約用了 <strong>8 次 AI 生成＋9 則聊天機器人測試訊息</strong>。</li><li>App 內<strong>沒有</strong>顯示「已用多少次」的用量計；請自行記錄。聊天訊息是否計入 100 次生成，官方未有說明（未確認）。</li><li>學校及學區方案（Schools &amp; Districts）需聯絡銷售團隊（Contact Sales）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建選單" id="s6">
+<h2>創建選單</h2>
+<p>按左上角 <strong>Create New</strong>，選單分兩組：</p><ul class="bullets compact"><li><strong>Activities &amp; Assessments</strong>：Chatbot、Quiz、YouTube Quiz、Flashcards、Reading Activity、Assignment Grader</li><li><strong>Content &amp; Planning</strong>：Slide Deck、Teaching Resources、Summary Note、Lesson Plan、AI Speech、AI Image</li></ul><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 7.8, &quot;y&quot;: 10.4, &quot;click&quot;: true}, {&quot;x&quot;: 39.6, &quot;y&quot;: 40.4, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/08-create-menu.png" alt="Create New 選單：按 Chatbot" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Create New 選單：按 Chatbot</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>有皇冠 👑 標記的是 Pro 功能；免費帳戶按下會彈出 “This is a Pro feature”。</li><li>多數工具可用 Topic／Text／Webpage／Files 四種來源；本教程用 <strong>Text</strong>（貼上自撰筆記）以確保內容準確。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="基本學力要求" id="s7">
+<h2>基本學力要求</h2>
+<p>依據：<strong>第52/2024號社會文化司司長批示</strong>附件二「小學教育階段常識基本學力要求」，<strong>「自 2025/2026 學校年度首日起在小學各年級實施」</strong>。學習範疇 D「科學與生活」（四至六年級）相關條文（逐字照錄）：</p>
+<table class="req-table"><thead><tr><th>編號</th><th>原文</th></tr></thead><tbody>
+<tr><td>D—2—8</td><td>能察覺力在生活中無處不在，並能列舉常見例子；</td></tr>
+<tr><td>D—2—9</td><td>能通過實驗，指出力會改變物體的運動狀態或形狀；</td></tr>
+<tr class="hl"><td>D—2—10</td><td>能說明簡單機械的原理，並能舉出它們在生活中的應用；</td></tr>
+<tr><td>D—2—11</td><td>能瞭解設計過程的基本步驟，並能設計或製作簡易的工程模型或產品；</td></tr>
+</tbody></table>
+<p class="note">編號說明（原文）：「大寫英文字母代表不同學習範疇的基本學力要求，A—“健康生活”，B—“人文社會與生活”，C—“自然環境與生活”，D—“科學與生活”」。本教程主要對應 <strong>D—2—10</strong>。舊版（第19/2016號批示）的相應編號為 D-2-7／D-2-8，引用時請用現行編號。</p><p class="links-inline">《公報》：<a href="https://bo.dsaj.gov.mo/bo/i/2024/29/despsasc_cn.asp#52" target="_blank" rel="noopener">bo.dsaj.gov.mo（第52/2024號批示）</a>　｜　PDF：<a href="https://images.bo.dsaj.gov.mo//bo/i/2024/29/despsasc-52-2024.pdf" target="_blank" rel="noopener">despsasc-52-2024.pdf</a>　｜　教青局：<a href="https://www.dsedj.gov.mo/crdc/edu/requirements.html" target="_blank" rel="noopener">基本學力要求</a></p><ul class="tips"><li>在 Lesson Plan 的 Standards 欄位貼上「D—2—10＋原文」，AI 會在教案中寫出對應條文（見「教案」一頁）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="知識庫素材" id="s8">
+<h2>知識庫素材</h2>
+<p>以下檔案是本教程用作知識庫／輸入內容的素材，全部自撰或虛構，可直接下載：</p><table class="req-table mat-table"><thead><tr><th>檔案</th><th>類型</th><th>用途</th></tr></thead><tbody><tr><td><a href="materials/%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0%E9%87%8D%E9%BB%9E%E7%AD%86%E8%A8%98.docx" download>簡單機械重點筆記.docx</a>（15 KB）<br><a href="materials/%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0%E9%87%8D%E9%BB%9E%E7%AD%86%E8%A8%98.md" download>簡單機械重點筆記.md</a>（8 KB）</td><td>Word／Markdown</td><td>案例一知識庫；亦貼入 Quiz、Reading、Summary 作 Text 來源</td></tr><tr><td><a href="materials/%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0%E7%B7%B4%E7%BF%92%E9%A1%8C%E5%BA%AB.pdf" download>簡單機械練習題庫.pdf</a>（361 KB）</td><td>PDF（15 題，附答案）</td><td>案例一知識庫（讓機器人分析答案）。⚠ 含答案，見「注意事項」</td></tr><tr><td><a href="materials/%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90%E8%88%87%E5%BD%B1%E7%89%87.docx" download>簡單機械參考連結與影片.docx</a>（13 KB）<br><a href="materials/%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90%E8%88%87%E5%BD%B1%E7%89%87.md" download>簡單機械參考連結與影片.md</a>（6 KB）</td><td>Word／Markdown</td><td>案例一知識庫：參考網站及影片清單</td></tr><tr class="demo-row"><td><a href="materials/%E7%A4%BA%E7%AF%84%E8%B3%87%E6%96%99%EF%BC%8D%E8%99%9B%E6%A7%8B%E5%AD%B8%E6%A0%A1%E7%8F%AD%E4%B8%BB%E4%BB%BB%E6%89%8B%E5%86%8A.docx" download>示範資料－虛構學校班主任手冊.docx</a>（14 KB）<br><a href="materials/%E7%A4%BA%E7%AF%84%E8%B3%87%E6%96%99%EF%BC%8D%E8%99%9B%E6%A7%8B%E5%AD%B8%E6%A0%A1%E7%8F%AD%E4%B8%BB%E4%BB%BB%E6%89%8B%E5%86%8A.md" download>示範資料－虛構學校班主任手冊.md</a>（8 KB）</td><td>Word／Markdown</td><td><strong>示範資料</strong>：案例二知識庫（虛構學校）</td></tr></tbody></table><h3>參考影片（YouTube）及字幕語言</h3><table class="req-table"><thead><tr><th>影片</th><th>長度</th><th>字幕</th></tr></thead><tbody><tr><td><a href="https://www.youtube.com/watch?v=YQ32qaec7Ys" target="_blank" rel="noopener">如何變成大力士：簡單機械槓桿</a></td><td>7:27</td><td>中文（台灣）人工字幕</td></tr><tr><td><a href="https://www.youtube.com/watch?v=fPDZVhgJ1_s" target="_blank" rel="noopener">輪軸</a></td><td>5:10</td><td>中文（台灣）人工字幕</td></tr><tr><td><a href="https://www.youtube.com/watch?v=LHBvB5Umgbw" target="_blank" rel="noopener">滑輪</a></td><td>7:07</td><td>中文（台灣）人工字幕</td></tr><tr><td><a href="https://www.youtube.com/watch?v=r12twrVmBwQ" target="_blank" rel="noopener">臺北酷課雲：簡單機械 Ⅰ</a></td><td>9:19</td><td>中文（台灣）人工字幕、中文繁體＋英文雙語、English</td></tr><tr><td><a href="https://www.youtube.com/watch?v=0MhOoWLsQkY" target="_blank" rel="noopener">臺北酷課雲：簡單機械 Ⅱ</a></td><td>9:09</td><td>同上</td></tr><tr><td><a href="https://www.youtube.com/watch?v=8U2BPtYyvW8" target="_blank" rel="noopener">NASA STEMonstrations（後備）</a></td><td>4:00</td><td>只有英文自動字幕</td></tr></tbody></table><p class="note">前三段影片以國語旁述，用語屬台灣慣用（如「翹翹板」「阻力臂」），課堂使用時可提醒學生對應本地用語（蹺蹺板、抗力臂）。暫未找到附字幕的粵語影片。</p><p class="links-inline">全部素材亦會放在：<span class="drive-link">Google Drive 資料夾（稍後加入）</span></p>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：建立 Chatbot" id="s9">
+<h2>案例一：建立「簡單機械學習助手」</h2>
+<p><strong>Create New → Chatbot</strong>。可在「What do you want the chatbot to do?」描述用途讓 AI 代寫指令（Generate the prompt），或按 <strong>I have my own prompt</strong> 直接貼上自己寫好的指令——本教程用後者。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 57.8, &quot;y&quot;: 52.2, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 56.2, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/10-c1-create.png" alt="Create Chatbot：按「I have my own prompt」" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Create Chatbot：按「I have my own prompt」</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>“Any knowledge to include?” 可在這裏先加知識，也可之後在 Knowledge 分頁加入。</li><li>編輯器左側有五個分頁：Instructions、Greeting、Capabilities、Knowledge、Language。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：指令（Instructions）" id="s10">
+<h2>案例一：指令（Instructions）</h2>
+<p>在 <strong>Instructions</strong> 分頁貼上以下指令（566 字元）。指令定義角色、知識範圍、三項功能、闖關玩法和安全守則。</p><div class="prompt-box"><div class="prompt-head"><span>案例一 Instructions（可複製）</span><button type="button" class="copy-btn" data-target="pt1">複製</button></div><pre class="prompt-text" id="pt1" style="max-height:200px">【角色】你是「簡單機械學習助手」，對象是澳門小學五年級學生。語氣親切、鼓勵、簡潔，用繁體中文回答，每次回覆不超過150字，適合朗讀。
+
+【知識範圍】只可根據知識庫的《簡單機械重點筆記》《簡單機械練習題庫》《簡單機械參考連結與影片》回答。知識庫沒有的內容，回答：「這個問題超出了我們的學習範圍，請問老師吧！」不要猜測，不要編造。
+
+【三項功能】
+1. 解答問題：用生活例子解釋槓桿、滑輪、輪軸、斜面、楔、螺旋。
+2. 練習與分析：出一題，等學生作答，再說明對或錯及原因，指出常見誤解。不要一次給出答案。
+3. 重點溫習：學生說「溫習」時，用3至5個要點總結指定主題。
+
+【闖關任務玩法】
+學生說「開始闖關」時啟動：
+- 第1關 槓桿三點、第2關 三類槓桿、第3關 滑輪、第4關 輪軸、第5關 斜面與楔、螺旋。
+- 每關3題（選擇題或判斷題），答對1題得10分；答錯先給提示，再答對得5分。
+- 每關答對2題或以上即過關，獲得徽章：槓桿小勇士、分類小偵探、滑輪工程師、輪軸大力士、斜面登山家。全部過關頒「簡單機械大師」稱號。
+- 每次回覆顯示：目前關卡／分數／已得徽章。
+- 學生可說「跳關」「重來」或「查看分數」。
+
+【安全】不可索取學生姓名以外的個人資料。遇到與學習無關或不安全的話題，溫和地引導回簡單機械學習，並建議找老師或家長。</pre></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 38.6, &quot;y&quot;: 35.4, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;【角色】你是「簡單機械學習助手」，對象是澳門小學五年級學生。語氣親切、鼓勵、簡潔，用繁體中文回答，每次回覆不超過150字，適合朗讀。\n\n【知識範圍】只可根據知識庫的《簡單機械重點筆記》《簡單機械練習題庫》《簡單機械參考連結與影片》回答。知識庫沒有的內容，回答：「這個問題超出了我們的學習範圍，請問老師吧！」不要猜測，不要編造。\n\n【三項功能……&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 48.6, &quot;y&quot;: 27.8, &quot;w&quot;: 31.4, &quot;h&quot;: 25.3}}"><div class="sim-stage"><img src="assets/11-c1-instructions.png" alt="Instructions 分頁：貼上指令" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Instructions 分頁：貼上指令</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>右上角 <strong>Prompt Assistant</strong> 可協助修訂指令。</li><li>官方未公布指令字數上限；本示範控制在 600 字元內。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：歡迎語（Greeting）" id="s11">
+<h2>案例一：歡迎語（Greeting）</h2>
+<p><strong>Greeting</strong> 是學生打開機器人時看到的第一句。</p><div class="prompt-box"><div class="prompt-head"><span>案例一 Greeting（可複製）</span><button type="button" class="copy-btn" data-target="pt2">複製</button></div><pre class="prompt-text" id="pt2">你好！我是「簡單機械學習助手」🔧
+我可以幫你：
+1️⃣ 解答槓桿、滑輪、輪軸、斜面的問題
+2️⃣ 出練習題，並分析你的答案
+3️⃣ 幫你溫習重點
+想挑戰一下？輸入「開始闖關」，完成5關就可以成為「簡單機械大師」！</pre></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 38.7, &quot;y&quot;: 39.7, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;你好！我是「簡單機械學習助手」🔧\n我可以幫你：\n1️⃣ 解答槓桿、滑輪、輪軸、斜面的問題\n2️⃣ 出練習題，並分析你的答案\n3️⃣ 幫你溫習重點\n想挑戰一下？輸入「開始闖關」，完成5關就可以成為「簡單機械大師」！&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 48.6, &quot;y&quot;: 27.8, &quot;w&quot;: 31.4, &quot;h&quot;: 16.8}}"><div class="sim-stage"><img src="assets/11-c1-greeting.png" alt="Greeting 分頁：貼上歡迎語" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Greeting 分頁：貼上歡迎語</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>編輯器<strong>沒有</strong>獨立的「開場提問（starter prompts）」欄位；可把建議問題寫在歡迎語中，例如「輸入『開始闖關』」。</li><li>官方說明：主指令內的連結不會顯示給學生；影片或網站連結要放在 Greeting。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：知識庫（Knowledge）" id="s12">
+<h2>案例一：知識庫（Knowledge）</h2>
+<p><strong>Knowledge → Add Knowledge</strong> 有三種方式：<strong>Upload Files</strong>、Add Web Page、Add Text Note。本示範上載三個檔案：重點筆記（Word）、練習題庫（PDF）、參考連結與影片（Word）。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 64.3, &quot;y&quot;: 35.7, &quot;click&quot;: true}, {&quot;x&quot;: 64.5, &quot;y&quot;: 39.2, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/12-c1-knowledge-menu.png" alt="Add Knowledge → Upload Files" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Add Knowledge → Upload Files</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/12-c1-knowledge-files.png" alt="上載後：三個檔案及 Knowledge Limits 選項" loading="lazy"><figcaption>上載後：三個檔案及 Knowledge Limits 選項</figcaption></figure></div><ul class="tips"><li>收費頁把「Upload Your Own Files as AI Knowledge」列為 <strong>Pro</strong> 功能，但本次以 <strong>Free 帳戶實測可以上載</strong>。兩者不一致，日後可能改變，請以實際帳戶為準。</li><li>支援 PDF、Word、PowerPoint、Excel、圖片；未見 YouTube 或 Google Drive 匯入。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：Files only" id="s13">
+<h2>案例一：只用知識庫回答（Files only）</h2>
+<p>加入知識檔案後才會出現 <strong>Knowledge Limits</strong>：</p><ul class="bullets compact"><li><strong>All knowledge</strong>：“Uses uploaded files plus general knowledge”</li><li><strong>Files only</strong>：“Uses only information from uploaded files”</li></ul><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.4, &quot;y&quot;: 52.5, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/13-c1-knowledge-limit.png" alt="選 Files only" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">選 Files only</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>選 <strong>Files only</strong> 並在指令寫明「知識庫沒有的內容要拒答」，可減少 AI 編造。</li><li>Edcafe 沒有「上網搜尋」開關；分別只在「上載材料」與「模型一般知識」之間。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：功能（Capabilities）" id="s14">
+<h2>案例一：功能（Capabilities）</h2>
+<p><strong>Capabilities</strong> 分頁可開關學生端功能：</p><ul class="bullets compact"><li>File Upload <span class="badge free">免費</span>——學生可附上文件或圖片</li><li><strong>Voice Messages</strong> <span class="badge free">免費</span>——學生可錄音發問（本示範開啟）</li><li>Whiteboard <span class="badge paid">付費</span>、Text Editor <span class="badge paid">付費</span>、Code Editor <span class="badge paid">付費</span>（皇冠標記）</li></ul><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 78.4, &quot;y&quot;: 31.6, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/14-c1-capabilities.png" alt="開啟 Voice Messages" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">開啟 Voice Messages</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>文字輸入框一直存在，不能設定為「只用語音」。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：語言與語音" id="s15">
+<h2>案例一：語言與語音（Language）</h2>
+<p><strong>Language</strong> 分頁：Output language 選 <strong>Chinese（繁體中文）</strong>，再選 Chatbot voice。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 64.3, &quot;y&quot;: 26.4, &quot;click&quot;: true}, {&quot;x&quot;: 53.1, &quot;y&quot;: 56.2, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/15-c1-language-dropdown.png" alt="Output language：選 Chinese（繁體中文）" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Output language：選 Chinese（繁體中文）</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 53.2, &quot;y&quot;: 50.8, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/15-c1-voice-cantonese-selected.png" alt="Chatbot voice：選 Siu-man（Hong Kong）" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Chatbot voice：選 Siu-man（Hong Kong）</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/15-c1-voice-list-zh-hant.png" alt="繁體中文可選的語音" loading="lazy"><figcaption>繁體中文可選的語音</figcaption></figure><figure class="shot"><img src="assets/15-c1-voice-list-english.png" alt="English 可選的語音（比較）" loading="lazy"><figcaption>English 可選的語音（比較）</figcaption></figure></div><ul class="tips"><li>繁體中文語音：Ching-yi、Chun-wei（Taiwan）；Lingling、Jianhua、Minghao、Xiaoyou（China Mainland）；Siu-man、Wai-kit（Hong Kong）；Anna、Ben、Lisa、Chris（Multilingual，Pro）。</li><li><strong>沒有任何語音標明「粵語／Cantonese」</strong>。本示範選最接近的 Siu-man（Hong Kong，女聲）；實測可播放，但未能確認是否以粵語朗讀——請教師先試聽。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：儲存與預覽" id="s16">
+<h2>案例一：儲存與預覽</h2>
+<p>按右上角 <strong>Save</strong>，輸入 File name、選資料夾，再按 Save。儲存後可在頁面看到指令摘要、歡迎語、功能及知識庫。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 50.0, &quot;y&quot;: 63.1, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/15-c1-save-dialog.png" alt="Save Chatbot 對話框" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Save Chatbot 對話框</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/15-c1-saved.png" alt="儲存後的機器人頁面（Assign／View Report／Edit／Share）" loading="lazy"><figcaption>儲存後的機器人頁面（Assign／View Report／Edit／Share）</figcaption></figure><figure class="shot"><img src="assets/16-c1-test-0-start.png" alt="預覽：學生端只需輸入名字" loading="lazy"><figcaption>預覽：學生端只需輸入名字</figcaption></figure></div><ul class="tips"><li>Save 對話框有 <strong>Content Visibility</strong>（預設 Public），請按需要調整。</li><li>預覽頁頂顯示 “Preview mode — session will not be saved”，測試對話不會記錄。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：測試問答" id="s17">
+<h2>案例一：測試問答</h2>
+<p>學生端輸入名字（本示範用 “Demo”）→ Start Chat。先問一題知識庫內容：</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 93.8, &quot;click&quot;: false}, {&quot;x&quot;: 67.8, &quot;y&quot;: 93.8, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;剪刀屬於第幾類槓桿？&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 31.1, &quot;y&quot;: 92.3, &quot;w&quot;: 32.2, &quot;h&quot;: 3.0}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/16-c1-test-1.png" alt="提問：剪刀屬於第幾類槓桿？" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">提問：剪刀屬於第幾類槓桿？</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/16-c1-test-4.png" alt="「幫我溫習滑輪」：以 5 個要點總結" loading="lazy"><figcaption>「幫我溫習滑輪」：以 5 個要點總結</figcaption></figure></div><ul class="tips"><li>回答「剪刀屬於第一類槓桿……支點在中間」，正確並附生活解釋。</li><li>溫習功能列出定滑輪、動滑輪、滑輪組及生活例子。</li><li>每則回覆下方顯示「x of 30 messages used」。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：闖關遊戲" id="s18">
+<h2>案例一：闖關遊戲</h2>
+<p>輸入「<strong>開始闖關</strong>」：機器人按指令進入第1關【槓桿三點】，出選擇題並顯示「目前關卡／分數／已得徽章」。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 93.8, &quot;click&quot;: false}, {&quot;x&quot;: 67.8, &quot;y&quot;: 93.8, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;開始闖關&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 31.1, &quot;y&quot;: 92.3, &quot;w&quot;: 32.2, &quot;h&quot;: 3.0}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/16-c1-test-2-quest.png" alt="輸入「開始闖關」" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">輸入「開始闖關」</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/16-c1-test-3-quest-answer.png" alt="答 A：答對，分數 10 分，進入第2題" loading="lazy"><figcaption>答 A：答對，分數 10 分，進入第2題</figcaption></figure></div><ul class="tips"><li>Edcafe <strong>沒有</strong>內建遊戲模式；闖關、計分和徽章全靠指令設計。</li><li>可再測「跳關」「重來」「查看分數」等指令。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：拒答範圍外" id="s19">
+<h2>案例一：拒答範圍外問題＋語音播放</h2>
+<p>問與課題無關的問題：「今天澳門的天氣怎樣？／電腦的 CPU 是甚麼？」</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 93.8, &quot;click&quot;: false}, {&quot;x&quot;: 67.8, &quot;y&quot;: 93.8, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;今天澳門的天氣怎樣？／電腦的 CPU 是甚麼？&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 31.1, &quot;y&quot;: 92.3, &quot;w&quot;: 32.2, &quot;h&quot;: 3.0}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/16-c1-test-5.png" alt="範圍外問題：機器人拒答並引導回課題" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">範圍外問題：機器人拒答並引導回課題</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 32.4, &quot;y&quot;: 36.4, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/16-c1-test-6-audio-playing.png" alt="按喇叭圖示播放語音（可選 0.7x／1x／1.5x）" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">按喇叭圖示播放語音（可選 0.7x／1x／1.5x）</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>實際回覆：「這些問題不在我們簡單機械的學習範圍內，請問老師吧！」——意思正確，但與指令的指定句子（「這個問題超出了我們的學習範圍，請問老師吧！」）不完全相同，AI 會改寫。</li><li>語音播放時圖示變成紅色停止鍵，並可調速度。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例一：派發（Assign）" id="s20">
+<h2>案例一：派發（Assign）</h2>
+<p>機器人頁面按 <strong>Assign</strong>：</p><ul class="bullets compact"><li>Accepting chats：開／關</li><li><strong>Message limit per student</strong>：10／20／30（預設）／Unlimited</li><li>Read chatbot responses aloud：Manual 等</li><li>分享方式：Copy link、Save QR、Embed、Google Classroom、Microsoft Teams</li><li>Responses：Free 方案上限 40 個 chat sessions</li></ul><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 59.4, &quot;y&quot;: 33.0, &quot;click&quot;: true}, {&quot;x&quot;: 41.6, &quot;y&quot;: 64.5, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/17-c1-share.png" alt="Assign Chatbot 對話框" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Assign Chatbot 對話框</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/17-c1-share-message-limit.png" alt="Message limit 選項" loading="lazy"><figcaption>Message limit 選項</figcaption></figure></div><ul class="tips"><li>截圖中的 QR code 已遮蓋——真實的學生加入連結不應公開。</li><li>闖關約需 15–20 則學生訊息，建議 30 或 Unlimited。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：概覽（示範資料）" id="s21" data-demo="1">
+<h2>案例二：班主任小助手（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><p>第二個機器人示範「客戶服務式」問答：家長或學生查詢班規、校曆、請假手續等，只根據一份<strong>虛構</strong>的班主任手冊回答。建立步驟與案例一相同。</p><div class="shots"><figure class="shot"><img src="assets/20-c2-create.png" alt="Create Chatbot（同樣按 I have my own prompt）" loading="lazy"><figcaption>Create Chatbot（同樣按 I have my own prompt）</figcaption></figure><figure class="shot"><img src="assets/25-c2-saved.png" alt="儲存後的「五年甲班班主任小助手（示範）」" loading="lazy"><figcaption>儲存後的「五年甲班班主任小助手（示範）」</figcaption></figure></div><ul class="tips"><li>知識庫：<a href="materials/%E7%A4%BA%E7%AF%84%E8%B3%87%E6%96%99%EF%BC%8D%E8%99%9B%E6%A7%8B%E5%AD%B8%E6%A0%A1%E7%8F%AD%E4%B8%BB%E4%BB%BB%E6%89%8B%E5%86%8A.docx" download>示範資料－虛構學校班主任手冊.docx</a>（14 KB）</li><li>Capabilities 全部關閉（客服問答不需要附件或白板）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：指令與歡迎語（示範資料）" id="s22" data-demo="1">
+<h2>案例二：指令與歡迎語（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><div class="prompt-box"><div class="prompt-head"><span>案例二 Instructions（可複製）</span><button type="button" class="copy-btn" data-target="pt3">複製</button></div><pre class="prompt-text" id="pt3" style="max-height:170px">【角色】你是「五年甲班班主任小助手（示範）」，是一個客戶服務式的問答助手，為家長和學生解答星光示範小學（虛構）五年甲班的班務問題。語氣有禮、清晰、簡潔，用繁體中文回覆，每次不超過120字。
+
+【資料範圍】只可根據知識庫的《示範資料－虛構學校班主任手冊》回答，範圍包括：班規、2026/2027示範校曆、校規（校服、考勤、電子產品、午膳）、手續（請假、遲到、更改聯絡資料、申請證明書、缺交功課）及常見問題。
+- 手冊有寫的：直接引用手冊內容回答，必要時列出步驟。
+- 手冊沒有寫、不確定或需要個別處理的：回答「這個問題我未能確定，請聯絡班主任。」
+- 不可猜測、不可補充手冊以外的規定或日期。
+
+【回覆格式】
+1. 先用一句話直接回答。
+2. 如涉及手續，用編號列出步驟。
+3. 如有需要，提醒「以上資料為虛構示範內容」。
+
+【限制】
+- 不處理投訴、成績查詢、個別學生情況或緊急事故；這些情況請對方聯絡班主任或校務處。
+- 不可索取或記錄學生或家長的個人資料。
+- 如對方提及受傷、身體不適或安全問題，請他立即聯絡學校或家長，並以安全為先。
+- 永遠保持禮貌；如對方情緒激動，先表示理解，再提供聯絡班主任的建議。</pre></div><div class="prompt-box"><div class="prompt-head"><span>案例二 Greeting（可複製）</span><button type="button" class="copy-btn" data-target="pt4">複製</button></div><pre class="prompt-text" id="pt4">您好！我是「五年甲班班主任小助手（示範）」😊
+我可以解答五年甲班的班規、校曆、校服、請假、遲到、午膳、證明書申請等問題。
+※ 此為虛構示範資料，學校及內容純屬虛構，與任何真實學校無關。
+請問有甚麼可以幫到您？</pre></div><div class="shots"><figure class="shot"><img src="assets/21-c2-instructions.png" alt="Instructions 分頁" loading="lazy"><figcaption>Instructions 分頁</figcaption></figure><figure class="shot"><img src="assets/21-c2-greeting.png" alt="Greeting 分頁" loading="lazy"><figcaption>Greeting 分頁</figcaption></figure></div>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：知識庫、功能與語音（示範資料）" id="s23" data-demo="1">
+<h2>案例二：知識庫、功能與語音（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.4, &quot;y&quot;: 46.6, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/22-c2-knowledge.png" alt="上載虛構手冊並選 Files only" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">上載虛構手冊並選 Files only</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/24-c2-capabilities.png" alt="Capabilities：全部關閉" loading="lazy"><figcaption>Capabilities：全部關閉</figcaption></figure><figure class="shot"><img src="assets/25-c2-language.png" alt="Language：繁體中文＋Ching-yi（Taiwan）" loading="lazy"><figcaption>Language：繁體中文＋Ching-yi（Taiwan）</figcaption></figure></div><ul class="tips"><li>手冊沒有寫的內容，指令要求回答「這個問題我未能確定，請聯絡班主任。」</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：測試問答（示範資料）" id="s24" data-demo="1">
+<h2>案例二：測試問答（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 93.8, &quot;click&quot;: false}, {&quot;x&quot;: 67.8, &quot;y&quot;: 93.8, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;每天幾點要回到學校？&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 31.1, &quot;y&quot;: 92.3, &quot;w&quot;: 32.2, &quot;h&quot;: 3.0}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/26-c2-test-1.png" alt="「每天幾點要回到學校？」" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">「每天幾點要回到學校？」</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/26-c2-test-2.png" alt="「想請三天事假回鄉，要怎樣做？」" loading="lazy"><figcaption>「想請三天事假回鄉，要怎樣做？」</figcaption></figure></div><ul class="tips"><li>回覆「7:55 預備鐘前回到課室，學校 7:30 開校門」及「最少提前 3 個上課日交『事假申請表』給班主任，由校長批核」，均與虛構手冊一致，並附「以上資料為虛構示範內容」。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：範圍外與投訴（示範資料）" id="s25" data-demo="1">
+<h2>案例二：範圍外與投訴（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><div class="shots"><figure class="shot"><img src="assets/26-c2-test-4.png" alt="手冊沒有的內容：「學校有沒有游泳班？收費多少？」" loading="lazy"><figcaption>手冊沒有的內容：「學校有沒有游泳班？收費多少？」</figcaption></figure><figure class="shot"><img src="assets/26-c2-test-5.png" alt="投訴：先表示理解，再轉介班主任或校務處" loading="lazy"><figcaption>投訴：先表示理解，再轉介班主任或校務處</figcaption></figure></div><ul class="tips"><li>範圍外問題回覆「這個問題我未能確定，請聯絡班主任。」——沒有編造收費。</li><li>投訴時沒有爭辯，按指令建議聯絡班主任或校務處。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="案例二：派發（示範資料）" id="s26" data-demo="1">
+<h2>案例二：派發（示範資料）</h2>
+<div class="demo-banner">⚠ 示範資料｜「星光示範小學」及手冊內容全屬虛構，與任何真實學校無關</div><p>派發方式與案例一相同。客服式問答可把 Message limit 設為 20，避免冗長對話。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 59.4, &quot;y&quot;: 33.0, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/27-c2-share.png" alt="Assign Chatbot：Message limit 下拉選單" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Assign Chatbot：Message limit 下拉選單</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><ul class="tips"><li>QR code 已遮蓋。</li><li>真正使用時，手冊內容須由學校核實，並避免放入任何學生或家長個人資料。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="測驗（Quiz）：建立" id="s27">
+<h2>測驗（Quiz）：建立</h2>
+<p><strong>Create New → Quiz</strong>。來源分頁：Topic、Text、Webpage、YouTube、Files。本示範用 <strong>Text</strong>（貼上重點筆記），Question type＝Mixed，Output language＝Chinese（繁體中文）。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 50.6, &quot;y&quot;: 27.9, &quot;click&quot;: true}, {&quot;x&quot;: 57.8, &quot;y&quot;: 55.6, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 70.7, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;小學五年級常識：簡單機械。約8題，題型混合，適合小五學生。&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 52.2, &quot;w&quot;: 44.1, &quot;h&quot;: 6.7}, &quot;typeAfter&quot;: 2}"><div class="sim-stage"><img src="assets/30a-quiz-input.png" alt="Text 來源＋額外指示 → Generate Quiz" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Text 來源＋額外指示 → Generate Quiz</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/30a-quiz-input-files.png" alt="Files 分頁" loading="lazy"><figcaption>Files 分頁</figcaption></figure><figure class="shot"><img src="assets/30a-quiz-files-pro-lock.png" alt="Quiz 的 Files 上載屬 Pro" loading="lazy"><figcaption>Quiz 的 Files 上載屬 Pro</figcaption></figure></div><ul class="tips"><li>Topic／Text／Webpage／YouTube <span class="badge free">免費</span>；Files 上載 <span class="badge paid">付費</span>。</li><li>每次生成計 1 次 AI 生成。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="測驗（Quiz）：結果與派發" id="s28">
+<h2>測驗（Quiz）：結果與派發</h2>
+<div class="shots"><figure class="shot"><img src="assets/30b-quiz-result.png" alt="生成結果：每題附 Explanation" loading="lazy"><figcaption>生成結果：每題附 Explanation</figcaption></figure><figure class="shot"><img src="assets/30b-quiz-generated-editor.png" alt="編輯器：可修改題目及答案" loading="lazy"><figcaption>編輯器：可修改題目及答案</figcaption></figure></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 54.7, &quot;y&quot;: 42.4, &quot;click&quot;: true}, {&quot;x&quot;: 65.6, &quot;y&quot;: 71.2, &quot;click&quot;: true}]}"><div class="sim-stage"><img src="assets/30c-quiz-assign.png" alt="Assign Quiz：Classic 模式 → Copy link" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Assign Quiz：Classic 模式 → Copy link</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/30c-quiz-preview-mode.png" alt="Preview mode" loading="lazy"><figcaption>Preview mode</figcaption></figure><figure class="shot"><img src="assets/30c-quiz-student-view.png" alt="學生端畫面（作者名稱已遮蓋）" loading="lazy"><figcaption>學生端畫面（作者名稱已遮蓋）</figcaption></figure></div><ul class="tips"><li>Quiz Mode：Classic <span class="badge free">免費</span>；Practice、Assessment <span class="badge paid">付費</span>。另有 Shuffle questions、Set time limit。</li><li>Free 方案每個測驗上限 40 份回應。</li><li>Export 按鈕有皇冠（Pro）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="YouTube 測驗" id="s29">
+<h2>YouTube 測驗</h2>
+<p>選單上的 <strong>YouTube Quiz</strong> 現已併入 Create Quiz 的 <strong>YouTube</strong> 分頁。貼上影片連結即可按影片內容出題。</p><div class="shots"><figure class="shot"><img src="assets/31a-ytquiz-moved-notice.png" alt="提示：YouTube Quiz 已移到 Quiz 內" loading="lazy"><figcaption>提示：YouTube Quiz 已移到 Quiz 內</figcaption></figure></div><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 63.7, &quot;y&quot;: 27.9, &quot;click&quot;: true}, {&quot;x&quot;: 48.8, &quot;y&quot;: 31.1, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 70.5, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;https://youtu.be/YQ32qaec7Ys&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 29.6, &quot;w&quot;: 44.1, &quot;h&quot;: 3.0}, &quot;typeAfter&quot;: 2}"><div class="sim-stage"><img src="assets/31a-ytquiz-input.png" alt="YouTube 分頁：貼上影片連結" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">YouTube 分頁：貼上影片連結</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/31b-ytquiz-result.png" alt="結果：題目附「Found in the video around [02:08]」時間點" loading="lazy"><figcaption>結果：題目附「Found in the video around [02:08]」時間點</figcaption></figure><figure class="shot"><img src="assets/31b-ytquiz-generated-editor.png" alt="編輯器" loading="lazy"><figcaption>編輯器</figcaption></figure></div><ul class="tips"><li>題目用語跟隨影片（台灣用語如「翹翹板」「阻力臂」「什麼」），派發前請改為本地用語。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="詞語卡（Flashcards）" id="s30">
+<h2>詞語卡（Flashcards）</h2>
+<p><strong>Create New → Flashcards</strong>，Template＝Term and definition，10 張，Output language＝繁體中文。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 32.0, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 77.8, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;小學五年級常識：簡單機械。詞語：槓桿、支點、施力點、抗力點、定滑輪、動滑輪、輪軸、斜面、楔、螺旋&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 30.0, &quot;w&quot;: 44.1, &quot;h&quot;: 5.1}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/32a-flashcards-input.png" alt="Topic：輸入課題及詞語 → Generate Flashcards" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Topic：輸入課題及詞語 → Generate Flashcards</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/32b-flashcards-generated-editor.png" alt="編輯器：可加圖片、選語音" loading="lazy"><figcaption>編輯器：可加圖片、選語音</figcaption></figure><figure class="shot"><img src="assets/32b-flashcards-result.png" alt="結果：翻卡＋語音播放" loading="lazy"><figcaption>結果：翻卡＋語音播放</figcaption></figure></div><ul class="tips"><li>Flashcards <span class="badge free">免費</span>；Add image to cards 可選「I will add images later」。</li><li>其他範本：Question and Answer、Vocabulary、True or False、Fill in the Blank、Custom。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="閱讀活動（Reading Activity）" id="s31">
+<h2>閱讀活動（Reading Activity）</h2>
+<p><strong>Create New → Reading Activity</strong>，用 Text 來源（重點筆記）生成小五程度的閱讀文章。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 47.8, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 63.0, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;小學五年級常識：簡單機械。閱讀程度適合小五學生，用繁體中文。&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 44.8, &quot;w&quot;: 44.1, &quot;h&quot;: 6.1}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/33a-reading-input.png" alt="額外指示 → Generate Reading Activity" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">額外指示 → Generate Reading Activity</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/33b-reading-generated-editor.png" alt="編輯器：Add vocabulary／Add passage quiz／Add audio" loading="lazy"><figcaption>編輯器：Add vocabulary／Add passage quiz／Add audio</figcaption></figure><figure class="shot"><img src="assets/33b-reading-result.png" alt="結果頁" loading="lazy"><figcaption>結果頁</figcaption></figure></div><ul class="tips"><li>Reading Activity <span class="badge free">免費</span>；加詞彙表或閱讀理解題會再用生成次數。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="評分器（Assignment Grader）：建立" id="s32">
+<h2>評分器（Assignment Grader）：建立</h2>
+<p><strong>Create New → Assignment Grader</strong>：寫題目（學生可見）及評分指示（滿分 5 分：例子正確 2 分、分類正確 2 分、說明清晰 1 分）。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 36.5, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 83.7, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請舉出兩個生活中的槓桿例子，並說明它們是省力還是費力。&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 36.3, &quot;y&quot;: 35.0, &quot;w&quot;: 43.4, &quot;h&quot;: 3.4}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/34a-grader-input.png" alt="輸入題目 → Create Assignment Grader" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">輸入題目 → Create Assignment Grader</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="prompt-box"><div class="prompt-head"><span>Grading instruction（可複製）</span><button type="button" class="copy-btn" data-target="pt5">複製</button></div><pre class="prompt-text" id="pt5">小學五年級常識：簡單機械。評分準則（滿分5分）：例子正確 2分（每個例子1分）；分類正確（省力／費力）2分；說明清晰 1分。請列出各項得分及總分，並用簡單、鼓勵的語氣給小五學生回饋及改進建議。</pre></div><div class="shots"><figure class="shot"><img src="assets/34b-grader-result.png" alt="評分器頁面" loading="lazy"><figcaption>評分器頁面</figcaption></figure></div><ul class="tips"><li>Free 方案最多 3 個評分器 <span class="badge unclear">有限額</span>。Rubric 可另行上載文件或圖片。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="評分器（Assignment Grader）：評分結果" id="s33">
+<h2>評分器（Assignment Grader）：評分結果</h2>
+<p>View Report → <strong>Add submission</strong>，可手動貼上或上載學生作業。本示範用虛構學生「示範學生A」。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 44.6, &quot;click&quot;: false}, {&quot;x&quot;: 50.0, &quot;y&quot;: 64.5, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;剛刀是省力槓桿，筷子是費力槓桿，因為支點位置不同。&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 38.1, &quot;y&quot;: 42.4, &quot;w&quot;: 23.8, &quot;h&quot;: 4.0}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/34c-grader-add-submission.png" alt="Add submission → Generate Feedback" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Add submission → Generate Feedback</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/34d-grader-feedback.png" alt="AI 逐項評分：總分 3/5" loading="lazy"><figcaption>AI 逐項評分：總分 3/5</figcaption></figure><figure class="shot"><img src="assets/41-submissions.png" alt="Submissions 頁：最新提交" loading="lazy"><figcaption>Submissions 頁：最新提交</figcaption></figure></div><ul class="tips"><li>示範答案有錯字（「剛刀」），AI 評分器也扣了分（3/5）；教師須自行判斷錯字應否扣分。</li><li>回饋寫明優點及改進建議，但仍需教師核實。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="摘要筆記（Summary Note）" id="s34">
+<h2>摘要筆記（Summary Note）</h2>
+<p><strong>Create New → Summary Note</strong>（來源：Topic／Text／Webpage／Files，沒有 YouTube 分頁）。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 48.8, &quot;y&quot;: 47.8, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 63.0, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;小學五年級常識：簡單機械。適合小五學生溫習的摘要筆記。&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 44.8, &quot;w&quot;: 44.1, &quot;h&quot;: 6.1}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/37a-summary-input.png" alt="額外指示 → Generate Summary Note" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">額外指示 → Generate Summary Note</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="shots"><figure class="shot"><img src="assets/37b-summary-result.png" alt="結果：簡單機械重點筆記" loading="lazy"><figcaption>結果：簡單機械重點筆記</figcaption></figure><figure class="shot"><img src="assets/37b-summary-generated-editor.png" alt="常見誤解與正確概念" loading="lazy"><figcaption>常見誤解與正確概念</figcaption></figure></div><ul class="tips"><li>實測生成的筆記包含 MA = R/E、W = Fd 等<strong>超出小五程度</strong>的公式，派發前應刪改。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="教案（Lesson Plan）" id="s35">
+<h2>教案（Lesson Plan）</h2>
+<p><strong>Create New → Lesson Plan</strong>：Topic＝小五常識「簡單機械：槓桿」，一節 40 分鐘；在 <strong>Standards</strong> 欄貼上基本學力要求編號及原文。</p><div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 44.9, &quot;y&quot;: 63.8, &quot;click&quot;: false}, {&quot;x&quot;: 57.8, &quot;y&quot;: 69.5, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;D—2—10「能說明簡單機械的原理，並能舉出它們在生活中的應用；」&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 35.7, &quot;y&quot;: 62.3, &quot;w&quot;: 18.8, &quot;h&quot;: 2.7}, &quot;typeAfter&quot;: 1}"><div class="sim-stage"><img src="assets/38a-lessonplan-input.png" alt="Standards：貼上 D—2—10 → Generate Lesson Plan" class="sim-img"><div class="sim-cursor" aria-hidden="true"></div><div class="sim-ripple" aria-hidden="true"></div><div class="sim-type" aria-hidden="true"></div></div><div class="sim-bar"><span class="sim-cap">Standards：貼上 D—2—10 → Generate Lesson Plan</span><button type="button" class="replay-btn">▶ 重播示範動畫</button></div></div><div class="prompt-box"><div class="prompt-head"><span>Additional instructions（可複製）</span><button type="button" class="copy-btn" data-target="pt6">複製</button></div><pre class="prompt-text" id="pt6">小學五年級，一節課 40 分鐘。包括引入、探究活動（槓桿三點：支點、施力點、抗力點；省力與費力槓桿）、生活應用例子、總結及評估。</pre></div><div class="shots"><figure class="shot"><img src="assets/38b-lessonplan-result.png" alt="結果：學習目標及「對應課程標準 D—2—10」" loading="lazy"><figcaption>結果：學習目標及「對應課程標準 D—2—10」</figcaption></figure><figure class="shot"><img src="assets/38b-lessonplan-generated-editor.png" alt="評量、教師反思、家課" loading="lazy"><figcaption>評量、教師反思、家課</figcaption></figure></div><ul class="tips"><li>Lesson Plan <span class="badge free">免費</span>；「Search Google for lesson resources」<span class="badge paid">付費</span>。</li><li>部分公式以原始 LaTeX 顯示（如 $ \tau = F \times d $），而力矩概念亦超出小五程度，請刪改。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="簡報（Slide Deck）" id="s36">
+<h2>簡報（Slide Deck）——付費功能</h2>
+<p><strong>Create New → Slide Deck</strong>（皇冠標記）。可選張數、語言及主題（Light、Dark、Chalkboard、Daydream……）。</p><div class="shots"><figure class="shot"><img src="assets/35a-slidedeck-input.png" alt="Create Slide Deck 輸入畫面" loading="lazy"><figcaption>Create Slide Deck 輸入畫面</figcaption></figure><figure class="shot"><img src="assets/35b-slidedeck-pro-lock.png" alt="按 Generate 後：This is a Pro feature" loading="lazy"><figcaption>按 Generate 後：This is a Pro feature</figcaption></figure></div><ul class="tips"><li><span class="badge paid">付費</span> 收費頁稱為 AI Slides Generator（Pro）。本教程未能生成簡報。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="教學資源搜尋（Teaching Resources）" id="s37">
+<h2>教學資源搜尋（Teaching Resources）——付費功能</h2>
+<p>輸入課題並勾選 Articles、Slide Decks、Videos、Worksheets，AI 搜尋網上教學資源。</p><div class="shots"><figure class="shot"><img src="assets/36a-teaching-resources-input.png" alt="Find Teaching Resources 輸入畫面" loading="lazy"><figcaption>Find Teaching Resources 輸入畫面</figcaption></figure><figure class="shot"><img src="assets/36b-teaching-resources-pro-lock.png" alt="Teaching resources finder：Pro" loading="lazy"><figcaption>Teaching resources finder：Pro</figcaption></figure></div><ul class="tips"><li><span class="badge paid">付費</span> 收費頁稱為 Teaching Resources Finder（Pro）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="AI 語音（AI Speech）" id="s38">
+<h2>AI 語音（AI Speech）——付費功能</h2>
+<p>貼上文字、選語言及語音（與聊天機器人相同的語音清單）、速度（0.5x–2x）及音高。</p><div class="shots"><figure class="shot"><img src="assets/39a-aispeech-input-voices.png" alt="Create AI Speech：繁體中文語音清單" loading="lazy"><figcaption>Create AI Speech：繁體中文語音清單</figcaption></figure><figure class="shot"><img src="assets/39b-aispeech-pro-lock.png" alt="AI speech generator：Pro" loading="lazy"><figcaption>AI speech generator：Pro</figcaption></figure></div><ul class="tips"><li><span class="badge paid">付費</span> 收費頁稱為 AI Text to Speech（Pro）。</li><li>注意：聊天機器人內的回覆朗讀（喇叭圖示）在 Free 方案可用。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="AI 圖像（AI Image）" id="s39">
+<h2>AI 圖像（AI Image）——付費功能</h2>
+<p>輸入描述並選風格（Photographic、Digital painting、Comic book、Line drawing……）。</p><div class="shots"><figure class="shot"><img src="assets/40a-aiimage-input.png" alt="Create AI Image 輸入畫面" loading="lazy"><figcaption>Create AI Image 輸入畫面</figcaption></figure><figure class="shot"><img src="assets/40b-aiimage-pro-lock.png" alt="AI image generator：Pro" loading="lazy"><figcaption>AI image generator：Pro</figcaption></figure></div><ul class="tips"><li><span class="badge paid">付費</span> 收費頁稱為 AI Image Generator（Pro）。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="分析助手與匯出" id="s40">
+<h2>分析助手與匯出——付費功能</h2>
+<p><strong>Analytics Assistant</strong> 可選一個互動檔案（測驗、詞語卡、閱讀、機器人、評分器），生成全班表現報告；<strong>Export</strong> 可把內容匯出成不同檔案格式。</p><div class="shots"><figure class="shot"><img src="assets/42-analytics-assistant.png" alt="Meet Your Analytics Assistant（皇冠標記）" loading="lazy"><figcaption>Meet Your Analytics Assistant（皇冠標記）</figcaption></figure><figure class="shot"><img src="assets/30b-quiz-result.png" alt="各結果頁的 Export 按鈕有皇冠" loading="lazy"><figcaption>各結果頁的 Export 按鈕有皇冠</figcaption></figure></div><ul class="tips"><li>Analytics Assistant <span class="badge paid">付費</span>；Export <span class="badge paid">付費</span>。</li><li>Free 方案仍可在 View Report 逐一查看學生對話及提交。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="付費功能一覽" id="s41">
+<h2>付費功能一覽</h2>
+<table class="req-table"><thead><tr><th>類別</th><th>項目</th></tr></thead><tbody><tr><td><span class="badge free">免費</span><br>（本教程已實測）</td><td>Chatbot（含知識庫上載、Files only、Voice Messages、File Upload、回覆朗讀）、Quiz（Topic／Text／Webpage／YouTube；Classic 模式）、Flashcards、Reading Activity、Assignment Grader、Summary Note、Lesson Plan</td></tr><tr><td><span class="badge unclear">有限額</span></td><td>每月 100 次 AI 生成；3 個聊天機器人；3 個評分器；每個測驗／機器人／評分器 40 名參與者；無用量計</td></tr><tr><td><span class="badge paid">付費</span><br>Pro</td><td>Slide Deck、Teaching Resources、AI Speech、AI Image、Analytics Assistant、Export；Quiz 的 Files 上載、Practice／Assessment 模式；Chatbot 的 Whiteboard／Text Editor／Code Editor；Multilingual 語音（Anna、Ben、Lisa、Chris）；Lesson Plan 的 Search Google</td></tr><tr><td><span class="badge paid">付費</span><br>Premium／學校</td><td>無限生成、無限機器人及評分器、1000 名參與者、DPA、SOC 2 報告、LMS 整合（Moodle、Canvas、Blackboard）、專人支援</td></tr></tbody></table><ul class="tips"><li>「上載檔案作 AI 知識庫」：收費頁列為 Pro，但 Free 帳戶實測可用——以實際帳戶為準。</li><li>以上依 2026年10月7日 收費頁及實測畫面整理，方案內容可能更改。</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="小結" id="s42">
+<h2>小結</h2>
+<ul class="bullets"><li>登入 app.edcafe.ai → Create New 選工具；學生免註冊，輸入名字即可使用</li><li><strong>Chatbot</strong>：自寫指令＋歡迎語 → 上載知識 → <strong>Files only</strong> → 開 Voice Messages → 選語言／語音 → Save → 預覽測試 → Assign</li><li>闖關、計分、徽章要靠<strong>指令設計</strong>，沒有內建遊戲模式</li><li>客服式機器人（案例二）：清楚寫明「手冊以外請聯絡班主任」，能有效避免編造</li><li>測驗、YouTube 測驗、詞語卡、閱讀活動、評分器、摘要筆記、教案均可在 Free 方案使用</li><li>把基本學力要求<strong>編號＋原文</strong>放入 Standards 或指示欄</li><li>Free 方案：每月 100 次生成、3 個機器人、3 個評分器、40 名參與者——要預先規劃</li></ul>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="注意事項" id="s43">
+<h2>注意事項</h2>
+<ul class="bullets warn"><li><strong>AI 輸出必須核實</strong>：實測出現超出小五程度的公式、原始 LaTeX、台灣用語、改寫指定句子；所有題目、答案及評分須教師審閱</li><li><strong>私隱</strong>：不要上載真實學生姓名、成績或家長資料；學生加入的連結／QR code 不要公開張貼；留意 Content Visibility（預設 Public）</li><li><strong>答案庫洩題風險</strong>：官方建議 “never upload answer keys or test banks”。本示範的練習題庫含答案（為了讓機器人分析答案），學生可能套出答案——正式評估前請只上載筆記</li><li><strong>用量</strong>：Free 方案每月 100 次 AI 生成，App 內沒有用量計；每個機器人每名學生預設 30 則訊息上限</li><li><strong>語音</strong>：沒有標明粵語的語音，Hong Kong 語音須先試聽</li><li><strong>示範資料</strong>：案例二的學校及手冊全屬虛構</li></ul><p class="links-inline">官方知識庫說明：<a href="https://www.edcafe.ai/blog/knowledge-base-chatbot" target="_blank" rel="noopener">Knowledge base chatbot（Edcafe Blog）</a></p>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="相關連結" id="s44">
+<h2>相關連結</h2>
+<ul class="bullets"><li><a href="https://www.edcafe.ai" target="_blank" rel="noopener">Edcafe 官網</a></li><li><a href="https://app.edcafe.ai" target="_blank" rel="noopener">Edcafe 應用程式（app.edcafe.ai）</a></li><li><a href="https://www.edcafe.ai/pricing" target="_blank" rel="noopener">方案／定價</a></li><li><a href="https://www.edcafe.ai/blog/how-to-build-an-ai-chatbot-no-code" target="_blank" rel="noopener">官方：建立 AI 聊天機器人</a></li><li><a href="https://www.edcafe.ai/blog/chatbot-for-language-learning" target="_blank" rel="noopener">官方：聊天機器人設定（Greeting、語音、學生免登入）</a></li><li><a href="https://www.edcafe.ai/blog/chatbot-message-limit" target="_blank" rel="noopener">官方：Message limit</a></li><li><a href="https://www.edcafe.ai/blog/create-interactive-youtube-quizzes" target="_blank" rel="noopener">官方：YouTube 測驗</a></li><li><a href="https://www.youtube.com/@EdcafeAI" target="_blank" rel="noopener">Edcafe 官方 YouTube 頻道</a></li><li><a href="https://bo.dsaj.gov.mo/bo/i/2024/29/despsasc_cn.asp#52" target="_blank" rel="noopener">第52/2024號社會文化司司長批示（《公報》）</a></li><li><a href="https://www.dsedj.gov.mo/crdc/edu/requirements.html" target="_blank" rel="noopener">教青局：基本學力要求</a></li><li>知識庫素材：<a href="#8" class="goto" data-goto="8">本教程「知識庫素材」頁</a>　｜　<span class="drive-link">Google Drive 資料夾（稍後加入）</span></li></ul><p class="credit" style="margin-top:2rem">澳門科學館 Oscar 製作 · 2026年10月</p>
+<p class="credit-line">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+  </div>
+  <div class="footer-credit">澳門科學館 Oscar 製作 · 2026年10月</div>
+  <nav class="nav">
+    <button type="button" id="prev">← 上一頁</button>
+    <button type="button" class="toc-btn" onclick="document.getElementById('toc-open').click()">目錄</button>
+    <button type="button" id="next">下一頁 →</button>
+  </nav>
+</div>
+<div class="toc-drawer" id="toc-drawer">
+  <div class="toc-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h3>目錄</h3>
+      <button type="button" class="btn-icon" id="toc-close" style="background:#eee;color:#333" aria-label="關閉目錄">✕</button></div>
+    <ol id="drawer-list"></ol>
+  </div>
+</div>
+<script>
+/* ===== 設定：Google Drive 資料夾連結（只需在這裏填入；留空時顯示「稍後加入」） ===== */
+const DRIVE_FOLDER_URL = "";
+/* ================================================================================ */
+(function(){
+  document.querySelectorAll('.drive-link').forEach(el=>{
+    if(DRIVE_FOLDER_URL){el.innerHTML='';const a=document.createElement('a');a.href=DRIVE_FOLDER_URL;a.target='_blank';a.rel='noopener';a.textContent='Google Drive 資料夾';el.appendChild(a);}
+    else el.textContent='Google Drive 資料夾（稍後加入）';
+  });
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;let idx=0;
+  const bar=document.getElementById('progress'),counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev'),nextBtn=document.getElementById('next');
+  const tocList=document.getElementById('toc-list'),drawer=document.getElementById('toc-drawer'),drawerList=document.getElementById('drawer-list');
+  const titles=slides.map((s,i)=>s.dataset.title||('投影片 '+(i+1)));
+  function buildToc(el){el.innerHTML='';titles.forEach((t,i)=>{const li=document.createElement('li');const a=document.createElement('a');a.textContent=(i+1)+'. '+t;a.href='#'+(i+1);a.addEventListener('click',ev=>{ev.preventDefault();go(i);closeToc();});li.appendChild(a);el.appendChild(li);});}
+  if(tocList)buildToc(tocList);if(drawerList)buildToc(drawerList);
+  function go(i){
+    if(i<0||i>=total)return;
+    slides[idx].classList.remove('active');idx=i;slides[idx].classList.add('active');
+    bar.style.width=((idx+1)/total*100)+'%';counter.textContent=(idx+1)+' / '+total;
+    prevBtn.disabled=idx===0;nextBtn.disabled=idx===total-1;
+    document.querySelector('.stage').scrollTop=0;
+    slides[idx].querySelectorAll('.sim').forEach(playSim);
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  function closeToc(){drawer.classList.remove('open');}
+  document.getElementById('toc-open').addEventListener('click',()=>drawer.classList.add('open'));
+  drawer.addEventListener('click',ev=>{if(ev.target===drawer)closeToc();});
+  document.getElementById('toc-close').addEventListener('click',closeToc);
+  prevBtn.addEventListener('click',()=>go(idx-1));nextBtn.addEventListener('click',()=>go(idx+1));
+  document.addEventListener('click',ev=>{const g=ev.target.closest('.goto');if(g){ev.preventDefault();go(parseInt(g.dataset.goto,10)-1);}});
+  document.addEventListener('keydown',ev=>{
+    const tag=(ev.target&&ev.target.tagName)||'';
+    if(tag==='INPUT'||tag==='TEXTAREA')return;
+    if(ev.key==='ArrowRight'||ev.key==='PageDown'||(ev.key===' '&&tag!=='BUTTON'&&tag!=='A')){ev.preventDefault();go(idx+1);}
+    else if(ev.key==='ArrowLeft'||ev.key==='PageUp'){ev.preventDefault();go(idx-1);}
+    else if(ev.key==='Escape')closeToc();
+    else if(ev.key==='Home'){ev.preventDefault();go(0);}
+    else if(ev.key==='End'){ev.preventDefault();go(total-1);}
+  });
+  let tx=null,ty=null;const stage=document.querySelector('.stage');
+  stage.addEventListener('touchstart',ev=>{tx=ev.changedTouches[0].screenX;ty=ev.changedTouches[0].screenY;},{passive:true});
+  stage.addEventListener('touchend',ev=>{if(tx==null)return;const dx=ev.changedTouches[0].screenX-tx,dy=ev.changedTouches[0].screenY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)go(idx+1);else go(idx-1);}tx=null;},{passive:true});
+  function copyText(t){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+    return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(x){rej(x);}ta.remove();});}
+  document.addEventListener('click',ev=>{const btn=ev.target.closest('.copy-btn');if(!btn)return;
+    const tgt=document.getElementById(btn.dataset.target);const text=tgt?tgt.textContent:(btn.dataset.copy||'');
+    copyText(text).then(()=>{btn.classList.add('copied');btn.textContent='已複製';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='複製';},1500);});});
+  function playSim(sim){
+    let cfg;try{cfg=JSON.parse(sim.getAttribute('data-sim'));}catch(x){return;}
+    const tok=(sim._tok=(sim._tok||0)+1);const alive=()=>sim._tok===tok;
+    const cursor=sim.querySelector('.sim-cursor'),ripple=sim.querySelector('.sim-ripple'),typeEl=sim.querySelector('.sim-type');
+    const path=cfg.path||[];const typeAt=(cfg.typeAfter==null)?path.length:cfg.typeAfter;
+    cursor.style.transition='none';cursor.style.opacity='0';cursor.style.left='50%';cursor.style.top='85%';void cursor.offsetWidth;cursor.style.transition='';
+    ripple.classList.remove('on');typeEl.style.opacity='0';typeEl.textContent='';
+    if(cfg.typeBox){const b=cfg.typeBox;typeEl.style.left=b.x+'%';typeEl.style.top=b.y+'%';typeEl.style.width=b.w+'%';typeEl.style.minHeight=b.h+'%';typeEl.style.height='auto';typeEl.style.maxHeight=Math.max(b.h,8)+'%';}
+    let step=0,typed=false;
+    function type(next){typed=true;if(!cfg.typeText){next();return;}typeEl.style.opacity='1';const full=cfg.typeText;let i=0;
+      const iv=setInterval(()=>{if(!alive()){clearInterval(iv);return;}i++;typeEl.textContent=full.slice(0,i);typeEl.scrollTop=typeEl.scrollHeight;if(i>=full.length){clearInterval(iv);setTimeout(()=>alive()&&next(),350);}},Math.max(10,Math.min(45,1600/full.length)));}
+    function run(){
+      if(!alive())return;
+      if(step===typeAt&&!typed){type(run);return;}
+      if(step>=path.length)return;
+      const p=path[step];cursor.style.opacity='1';cursor.style.left=p.x+'%';cursor.style.top=p.y+'%';
+      setTimeout(()=>{if(!alive())return;if(p.click){ripple.style.left=p.x+'%';ripple.style.top=p.y+'%';ripple.classList.remove('on');void ripple.offsetWidth;ripple.classList.add('on');}
+        step++;setTimeout(run,p.click?450:200);},700);
+    }
+    setTimeout(run,350);
+  }
+  document.addEventListener('click',ev=>{const b=ev.target.closest('.replay-btn');if(b)playSim(b.closest('.sim'));});
+  const hash=parseInt(location.hash.replace('#',''),10);
+  go((hash>=1&&hash<=total)?hash-1:0);
+})();
+</script>
+<script>/* lightbox: click/tap any slide image to enlarge; Esc, click or tap closes.
+   While open, a capture-phase key handler swallows keys so slide navigation
+   cannot fire behind the overlay; after closing, keyboard nav works as before. */
+(function(){
+  const lb=document.createElement('div');
+  lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','放大圖片');
+  lb.innerHTML='<span class="lb-hint">按 Esc 或點擊任何位置關閉</span><button type="button" class="lb-close" aria-label="關閉">✕</button><img alt=""><div class="lb-cap"></div>';
+  document.body.appendChild(lb);
+  const big=lb.querySelector('img'),cap=lb.querySelector('.lb-cap'),closeBtn=lb.querySelector('.lb-close');
+  let lastFocus=null,isOpen=false;
+  function open(img){
+    big.src=img.currentSrc||img.src;big.alt=img.alt||'';
+    const fig=img.closest('figure');const fc=fig&&fig.querySelector('figcaption');
+    const sim=img.closest('.sim');const sc=sim&&sim.querySelector('.sim-cap');
+    cap.textContent=(fc&&fc.textContent)||(sc&&sc.textContent)||img.alt||'';
+    lastFocus=document.activeElement;isOpen=true;lb.classList.add('open');closeBtn.focus({preventScroll:true});
+  }
+  function close(){
+    if(!isOpen)return;isOpen=false;lb.classList.remove('open');big.removeAttribute('src');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.slide img').forEach(img=>{
+    img.setAttribute('tabindex','0');img.setAttribute('role','button');
+    if(!img.title)img.title='點擊放大';
+  });
+  document.addEventListener('click',e=>{
+    if(isOpen)return;
+    const img=e.target.closest&&e.target.closest('.slide img');
+    if(img){e.preventDefault();open(img);}
+  });
+  lb.addEventListener('click',e=>{e.stopPropagation();close();});
+  window.addEventListener('keydown',e=>{
+    if(isOpen){
+      e.stopImmediatePropagation();
+      if(e.key==='Escape'||e.key==='Enter'||e.key===' '){e.preventDefault();close();}
+      else if(e.key.indexOf('Arrow')===0||e.key==='PageUp'||e.key==='PageDown'||e.key==='Home'||e.key==='End'||e.key==='Tab'){e.preventDefault();}
+      return;
+    }
+    const a=document.activeElement;
+    if(e.key==='Enter'&&a&&a.matches&&a.matches('.slide img')){e.preventDefault();e.stopImmediatePropagation();open(a);}
+  },true);
+  ['touchstart','touchend'].forEach(t=>lb.addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+  window.__lightbox={open,close,isOpen:()=>isOpen};
+})();
+</script>
+</body>
+</html>
