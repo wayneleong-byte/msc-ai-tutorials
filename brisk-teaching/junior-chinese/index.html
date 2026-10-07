@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brisk Teaching 初中中文教程｜澳門科學館</title>
+<style>
+:root{--bg:#0b2e2f;--panel:#0f3d3e;--accent:#1a9e8f;--accent2:#f0b429;--text:#1a1a1a;--muted:#5a6670;--card:#fff;--warn:#b33;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+.app{display:flex;flex-direction:column;height:100%}
+.topbar{display:flex;align-items:center;gap:12px;padding:8px 14px;background:var(--panel);color:#fff;flex-shrink:0;z-index:20}
+.topbar .brand{font-weight:700;font-size:.95rem;white-space:nowrap}
+.progress-wrap{flex:1;height:6px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7fddd4);transition:width .25s}
+.counter{font-size:.85rem;opacity:.9;min-width:4.5em;text-align:right}
+.btn-icon{background:rgba(255,255,255,.12);border:0;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem}
+.btn-icon:hover{background:rgba(255,255,255,.22)}
+.btn-icon:disabled{opacity:.35;cursor:default}
+.stage{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 80px}
+.slide{display:none;max-width:980px;margin:0 auto;background:var(--card);border-radius:var(--radius);padding:28px 32px 36px;box-shadow:0 10px 40px rgba(0,0,0,.25);min-height:min(70vh,720px)}
+.slide.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide h2{font-size:clamp(1.25rem,2.5vw,1.65rem);color:var(--panel);margin-bottom:14px;line-height:1.35}
+.slide h3{font-size:1.05rem;margin:16px 0 8px;color:var(--panel)}
+.slide p,.slide li{line-height:1.7;font-size:.98rem}
+.bullets{margin:10px 0 14px 1.2em}.bullets.compact li{margin:.25em 0}.bullets.warn li{margin:.45em 0}
+.tips{margin:14px 0;padding:12px 16px;background:#f3faf9;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;list-style:none}
+.tips li{margin:.35em 0;font-size:.92rem;color:#2a4a4a}
+.note{font-size:.9rem;color:var(--muted);margin:10px 0;line-height:1.6}
+.links-inline{margin:12px 0;font-size:.92rem}.links-inline a{color:var(--accent);word-break:break-all}
+.badge{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:6px;vertical-align:middle;font-weight:600;margin-left:6px}
+.badge.free{background:#e6f5f3;color:#0f6e66}
+.badge.unclear{background:#fff3cd;color:#856404}
+.badge.paid{background:#fde8e8;color:#9b1c1c}
+.paid-list .badge{margin-left:8px}
+.prompt-box{margin:14px 0;border:1px solid #d5e5e3;border-radius:10px;overflow:hidden;background:#fafcfc}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#e8f4f2;font-size:.85rem;font-weight:600;color:var(--panel)}
+.copy-btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.8rem}
+.copy-btn:hover{filter:brightness(1.08)}.copy-btn.copied{background:#2d6a4f}
+.prompt-text{padding:12px 14px;white-space:pre-wrap;word-break:break-word;font-size:.88rem;line-height:1.65;max-height:180px;overflow:auto;font-family:inherit}
+.shots{display:grid;gap:14px;margin:14px 0}
+@media(min-width:700px){.shots{grid-template-columns:1fr 1fr}}
+.shot{margin:0}.shot img{width:100%;height:auto;border-radius:8px;border:1px solid #e0e8e7;display:block}
+.shot figcaption{font-size:.75rem;color:var(--muted);margin-top:4px}
+.sim{margin:14px 0}.sim-stage{position:relative;border-radius:8px;overflow:hidden;border:1px solid #e0e8e7;background:#111}
+.sim-img{width:100%;display:block;vertical-align:top}
+.sim-cursor{position:absolute;width:18px;height:18px;margin-left:-4px;margin-top:-2px;pointer-events:none;opacity:0;z-index:5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' stroke='%23111' stroke-width='1.2' d='M4 3l7 17 2.2-6.3L19 12z'/%3E%3C/svg%3E") no-repeat center/contain;
+  filter:drop-shadow(1px 2px 2px rgba(0,0,0,.45));transition:left .6s cubic-bezier(.22,.68,0,1.1),top .6s cubic-bezier(.22,.68,0,1.1)}
+.sim-ripple{position:absolute;width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);pointer-events:none;opacity:0;z-index:4;transform:translate(-50%,-50%);margin-left:4px;margin-top:4px}
+.sim-ripple.on{animation:ripple .45s ease-out}
+@keyframes ripple{0%{opacity:.9;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+.sim-type{position:absolute;background:rgba(255,255,255,.92);border:1px solid var(--accent);border-radius:6px;padding:6px 8px;font-size:11px;line-height:1.4;color:#222;pointer-events:none;opacity:0;z-index:3;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.replay-btn{margin-top:8px;background:#eef7f6;border:1px solid #b8d9d5;color:var(--panel);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.replay-btn:hover{background:#dff0ee}
+.cover{text-align:center;padding:48px 12px 24px}
+.cover-badge{display:inline-block;background:#e6f5f3;color:var(--accent);padding:6px 14px;border-radius:99px;font-size:.85rem;margin-bottom:20px}
+.cover h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--panel);line-height:1.25;margin-bottom:16px}
+.cover-sub{font-size:1.1rem;color:var(--muted);line-height:1.7}
+.cover-meta{margin-top:24px;color:var(--muted);font-size:.95rem}
+.credit{margin-top:20px;font-size:.9rem;color:var(--panel);font-weight:600}
+.footer-credit{position:fixed;bottom:52px;left:0;right:0;text-align:center;font-size:.72rem;color:rgba(255,255,255,.45);pointer-events:none;z-index:5}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:10px;padding:10px;background:rgba(11,46,47,.92);backdrop-filter:blur(8px);z-index:30}
+.nav button{background:var(--accent);color:#fff;border:0;padding:10px 22px;border-radius:10px;font-size:1rem;cursor:pointer;min-width:100px}
+.nav button:hover{filter:brightness(1.08)}.nav button:disabled{opacity:.4;cursor:default}
+.nav .toc-btn{background:rgba(255,255,255,.15)}
+.toc{columns:1;margin:8px 0 16px 1.2em}@media(min-width:640px){.toc{columns:2}}
+.toc li{margin:.35em 0;break-inside:avoid}.toc a{color:var(--accent);text-decoration:none;cursor:pointer}.toc a:hover{text-decoration:underline}
+.hint{font-size:.88rem;color:var(--muted)}
+.req-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0}
+.req-table th,.req-table td{border:1px solid #d5e0df;padding:8px 10px;text-align:left;vertical-align:top}
+.req-table th{background:#e8f4f2;color:var(--panel)}
+.req-table td:first-child{white-space:nowrap;font-weight:600;width:7em}
+.toc-drawer{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:stretch;justify-content:flex-end}
+.toc-drawer.open{display:flex}
+.toc-panel{width:min(360px,92vw);background:#fff;padding:20px;overflow:auto;box-shadow:-4px 0 24px rgba(0,0,0,.2)}
+.toc-panel h3{margin-bottom:12px;color:var(--panel)}
+.toc-panel ol{margin-left:1.2em}.toc-panel a{color:var(--accent);text-decoration:none;display:block;padding:4px 0;cursor:pointer}
+@media(max-width:600px){
+  .slide{padding:18px 16px 28px;border-radius:10px}
+  .stage{padding:10px 8px 90px}
+  .nav button{min-width:72px;padding:10px 14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <span class="brand">Brisk · 初中中文</span>
+    <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+    <span class="counter" id="counter">1 / 32</span>
+    <button type="button" class="btn-icon" id="toc-open" title="目錄">☰</button>
+  </div>
+  <div class="stage">
+<section class="slide active" data-title="封面" id="s1">
+<div class="cover">
+  <div class="cover-badge">澳門科學館 · 教師／同工培訓</div>
+  <h1>Brisk Teaching<br>互動教程</h1>
+  <p class="cover-sub">在 Google 文件內使用 AI 備課與回饋<br>示範：澳門初中中文</p>
+  <p class="cover-meta">2026年10月 · 繁體中文（澳門書面語）</p>
+  <p class="credit">澳門科學館 Oscar 製作</p>
+</div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="目錄" id="s2">
+<h2>目錄</h2>
+<ol class="toc" id="toc-list"></ol>
+<p class="hint">按左側編號或鍵盤數字可跳轉；← → 鍵翻頁。</p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="關於本教程" id="s3">
+<h2>關於本教程</h2>
+<ul class="bullets">
+<li>對象：澳門教師、澳門科學館教育同工</li>
+<li>工具：<strong>Brisk Teaching</strong> Chrome 擴充功能（在 Google 文件內使用）</li>
+<li>示範科目：初中二年級中文（說明文閱讀＋記敘文寫作）</li>
+<li>學力依據：第56/2017號社會文化司司長批示附件一〈初中教育階段中文基本學力要求（第一語文即教學語文）〉</li>
+<li>所有示範文本均為<strong>自撰</strong>，不含真實學生個資</li>
+<li>截圖已遮蓋電郵、頭像、個人姓名等私隱資料</li>
+</ul>
+<p class="links-inline">官方網站：<a href="https://www.briskteaching.com" target="_blank" rel="noopener">briskteaching.com</a>　｜　說明中心：<a href="https://help.briskteaching.com/hc/en-us" target="_blank" rel="noopener">help.briskteaching.com</a></p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="安裝：Chrome 線上應用程式商店" id="s4">
+<h2>① 安裝 Brisk Teaching</h2>
+<p>到 Chrome 線上應用程式商店搜尋或開啟官方頁面，按「Add to Chrome」。</p>
+<p class="links-inline"><a href="https://chromewebstore.google.com/detail/brisk-teaching-ai-that-wo/pcblbflgdkdfdjpjifeppkljdnaekohj" target="_blank" rel="noopener">Chrome Web Store 安裝頁</a></p>
+<ul class="tips"><li>擴充功能 ID：pcblbflgdkdfdjpjifeppkljdnaekohj</li><li>亦支援 Microsoft Edge（見說明中心）</li><li>安裝說明：https://help.briskteaching.com/hc/en-us/articles/38789769509524-Installing-the-Brisk-Chrome-extension</li></ul>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 28, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/01-store-listing.png" alt="01-store-listing.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/02-add-dialog.png" alt="02-add-dialog.png" loading="lazy"><figcaption>02-add-dialog</figcaption></figure><figure class="shot"><img src="assets/03-installed.png" alt="03-installed.png" loading="lazy"><figcaption>03-installed</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="釘選擴充功能" id="s5">
+<h2>② 釘選擴充功能</h2>
+<p>按瀏覽器工具列的<strong>拼圖圖示</strong> → 找到 Brisk Teaching → 按<strong>釘選</strong>，方便隨時開啟。</p>
+<div class="shots"><figure class="shot"><img src="assets/04-pinned.png" alt="04-pinned.png" loading="lazy"><figcaption>04-pinned</figcaption></figure></div>
+<ul class="tips"><li>若 Google 文件右下角未自動出現 Brisk「B」按鈕，可按工具列的 Brisk 圖示手動開啟。</li><li>官方入門：https://www.briskteaching.com/getting-started-with-brisk-teaching</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="登入與授權" id="s6">
+<h2>③ 登入 Google 帳戶</h2>
+<p>首次使用需以 Google 帳戶登入 Brisk，並同意授權。畫面會顯示「Sign in with Google」。</p>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 50, &quot;y&quot;: 55, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/05a-account-chooser.png" alt="05a-account-chooser.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/05-consent.png" alt="05-consent.png" loading="lazy"><figcaption>05-consent</figcaption></figure><figure class="shot"><img src="assets/06-signed-in.png" alt="06-signed-in.png" loading="lazy"><figcaption>06-signed-in</figcaption></figure><figure class="shot"><img src="assets/06a-onboarding-role.png" alt="06a-onboarding-role.png" loading="lazy"><figcaption>06a-onboarding-role</figcaption></figure></div>
+<ul class="tips"><li>註冊入口：https://app.briskteaching.com/get-started</li><li>新用戶會自動獲得 14 天 Premium 試用，其後轉為 Free Forever Plan（見 FAQ）。</li><li>私隱：示範時請用學校／個人帳戶，勿上載真實學生作品。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="開啟 Google 文件" id="s7">
+<h2>④ 開啟 Google 文件</h2>
+<p>新增空白文件：<a href="https://docs.new" target="_blank" rel="noopener">docs.new</a>　｜　Google 文件：<a href="https://docs.google.com" target="_blank" rel="noopener">docs.google.com</a></p>
+<p>文件右下角會出現 Brisk「B」按鈕；按一下開啟面板。</p>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 92, &quot;y&quot;: 88, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/07-doc-brisk-button.png" alt="07-doc-brisk-button.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/08-brisk-panel.png" alt="08-brisk-panel.png" loading="lazy"><figcaption>08-brisk-panel</figcaption></figure><figure class="shot"><img src="assets/08a-brisk-panel-intro-modal.png" alt="08a-brisk-panel-intro-modal.png" loading="lazy"><figcaption>08a-brisk-panel-intro-modal</figcaption></figure><figure class="shot"><img src="assets/09-doc-renamed.png" alt="09-doc-renamed.png" loading="lazy"><figcaption>09-doc-renamed</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="主面板總覽" id="s8">
+<h2>⑤ 主面板工具（繁中介面）</h2>
+<p>在 <a href="https://app.briskteaching.com/teacher_settings" target="_blank" rel="noopener">教師設定</a> 將輸出語言設為<strong>繁體中文（香港）</strong>後，面板顯示為中文。主要工具：</p>
+<ul class="bullets">
+<li><strong>創建</strong> — 製作課程、測驗、簡報等</li>
+<li><strong>提供回饋</strong> — 草擬學生作業回饋</li>
+<li><strong>檢查寫作</strong> — 視覺化學生的寫作過程</li>
+<li><strong>更改級別</strong> — 調整閱讀程度並翻譯</li>
+<li><strong>Boost 學生活動</strong> — 創建互動學生活動</li>
+<li><strong>獲取教學靈感</strong> — 在 Next 中生成個人化想法</li>
+</ul>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 42, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/11-main-panel.png" alt="11-main-panel.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/10-doc-text3.png" alt="10-doc-text3.png" loading="lazy"><figcaption>10-doc-text3</figcaption></figure><figure class="shot"><img src="assets/11-settings-language-select.png" alt="11-settings-language-select.png" loading="lazy"><figcaption>11-settings-language-select</figcaption></figure></div>
+<ul class="tips"><li>本帳戶顯示「Brisk 學校和區域／學校及學區 目前方案」——新帳戶 14 天試用期內可能暫時享有付費功能；本教學示範的工具均無鎖頭／Premium 標記。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="方案與目前帳戶" id="s9">
+<h2>⑥ 方案畫面</h2>
+<p>擴充功能內「管理計劃」可見 Free／Educator Pro／學校及學區。官方定價頁：<a href="https://www.briskteaching.com/plans" target="_blank" rel="noopener">briskteaching.com/plans</a>　｜　Educator Pro：<a href="https://www.briskteaching.com/educator-pro" target="_blank" rel="noopener">/educator-pro</a></p>
+<div class="shots"><figure class="shot"><img src="assets/11-plan-wording.png" alt="11-plan-wording.png" loading="lazy"><figcaption>11-plan-wording</figcaption></figure><figure class="shot"><img src="assets/11-settings-plan.png" alt="11-settings-plan.png" loading="lazy"><figcaption>11-settings-plan</figcaption></figure><figure class="shot"><img src="assets/11-settings-plan-2.png" alt="11-settings-plan-2.png" loading="lazy"><figcaption>11-settings-plan-2</figcaption></figure></div>
+<ul class="tips"><li>FAQ 原文：new sign-ups automatically receive 14 days of free access to Brisk Premium … After 14 days … transition to the Free Forever Plan。</li><li>Educator Pro 價格：官方定價頁未列明（僅見 2024 Blog 提及 $14.99）。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="哪些是付費功能" id="s10">
+<h2>⑦ 哪些是付費功能</h2>
+<p class="note">以下根據官方 <a href="https://www.briskteaching.com/plans" target="_blank" rel="noopener">/plans</a> 比較表及 <a href="https://www.briskteaching.com/educator-pro" target="_blank" rel="noopener">Educator Pro</a> 頁整理。標示 <strong>付費功能，本教學未操作</strong> 者本教程不示範。</p>
+<h3>Free 方案有、付費方案加強</h3>
+<ul class="bullets compact">
+<li>Create tools for teachers：Free＝<strong>20+ tools</strong>；Premium／Intelligence＝<strong>35+ tools</strong></li>
+<li>Advanced language models：Free＝<strong>Standard</strong>；付費＝<strong>Turbo</strong></li>
+<li>Unlimited usage：Free 無；付費有</li>
+<li>Batch feedback：Free＝<strong>Upload limit</strong>；付費＝No limit</li>
+<li>Presentation：免費版 without images；Pro／學校版 with images（Educator Pro：「Presentation glow-up: templates + slides with images」）</li>
+</ul>
+<h3>付費功能，本教學未操作</h3>
+<ul class="bullets compact paid-list">
+<li>Targeted feedback generator（嵌入 Google 註解）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Batch feedback insights<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Rubric scoring in feedback（Opt-in）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Brisk Boost Chrome Extension（學生端）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Advanced student learning insights<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Boost school hours（Opt-in）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>District administrator dashboard／Admin tool manager<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Custom data privacy agreements／Rostering<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Dedicated customer success／Access to professional learning<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>District standards, rubrics, and classroom context<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Academic standards integrated into all Brisk tools（學校方案）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>AI Detection（Inspect Writing Tools）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Curriculum Intelligence（Intelligence 方案）<span class="badge paid">付費功能，本教學未操作</span></li>
+<li>Kahoot!／Nearpod／QTI 等標 🏫 項目<span class="badge paid">付費功能，本教學未操作</span></li>
+</ul>
+<div class="shots"><figure class="shot"><img src="assets/20-free-plan-1.png" alt="20-free-plan-1.png" loading="lazy"><figcaption>20-free-plan-1</figcaption></figure><figure class="shot"><img src="assets/20-free-plan-2.png" alt="20-free-plan-2.png" loading="lazy"><figcaption>20-free-plan-2</figcaption></figure><figure class="shot"><img src="assets/21-pro-plan-4.png" alt="21-pro-plan-4.png" loading="lazy"><figcaption>21-pro-plan-4</figcaption></figure></div>
+<p class="note">本教程示範的 Lesson Plan、Quiz、DOK、Slides、Guided Notes、Glow &amp; Grow、Next Steps、Rubric、Exemplar、Translate、Boost（基本）、Brisk Next 等，官方比較表／工具卡均列為 Free 或 Free 欄有勾。Change Level（Text Leveler）與 Inspect Writing 在官方頁面標示互相矛盾（見研究筆記），實測時無鎖頭。</p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="基本學力要求（引文）" id="s11">
+<h2>⑧ 本教程引用的基本學力要求</h2>
+<p>法規：<strong>第56/2017號社會文化司司長批示</strong>附件一。來源：</p>
+<ul class="bullets compact">
+<li>教青局：<a href="https://www.dsedj.gov.mo/crdc/edu/requirements.html" target="_blank" rel="noopener">dsedj.gov.mo/crdc/edu/requirements.html</a></li>
+<li>《公報》網頁：<a href="https://bo.dsaj.gov.mo/bo/i/2017/26/despsasc_cn.asp" target="_blank" rel="noopener">bo.dsaj.gov.mo/.../despsasc_cn.asp</a></li>
+<li>附件 PDF：<a href="https://www.dsedj.gov.mo/crdc/edu/BAA_junior/despsasc-56-2017-anexo_i.pdf" target="_blank" rel="noopener">despsasc-56-2017-anexo_i.pdf</a></li>
+</ul>
+<table class="req-table">
+<thead><tr><th>編號</th><th>原文（逐字）</th></tr></thead>
+<tbody>
+<tr><td>D——4——1</td><td>能理清文章思路，概括要點，把握主要內容；</td></tr>
+<tr><td>D——4——3</td><td>能利用上下文語境，理解關鍵語句的含義；</td></tr>
+<tr><td>D——7——1</td><td>閱讀說明事物的文章，能理解事物的特徵和性質；</td></tr>
+<tr><td>D——7——3</td><td>閱讀科普、科幻作品，能理解基本的科學知識和科學精神；</td></tr>
+<tr><td>E——1——4</td><td>能通過自我反思和接受他人建議，借助語感和語言常識，修改完善自己的作文；</td></tr>
+<tr><td>E——2——2</td><td>能理清思路，合理安排文章層次，做到言之有序；</td></tr>
+<tr><td>E——2——3</td><td>能正確地運用標點符號；</td></tr>
+<tr><td>E——3——5</td><td>能發揮聯想和想像，運用細節，充實內容；</td></tr>
+<tr><td>E——4——1</td><td>寫作記敘性文章，能做到中心明確，內容具體，情感真實；</td></tr>
+<tr><td>B——3——3</td><td>能抓住事物特徵，對具體事物的形狀、構造、性質、特點、用途等作出簡要的說明；</td></tr>
+</tbody>
+</table>
+<p class="note">提示詞中寫「D-4-1」是方便輸入；公報原文為「D——4——1」（全形長破折號）。免費版不能用 Standards 標準庫，故把編號＋原文寫進提示詞。</p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="示範文本說明" id="s12">
+<h2>⑨ 示範文本（自撰）</h2>
+<ul class="bullets">
+<li><strong>文本三</strong>（說明文《天空為甚麼是藍色的？》）：用於教案、測驗、DOK、簡報、筆記、改級、翻譯</li>
+<li><strong>文本二</strong>（記敘文初稿，刻意保留錯誤）：用於 Glow &amp; Grow、Next Steps、評分準則回饋</li>
+<li><strong>文本一</strong>（較完整記敘文）：用於評分量表、範例、Boost</li>
+<li><strong>文本四做法</strong>：先貼上再手打，供檢查寫作重播</li>
+</ul>
+<p class="note">全部為示範文本（自撰），人物虛構。請各自開新 Google 文件貼上後操作。</p>
+<div class="shots"><figure class="shot"><img src="assets/10-doc-text3.png" alt="10-doc-text3.png" loading="lazy"><figcaption>10-doc-text3</figcaption></figure><figure class="shot"><img src="assets/22-doc-text2.png" alt="22-doc-text2.png" loading="lazy"><figcaption>22-doc-text2</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建選單一覽" id="s13">
+<h2>⑩ 「創建」選單一覽</h2>
+<p>主面板按<strong>創建</strong>後可見分類（操作時實際介面）：</p>
+<ul class="bullets compact">
+<li>頂部：創建任何內容、簡報、播客、可列印資源、測驗、Canva (Beta)、Wayground (Beta)、Kahoot!、Nearpod</li>
+<li>課程要素：評分標準、課程大綱、進度報告、資源、範例、課程計劃、知識深度問題、可解碼文本、翻譯、數學螺旋複習、數學應用題、科學實驗室、探究任務、指導筆記、單元計劃、代課計劃、練習測試、UDL 教案、標準解讀、Canvas QTI 等</li>
+<li>行政工作：電郵、通訊、推薦信、觀察筆記</li>
+<li>介入策略：個別教育計劃目標方案、MTSS、504 計劃等</li>
+</ul>
+<div class="shots"><figure class="shot"><img src="assets/12-create-list-1.png" alt="12-create-list-1.png" loading="lazy"><figcaption>12-create-list-1</figcaption></figure><figure class="shot"><img src="assets/12-create-list-2.png" alt="12-create-list-2.png" loading="lazy"><figcaption>12-create-list-2</figcaption></figure><figure class="shot"><img src="assets/12-create-menu-1.png" alt="12-create-menu-1.png" loading="lazy"><figcaption>12-create-menu-1</figcaption></figure></div>
+<ul class="tips"><li>首次建立 Drive／Forms／Slides 輸出時會要求 Google 權限，請允許。</li><li>智慧模式會先問澄清問題；亦可選快速模式。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：課程計劃" id="s14">
+<h2>⑪ 創建 → 課程計劃 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>根據目前文件內容生成一節課教案（輸出至 Google 文件）。</p>
+<p><strong>步驟：</strong>開文本三 → 創建 → 課程計劃 → 貼上提示詞 → 建立（可選智慧模式回答澄清問題）。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P1</span><button type="button" class="copy-btn" data-copy="請根據這份文件的說明文，為澳門初中二年級中文課設計一節40分鐘的閱讀教案，全部用繁體中文。學習目標對應澳門初中中文基本學力要求：D-7-1「閱讀說明事物的文章，能理解事物的特徵和性質；」及 D-4-1「能理清文章思路，概括要點，把握主要內容；」。請包括：引入活動、分組閱讀任務、說明方法分析、小結及課後延伸。">複製</button></div><pre class="prompt-text">請根據這份文件的說明文，為澳門初中二年級中文課設計一節40分鐘的閱讀教案，全部用繁體中文。學習目標對應澳門初中中文基本學力要求：D-7-1「閱讀說明事物的文章，能理解事物的特徵和性質；」及 D-4-1「能理清文章思路，概括要點，把握主要內容；」。請包括：引入活動、分組閱讀任務、說明方法分析、小結及課後延伸。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 72}, {&quot;x&quot;: 88, &quot;y&quot;: 78, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請根據這份文件的說明文，為澳門初中二年級中文課設計一節40分鐘的閱讀教案，全部用繁體中文。學習目標對應澳門初中中文基本學力要求：D-7-1「閱讀說明事物的文章，…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 72, &quot;y&quot;: 45, &quot;w&quot;: 26, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/12a-lesson-input.png" alt="12a-lesson-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/12-drive-permission-prompt.png" alt="12-drive-permission-prompt.png" loading="lazy"><figcaption>12-drive-permission-prompt</figcaption></figure><figure class="shot"><img src="assets/12b-lesson-output-generating.png" alt="12b-lesson-output-generating.png" loading="lazy"><figcaption>12b-lesson-output-generating</figcaption></figure><figure class="shot"><img src="assets/12b-lesson-output.png" alt="12b-lesson-output.png" loading="lazy"><figcaption>12b-lesson-output</figcaption></figure></div>
+<ul class="tips"><li>生成後可在 chat 要求修改，例如「縮短為30分鐘」。</li><li>輸出請教師核實後才用於課堂。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：測驗（Google 表單）" id="s15">
+<h2>⑫ 創建 → 測驗 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>根據文章出題，輸出為 <strong>Google 表單</strong>（或文件），可附答案。</p>
+<p><strong>步驟：</strong>開文本三 → 創建 → 測驗 → 選快速／智慧 → 貼提示詞。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P2</span><button type="button" class="copy-btn" data-copy="根據這篇說明文，用繁體中文出8題測驗：5題選擇題、3題簡答題，並附答案。題目須評估澳門初中中文基本學力要求 D-4-1「能理清文章思路，概括要點，把握主要內容；」、D-4-3「能利用上下文語境，理解關鍵語句的含義；」及 D-7-3「閱讀科普、科幻作品，能理解基本的科學知識和科學精神；」。請在每題後以括號標示對應編號。">複製</button></div><pre class="prompt-text">根據這篇說明文，用繁體中文出8題測驗：5題選擇題、3題簡答題，並附答案。題目須評估澳門初中中文基本學力要求 D-4-1「能理清文章思路，概括要點，把握主要內容；」、D-4-3「能利用上下文語境，理解關鍵語句的含義；」及 D-7-3「閱讀科普、科幻作品，能理解基本的科學知識和科學精神；」。請在每題後以括號標示對應編號。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 70, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;根據這篇說明文，用繁體中文出8題測驗：5題選擇題、3題簡答題，並附答案。題目須評估澳門初中中文基本學力要求 D-4-1「…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 40, &quot;w&quot;: 28, &quot;h&quot;: 20}}">
+  <div class="sim-stage">
+    <img src="assets/13a-quiz-input.png" alt="13a-quiz-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/13b-quiz-panel-link.png" alt="13b-quiz-panel-link.png" loading="lazy"><figcaption>13b-quiz-panel-link</figcaption></figure><figure class="shot"><img src="assets/13b-quiz-output.png" alt="13b-quiz-output.png" loading="lazy"><figcaption>13b-quiz-output</figcaption></figure><figure class="shot"><img src="assets/13b-quiz-output-2.png" alt="13b-quiz-output-2.png" loading="lazy"><figcaption>13b-quiz-output-2</figcaption></figure></div>
+<ul class="tips"><li>智慧模式會追問題型、題數等；快速模式直接生成。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：知識深度問題（DOK）" id="s16">
+<h2>⑬ 創建 → 知識深度問題 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>按 DOK 第1–4層設計問題，加深理解。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P3</span><button type="button" class="copy-btn" data-copy="請用繁體中文，根據這篇說明文，按 DOK 第1至第4層各設計2條問題，對應澳門初中中文基本學力要求 D-4-1 及 D-7-1，適合初中二年級學生。">複製</button></div><pre class="prompt-text">請用繁體中文，根據這篇說明文，按 DOK 第1至第4層各設計2條問題，對應澳門初中中文基本學力要求 D-4-1 及 D-7-1，適合初中二年級學生。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文，根據這篇說明文，按 DOK 第1至第4層各設計2條問題，對應澳門初中中文基本學力要求 …&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 42, &quot;w&quot;: 28, &quot;h&quot;: 16}}">
+  <div class="sim-stage">
+    <img src="assets/14a-dok-input.png" alt="14a-dok-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/14b-dok-output.png" alt="14b-dok-output.png" loading="lazy"><figcaption>14b-dok-output</figcaption></figure><figure class="shot"><img src="assets/14b-dok-output-2.png" alt="14b-dok-output-2.png" loading="lazy"><figcaption>14b-dok-output-2</figcaption></figure></div>
+<ul class="tips"><li>⚠ 實測輸出文件標題出現簡體「什么」——請檢查<strong>簡繁混雜</strong>，手動改正後才派給學生。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：簡報（Google 簡報）" id="s17">
+<h2>⑭ 創建 → 簡報 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>由文章／主題生成 Google 簡報。免費版為 without images；Pro／學校版可加圖片與範本。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P6</span><button type="button" class="copy-btn" data-copy="根據這篇說明文，用繁體中文製作8張投影片，供初中二年級中文課講解「說明文如何說明事物的特徵」，對應澳門初中中文基本學力要求 D-7-1 及 B-3-3「能抓住事物特徵，對具體事物的形狀、構造、性質、特點、用途等作出簡要的說明；」。最後一張設一個1分鐘口頭說明小任務。">複製</button></div><pre class="prompt-text">根據這篇說明文，用繁體中文製作8張投影片，供初中二年級中文課講解「說明文如何說明事物的特徵」，對應澳門初中中文基本學力要求 D-7-1 及 B-3-3「能抓住事物特徵，對具體事物的形狀、構造、性質、特點、用途等作出簡要的說明；」。最後一張設一個1分鐘口頭說明小任務。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 70, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;根據這篇說明文，用繁體中文製作8張投影片，供初中二年級中文課講解「說明文如何說明事物的特徵」，對應澳…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 40, &quot;w&quot;: 28, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/15a-slides-input.png" alt="15a-slides-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/15-slides-permission-prompt.png" alt="15-slides-permission-prompt.png" loading="lazy"><figcaption>15-slides-permission-prompt</figcaption></figure><figure class="shot"><img src="assets/15a-slides-clarify.png" alt="15a-slides-clarify.png" loading="lazy"><figcaption>15a-slides-clarify</figcaption></figure><figure class="shot"><img src="assets/15b-slides-output.png" alt="15b-slides-output.png" loading="lazy"><figcaption>15b-slides-output</figcaption></figure><figure class="shot"><img src="assets/15b-slides-output-2.png" alt="15b-slides-output-2.png" loading="lazy"><figcaption>15b-slides-output-2</figcaption></figure></div>
+<ul class="tips"><li>首次需授權 Google 簡報權限。</li><li>智慧模式會先問澄清問題。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：指導筆記" id="s18">
+<h2>⑮ 創建 → 指導筆記 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>把文章變成填充／表格式引導筆記，方便課堂使用。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P7</span><button type="button" class="copy-btn" data-copy="請用繁體中文，根據這篇說明文製作一份初中二年級的引導式筆記（填充＋表格），幫助學生概括每段要點（D-4-1）及理解「散射」等關鍵語句的含義（D-4-3）。">複製</button></div><pre class="prompt-text">請用繁體中文，根據這篇說明文製作一份初中二年級的引導式筆記（填充＋表格），幫助學生概括每段要點（D-4-1）及理解「散射」等關鍵語句的含義（D-4-3）。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文，根據這篇說明文製作一份初中二年級的引導式筆記（填充＋表格），幫助學生概括每段要點（D-…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 42, &quot;w&quot;: 28, &quot;h&quot;: 16}}">
+  <div class="sim-stage">
+    <img src="assets/16a-notes-input.png" alt="16a-notes-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/16b-notes-output.png" alt="16b-notes-output.png" loading="lazy"><figcaption>16b-notes-output</figcaption></figure><figure class="shot"><img src="assets/16b-notes-output-2.png" alt="16b-notes-output-2.png" loading="lazy"><figcaption>16b-notes-output-2</figcaption></figure><figure class="shot"><img src="assets/16b-notes-bundle-page.png" alt="16b-notes-bundle-page.png" loading="lazy"><figcaption>16b-notes-bundle-page</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="更改級別" id="s19">
+<h2>⑯ 更改級別 <span class="badge unclear">方案歸類未明（官方頁面互相矛盾）</span></h2>
+<p><strong>作用：</strong>評估目前閱讀程度，改寫成另一年級程度的新文件。介面<strong>沒有</strong>自由輸入提示框，以選項操作為主。</p>
+<p><strong>步驟：</strong>開文本三 → 更改級別 → 可見「評估閱讀程度 八年級」→ 選目標年級（例：五年級）→ 生成。</p>
+<div class="shots"><figure class="shot"><img src="assets/17a-level-input.png" alt="17a-level-input.png" loading="lazy"><figcaption>17a-level-input</figcaption></figure><figure class="shot"><img src="assets/17b-level-output.png" alt="17b-level-output.png" loading="lazy"><figcaption>17b-level-output</figcaption></figure></div>
+<ul class="tips"><li>官方 /ai-tools-for-teachers 將 Text Leveler 標 Premium，但 Educator Pro 比較表 Free 欄有勾——以實際畫面為準。</li><li>在更改級別選「英語」時，實測輸出仍為中文；若要翻譯請用「創建 → 翻譯」。</li><li>澳門初二約相當於美國 Grade 8（一般對應，非官方說法）。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="翻譯" id="s20">
+<h2>⑰ 翻譯 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>把文件譯成其他語言（官方稱 50+／58 種語言）。</p>
+<p><strong>教訓：</strong>第一次用「更改級別」選英語 → 輸出仍是中文。改用<strong>創建任何內容 → 翻譯</strong>（或創建選單內「翻譯」）後成功。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P12</span><button type="button" class="copy-btn" data-copy="把這篇說明文翻譯成英文（另一版：葡萄牙文），保留段落結構，供英文／葡文教學語文班或家長參考。">複製</button></div><pre class="prompt-text">把這篇說明文翻譯成英文（另一版：葡萄牙文），保留段落結構，供英文／葡文教學語文班或家長參考。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 70, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;把這篇說明文翻譯成英文（另一版：葡萄牙文），保留段落結構，供英文／葡文教學語文班…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 45, &quot;w&quot;: 28, &quot;h&quot;: 14}}">
+  <div class="sim-stage">
+    <img src="assets/18a-translate-prompt-box.png" alt="18a-translate-prompt-box.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/18a-translate-input.png" alt="18a-translate-input.png" loading="lazy"><figcaption>18a-translate-input</figcaption></figure><figure class="shot"><img src="assets/18b-translate-output-attempt1-still-chinese.png" alt="18b-translate-output-attempt1-still-chinese.png" loading="lazy"><figcaption>18b-translate-output-attempt1-still-chinese</figcaption></figure><figure class="shot"><img src="assets/18b-translate-output.png" alt="18b-translate-output.png" loading="lazy"><figcaption>18b-translate-output</figcaption></figure></div>
+<ul class="tips"><li>需要英／葡文版本給家長或教學語文班時，用翻譯工具比改級別可靠。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="提供回饋總覽" id="s21">
+<h2>⑱ 提供回饋 <span class="badge free">免費方案包含</span></h2>
+<p>在學生文件上開啟 Brisk → <strong>提供回饋</strong>，可選風格：Glow &amp; Grow、Next Steps、評分準則回饋等。按 Insert 插入文件頂部。</p>
+<p><span class="badge paid">付費功能，本教學未操作</span> Targeted Feedback（Google 註解）屬付費，本教學未操作。</p>
+<div class="shots"><figure class="shot"><img src="assets/23-feedback-menu.png" alt="23-feedback-menu.png" loading="lazy"><figcaption>23-feedback-menu</figcaption></figure><figure class="shot"><img src="assets/22-doc-text2.png" alt="22-doc-text2.png" loading="lazy"><figcaption>22-doc-text2</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="Glow &amp; Grow 回饋" id="s22">
+<h2>⑲ Glow &amp; Grow <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>指出優點（Glow）與改進空間（Grow）。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P8</span><button type="button" class="copy-btn" data-copy="請用繁體中文給這篇初二記敘文初稿回饋，重點：E-2-2「能理清思路，合理安排文章層次，做到言之有序；」、E-2-3「能正確地運用標點符號；」、E-3-5「能發揮聯想和想像，運用細節，充實內容；」。語氣鼓勵，Glow 2點、Grow 2點，並引用學生原句。">複製</button></div><pre class="prompt-text">請用繁體中文給這篇初二記敘文初稿回饋，重點：E-2-2「能理清思路，合理安排文章層次，做到言之有序；」、E-2-3「能正確地運用標點符號；」、E-3-5「能發揮聯想和想像，運用細節，充實內容；」。語氣鼓勵，Glow 2點、Grow 2點，並引用學生原句。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文給這篇初二記敘文初稿回饋，重點：E-2-2「能理清思路，合理安排文章層次，做到言之有序；…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 42, &quot;w&quot;: 28, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/23a-glowgrow-input.png" alt="23a-glowgrow-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/23b-glowgrow-output.png" alt="23b-glowgrow-output.png" loading="lazy"><figcaption>23b-glowgrow-output</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="Next Steps 回饋" id="s23">
+<h2>⑳ Next Steps <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>給出具體下一步修改建議。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P9</span><button type="button" class="copy-btn" data-copy="請用繁體中文列出3個具體的修改步驟，幫助學生按 E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」及 E-1-4「能通過自我反思和接受他人建議，借助語感和語言常識，修改完善自己的作文；」修改這篇初稿。">複製</button></div><pre class="prompt-text">請用繁體中文列出3個具體的修改步驟，幫助學生按 E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」及 E-1-4「能通過自我反思和接受他人建議，借助語感和語言常識，修改完善自己的作文；」修改這篇初稿。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文列出3個具體的修改步驟，幫助學生按 E-4-1「寫作記敘性文章，能做到中心明確，內容具體…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 42, &quot;w&quot;: 28, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/24a-nextsteps-input.png" alt="24a-nextsteps-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/24b-nextsteps-output.png" alt="24b-nextsteps-output.png" loading="lazy"><figcaption>24b-nextsteps-output</figcaption></figure><figure class="shot"><img src="assets/24b-nextsteps-output-2.png" alt="24b-nextsteps-output-2.png" loading="lazy"><figcaption>24b-nextsteps-output-2</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：評分標準" id="s24">
+<h2>㉑ 創建 → 評分標準 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>按基本學力要求設計記敘文評分量表。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P4</span><button type="button" class="copy-btn" data-copy="請用繁體中文，為澳門初中二年級記敘文寫作「一次難忘的參觀」設計一份4級評分量表（滿分20分），評分準則分別對應澳門初中中文基本學力要求：E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」、E-2-2「能理清思路，合理安排文章層次，做到言之有序；」、E-3-5「能發揮聯想和想像，運用細節，充實內容；」、E-2-3「能正確地運用標點符號；」。">複製</button></div><pre class="prompt-text">請用繁體中文，為澳門初中二年級記敘文寫作「一次難忘的參觀」設計一份4級評分量表（滿分20分），評分準則分別對應澳門初中中文基本學力要求：E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」、E-2-2「能理清思路，合理安排文章層次，做到言之有序；」、E-3-5「能發揮聯想和想像，運用細節，充實內容；」、E-2-3「能正確地運用標點符號；」。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文，為澳門初中二年級記敘文寫作「一次難忘的參觀」設計一份4級評分量表（滿分20分），評分準…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 40, &quot;w&quot;: 28, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/25a-rubric-input.png" alt="25a-rubric-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/25b-rubric-output.png" alt="25b-rubric-output.png" loading="lazy"><figcaption>25b-rubric-output</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="評分準則回饋" id="s25">
+<h2>㉒ 評分準則回饋 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>按量表每一項給等級與理由。</p>
+<p><strong>限制：</strong>回饋模式只允許<strong>一個附件</strong>。若學生稿已作為目前文件，請把量表文字<strong>貼進提示詞</strong>（不要再附加第二個檔）。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P10</span><button type="button" class="copy-btn" data-copy="請按以下評分準則，用繁體中文就每一項給出等級建議及一句理由：E-4-1、E-2-2、E-3-5、E-2-3（準則內容見所附量表）。">複製</button></div><pre class="prompt-text">請按以下評分準則，用繁體中文就每一項給出等級建議及一句理由：E-4-1、E-2-2、E-3-5、E-2-3（準則內容見所附量表）。</pre></div>
+<div class="shots"><figure class="shot"><img src="assets/26-rubric-one-attachment-limit.png" alt="26-rubric-one-attachment-limit.png" loading="lazy"><figcaption>26-rubric-one-attachment-limit</figcaption></figure></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請按以下評分準則，用繁體中文就每一項給出等級建議及一句理由：E-4-1、E-2-…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 42, &quot;w&quot;: 28, &quot;h&quot;: 16}}">
+  <div class="sim-stage">
+    <img src="assets/26a-rubricfb-input.png" alt="26a-rubricfb-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/26b-rubricfb-output.png" alt="26b-rubricfb-output.png" loading="lazy"><figcaption>26b-rubricfb-output</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="創建：範例" id="s26">
+<h2>㉓ 創建 → 範例 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>生成高質素範文，作為學生寫作參照。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P5</span><button type="button" class="copy-btn" data-copy="請用繁體中文寫一篇約400字的記敘文範文，題目「一次難忘的參觀」，敘述一名澳門初中二年級學生參觀澳門科學館的經歷（人物虛構）。範文須示範 E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」及 E-3-5「能發揮聯想和想像，運用細節，充實內容；」，並在文末用3點說明範文如何達到這兩項要求。">複製</button></div><pre class="prompt-text">請用繁體中文寫一篇約400字的記敘文範文，題目「一次難忘的參觀」，敘述一名澳門初中二年級學生參觀澳門科學館的經歷（人物虛構）。範文須示範 E-4-1「寫作記敘性文章，能做到中心明確，內容具體，情感真實；」及 E-3-5「能發揮聯想和想像，運用細節，充實內容；」，並在文末用3點說明範文如何達到這兩項要求。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 85, &quot;y&quot;: 72, &quot;click&quot;: true}], &quot;typeText&quot;: &quot;請用繁體中文寫一篇約400字的記敘文範文，題目「一次難忘的參觀」，敘述一名澳門初中二年級學生參觀澳門…&quot;, &quot;typeBox&quot;: {&quot;x&quot;: 70, &quot;y&quot;: 40, &quot;w&quot;: 28, &quot;h&quot;: 18}}">
+  <div class="sim-stage">
+    <img src="assets/27a-exemplar-input.png" alt="27a-exemplar-input.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/27b-exemplar-output.png" alt="27b-exemplar-output.png" loading="lazy"><figcaption>27b-exemplar-output</figcaption></figure><figure class="shot"><img src="assets/27b-exemplar-output-2.png" alt="27b-exemplar-output-2.png" loading="lazy"><figcaption>27b-exemplar-output-2</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="檢查寫作" id="s27">
+<h2>㉔ 檢查寫作（重播） <span class="badge unclear">方案歸類未明（官方頁面互相矛盾）</span></h2>
+<p><strong>作用：</strong>重播 Google 文件編輯歷史。綠色＝新增；黃色＝大段貼上；紅色＝刪除。可調<strong>60倍速</strong>，顯示編輯次數與時間軸。</p>
+<p><strong>步驟：</strong>先貼上一段（會標為貼上），再手打句子並刪改 → 檢查寫作 → 播放。</p>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 55, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/28a-inspect-menu.png" alt="28a-inspect-menu.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/28-doc-mixed-input.png" alt="28-doc-mixed-input.png" loading="lazy"><figcaption>28-doc-mixed-input</figcaption></figure><figure class="shot"><img src="assets/28c-inspect-replay-mid.png" alt="28c-inspect-replay-mid.png" loading="lazy"><figcaption>28c-inspect-replay-mid</figcaption></figure><figure class="shot"><img src="assets/28b-inspect-replay-end.png" alt="28b-inspect-replay-end.png" loading="lazy"><figcaption>28b-inspect-replay-end</figcaption></figure></div>
+<ul class="tips"><li>官方頁面對 Inspect Writing 免費／付費標示不一致；實測無鎖頭。</li><li>AI Detection 屬付費（Educator Pro 比較表 Free 欄打叉），本教學未操作。</li><li>只支援有編輯歷史的 Google 文件（及 OneDrive Word Beta）。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="Boost 學生活動" id="s28">
+<h2>㉕ Boost 學生活動 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>建立學生可互動的 AI 活動（如寫作指導）。分類含參與／評估／寫作等。可設 AI 護欄、鷹架；學生獲<strong>可編輯副本</strong>。</p>
+<p><strong>步驟：</strong>Boost → 選寫作指導 → 貼 P13 → 設定年級／語言 → 建立 → 教師可預覽。本示範<strong>未分享</strong>給真實學生。</p>
+<div class="prompt-box"><div class="prompt-head"><span>提示詞 P13</span><button type="button" class="copy-btn" data-copy="用繁體中文設計一個「寫作教練」活動：引導初二學生修改自己的記敘文，每次只問一個問題，聚焦 E-3-5「能發揮聯想和想像，運用細節，充實內容；」，不可直接代寫。">複製</button></div><pre class="prompt-text">用繁體中文設計一個「寫作教練」活動：引導初二學生修改自己的記敘文，每次只問一個問題，聚焦 E-3-5「能發揮聯想和想像，運用細節，充實內容；」，不可直接代寫。</pre></div>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 62, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/29-boost-menu.png" alt="29-boost-menu.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/29a-boost-setup.png" alt="29a-boost-setup.png" loading="lazy"><figcaption>29a-boost-setup</figcaption></figure><figure class="shot"><img src="assets/29a-boost-setup-2-customize.png" alt="29a-boost-setup-2-customize.png" loading="lazy"><figcaption>29a-boost-setup-2-customize</figcaption></figure><figure class="shot"><img src="assets/29b-boost-activity.png" alt="29b-boost-activity.png" loading="lazy"><figcaption>29b-boost-activity</figcaption></figure><figure class="shot"><img src="assets/29c-boost-student-preview.png" alt="29c-boost-student-preview.png" loading="lazy"><figcaption>29c-boost-student-preview</figcaption></figure></div>
+<ul class="tips"><li>需要 Google 檔案選擇器權限。</li><li>學生端擴充功能屬學校方案付費功能，本教學未操作。</li><li>溫馨提示會告訴學生：正在與 AI 對話、老師可看到對話。</li></ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="獲取教學靈感（Brisk Next）" id="s29">
+<h2>㉖ 獲取教學靈感 <span class="badge free">免費方案包含</span></h2>
+<p><strong>作用：</strong>在 Brisk Next 產生個人化教學想法，可組合／分享教材。</p>
+<div class="sim" data-sim="{&quot;path&quot;: [{&quot;x&quot;: 88, &quot;y&quot;: 70, &quot;click&quot;: true}]}">
+  <div class="sim-stage">
+    <img src="assets/30a-next-ideas-open.png" alt="30a-next-ideas-open.png" class="sim-img">
+    <div class="sim-cursor" aria-hidden="true"></div>
+    <div class="sim-ripple" aria-hidden="true"></div>
+    <div class="sim-type" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="replay-btn">▶ 重播示範動畫</button>
+</div>
+<div class="shots"><figure class="shot"><img src="assets/30a-next-ideas-input.png" alt="30a-next-ideas-input.png" loading="lazy"><figcaption>30a-next-ideas-input</figcaption></figure><figure class="shot"><img src="assets/30b-next-ideas-output.png" alt="30b-next-ideas-output.png" loading="lazy"><figcaption>30b-next-ideas-output</figcaption></figure></div>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="小結" id="s30">
+<h2>㉗ 小結</h2>
+<ul class="bullets">
+<li>安裝釘選 → 登入 → 設繁中 → 在 Google 文件右下角開 Brisk</li>
+<li><strong>創建</strong>：教案、測驗（Forms）、DOK、簡報、筆記、評分標準、範例、翻譯……</li>
+<li><strong>提供回饋</strong>：Glow &amp; Grow、Next Steps、評分準則（注意單附件限制）</li>
+<li><strong>更改級別</strong>改深淺；要翻譯請用翻譯工具</li>
+<li><strong>檢查寫作</strong>看過程；<strong>Boost</strong>做學生活動；<strong>Next</strong>找靈感</li>
+<li>把澳門基本學力要求<strong>編號＋原文</strong>寫進提示詞</li>
+<li>新帳戶 14 天試用後部分付費功能會消失——留意方案</li>
+</ul>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="注意事項" id="s31">
+<h2>㉘ 注意事項</h2>
+<ul class="bullets warn">
+<li><strong>AI 輸出要核實</strong>：事實、學力對應、題目答案、繁簡用字均須教師審閱後才使用</li>
+<li><strong>簡繁混雜</strong>：實測 DOK 標題曾出現簡體，請檢查並改正</li>
+<li><strong>學生私隱</strong>：不要上載真實學生姓名、班別、成績或可識別個資；示範用自撰文本</li>
+<li><strong>Boost／回饋</strong>：老師可看到學生與 AI 的對話——使用前向學生說明</li>
+<li><strong>試用期</strong>：首 14 天見到的付費功能其後可能消失</li>
+<li><strong>免費用量</strong>：官方指繁忙時或有限制，約 30 分鐘後可再試；付費方案無此限制</li>
+</ul>
+<p class="links-inline">私隱中心：<a href="https://www.briskteaching.com/privacy/privacy-center" target="_blank" rel="noopener">briskteaching.com/privacy</a></p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+<section class="slide" data-title="相關連結" id="s32">
+<h2>㉙ 相關連結</h2>
+<ul class="bullets">
+<li><a href="https://chromewebstore.google.com/detail/brisk-teaching-ai-that-wo/pcblbflgdkdfdjpjifeppkljdnaekohj" target="_blank" rel="noopener">Chrome Web Store 安裝</a></li>
+<li><a href="https://www.briskteaching.com" target="_blank" rel="noopener">Brisk 官網</a></li>
+<li><a href="https://www.briskteaching.com/plans" target="_blank" rel="noopener">方案／定價</a></li>
+<li><a href="https://www.briskteaching.com/educator-pro" target="_blank" rel="noopener">Educator Pro</a></li>
+<li><a href="https://app.briskteaching.com/teacher_settings" target="_blank" rel="noopener">教師設定（語言）</a></li>
+<li><a href="https://help.briskteaching.com/hc/en-us" target="_blank" rel="noopener">說明中心</a></li>
+<li><a href="https://docs.new" target="_blank" rel="noopener">新增 Google 文件</a></li>
+<li><a href="https://www.dsedj.gov.mo/crdc/edu/requirements.html" target="_blank" rel="noopener">教青局基本學力要求</a></li>
+<li><a href="https://bo.dsaj.gov.mo/bo/i/2017/26/despsasc_cn.asp" target="_blank" rel="noopener">第56/2017號批示《公報》</a></li>
+</ul>
+<p class="credit" style="margin-top:2rem">澳門科學館 Oscar 製作 · 2026年10月</p>
+
+<p class="credit" style="margin-top:1.5rem;font-size:.8rem;opacity:.7">澳門科學館 Oscar 製作 · 2026年10月</p>
+</section>
+
+  </div>
+  <div class="footer-credit">澳門科學館 Oscar 製作 · 2026年10月</div>
+  <nav class="nav">
+    <button type="button" id="prev">← 上一頁</button>
+    <button type="button" class="toc-btn" id="toc-open2" onclick="document.getElementById('toc-open').click()">目錄</button>
+    <button type="button" id="next">下一頁 →</button>
+  </nav>
+</div>
+<div class="toc-drawer" id="toc-drawer">
+  <div class="toc-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>目錄</h3>
+      <button type="button" class="btn-icon" id="toc-close" style="background:#eee;color:#333">✕</button>
+    </div>
+    <ol id="drawer-list"></ol>
+  </div>
+</div>
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let idx=0;
+  const bar=document.getElementById('progress');
+  const counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev');
+  const nextBtn=document.getElementById('next');
+  const tocList=document.getElementById('toc-list');
+  const drawer=document.getElementById('toc-drawer');
+  const drawerList=document.getElementById('drawer-list');
+
+  const titles=slides.map((s,i)=>s.dataset.title||('投影片 '+(i+1)));
+  function buildToc(el){
+    el.innerHTML='';
+    titles.forEach((t,i)=>{
+      const li=document.createElement('li');
+      const a=document.createElement('a');
+      a.textContent=(i+1)+'. '+t;
+      a.href='#';
+      a.addEventListener('click',e=>{e.preventDefault();go(i);closeToc();});
+      li.appendChild(a);el.appendChild(li);
+    });
+  }
+  if(tocList) buildToc(tocList);
+  if(drawerList) buildToc(drawerList);
+
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[idx].classList.remove('active');
+    idx=i;
+    slides[idx].classList.add('active');
+    bar.style.width=((idx+1)/total*100)+'%';
+    counter.textContent=(idx+1)+' / '+total;
+    prevBtn.disabled=idx===0;
+    nextBtn.disabled=idx===total-1;
+    slides[idx].closest('.stage').scrollTop=0;
+    // auto-play sim on enter
+    slides[idx].querySelectorAll('.sim').forEach(sim=>playSim(sim));
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  function closeToc(){drawer.classList.remove('open');}
+
+  document.getElementById('toc-open').addEventListener('click',()=>drawer.classList.add('open'));
+  drawer.addEventListener('click',e=>{if(e.target===drawer)closeToc();});
+  document.getElementById('toc-close').addEventListener('click',closeToc);
+  prevBtn.addEventListener('click',()=>go(idx-1));
+  nextBtn.addEventListener('click',()=>go(idx+1));
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(idx+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(idx-1);}
+    else if(e.key==='Escape')closeToc();
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(total-1);
+  });
+
+  // swipe
+  let tx=null;
+  document.querySelector('.stage').addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;},{passive:true});
+  document.querySelector('.stage').addEventListener('touchend',e=>{
+    if(tx==null)return;
+    const dx=e.changedTouches[0].screenX-tx;
+    if(Math.abs(dx)>50){if(dx<0)go(idx+1);else go(idx-1);}
+    tx=null;
+  },{passive:true});
+
+  // copy buttons
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('.copy-btn');
+    if(!btn) return;
+    const text=btn.getAttribute('data-copy');
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.classList.add('copied');btn.textContent='已複製';
+      setTimeout(()=>{btn.classList.remove('copied');btn.textContent='複製';},1500);
+    });
+  });
+
+  function playSim(sim){
+    let cfg; try{cfg=JSON.parse(sim.getAttribute('data-sim'));}catch(e){return;}
+    const cursor=sim.querySelector('.sim-cursor');
+    const ripple=sim.querySelector('.sim-ripple');
+    const typeEl=sim.querySelector('.sim-type');
+    const path=cfg.path||[];
+    cursor.style.opacity='0';
+    ripple.classList.remove('on');
+    typeEl.style.opacity='0';typeEl.textContent='';
+    if(cfg.typeBox){
+      const b=cfg.typeBox;
+      typeEl.style.left=b.x+'%';typeEl.style.top=b.y+'%';
+      typeEl.style.width=b.w+'%';typeEl.style.height=b.h+'%';
+    }
+    let step=0;
+    function run(){
+      if(step>=path.length){
+        if(cfg.typeText){
+          typeEl.style.opacity='1';
+          const full=cfg.typeText;
+          let i=0;typeEl.textContent='';
+          const iv=setInterval(()=>{
+            i++;typeEl.textContent=full.slice(0,i);
+            if(i>=full.length)clearInterval(iv);
+          },18);
+        }
+        return;
+      }
+      const p=path[step];
+      cursor.style.opacity='1';
+      cursor.style.left=p.x+'%';
+      cursor.style.top=p.y+'%';
+      setTimeout(()=>{
+        if(p.click){
+          ripple.style.left=p.x+'%';ripple.style.top=p.y+'%';
+          ripple.classList.remove('on');void ripple.offsetWidth;ripple.classList.add('on');
+        }
+        step++;
+        setTimeout(run, p.click?400:200);
+      },650);
+    }
+    setTimeout(run,300);
+  }
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.replay-btn');
+    if(!b)return;
+    playSim(b.closest('.sim'));
+  });
+
+  const hash=parseInt(location.hash.replace('#',''),10);
+  go((hash>=1&&hash<=total)?hash-1:0);
+})();
+</script>
+</body>
+</html>
