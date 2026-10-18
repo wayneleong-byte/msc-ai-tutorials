@@ -7,7 +7,7 @@
 <style>
 :root{--bg:#0b2e2f;--panel:#0f3d3e;--accent:#1a9e8f;--accent2:#f0b429;--text:#1a1a1a;--muted:#5a6670;--card:#fff;--soft:#f3faf9;--line:#d5e5e3;--radius:14px}
 *{box-sizing:border-box}body{margin:0;font:16.5px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;background:var(--bg);color:var(--text)}
-.wrap{max-width:880px;margin:0 auto;padding:28px 20px 64px}
+.wrap{max-width:920px;margin:0 auto;padding:28px 20px 64px}
 .topnav{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}
 .topnav a{color:#7fddd4;text-decoration:none;font-size:.92rem}
 .topnav a:hover{text-decoration:underline}
@@ -24,300 +24,1853 @@
 .toc li{break-inside:avoid;margin:.35em 0;font-size:.9rem}
 .toc a{color:var(--accent);text-decoration:none}.toc a:hover{text-decoration:underline}
 .note-box{background:#e8f4f2;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:22px;font-size:.92rem;color:#2a4a4a}
-article.chapter{background:var(--card);border-radius:var(--radius);padding:26px 28px 28px;margin-bottom:18px;border-left:5px solid var(--accent);box-shadow:0 4px 20px rgba(0,0,0,.12)}
-article.chapter h2{margin:0 0 12px;font-size:clamp(1.15rem,2.5vw,1.4rem);color:var(--panel);line-height:1.35}
-.master{font-size:.98rem;color:#2a4a4a;margin:0 0 16px}
+.intro-block,.appendix,article.chapter{background:var(--card);border-radius:var(--radius);padding:26px 28px 28px;margin-bottom:18px;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+article.chapter{border-left:5px solid var(--accent)}
+.intro-block h2,.appendix h2,article.chapter h2{margin:0 0 12px;font-size:clamp(1.15rem,2.5vw,1.4rem);color:var(--panel);line-height:1.35}
+.master{font-size:.98rem;color:#2a4a4a;margin:0 0 12px}
+.lead-note{font-size:.92rem;color:var(--muted);margin:0 0 8px}
 h3.sec{font-size:.95rem;color:var(--panel);margin:18px 0 8px;display:flex;align-items:center;gap:8px}
 h3.sec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent2);flex-shrink:0}
+p.subhead{font-weight:700;color:var(--panel);margin:12px 0 4px;font-size:.92rem}
 ul.points{margin:0 0 8px;padding-left:1.25em}
 ul.points li{margin:.4em 0;font-size:.95rem}
-.macao{background:var(--soft);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.92rem;color:#2a4a4a;border:1px solid var(--line)}
+.macao{background:var(--soft);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.92rem;color:#2a4a4a;border:1px solid var(--line)}
 .macao strong{color:var(--panel)}
-.lessons{font-size:.9rem;margin:12px 0 0}
+.practice-box{background:#f7fbfa;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:8px 0 12px}
+.cap-box{background:#fffbf0;border:1px solid #f0d78a;border-radius:10px;padding:12px 16px;margin:8px 0;font-size:.92rem}
+.cap-box strong{color:#856404;display:block;margin-bottom:4px}
+.cap-box p{margin:0}
+.lessons{font-size:.9rem;margin:0 0 14px}
 .lessons a{color:var(--accent);font-weight:600;text-decoration:none}
 .lessons a:hover{text-decoration:underline}
 .selfq{margin:14px 0 0;padding:12px 14px;background:#fffbf0;border:1px solid #f0d78a;border-radius:10px;font-size:.9rem}
 .selfq strong{color:#856404}
-.appendix{background:var(--card);border-radius:var(--radius);padding:22px 26px;margin-top:8px}
-.appendix h2{margin:0 0 10px;color:var(--panel);font-size:1.15rem}
+.quiz{margin:8px 0 0}
+.quiz .q{margin:12px 0 4px}
+.quiz .opts{margin:0 0 6px;padding-left:1.2em;font-size:.92rem}
+.quiz .ans{margin:0 0 12px;font-size:.9rem;background:var(--soft);border-radius:8px;padding:6px 12px;border:1px solid var(--line)}
+.quiz .ans summary{cursor:pointer;color:var(--accent);font-weight:600}
+.example{font-size:.9rem;color:#2a4a4a;background:var(--soft);padding:8px 12px;border-radius:8px;border-left:3px solid var(--accent2)}
 .foot{margin-top:28px;padding:18px;text-align:center;color:rgba(255,255,255,.55);font-size:.8rem}
 .foot a{color:#7fddd4}
-.buy{display:inline-block;margin-top:8px;padding:8px 14px;background:var(--accent2);color:#1a1a1a;border-radius:8px;font-weight:700;font-size:.85rem;text-decoration:none}
-.buy:hover{filter:brightness(1.05)}
+.mini-toc{font-size:.85rem;margin-top:8px}
+.mini-toc a{color:#7fddd4;margin-right:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <nav class="topnav">
 <a href="../">← 返回 AI 素養工作室</a>
-<a href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">自行於 Amazon Kindle 購買閱讀原文 ↗</a>
+<a href="#intro">導言精要</a>
+<a href="#appendix">附錄速查</a>
 </nav>
 
 <header class="hero">
 <p class="eyebrow">澳門科學館 · AI 素養工作室</p>
 <h1>15 章<em>重點導讀</em></h1>
-<p>本頁為教學導讀摘要，用自己的話整理各章要掌握的概念、做法與常見誤解，並配上澳門／科學館情境提示。本頁<strong>不是</strong>原書譯本，亦不貼原文長段。</p>
-<p class="meta">練習結構改編自 Laurence Lars Svekis,《AI Literacy for All Employees》, © 2026 · 澳門科學館 Oscar 製作</p>
-<a class="buy" href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">於 Amazon Kindle 閱讀原文</a>
+<p>本頁為<strong>澳門科學館教學導讀</strong>：內容改編自學員／導師自備教材與公開職場 AI 素養能力框架，整理為網頁易讀結構，並配上澳門／科學館情境。本頁<strong>不是</strong>商業出版物的全文譯本。</p>
+<p class="meta">練習結構參考 Laurence Lars Svekis《AI Literacy for All Employees》（純文字書名，無外連）· 澳門科學館 Oscar 製作</p>
+<p class="mini-toc"><a href="#intro">導言</a><a href="#chapter-1">第1章</a><a href="#chapter-5">第5章</a><a href="#chapter-10">第10章</a><a href="#chapter-15">第15章</a><a href="#appendix">附錄</a></p>
 </header>
 
 <div class="note-box">
-<strong>如何使用：</strong>每章對應工作室兩課（共 30 課）。先讀「要掌握什麼」與「重點知識」，再進實驗室或課節練習。個案與例子若未標明真實機構，一律視為虛構教學情境。真實工作請依所屬機構程序與法例；本站不提供法律意見。
+<strong>如何使用：</strong>每章對應工作室兩課（共 30 課）。先讀「學習目標」與「重點知識」，再做「練習與反思」或進實驗室。個案與例子若未標明真實機構，一律視為<strong>虛構教學情境</strong>。真實工作請依所屬機構程序與法例；本站不提供法律意見。
 </div>
 
 <nav class="toc" aria-label="章節目錄">
 <h2>章節目錄</h2>
 <ol>
-<li><a href="#chapter-1">第 1 章 · AI 時刻</a></li>
-<li><a href="#chapter-2">第 2 章 · 人工智能如何運作</a></li>
-<li><a href="#chapter-3">第 3 章 · 日常工作中的 AI</a></li>
-<li><a href="#chapter-4">第 4 章 · AI 迷思與誤解</a></li>
-<li><a href="#chapter-5">第 5 章 · 員工今天如何使用 AI</a></li>
-<li><a href="#chapter-6">第 6 章 · 有效的提示</a></li>
-<li><a href="#chapter-7">第 7 章 · 評估 AI 輸出</a></li>
-<li><a href="#chapter-8">第 8 章 · 倫理與負責任使用</a></li>
-<li><a href="#chapter-9">第 9 章 · 理解 AI 偏見</a></li>
-<li><a href="#chapter-10">第 10 章 · 私隱與資料保護</a></li>
-<li><a href="#chapter-11">第 11 章 · AI 管治與合規</a></li>
-<li><a href="#chapter-12">第 12 章 · 持份者參與</a></li>
-<li><a href="#chapter-13">第 13 章 · 真實世界個案</a></li>
-<li><a href="#chapter-14">第 14 章 · 職場 AI 的未來</a></li>
-<li><a href="#chapter-15">第 15 章 · 負責任使用最佳做法</a></li>
+<li><a href="#chapter-1">第 1 章 · AI 時刻</a></li><li><a href="#chapter-2">第 2 章 · 人工智能如何運作</a></li><li><a href="#chapter-3">第 3 章 · 日常工作中的 AI</a></li><li><a href="#chapter-4">第 4 章 · AI 迷思與誤解</a></li><li><a href="#chapter-5">第 5 章 · 員工今日如何使用 AI</a></li><li><a href="#chapter-6">第 6 章 · 有效地向 AI 下提示</a></li><li><a href="#chapter-7">第 7 章 · 評估 AI 輸出</a></li><li><a href="#chapter-8">第 8 章 · 倫理與負責任的 AI 使用</a></li><li><a href="#chapter-9">第 9 章 · 理解 AI 偏見</a></li><li><a href="#chapter-10">第 10 章 · 隱私與資料保護</a></li><li><a href="#chapter-11">第 11 章 · AI 治理與合規</a></li><li><a href="#chapter-12">第 12 章 · 利害關係人參與</a></li><li><a href="#chapter-13">第 13 章 · 真實世界的 AI 案例研究</a></li><li><a href="#chapter-14">第 14 章 · 職場中 AI 的未來</a></li><li><a href="#chapter-15">第 15 章 · 負責任使用 AI 的最佳實務</a></li>
 </ol>
 </nav>
 
+<section class="intro-block" id="intro"><h2>全書導言精要</h2><p class="master">AI 素養指的是理解人工智慧系統如何運作的能力、辨識其功能與限制、批判性地評估其輸出結果，以及在專業環境中負責任地使用它們。</p><h3 class="sec">為何 AI 素養重要</h3><ul class="points"><li>誤解 AI 輸出結果</li><li>過度依賴自動化決策</li><li>隱私與資料保護違規</li><li>與偏見和公平性相關的倫理疑慮</li><li>合規風險與治理問題</li><li>有效且高效率地使用 AI 工具</li></ul><h3 class="sec">你將學到什麼</h3><ul class="points"><li>人工智慧的基本概念</li><li>AI 在職場中的實務應用</li><li>與 AI 系統互動的有效技巧</li><li>評估 AI 輸出結果的方法</li><li>倫理考量與偏見意識</li><li>隱私保護與資料處理實務</li><li>治理與合規要求</li><li>利害關係人參與策略</li></ul><div class="cap-box"><strong>職場能力架構（精要）</strong><p>公開職場 AI 素養框架常強調六域：技術知識、實務應用、分析技能、人際與溝通、倫理評估、適應技能。本導讀各章「職場能力提示」會對應相關能力，協助你把概念落到科學館／學校／行政等角色。</p></div></section>
+
 <article class="chapter" id="chapter-1">
-<h2>第 1 章 · AI 時刻：理解人工智能為何正在改變工作</h2>
-<p class="master">這一章要掌握什麼：AI 素養不是先背產品名稱，而是先<strong>盤點</strong>你日常流程裡哪些步驟已有 AI 介入、它實際做什麼，以及<strong>誰仍須負責</strong>。工具可以協助起草或分類，但機構問責不會自動轉移給模型。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>從「功能」入手：寫作助理、預測儀表板、分類器等可能藏在同一軟件裡；行銷標籤不能代替實際說明。</li>
-<li>工作地圖應含：任務、AI 的貢獻、人的責任，以及需要核對的證據。</li>
-<li>AI 可自動化技術步驟，並不代表模型成為法律或行政上的決定擁有人。</li>
-<li>常見誤解：以為「用了 AI」就等於流程已負責任；其實缺審核人、缺拒絕權，風險仍在。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>展教部用助理草擬「週末家庭活動」回覆前，先標出哪句是核准展項資料、誰有權修改與寄出——模型名稱寫在註腳也代替不了這步。</div>
+<h2>第 1 章 · AI 時刻：理解人工智慧為何正在改變工作</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-01">課 1 · 盤點工作中已有的 AI</a>　·　<a href="../#literacy-02">課 2 · 讓責任保持可見</a></p>
-<p class="selfq"><strong>自問：</strong>你本週會接觸的一個工作流程裡，審核人是誰？他／她真的可以拒絕 AI 草稿嗎？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>在職場情境中定義人工智慧</li>
+<li>說明 AI 與傳統軟體的差異</li>
+<li>辨識你工作環境中目前如何使用 AI</li>
+<li>理解 AI 素養為何日趨重要</li>
+<li>認識人類監督在 AI 使用中的角色</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">人工智慧是一種執行認知任務的資料驅動技術；AI 透過預測能力與傳統軟體有所區別；AI 已廣泛應用於職場工具；許多員工缺乏 AI 素養訓練。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">什麼是人工智慧？</p>
+<ul class="points">
+<li>人工智慧指的是為執行通常需要人類智慧的任務而設計的電腦系統。</li>
+<li>辨識資料中的模式</li>
+<li>生成書面內容</li>
+<li>支援決策</li>
+<li>預測結果</li>
+</ul>
+<p class="subhead">AI 與傳統軟體的差異</p>
+<ul class="points">
+<li>資料驅動運作：AI 從資料中學習模式，而非僅依賴明確的指令。</li>
+<li>預測能力：AI 根據機率與統計模型產生輸出。</li>
+<li>適應性：部分 AI 系統會隨著處理更多資料而提升效能。</li>
+</ul>
+<p class="subhead">職場中的 AI 採用</p>
+<ul class="points">
+<li>AI 技術現已嵌入許多常見的職場工具。</li>
+<li>電子郵件撰寫輔助工具</li>
+<li>客服聊天機器人</li>
+<li>自動排程系統</li>
+<li>預測分析儀表板</li>
+</ul>
+<p class="subhead">AI 素養落差</p>
+<ul class="points">
+<li>儘管採用速度很快，許多員工卻缺乏 AI 使用的正式訓練。</li>
+<li>過度依賴 AI 輸出</li>
+<li>誤解 AI 的限制</li>
+<li>資料隱私風險</li>
+<li>未驗證準確性</li>
+</ul>
+<p class="subhead">人類監督的重要性</p>
+<ul class="points">
+<li>AI 系統是為輔助人類工作而設計的工具，並非用以取代人類判斷。</li>
+<li>驗證 AI 輸出</li>
+<li>評估風險</li>
+<li>應用倫理標準</li>
+<li>做出最終決策</li>
+</ul>
+<p class="subhead">關於 AI 的常見迷思</p>
+<ul class="points">
+<li>現實：AI 輸出可能包含錯誤或過時資訊。</li>
+<li>迷思一：AI 總是提供準確資訊：現實：AI 輸出可能包含錯誤或過時資訊。</li>
+<li>迷思二：AI 像人類一樣理解情境：現實：AI 是基於模式產生輸出，並非真正理解。</li>
+<li>迷思三：AI 消除了人類的責任：現實：人類仍需對決策負責。</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>先從理解 AI 的功能與限制開始</li>
+<li>在低風險任務中使用 AI 工具以建立信心</li>
+<li>在專業使用前務必驗證 AI 輸出</li>
+<li>避免分享敏感或機密資料</li>
+<li>隨時掌握組織的 AI 政策</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>展教部用助理草擬「週末家庭活動」回覆前，先標出哪句是核准展項資料、誰有權修改與寄出——模型名稱寫在註腳也代替不了這步。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索對 AI 的理解** 使用經核准的 AI 助理，提出以下提示： &gt; 提示：「請用簡單的方式解釋人工智慧，聚焦於職場應用。」 審閱回應後，回答下列問題： - 這個解釋準確嗎？ - 是否提及 AI 的限制？ - 哪些資訊可能需要進一步驗證？ 此活動有助於培養批判性評估 AI 輸出的技能。</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——辨識你工作中的 AI</p>
+<ul class="points">
+<li>列出三項你經常使用的職場工具。針對每一項工具，判斷： - 是否包含 AI 功能 - AI 執行哪些任務 - 哪些決策仍需人類監督 範例： | 工具 | AI 功能 | 人類責任 | |---|---|---| | 電子郵件助理 | 草稿建議 | 審查準確性 |</li>
+</ul></div>
+<p class="subhead">反思</p>
+<ul class="points">
+<li>你目前使用 AI 工具的自在程度如何？</li>
+<li>你對 AI 風險有哪些疑慮？</li>
+<li>AI 如何能提升你的生產力？</li>
+<li>你需要培養哪些技能才能有效使用 AI？</li>
+</ul>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>技術知識 · 實務應用</strong><p>理解 AI 能力與限制；熟悉常見助理與生產力工具，並判斷任務是否適合 AI 輔助。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 主要透過以下方式運作：</strong></p>
+<ul class="opts">
+<li>A. 遵循固定指令</li>
+<li>B. 處理資料模式</li>
+<li>C. 獨立行動</li>
+<li>D. 取代人類判斷</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 處理資料模式</p></details>
+<p class="q"><strong>2. AI 素養包括：</strong></p>
+<ul class="opts">
+<li>A. 程式撰寫 AI 系統</li>
+<li>B. 負責任地評估 AI 輸出</li>
+<li>C. 管理硬體</li>
+<li>D. 設計演算法</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 負責任地評估 AI 輸出</p></details>
+<p class="q"><strong>3. AI 使用中人類監督之所以重要，是因為：</strong></p>
+<ul class="opts">
+<li>A. AI 會做倫理決策</li>
+<li>B. AI 總是提供準確結果</li>
+<li>C. 人類仍需對結果負責</li>
+<li>D. AI 無法處理資料</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>C. 人類仍需對結果負責</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-2">
-<h2>第 2 章 · 人工智能如何運作</h2>
-<p class="master">這一章要掌握什麼：分開<strong>訓練</strong>（改變模型）與<strong>推論／使用</strong>（用已有模型產生輸出）。對話裡給更多上下文，通常不是「即時重新訓練」。資料、目標與情境會限制系統能做好什麼。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>監督式（有標籤例子）、非監督式（分群）、強化學習（回饋）是入門切入口，不是所有現代系統的完整分類。</li>
-<li>對話記憶、產品資料保留、模型參數更新是不同機制；請查產品政策，勿假設「完全不保留」或「永遠在學」。</li>
-<li>在狹窄例子上表現良好，換到另一情境（例如不同訪客類型）可能失效。</li>
-<li>常見誤解：以為「它記得我們剛才說的」就等於模型已永久更新。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>科學館服務台試用查詢分流助手時，先分清：是用已核准回覆範本做推論，還是有人在後台用真實工單重新訓練——兩者批准與風險不同。</div>
+<h2>第 2 章 · 人工智慧如何運作</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-03">課 3 · 分開訓練與使用</a>　·　<a href="../#literacy-04">課 4 · 資料如何塑造結果</a></p>
-<p class="selfq"><strong>自問：</strong>你依賴的工具，哪一項「學習」其實只是工作階段內的對話記憶？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>說明人工智慧系統如何運作</li>
+<li>理解資料在 AI 訓練中的角色</li>
+<li>區分 AI 訓練與 AI 使用</li>
+<li>用簡單的方式描述機器學習</li>
+<li>認識 AI 系統為何會出錯</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 透過辨識資料中的模式來運作；機器學習讓 AI 系統能從資料集中學習；AI 輸出是機率性的，而非確定的；AI 可能因資料限制而出錯。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">AI 系統的核心原理</p>
+<ul class="points">
+<li>從最基本的層面來看，人工智慧透過辨識資料中的模式來運作。AI 系統分析大量資訊，以偵測其中的關聯、趨勢與統計模式。</li>
+<li>書面內容</li>
+</ul>
+<p class="subhead">資料在 AI 中的角色</p>
+<ul class="points">
+<li>資料是所有 AI 系統的基礎。若沒有用於訓練模型的大量資料集，AI 便無法運作。</li>
+<li>AI 使用的資料類型：AI 系統可能使用以下資料進行訓練：</li>
+<li>文字資料（文件、文章、訊息）</li>
+<li>數值資料（財務紀錄、績效指標）</li>
+<li>影像資料（照片、掃描文件）</li>
+</ul>
+<p class="subhead">AI 訓練 vs. AI 使用</p>
+<ul class="points">
+<li>理解 AI 訓練與 AI 使用之間的差異至關重要。</li>
+<li>AI 訓練：訓練是 AI 系統從資料中學習模式的過程。</li>
+<li>AI 使用：使用發生在員工與 AI 工具互動之時。</li>
+<li>員工提供輸入（問題、資料、任務）</li>
+<li>AI 根據已學習的模式產生輸出</li>
+</ul>
+<p class="subhead">什麼是機器學習？</p>
+<ul class="points">
+<li>機器學習是建構現代 AI 系統的主要方法。 機器學習讓電腦無需明確程式撰寫，即可辨識資料中的模式。</li>
+<li>機器學習的關鍵特性：- 從資料中學習，而非遵循固定指令</li>
+<li>從資料中學習，而非遵循固定指令</li>
+</ul>
+<p class="subhead">機器學習的類型</p>
+<ul class="points">
+<li>監督式學習：監督式學習使用已標記的資料集。</li>
+<li>非監督式學習：非監督式學習在沒有標記資料的情況下辨識模式。</li>
+<li>強化學習：強化學習是透過回饋進行試誤學習。</li>
+</ul>
+<p class="subhead">AI 為何產生機率性輸出</p>
+<ul class="points">
+<li>AI 輸出基於，而非確定性。 這表示 AI 是根據模式預測最可能的結果。</li>
+<li>AI 回應未必總是準確</li>
+<li>AI 可能產生不完整或過時的資訊</li>
+<li>AI 無法保證正確性</li>
+</ul>
+<p class="subhead">AI 為何會出錯</p>
+<ul class="points">
+<li>訓練資料有限：AI 無法在其訓練資料範圍之外表現良好。</li>
+<li>資訊過時：AI 模型可能未包含近期發展。</li>
+<li>誤解情境：AI 可能誤解含糊或不清楚的輸入。</li>
+<li>訓練資料中的偏見：若訓練資料含有偏見，AI 輸出可能反映這些偏見。</li>
+</ul>
+<p class="subhead">人類監督的重要性</p>
+<ul class="points">
+<li>由於 AI 是基於模式而非真正的理解來運作，人類監督不可或缺。</li>
+<li>審查 AI 輸出</li>
+<li>驗證準確性</li>
+<li>應用專業判斷</li>
+<li>確保符合政策</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>理解 AI 輸出是機率性的，並非保證正確</li>
+<li>在依賴資訊前先驗證</li>
+<li>向 AI 系統提供清楚的指示</li>
+<li>避免含糊的輸入</li>
+<li>遵循組織的資料政策</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>科學館服務台試用查詢分流助手時，先分清：是用已核准回覆範本做推論，還是有人在後台用真實工單重新訓練——兩者批准與風險不同。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索 AI 的限制** 使用經核准的 AI 助理，並提出： &gt; 提示：「請說明人工智慧系統如何從資料中學習。」 審閱回應後，評估： - 解釋是否準確？ - 是否提及限制？ - 還需要哪些額外驗證？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——AI 訓練認知</p>
+<ul class="points">
+<li>思考你職場中使用的一款 AI 工具。 回答： - 它可能使用哪種類型的資料進行訓練？ - 這可能造成哪些限制？ - 需要哪些人類監督？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>技術知識</strong><p>理解系統如何從資料學習模式，以及訓練與使用／推論的分別，避免誤解「即時重新訓練」。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 系統主要透過以下方式運作：</strong></p>
+<ul class="opts">
+<li>A. 遵循固定規則</li>
+<li>B. 辨識資料中的模式</li>
+<li>C. 獨立運作</li>
+<li>D. 消除人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 辨識資料中的模式</p></details>
+<p class="q"><strong>2. 機器學習讓 AI 能夠：</strong></p>
+<ul class="opts">
+<li>A. 無需資料即可運作</li>
+<li>B. 從資料模式中學習</li>
+<li>C. 保證結果準確</li>
+<li>D. 取代人類判斷</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 從資料模式中學習</p></details>
+<p class="q"><strong>3. AI 錯誤可能因以下原因而發生：</strong></p>
+<ul class="opts">
+<li>A. 人類監督過多</li>
+<li>B. 缺乏訓練資料</li>
+<li>C. 資料品質完美</li>
+<li>D. 固定程式設計</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 缺乏訓練資料</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-3">
 <h2>第 3 章 · 日常工作中的 AI</h2>
-<p class="master">這一章要掌握什麼：分清<strong>增強</strong>（人做決定、工具協助）與<strong>自動化</strong>（系統直接執行動作）。同一輸出，後續是否自動寄出／自動改檔，風險完全不同。再好的建議也需要真實期限、審批與人手等約束。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>為同一任務寫出「草稿待審」與「自動執行動作」兩種模式，才能看出審核界線。</li>
-<li>錯誤後果、誰可介入、系統做得不好時會發生什麼，都要寫進流程說明。</li>
-<li>「詳細」的計劃若省略必要審批或依賴，仍不可行。</li>
-<li>常見誤解：以為只要模型輸出品質好，就可以跳過機構依賴檢查。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>活動報名確認信若改成「草稿產生後自動寄出」，必須另訂：誰對活動名額與費用負責、出錯時如何撤回——不能只盯着語氣是否親切。</div>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-05">課 5 · 區分自動化與增強</a>　·　<a href="../#literacy-06">課 6 · 提供工作流程所需情境</a></p>
-<p class="selfq"><strong>自問：</strong>你負責的哪一步，一旦自動執行，錯誤代價會明顯上升？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>辨識 AI 在職場中的常見應用</li>
+<li>理解 AI 如何支援生產力與決策</li>
+<li>認識適合 AI 輔助的任務</li>
+<li>區分自動化與人類監督的角色</li>
+<li>在日常工作流程中適當地應用 AI 工具</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 支援溝通、分析、自動化與生產力；AI 主要增強人類工作，而非取代它；人類監督仍然至關重要；理解 AI 應用可提升職場效率。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">職場 AI 應用的類別</p>
+<ul class="points">
+<li>職場中的 AI 應用大致可歸為五大類： 1. 溝通支援 2. 資訊處理 3. 決策支援 4. 工作流程自動化 5. 個人生產力輔助 每一類別在職場運作中扮演不同角色。</li>
+</ul>
+<p class="subhead">用於溝通支援的 AI</p>
+<ul class="points">
+<li>AI 最常見的用途之一是輔助職場溝通。</li>
+<li>範例：- 電子郵件撰寫建議</li>
+<li>效益：- 更快速地建立訊息</li>
+<li>風險：- 未經審查即過度依賴</li>
+<li>若未編輯，可能喪失專業語氣</li>
+</ul>
+<p class="subhead">用於資訊處理的 AI</p>
+<ul class="points">
+<li>範例：- 摘要報告</li>
+<li>效益：- 更快的資料分析</li>
+<li>限制：- AI 可能忽略情境中的細微差異</li>
+<li>AI 可能忽略情境中的細微差異</li>
+</ul>
+<p class="subhead">用於決策支援的 AI</p>
+<ul class="points">
+<li>AI 工具透過提供資料驅動的洞察，協助員工做出明智決策。</li>
+<li>範例：- 財務預測系統</li>
+<li>效益：- 提升分析準確度</li>
+<li>責任：員工必須：</li>
+<li>考量 AI 可能未納入的外部因素</li>
+</ul>
+<p class="subhead">用於工作流程自動化的 AI</p>
+<ul class="points">
+<li>範例：- 自動排程系統</li>
+<li>效益：- 減少人工投入</li>
+<li>風險：- 缺乏監督</li>
+<li>未經人工檢核的過度自動化</li>
+</ul>
+<p class="subhead">用於個人生產力輔助的 AI</p>
+<ul class="points">
+<li>AI 工具日益扮演個人生產力助理的角色。</li>
+<li>範例：- 任務優先排序工具</li>
+</ul>
+<p class="subhead">自動化 vs. 增強</p>
+<ul class="points">
+<li>理解自動化與增強之間的差異至關重要。</li>
+<li>自動化：自動化指 AI 獨立執行任務。</li>
+<li>增強：增強指 AI 在不取代人類工作的前提下提供支援。</li>
+</ul>
+<p class="subhead">辨識適合 AI 輔助的任務</p>
+<ul class="points">
+<li>重複性流程</li>
+<li>大量資料分析</li>
+<li>資訊摘要</li>
+<li>預測建模</li>
+<li>倫理決策</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>將 AI 用於例行性與重複性任務</li>
+<li>提供清楚指示以提升輸出品質</li>
+<li>使用前務必審查 AI 輸出</li>
+<li>避免分享機密資訊</li>
+<li>對 AI 建議應用人類判斷</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>活動報名確認信若改成「草稿產生後自動寄出」，必須另訂：誰對活動名額與費用負責、出錯時如何撤回——不能只盯着語氣是否親切。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索 AI 使用案例** 使用經核准的 AI 助理。 &gt; 提示：「列出人工智慧可提升生產力的常見職場任務。」 審閱回應後，評估： - 哪些任務適用於你的角色？ - 哪些任務需要人類監督？ - 哪些建議可能不切實際？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——將 AI 對應到你的工作</p>
+<ul class="points">
+<li>建立一個簡單表格： | 任務 | AI 角色 | 人類責任 | |---|---|---| 列出你工作日中的五項任務。 辨識： - AI 可在何處提供協助 - 何處必須由人類判斷</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>實務應用</strong><p>把 AI 輸出整合進既有流程與決策；分清草稿待審與自動執行動作。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 增強指的是：</strong></p>
+<ul class="opts">
+<li>A. AI 取代人類員工</li>
+<li>B. AI 支援人類任務</li>
+<li>C. AI 獨立運作</li>
+<li>D. AI 消除決策</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. AI 支援人類任務</p></details>
+<p class="q"><strong>2. AI 最適合處理涉及以下項目的任務：</strong></p>
+<ul class="opts">
+<li>A. 倫理判斷</li>
+<li>B. 策略規劃</li>
+<li>C. 資料處理</li>
+<li>D. 情感溝通</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>C. 資料處理</p></details>
+<p class="q"><strong>3. 員工仍需負責：</strong></p>
+<ul class="opts">
+<li>A. 忽略 AI 輸出</li>
+<li>B. 最終決策</li>
+<li>C. 程式撰寫 AI 系統</li>
+<li>D. 消除監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 最終決策</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-4">
 <h2>第 4 章 · AI 迷思與誤解</h2>
-<p class="master">這一章要掌握什麼：華麗、果斷的措辭<strong>不能</strong>證明準確或中立。流暢互動也不等於人類般的判斷或權威。提示裡寫「扮演專家」只是風格指示，不是專業資格。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>信心應來自相關證據與適當評估，不是語氣自信或答案長度。</li>
-<li>預測可能反映不具代表性的資料、不適合的目標或評估漏洞。</li>
-<li>機構仍須指定負責擁有人；技術上可自動化決定，並不免除問責。</li>
-<li>常見誤解：以為「聽起來很專業」就可以對外發布或代替審核。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>學校行政收到一段「一定正確」的政策摘要草稿時，應用官方通告對照日期與範圍，而不是被自信語氣說服。</div>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-07">課 7 · 挑戰準確與中立迷思</a>　·　<a href="../#literacy-08">課 8 · 分開能力聲稱與問責</a></p>
-<p class="selfq"><strong>自問：</strong>你最近一次「相信」AI 輸出時，依據的是證據還是語氣？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>辨識關於人工智慧的常見誤解</li>
+<li>區分 AI 的能力與限制</li>
+<li>理解不切實際的期望為何會造成職場風險</li>
+<li>認識人類監督的重要性</li>
+<li>在使用 AI 工具時應用正確的理解</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 不像人類一樣思考；AI 輸出不保證準確；AI 無法取代人類判斷；AI 可能反映資料中的偏見。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">AI 誤解為何存在</p>
+<ul class="points">
+<li>媒體對智慧機器的描繪</li>
+<li>缺乏技術理解</li>
+<li>技術進展快速</li>
+<li>行銷誇大</li>
+<li>混淆 AI 能力與人類智慧</li>
+</ul>
+<p class="subhead">迷思一：AI 像人類一樣思考</p>
+<ul class="points">
+<li>許多人認為 AI 系統具備類似人類的理解力與推理能力。</li>
+<li>誤解：許多人認為 AI 系統具備類似人類的理解力與推理能力。</li>
+<li>現實：AI 並不像人類那樣思考或理解資訊。</li>
+<li>理解訓練資料以外的情境</li>
+</ul>
+<p class="subhead">迷思二：AI 總是產生準確結果</p>
+<ul class="points">
+<li>部分員工假設 AI 輸出可靠且無誤。</li>
+<li>誤解：部分員工假設 AI 輸出可靠且無誤。</li>
+<li>現實：AI 輸出可能包含：</li>
+</ul>
+<p class="subhead">迷思三：AI 能取代人類判斷</p>
+<ul class="points">
+<li>有一種觀點認為 AI 能完全取代人類決策。</li>
+<li>誤解：有一種觀點認為 AI 能完全取代人類決策。</li>
+<li>現實：AI 支援決策，但無法取代人類的責任。</li>
+</ul>
+<p class="subhead">迷思四：AI 完美理解情境</p>
+<ul class="points">
+<li>人們常認為 AI 能完全理解複雜情況。</li>
+<li>誤解：人們常認為 AI 能完全理解複雜情況。</li>
+<li>現實：AI 可能誤解：</li>
+</ul>
+<p class="subhead">迷思五：AI 完全客觀</p>
+<ul class="points">
+<li>誤解：有人假設 AI 系統無偏見且中立。</li>
+<li>現實：AI 可能反映訓練資料中存在的偏見。</li>
+</ul>
+<p class="subhead">迷思六：AI 會從每次互動中自動學習</p>
+<ul class="points">
+<li>許多人認為 AI 系統會持續從每一次使用者互動中學習。</li>
+<li>誤解：許多人認為 AI 系統會持續從每一次使用者互動中學習。</li>
+<li>現實：多數職場 AI 工具：</li>
+<li>需要正式重新訓練才能納入新資料</li>
+</ul>
+<p class="subhead">職場中 AI 誤解的風險</p>
+<ul class="points">
+<li>決策品質低落</li>
+<li>關鍵任務過度自動化</li>
+<li>合規違規</li>
+<li>問責性降低</li>
+<li>資料隱私風險</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>將 AI 輸出視為起點，而非最終答案</li>
+<li>使用可信來源驗證資訊</li>
+<li>在依賴輸出前先理解 AI 的限制</li>
+<li>避免將關鍵決策完全交由 AI</li>
+<li>隨時維持人類監督</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>學校行政收到一段「一定正確」的政策摘要草稿時，應用官方通告對照日期與範圍，而不是被自信語氣說服。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：評估對 AI 的理解** 使用經核准的 AI 助理。 &gt; 提示：「請說明人工智慧是否能像人類一樣思考。」 審閱回應後，評估： - 回應是否釐清了限制？ - 是否提及統計模式辨識？ - 哪些資訊需要驗證？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——辨識誤解</p>
+<ul class="points">
+<li>審閱以下陳述，並判斷其為「正確」或「錯誤」。 1. AI 系統理解人類情感。 2. AI 輸出應始終接受驗證。 3. AI 能取代人類的問責。 4. AI 可能含有偏見。</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>分析技能</strong><p>用證據與評估檢視華麗措辭；維持對偏見與限制的警覺。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 系統主要透過以下方式運作：</strong></p>
+<ul class="opts">
+<li>A. 完全理解情境</li>
+<li>B. 辨識統計模式</li>
+<li>C. 做出獨立決策</li>
+<li>D. 取代人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 辨識統計模式</p></details>
+<p class="q"><strong>2. AI 可能產生有偏見的輸出，因為：</strong></p>
+<ul class="opts">
+<li>A. 它的設計目的是中立</li>
+<li>B. 訓練資料可能含有偏見</li>
+<li>C. 它忽略資料模式</li>
+<li>D. 它缺乏演算法</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 訓練資料可能含有偏見</p></details>
+<p class="q"><strong>3. 員工應將 AI 輸出視為：</strong></p>
+<ul class="opts">
+<li>A. 最終權威決策</li>
+<li>B. 需要驗證的起點</li>
+<li>C. 獨立結論</li>
+<li>D. 專業知識的替代品</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 需要驗證的起點</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-5">
-<h2>第 5 章 · 員工今天如何使用 AI</h2>
-<p class="master">這一章要掌握什麼：面向公眾或訪客的草稿，寄出前必須對照你<strong>能支持</strong>的事實與承諾。效益取決於完整工作流程——任務、輸入、審核與錯誤後果——而不只是「這類任務很適合 AI」的標籤。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>文法完美仍可承諾不存在的服務、錯誤日期或未核准優惠。</li>
-<li>選狹窄用例：寫清輸入來源、審核人、升級路徑，再談擴展。</li>
-<li>內容創作、研究、分析、自動化、決策支援各有不同保障需求。</li>
-<li>常見誤解：友善語氣可以「補救」錯誤事實；任務類別本身保證負責任部署。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>服務台回覆「星球模擬廳今日是否開放」前，對照當日場館通告；AI 草稿寫「全日開放」也不能寄出。</div>
+<h2>第 5 章 · 員工今日如何使用 AI</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-09">課 9 · 對外通訊寄出前先審核</a>　·　<a href="../#literacy-10">課 10 · 按完整工作流程選擇用例</a></p>
-<p class="selfq"><strong>自問：</strong>你下一個擬用 AI 的用例，審核與升級路徑寫在哪裡？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>辨識員工目前在職場環境中如何使用 AI</li>
+<li>理解各職務角色中常見的 AI 使用案例</li>
+<li>認識適當與不適當的 AI 應用</li>
+<li>區分 AI 輔助與 AI 決策權</li>
+<li>應用安全使用 AI 的最佳實務</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">員工將 AI 用於溝通、研究、自動化與決策支援；AI 提升生產力，但需要監督；人類判斷仍然不可或缺；理解適當用途可預防風險。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">員工使用 AI 的類別</p>
+<ul class="points">
+<li>員工通常在五大領域使用 AI： 1. 內容創作與溝通 2. 資訊摘要與研究 3. 資料分析與報告 4. 工作流程自動化 5. 決策支援 每一類別涉及不同程度的人類監督。</li>
+</ul>
+<p class="subhead">用於內容創作與溝通的 AI</p>
+<ul class="points">
+<li>AI 最廣泛的應用之一，是協助員工進行書面溝通。</li>
+<li>常見用途：- 草擬電子郵件</li>
+<li>效益：- 節省例行撰寫任務的時間</li>
+<li>風險：- 可能不準確</li>
+<li>節省例行撰寫任務的時間</li>
+</ul>
+<p class="subhead">用於資訊摘要與研究的 AI</p>
+<ul class="points">
+<li>AI 工具常被用來快速處理大量資訊。</li>
+<li>常見用途：- 摘要長篇文件</li>
+<li>效益：- 減少資訊過載</li>
+<li>限制：- AI 可能遺漏關鍵細節</li>
+<li>AI 可能遺漏關鍵細節</li>
+</ul>
+<p class="subhead">用於資料分析與報告的 AI</p>
+<ul class="points">
+<li>AI 日益被用於支援資料驅動的決策。</li>
+<li>常見用途：- 分析商業指標</li>
+<li>效益：- 更快分析大型資料集</li>
+<li>責任：員工必須：</li>
+<li>驗證 AI 生成的洞察</li>
+</ul>
+<p class="subhead">用於工作流程自動化的 AI</p>
+<ul class="points">
+<li>AI 支援各作業流程中重複性任務的自動化。</li>
+<li>常見用途：- 自動客服回應</li>
+<li>效益：- 減少人工工作量</li>
+<li>風險：- 監督減少</li>
+</ul>
+<p class="subhead">用於決策支援的 AI</p>
+<ul class="points">
+<li>AI 系統幫助員工評估複雜資訊並做出明智決策。</li>
+<li>常見用途：- 風險評估工具</li>
+<li>關鍵原則：AI 提供建議，而非最終決策。</li>
+</ul>
+<p class="subhead">適當 vs. 不適當的 AI 使用</p>
+<ul class="points">
+<li>適當用途：AI 適用於：</li>
+<li>不適當用途：以下事項不應依賴 AI：</li>
+</ul>
+<p class="subhead">員工常見的 AI 使用錯誤</p>
+<ul class="points">
+<li>未經審查即提交 AI 輸出</li>
+<li>與 AI 工具分享機密資料</li>
+<li>誤解 AI 建議</li>
+<li>將複雜任務過度自動化</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>將 AI 用於例行性與重複性任務</li>
+<li>提供清楚指示以提升輸出品質</li>
+<li>使用前務必審查 AI 輸出</li>
+<li>避免輸入敏感或機密資料</li>
+<li>遵循組織的 AI 政策</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>服務台回覆「星球模擬廳今日是否開放」前，對照當日場館通告；AI 草稿寫「全日開放」也不能寄出。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索 AI 的工作應用** 使用經核准的 AI 助理。 &gt; 提示：「請列舉員工在辦公環境中使用人工智慧的範例。」 審閱回應後，評估： - 哪些用途適用於你的角色？ - 哪些需要人類監督？ - 哪些用途可能涉及風險？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——盤點你的 AI 使用</p>
+<ul class="points">
+<li>建立一張表格，列出你的日常工作活動。 | 活動 | 是否使用 AI？ | AI 角色 | 人類責任 | |---|---|---|---| 此練習有助於辨識 AI 整合的機會。</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>實務應用 · 分析技能</strong><p>為狹窄用例選定工具與審核路徑；對外通訊前核對核准事實。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 最適合用於：</strong></p>
+<ul class="opts">
+<li>A. 倫理決策</li>
+<li>B. 重複性任務自動化</li>
+<li>C. 最終法律判斷</li>
+<li>D. 策略領導規劃</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 重複性任務自動化</p></details>
+<p class="q"><strong>2. 員工應：</strong></p>
+<ul class="opts">
+<li>A. 不經審查即信任 AI 輸出</li>
+<li>B. 在使用前驗證 AI 輸出</li>
+<li>C. 與 AI 工具分享機密資料</li>
+<li>D. 避免人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 在使用前驗證 AI 輸出</p></details>
+<p class="q"><strong>3. AI 決策支援意味著：</strong></p>
+<ul class="opts">
+<li>A. AI 取代人類判斷</li>
+<li>B. AI 提供建議</li>
+<li>C. AI 獨立運作</li>
+<li>D. AI 消除責任</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. AI 提供建議</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-6">
-<h2>第 6 章 · 有效的提示（Prompt）</h2>
-<p class="master">這一章要掌握什麼：用<strong>情境、指示、格式、對象</strong>四部分讓期望可見；事實缺失時要加「不得臆測」等約束。第一次不完美是常態——跟進應點名要改什麼、什麼必須保持不變。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>填好範本不是答案質素的證據；仍須測試輸出。</li>
-<li>重覆模糊提示，往往重覆同一問題；應針對具體落差修訂。</li>
-<li>調整對象與用語層級時，應保留必要事實，而不是為了「聽起來簡單」而改事實。</li>
-<li>常見誤解：以為角色扮演或更長提示就能保證正確。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>為公眾訪客寫展項簡介時，在提示註明「對象：家庭觀眾、禁用未核准數字」；若草稿太技術，跟進時要求縮短同時保留開放時間等事實。</div>
+<h2>第 6 章 · 有效地向 AI 下提示</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-11">課 11 · 四部分提示</a>　·　<a href="../#literacy-12">課 12 · 依落差再修訂</a></p>
-<p class="selfq"><strong>自問：</strong>你上一則提示，四部分裡哪一部分最常空白？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>理解「提示」在 AI 系統中的意義</li>
+<li>辨識有效提示的關鍵要素</li>
+<li>認識提示品質如何影響 AI 輸出品質</li>
+<li>應用結構化的提示技巧</li>
+<li>評估並優化提示以獲得更佳結果</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">提示品質直接影響 AI 輸出品質；強提示包含情境、指示、結構與對象意識；迭代式提示可改善結果；有效提示能減少錯誤並提升生產力。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">什麼是提示？</p>
+<ul class="points">
+<li>提示是提供給 AI 系統、用以引導其回應的輸入。</li>
+<li>資料輸入</li>
+<li>情境資訊</li>
+</ul>
+<p class="subhead">為何提示品質很重要</p>
+<ul class="points">
+<li>提示的品質直接影響 AI 回應的品質。</li>
+<li>答案不完整</li>
+<li>資訊不相關</li>
+<li>誤解意圖</li>
+<li>錯誤的假設</li>
+</ul>
+<p class="subhead">弱提示的特徵</p>
+<ul class="points">
+<li>「解釋 AI。」</li>
+<li>「寫一份報告。」</li>
+<li>「摘要這個。」</li>
+<li>期望格式</li>
+</ul>
+<p class="subhead">強提示的特徵</p>
+<ul class="points">
+<li>期望格式</li>
+<li>範圍或限制條件</li>
+</ul>
+<p class="subhead">有效提示的四項要素</p>
+<ul class="points">
+<li>情境：情境說明情況或背景。</li>
+<li>明確指示：清楚的指示界定 AI 應做的事。</li>
+<li>結構要求：指明格式可提升清晰度。</li>
+<li>對象意識：辨識目標對象有助於調整語氣與複雜度。</li>
+</ul>
+<p class="subhead">職場適用的提示技巧</p>
+<ul class="points">
+<li>分步驟提示：將複雜任務拆解為較小的步驟。</li>
+<li>反覆優化提示（迭代式提示）：根據 AI 的初次回應優化提示。</li>
+<li>角色設定提示：指派一個角色以引導 AI 的輸出風格。</li>
+<li>限制條件提示：設定回應長度或範圍的限制。</li>
+</ul>
+<p class="subhead">常見的提示錯誤</p>
+<ul class="points">
+<li>提供含糊的指示</li>
+<li>未指明情境</li>
+<li>要求過於寬泛的任務</li>
+<li>不審查輸出</li>
+<li>期待單一提示就能得到完美結果</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>對任務與期望明確具體</li>
+<li>盡可能提供情境</li>
+<li>清楚定義輸出格式</li>
+<li>將複雜請求拆解為步驟</li>
+<li>反覆審查並優化提示</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>為公眾訪客寫展項簡介時，在提示註明「對象：家庭觀眾、禁用未核准數字」；若草稿太技術，跟進時要求縮短同時保留開放時間等事實。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：比較提示品質** 使用經核准的 AI 助理。 測試以下提示： &gt; 提示 1：「解釋人工智慧。」 &gt; 提示 2：「為辦公室員工解釋人工智慧，聚焦於職場應用，使用簡單語言。」 比較兩者回應，並回答： - 哪個回應更有用？ - 為何提示品質會影響結果？ - 還能做哪些改進？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——撰寫有效提示</p>
+<ul class="points">
+<li>選擇一項常見的職場任務，例如： - 草擬電子郵件 - 摘要報告 - 生成會議記錄 撰寫兩個提示： 1. 基本提示 2. 含情境與結構的改進版提示 比較兩者的 AI 輸出。</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>實務應用 · 溝通</strong><p>清楚下達任務情境與格式；能向同事說明你如何引導工具。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 提示是：</strong></p>
+<ul class="opts">
+<li>A. AI 輸出</li>
+<li>B. 用以引導 AI 回應的使用者輸入</li>
+<li>C. AI 訓練資料</li>
+<li>D. AI 演算法</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 用以引導 AI 回應的使用者輸入</p></details>
+<p class="q"><strong>2. 有效提示應包含：</strong></p>
+<ul class="opts">
+<li>A. 僅一個問題</li>
+<li>B. 情境與清楚指示</li>
+<li>C. 無任何限制</li>
+<li>D. 極少的細節</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 情境與清楚指示</p></details>
+<p class="q"><strong>3. 迭代式提示涉及：</strong></p>
+<ul class="opts">
+<li>A. 不做任何改變地使用 AI</li>
+<li>B. 根據輸出優化提示</li>
+<li>C. 忽略初次回應</li>
+<li>D. 消除人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 根據輸出優化提示</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-7">
 <h2>第 7 章 · 評估 AI 輸出</h2>
-<p class="master">這一章要掌握什麼：用五維分開檢查——<strong>準確、完整、相關、偏見、人的判斷</strong>。單一維度通過不代表整體可靠。數據洞察還要核對來源、定義、時期與假設；多個模型答案一致，可能只是重複同一錯誤。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>完整性在問：是否遺漏重要資訊或限定條件（例如時期、適用範圍）。</li>
-<li>把生成的計算與來源或獨立重算對照，而不是選最華麗的圖表。</li>
-<li>決策前寫清：使用、修正，還是升級給負責人。</li>
-<li>常見誤解：三個工具給同一數字就等於已核實。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>展教活動報告出現「訪客滿意度 98%」時，先查分母、問卷時期與是否含學校團體場——再決定是否寫進對外簡報。</div>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-13">課 13 · 五項輸出檢查</a>　·　<a href="../#literacy-14">課 14 · 核實數據洞察</a></p>
-<p class="selfq"><strong>自問：</strong>你最近一次「略過」的檢查維度是哪一個？為什麼？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>理解為何 AI 輸出在使用前必須經過評估</li>
+<li>辨識常見的 AI 錯誤類型</li>
+<li>應用驗證 AI 生成資訊的技巧</li>
+<li>認識 AI 回應中的偏見與限制</li>
+<li>維持人類監督與問責</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 輸出可能包含錯誤或偏見；結構化的評估流程不可或缺；驗證技巧可提升可靠性；人類監督與問責仍然至關重要。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">為何 AI 輸出需要評估</p>
+<ul class="points">
+<li>AI 輸出必須評估，因為 AI 系統：。</li>
+<li>無法評估真實世界的風險或後果</li>
+</ul>
+<p class="subhead">AI 輸出錯誤的類型</p>
+<ul class="points">
+<li>理解常見的 AI 錯誤，有助於員工辨識潛在問題。</li>
+<li>事實錯誤：AI 可能產生錯誤的事實或不準確的資料。</li>
+<li>資訊不完整：AI 回應可能遺漏決策所需的關鍵細節。</li>
+<li>情境誤解：AI 可能誤解指示或情境。</li>
+<li>邏輯不一致：AI 輸出可能包含矛盾或有缺陷的推理。</li>
+</ul>
+<p class="subhead">AI 輸出評估流程</p>
+<ul class="points">
+<li>步驟 1：審查準確性：檢查資訊是否事實正確。</li>
+<li>步驟 2：評估完整性：確認所有相關資訊都已納入。</li>
+<li>步驟 3：評估相關性：確認輸出符合任務需求。</li>
+<li>步驟 4：辨識潛在偏見：尋找失衡或不公平的內容。</li>
+<li>步驟 5：應用人類判斷：運用專業知識驗證結論。</li>
+</ul>
+<p class="subhead">驗證 AI 輸出的技巧</p>
+<ul class="points">
+<li>以下數項技巧有助於確保輸出的可靠性。</li>
+<li>交叉查核來源：使用可信參考資料驗證資訊。</li>
+<li>要求佐證依據：請 AI 提供來源或解釋。</li>
+<li>比較多份輸出：生成不同版本的回應，以辨識不一致之處。</li>
+<li>諮詢領域專家：針對複雜或高風險決策，尋求專家審查。</li>
+</ul>
+<p class="subhead">評估 AI 生成的資料洞察</p>
+<ul class="points">
+<li>當 AI 提供分析洞察時： 員工應：。</li>
+<li>當 AI 提供分析洞察時： 員工應：；確認資料來源；理解所使用的假設；驗證統計結論；考量未納入的外部因素 AI 洞察支援決策，但不應取代分析。</li>
+</ul>
+<p class="subhead">評估 AI 生成的內容</p>
+<ul class="points">
+<li>當 AI 生成書面內容時： 員工應：。</li>
+<li>針對情境相關性進行編輯</li>
+</ul>
+<p class="subhead">辨識 AI 輸出中的偏見</p>
+<ul class="points">
+<li>偏見發生於 AI 產生不公平或失衡的結果時。</li>
+<li>缺乏多元觀點</li>
+<li>過度概化</li>
+<li>資料呈現不完整</li>
+</ul>
+<p class="subhead">人類問責的角色</p>
+<ul class="points">
+<li>基於 AI 輸出所做的決策</li>
+<li>倫理影響</li>
+<li>法規遵循</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>絕不假設 AI 輸出是正確的</li>
+<li>獨立驗證關鍵資訊</li>
+<li>尋找遺漏的情境或假設</li>
+<li>考量潛在偏見</li>
+<li>在使用輸出前應用專業判斷</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>展教活動報告出現「訪客滿意度 98%」時，先查分母、問卷時期與是否含學校團體場——再決定是否寫進對外簡報。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：評估一份 AI 回應** 使用經核准的 AI 助理。 &gt; 提示：「請提供近期職場 AI 趨勢的摘要。」 審閱回應後，評估： - 資訊的準確性 - 關鍵要點的完整性 - 潛在偏見或遺漏</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——輸出驗證</p>
+<ul class="points">
+<li>選擇一份與你工作相關的 AI 生成輸出。 回答： - 需要哪些驗證步驟？ - 哪些來源可以確認準確性？ - 應應用哪些人類判斷？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>分析技能</strong><p>核實輸出、對照外部來源、詮釋 AI 產生的洞察，並補上人的判斷。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 輸出需要評估，是因為它們：</strong></p>
+<ul class="opts">
+<li>A. 總是提供準確結果</li>
+<li>B. 依機率運作</li>
+<li>C. 取代人類監督</li>
+<li>D. 無需驗證</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 依機率運作</p></details>
+<p class="q"><strong>2. AI 輸出中的偏見可能源於：</strong></p>
+<ul class="opts">
+<li>A. 完美的資料品質</li>
+<li>B. 訓練資料的不平衡</li>
+<li>C. 人類監督</li>
+<li>D. 固定的程式規則</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 訓練資料的不平衡</p></details>
+<p class="q"><strong>3. 員工有責任：</strong></p>
+<ul class="opts">
+<li>A. 忽略 AI 輸出</li>
+<li>B. 驗證 AI 生成的資訊</li>
+<li>C. 允許 AI 做最終決策</li>
+<li>D. 消除監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 驗證 AI 生成的資訊</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-8">
 <h2>第 8 章 · 倫理與負責任的 AI 使用</h2>
-<p class="master">這一章要掌握什麼：把公平、問責、透明、私隱變成<strong>可重複的做法、擁有人與紀錄</strong>，而不是海報口號。受影響的人需要真正能提出關注的途徑，而不只是單向宣佈「我們用了 AI」。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>對每個流程問：誰可能受損、誰擁有決定、溝通了什麼、允許哪些資料。</li>
-<li>說明應包含：工具做什麼、誰審核、如何提出關注與預期回覆時間。</li>
-<li>沒有質疑途徑的「透明」，只是宣佈。</li>
-<li>常見誤解：貼上原則標語就等於已負責任部署。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>若內部服務台用 AI 協助排班建議，公告應寫明建議如何產生、誰最終批核，以及員工可向誰提出關注——並給合理回覆時限。</div>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-15">課 15 · 倫理變成具體行動</a>　·　<a href="../#literacy-16">課 16 · 審核與質疑途徑</a></p>
-<p class="selfq"><strong>自問：</strong>你單位若引入一項 AI 協助流程，受影響的人第一個聯絡人是誰？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>理解倫理考量在 AI 使用中為何重要</li>
+<li>辨識負責任 AI 的核心原則</li>
+<li>認識與 AI 系統相關的倫理風險</li>
+<li>在使用 AI 工具時應用倫理思維</li>
+<li>理解員工在倫理 AI 使用中的責任</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 使用涉及倫理考量；核心原則包括公平性、問責、透明度與隱私；倫理風險必須被辨識並加以管理；員工在負責任的 AI 使用中扮演核心角色。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">為何倫理在 AI 中很重要</p>
+<ul class="points">
+<li>倫理考量之所以必要，是因為 AI 系統可能：。</li>
+<li>倫理考量之所以必要，是因為 AI 系統可能：；影響決策；影響員工與客戶的結果；處理敏感資訊；放大既有偏見 不合倫理的 AI 使用可能導致：；歧視；隱私侵害；信任流失；法律與監管後果 負責任的 AI 使用能保護組織、員工與利害關係人。</li>
+</ul>
+<p class="subhead">AI 中的公平性</p>
+<ul class="points">
+<li>公平性確保 AI 系統不會產生有偏見或歧視性的結果。</li>
+<li>公平性的意涵：AI 系統應：</li>
+<li>偏見的來源：偏見可能源於：</li>
+</ul>
+<p class="subhead">AI 使用中的問責</p>
+<ul class="points">
+<li>問責指的是對涉及 AI 的決策承擔責任。</li>
+<li>關鍵原則：AI 系統不對結果承擔責任。</li>
+</ul>
+<p class="subhead">AI 使用中的透明度</p>
+<ul class="points">
+<li>透明度涉及理解並溝通 AI 系統如何影響決策。</li>
+<li>為何透明度重要：透明度有助於：</li>
+<li>建立與利害關係人的信任</li>
+</ul>
+<p class="subhead">AI 中的隱私保護</p>
+<ul class="points">
+<li>AI 系統經常處理敏感或個人資料。 保護隱私是一項關鍵的倫理責任。</li>
+<li>主要隱私風險：- 未經授權的資料分享</li>
+</ul>
+<p class="subhead">職場中 AI 的倫理風險</p>
+<ul class="points">
+<li>有偏見的招聘建議</li>
+<li>不準確的績效評估</li>
+<li>濫用客戶資料</li>
+<li>缺乏監督的自動化決策</li>
+</ul>
+<p class="subhead">倫理決策框架</p>
+<ul class="points">
+<li>員工在使用 AI 時應採取結構化方法。</li>
+<li>步驟 1：辨識利害關係人：判斷誰可能受 AI 使用影響。</li>
+<li>步驟 2：評估風險：評估潛在的倫理與營運風險。</li>
+<li>步驟 3：確保透明度：記錄 AI 的使用方式。</li>
+<li>步驟 4：維持監督：保留人類對決策的控制。</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>多數組織採用相似、以四項關鍵原則為基礎的倫理框架： 1. 公平性 2. 問責 3. 透明度 4. 隱私保護 這些原則指引負責任的 AI 使用。</li>
+<li>務必審查 AI 輸出的公平性與偏見</li>
+<li>避免與 AI 系統分享機密資訊</li>
+<li>對 AI 決策維持人類監督</li>
+<li>遵循組織的 AI 政策</li>
+<li>記錄決策過程中的 AI 參與</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>若內部服務台用 AI 協助排班建議，公告應寫明建議如何產生、誰最終批核，以及員工可向誰提出關注——並給合理回覆時限。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索 AI 倫理原則** 使用經核准的 AI 助理。 &gt; 提示：「請說明職場環境中人工智慧的倫理原則。」 審閱回應後，評估： - 是否涵蓋公平性、問責、透明度與隱私？ - 說明是否準確且均衡？ - 還需要哪些額外考量？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——辨識倫理風險</p>
+<ul class="points">
+<li>思考你使用的一款職場 AI 工具。 回答： - 使用它可能產生哪些倫理風險？ - 應採取哪些保障措施？ - 需要哪些人類監督？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>倫理評估</strong><p>緩解偏見、私隱與倫理風險；把公平、問責、透明變成可執行做法。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 合乎倫理的 AI 使用能確保系統：</strong></p>
+<ul class="opts">
+<li>A. 取代人類決策</li>
+<li>B. 在無監督下運作</li>
+<li>C. 保護公平性與隱私</li>
+<li>D. 消除問責</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>C. 保護公平性與隱私</p></details>
+<p class="q"><strong>2. AI 中的問責意味著：</strong></p>
+<ul class="opts">
+<li>A. AI 對結果承擔責任</li>
+<li>B. 人類仍需對決策負責</li>
+<li>C. AI 獨立運作</li>
+<li>D. 無需監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 人類仍需對決策負責</p></details>
+<p class="q"><strong>3. AI 中的透明度涉及：</strong></p>
+<ul class="opts">
+<li>A. 隱瞞 AI 的使用</li>
+<li>B. 溝通 AI 如何影響決策</li>
+<li>C. 消除文件紀錄</li>
+<li>D. 忽視利害關係人的知悉權</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 溝通 AI 如何影響決策</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-9">
 <h2>第 9 章 · 理解 AI 偏見</h2>
-<p class="master">這一章要掌握什麼：偏見可來自歷史模式、代表性不足、不適度量度與不完整評估，且常互相影響。出現群體差異時，先用<strong>比率、分母與情境</strong>調查，差異是調查理由，不是已證明的意圖結論。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>只計「接待次數」可能忽略複雜查詢或語言需求等面向。</li>
-<li>總數相等≠比率相等；比率相等也不自動等於公平。</li>
-<li>差距可合理化加強人工審核，本身不構成法律結論。</li>
-<li>常見誤解：以為「算法沒有情緒」就必然中立。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>若虛構的「導賞員績效」只按場次計分，可能低估照顧特殊教育需要團體的準備時間——指標本身就可能造成不公平印象。</div>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-17">課 17 · 辨識偏見來源</a>　·　<a href="../#literacy-18">課 18 · 謹慎調查群體差異</a></p>
-<p class="selfq"><strong>自問：</strong>你單位常用的一項 KPI，分母與遺漏面向是什麼？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>定義人工智慧系統中的偏見</li>
+<li>辨識 AI 偏見的常見成因</li>
+<li>認識偏見如何影響職場決策</li>
+<li>應用降低偏見風險的策略</li>
+<li>在使用 AI 工具時維持公平性</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 偏見源自資料與設計因素；偏見可能影響職場決策；員工在偏見偵測中扮演關鍵角色；緩解策略包括監督、評估與透明度。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">什麼是 AI 偏見？</p>
+<ul class="points">
+<li>AI 偏見發生於 AI 系統產生不公平或系統性偏斜的結果，使特定個人或群體處於劣勢。</li>
+<li>呈現不均衡</li>
+<li>對特定族群的預測不準確</li>
+<li>具歧視性的建議</li>
+</ul>
+<p class="subhead">AI 系統中偏見為何產生</p>
+<ul class="points">
+<li>偏見並非源自 AI 本身，而是來自開發 AI 系統所使用的資料與流程。</li>
+<li>訓練資料中的偏見：AI 系統從歷史資料中學習模式。</li>
+<li>資料不完整或不具代表性：當訓練資料包含多元且完整的範例時，AI 系統表現最佳。</li>
+<li>演算法設計偏見：偏見也可能來自 AI 系統設計過程中的決策。</li>
+<li>人類決策偏見：資料標註或系統設定中的人類偏見，會影響 AI 結果。</li>
+</ul>
+<p class="subhead">AI 偏見的類型</p>
+<ul class="points">
+<li>理解不同形式的偏見，有助於員工辨識風險。</li>
+<li>歷史偏見：發生於訓練資料反映過去不平等時。</li>
+<li>代表性偏見：發生於特定群體在訓練資料集中代表性不足時。</li>
+<li>測量偏見：發生於資料蒐集方法產生不準確或不完整資訊時。</li>
+<li>評估偏見：發生於使用不完整或偏斜的標準評估 AI 效能時。</li>
+</ul>
+<p class="subhead">AI 偏見的現實影響</p>
+<ul class="points">
+<li>AI 偏見可能影響職場中的多個層面。</li>
+<li>招聘與人才招募：具偏見的篩選工具可能偏好特定候選人。</li>
+<li>績效評估：AI 驅動的績效指標可能使特定員工群體處於劣勢。</li>
+<li>客戶服務：具偏見的演算法可能導致客戶受到不平等待遇。</li>
+<li>財務決策：AI 模型可能產生不平等的貸款或風險評估。</li>
+</ul>
+<p class="subhead">為何偏見是職場風險</p>
+<ul class="points">
+<li>法律合規違規</li>
+<li>聲譽損害</li>
+<li>失去員工與客戶的信任</li>
+<li>不公平的決策</li>
+</ul>
+<p class="subhead">緩解 AI 偏見的策略</p>
+<ul class="points">
+<li>批判性評估輸出：審查 AI 輸出的公平性與一致性。</li>
+<li>多元資料檢視：考量 AI 輸出是否反映多元觀點。</li>
+<li>人類監督：確保由人類審查 AI 驅動的決策。</li>
+<li>AI 使用的透明度：記錄決策過程中的 AI 參與。</li>
+<li>上報程序：向適當的組織管道通報疑似偏見。</li>
+</ul>
+<p class="subhead">員工在偏見預防中的角色</p>
+<ul class="points">
+<li>員工在辨識與處理 AI 偏見方面扮演重要角色。</li>
+<li>批判性審查 AI 輸出</li>
+<li>辨識不公平的模式</li>
+<li>通報疑慮</li>
+<li>確保合乎倫理的使用</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>務必審查 AI 輸出的公平性</li>
+<li>避免僅依賴自動化決策</li>
+<li>使用多個資料來源進行驗證</li>
+<li>確保 AI 使用的透明度</li>
+<li>及時通報疑似偏見</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>若虛構的「導賞員績效」只按場次計分，可能低估照顧特殊教育需要團體的準備時間——指標本身就可能造成不公平印象。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：辨識 AI 回應中的偏見** 使用經核准的 AI 助理。 &gt; 提示：「請描述一名有效能員工的特質。」 評估回應： - 是否反映多元觀點？ - 是否依賴刻板印象？ - 可能存在哪些偏見？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——偏見風險評估</p>
+<ul class="points">
+<li>選擇你職場中使用的一款 AI 工具。 回答： - 哪些類型的偏見可能影響其輸出？ - 已有哪些保障措施？ - 還需要哪些額外監督？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>倫理評估 · 分析技能</strong><p>辨識偏見來源，用比率與情境調查群體差異，而非只看總數。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 偏見通常源自：</strong></p>
+<ul class="opts">
+<li>A. AI 的自我意識</li>
+<li>B. 訓練資料的不平衡</li>
+<li>C. AI 的獨立決策</li>
+<li>D. 完美的資料品質</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 訓練資料的不平衡</p></details>
+<p class="q"><strong>2. 代表性偏見發生於：</strong></p>
+<ul class="opts">
+<li>A. 資料包含多元族群</li>
+<li>B. 特定群體代表性不足</li>
+<li>C. AI 忽略資料模式</li>
+<li>D. 演算法獨立運作</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 特定群體代表性不足</p></details>
+<p class="q"><strong>3. 員工面對疑似偏見時應：</strong></p>
+<ul class="opts">
+<li>A. 忽略它</li>
+<li>B. 適當地通報疑慮</li>
+<li>C. 允許 AI 繼續運作</li>
+<li>D. 移除人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 適當地通報疑慮</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-10">
-<h2>第 10 章 · AI 中的私隱與資料保護</h2>
-<p class="master">這一章要掌握什麼：分享前先辨識資料類型——個人、機密、特別受保護等可並存於同一文件。只提供<strong>必要且獲准</strong>的資訊；刪標題或替換姓名不保證匿名化。懷疑未經授權分享時，停止並依事故流程通報。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>工具「獲准用於公開草稿」≠可自動接收內部或個人資料。</li>
-<li>職位、日期、特殊事件等仍可能識別個人；練習請用虛構輸入。</li>
-<li>概念上應知悉個人資料保護要求（如澳門相關法例框架）；本站不提供法律意見。</li>
-<li>常見誤解：關瀏覽器分頁就等於遠端紀錄已刪除；遮罩等於匿名化。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>活動報名名單含姓名與電話時，不可為了「讓 AI 幫忙分類」就整表貼進未核准工具；先確認用途是否在批准範圍，並盡量最小化欄位。</div>
+<h2>第 10 章 · AI 中的隱私與資料保護</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-19">課 19 · 分享前先辨識資料</a>　·　<a href="../#literacy-20">課 20 · 盡量減少資料並通報</a></p>
-<p class="selfq"><strong>自問：</strong>你下一次貼進助手的內容，是否包含可識別個人的組合資訊？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>理解 AI 系統如何使用資料</li>
+<li>辨識與 AI 工具相關的隱私風險</li>
+<li>認識敏感資訊的類型</li>
+<li>在使用 AI 時應用安全的資料處理實務</li>
+<li>遵循組織的隱私政策</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 系統高度依賴資料；敏感資訊必須受到保護；員工在隱私合規中扮演核心角色；安全的資料實務可降低風險。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">為何資料是 AI 系統的核心</p>
+<ul class="points">
+<li>AI 系統透過分析與處理資料來運作。</li>
+<li>文字資料（文件、通訊內容）</li>
+<li>數值資料（財務或營運指標）</li>
+<li>個人資料（員工或客戶資訊）</li>
+<li>行為資料（使用模式、互動紀錄）</li>
+</ul>
+<p class="subhead">敏感資訊的類型</p>
+<ul class="points">
+<li>個人資訊：可識別特定個人的資訊。</li>
+<li>機密商業資訊：一旦揭露可能損害組織的資訊。</li>
+<li>受法規保護的資料：受法律與法規保護的資料。</li>
+</ul>
+<p class="subhead">使用 AI 時的隱私風險</p>
+<ul class="points">
+<li>員工使用 AI 工具時可能出現數種隱私風險。</li>
+<li>資料外洩：將敏感資料輸入 AI 工具，可能使其暴露於未經授權的系統。</li>
+<li>未經授權的資料分享：AI 系統可能在組織管控環境之外處理資料。</li>
+<li>資料留存風險：部分 AI 工具可能為訓練或營運目的儲存使用者輸入。</li>
+<li>濫用 AI 輸出：AI 生成的摘要可能無意間揭露敏感資訊。</li>
+</ul>
+<p class="subhead">員工常見的隱私錯誤</p>
+<ul class="points">
+<li>將機密資料輸入公開的 AI 工具</li>
+<li>未經授權分享個人資訊</li>
+<li>假設 AI 系統會自動保護資料</li>
+<li>忽略組織的資料政策</li>
+</ul>
+<p class="subhead">使用 AI 的安全資料實務</p>
+<ul class="points">
+<li>避免分享敏感資料：除非獲得核准，否則不要將機密或個人資訊輸入 AI 系統。</li>
+<li>使用經核准的 AI 工具：僅使用組織授權的 AI 工具。</li>
+<li>遵循資料最小化原則：僅提供任務所需的必要資訊。</li>
+<li>應用資料匿名化：在可行情況下移除可識別細節。</li>
+<li>審閱組織政策：理解內部關於 AI 與資料保護的指引。</li>
+</ul>
+<p class="subhead">資料治理在 AI 中的角色</p>
+<ul class="points">
+<li>遵守資料處理程序</li>
+<li>理解通報協定</li>
+<li>遵循存取控制政策</li>
+</ul>
+<p class="subhead">法律與監管考量</p>
+<ul class="points">
+<li>隱私法規</li>
+<li>消費者保護法</li>
+<li>產業特定的合規標準</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>絕不將機密資料輸入未經授權的 AI 系統</li>
+<li>使用前確認 AI 工具已獲核准</li>
+<li>將資料輸入限制於必要資訊</li>
+<li>遵循組織的資料政策</li>
+<li>立即通報疑似隱私事件</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>活動報名名單含姓名與電話時，不可為了「讓 AI 幫忙分類」就整表貼進未核准工具；先確認用途是否在批准範圍，並盡量最小化欄位。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索隱私風險** 使用經核准的 AI 助理。 &gt; 提示：「請說明在職場中使用人工智慧工具相關的隱私風險。」 審閱回應後，評估： - 是否辨識出關鍵風險？ - 是否提供實務指引？ - 還有哪些額外考量可能適用？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——辨識資料風險</p>
+<ul class="points">
+<li>列出你職場中使用的三款 AI 工具。 針對每一款工具，回答： - 處理哪些類型的資料？ - 可能存在哪些隱私風險？ - 應採取哪些保障措施？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>倫理評估</strong><p>辨識敏感資料、最小化輸入，並依機構事故流程通報關注。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 敏感資料包括：</strong></p>
+<ul class="opts">
+<li>A. 公開資訊</li>
+<li>B. 機密商業紀錄</li>
+<li>C. 一般知識</li>
+<li>D. 無法識別個人的資料</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 機密商業紀錄</p></details>
+<p class="q"><strong>2. 資料最小化意味著：</strong></p>
+<ul class="opts">
+<li>A. 分享所有可取得的資料</li>
+<li>B. 僅使用必要資訊</li>
+<li>C. 忽略隱私政策</li>
+<li>D. 無限制儲存資料</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 僅使用必要資訊</p></details>
+<p class="q"><strong>3. 員工應：</strong></p>
+<ul class="opts">
+<li>A. 未經核准使用任何 AI 工具</li>
+<li>B. 遵循組織的資料政策</li>
+<li>C. 自由分享機密資訊</li>
+<li>D. 忽視隱私風險</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 遵循組織的資料政策</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-11">
-<h2>第 11 章 · AI 管治與合規</h2>
-<p class="master">這一章要掌握什麼：管治是運作中的流程——政策、風險審視、監督與文件化。不清楚時向<strong>負責擁有人</strong>釐清，沉默不是批准。紀錄應足以重建：目的、資料類別、檢查、審核人與結果。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>找出你角色適用的核准用例、資料限制、升級途徑。</li>
-<li>完成線上課程或本工作室，不能證明真實部署已獲機構授權。</li>
-<li>文件應解釋決定，而不是傾倒無關私隱內容。</li>
-<li>常見誤解：請聊天機械人「授權」某用途；只寫「用過 AI」就算問責。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>是否把 AI 草擬的活動簡介發到科學館公眾渠道前，應有簡短問責紀錄：用途、資料來源、誰審核、未解決問題——並存放在獲授權位置。</div>
+<h2>第 11 章 · AI 治理與合規</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-21">課 21 · 管治是運作中的流程</a>　·　<a href="../#literacy-22">課 22 · 記錄到足以重建決定</a></p>
-<p class="selfq"><strong>自問：</strong>你現在想試的用途，對應的機構擁有人姓名／職位是否寫得出來？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>定義 AI 治理及其目的</li>
+<li>理解 AI 合規為何必要</li>
+<li>辨識 AI 治理框架的關鍵組成</li>
+<li>認識治理體系中員工的責任</li>
+<li>在使用 AI 工具時應用組織政策</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 治理管理風險並確保負責任的使用；治理框架包含政策、監督與文件紀錄；員工在合規中扮演關鍵角色；透明度支持問責。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">什麼是 AI 治理？</p>
+<ul class="points">
+<li>AI 治理指的是組織用以負責任地管理 AI 系統的流程、政策與架構。</li>
+<li>AI 的倫理使用</li>
+<li>風險管理</li>
+<li>資料保護</li>
+<li>問責與監督</li>
+</ul>
+<p class="subhead">為何需要 AI 治理</p>
+<ul class="points">
+<li>AI 治理之所以必要，是因為 AI 系統可能：。</li>
+<li>AI 治理之所以必要，是因為 AI 系統可能：；影響關鍵決策；影響員工與客戶的結果；處理敏感資訊；造成倫理與法律風險 若缺乏治理，組織可能面臨：；監管處罰；聲譽損害；營運中斷；失去利害關係人信任 治理框架能降低這些風險。</li>
+</ul>
+<p class="subhead">AI 治理框架的組成</p>
+<ul class="points">
+<li>多數組織的 AI 治理體系包含數項關鍵要素。</li>
+<li>政策與標準：組織會定義政策，明確規範：</li>
+<li>風險管理流程：治理框架包含風險評估程序，用以評估：</li>
+<li>監督機制：監督架構可能包括：</li>
+<li>文件紀錄要求：組織要求記錄：</li>
+</ul>
+<p class="subhead">AI 使用中的法規遵循</p>
+<ul class="points">
+<li>資料保護法律</li>
+<li>消費者保護法規</li>
+<li>產業特定的合規標準</li>
+</ul>
+<p class="subhead">員工在 AI 治理中的責任</p>
+<ul class="points">
+<li>使用經核准的 AI 工具</li>
+<li>遵循資料保護政策</li>
+<li>適當地記錄 AI 使用</li>
+<li>通報疑慮或事件</li>
+<li>對 AI 輔助的決策維持監督</li>
+</ul>
+<p class="subhead">不合規的風險</p>
+<ul class="points">
+<li>法律處罰</li>
+<li>資料外洩</li>
+<li>倫理違規</li>
+<li>失去利害關係人信任</li>
+</ul>
+<p class="subhead">透明度在治理中的角色</p>
+<ul class="points">
+<li>利害關係人理解 AI 的參與</li>
+<li>決策可追溯</li>
+<li>風險可見</li>
+<li>問責得以維持</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>僅使用經核准的 AI 工具</li>
+<li>遵循組織的資料保護政策</li>
+<li>記錄決策中的 AI 參與</li>
+<li>及時通報疑慮</li>
+<li>參與治理訓練課程</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>是否把 AI 草擬的活動簡介發到科學館公眾渠道前，應有簡短問責紀錄：用途、資料來源、誰審核、未解決問題——並存放在獲授權位置。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索 AI 治理概念** 使用經核准的 AI 助理。 &gt; 提示：「請說明組織中 AI 治理的目的。」 審閱回應後，評估： - 是否辨識出關鍵治理組成？ - 是否說明員工責任？ - 還需要哪些額外細節？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——治理認知</p>
+<ul class="points">
+<li>若有可用資料，審閱你所在組織的 AI 政策。 回答： - 哪些類型的 AI 工具已獲核准？ - 資料使用有哪些限制？ - 針對 AI 疑慮有哪些通報程序？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>倫理評估 · 適應技能</strong><p>依政策與風險流程使用 AI；文件化到足以重建決定。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 治理指的是：</strong></p>
+<ul class="opts">
+<li>A. 消除監督</li>
+<li>B. 負責任地管理 AI 使用</li>
+<li>C. 取代人類問責</li>
+<li>D. 忽略法規</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 負責任地管理 AI 使用</p></details>
+<p class="q"><strong>2. 員工透過以下方式支持治理：</strong></p>
+<ul class="opts">
+<li>A. 使用未經核准的 AI 工具</li>
+<li>B. 遵循組織政策</li>
+<li>C. 忽略文件紀錄要求</li>
+<li>D. 避免監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 遵循組織政策</p></details>
+<p class="q"><strong>3. AI 治理中的透明度確保：</strong></p>
+<ul class="opts">
+<li>A. 隱藏的決策流程</li>
+<li>B. 可追溯且可問責的決策</li>
+<li>C. 消除風險管理</li>
+<li>D. 移除人類監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 可追溯且可問責的決策</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-12">
-<h2>第 12 章 · AI 的持份者參與</h2>
-<p class="master">這一章要掌握什麼：持份者包括使用者、受結果影響卻不操作工具的人、擁有人與外部各方。信任來自<strong>準確說明限制</strong>與對回饋的真實回應，而不是更多宣傳或保證零錯誤。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>排班或服務工具可影響從不開介面的同事與訪客。</li>
-<li>試點公告宜含：目的、限制、監督、回饋途徑。</li>
-<li>溝通不應誇大保障或排除質疑。</li>
-<li>常見誤解：只有管理員或供應商才算持份者。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>展教部排班試點上線時，除通知操作同事外，也應讓前線導賞員知道建議如何產生、如何提出不公平班次關注。</div>
+<h2>第 12 章 · AI 中的利害關係人參與</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-23">課 23 · 盤點所有受影響的人</a>　·　<a href="../#literacy-24">課 24 · 說明限制並聆聽回饋</a></p>
-<p class="selfq"><strong>自問：</strong>你下一個試點，有哪個群體「受影響但不操作工具」被漏掉了？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>辨識受 AI 系統影響的利害關係人</li>
+<li>理解利害關係人參與為何必要</li>
+<li>認識溝通在 AI 採用中的角色</li>
+<li>應用建立 AI 使用信任的策略</li>
+<li>支持負責任的利害關係人參與實務</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 影響多個利害關係人群體；參與能建立信任與透明度；溝通是負責任使用 AI 的關鍵；員工在參與中扮演關鍵角色。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">誰是 AI 利害關係人？</p>
+<ul class="points">
+<li>利害關係人包括任何受 AI 系統影響的個人或群體。</li>
+<li>內部利害關係人：內部利害關係人包括：</li>
+<li>外部利害關係人：外部利害關係人包括：</li>
+<li>使用 AI 工具的員工</li>
+<li>督導 AI 輔助流程的主管</li>
+</ul>
+<p class="subhead">為何利害關係人參與很重要</p>
+<ul class="points">
+<li>利害關係人參與至關重要，因為 AI 系統可能：。</li>
+<li>利害關係人參與至關重要，因為 AI 系統可能：；影響涉及個人的決策；處理個人或敏感資料；影響就業與客戶體驗；引發倫理疑慮 參與有助於組織辨識風險，並主動回應利害關係人的關切。</li>
+</ul>
+<p class="subhead">建立對 AI 系統的信任</p>
+<ul class="points">
+<li>AI 系統如何運作</li>
+<li>存在哪些限制</li>
+<li>決策如何形成</li>
+<li>已有哪些保障措施</li>
+</ul>
+<p class="subhead">AI 參與的溝通策略</p>
+<ul class="points">
+<li>清楚說明 AI 的使用：應告知利害關係人：</li>
+<li>易懂的語言：應以清楚、非技術性的語言解釋 AI 概念。</li>
+<li>開放對話：組織應鼓勵利害關係人回饋與提問。</li>
+<li>一致的訊息：溝通應與組織政策及治理框架保持一致。</li>
+</ul>
+<p class="subhead">回應利害關係人的關切</p>
+<ul class="points">
+<li>工作保障</li>
+<li>資料隱私</li>
+<li>決策公平性</li>
+<li>缺乏透明度</li>
+<li>提供準確資訊</li>
+</ul>
+<p class="subhead">員工在參與中的角色</p>
+<ul class="points">
+<li>員工透過以下方式貢獻利害關係人參與：。</li>
+<li>清楚溝通 AI 的使用</li>
+</ul>
+<p class="subhead">利害關係人參與不足的風險</p>
+<ul class="points">
+<li>對 AI 系統缺乏信任</li>
+<li>抗拒 AI 採用</li>
+<li>誤解 AI 能力</li>
+<li>倫理與聲譽風險</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>清楚且透明地溝通 AI 的使用</li>
+<li>提供易懂的 AI 流程說明</li>
+<li>鼓勵回饋與對話</li>
+<li>主動回應關切</li>
+<li>記錄參與工作</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>展教部排班試點上線時，除通知操作同事外，也應讓前線導賞員知道建議如何產生、如何提出不公平班次關注。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索利害關係人觀點** 使用經核准的 AI 助理。 &gt; 提示：「請列出組織中利害關係人對人工智慧的常見關切。」 審閱回應後，評估： - 是否涵蓋所有利害關係人群體？ - 這些關切是否實際且務實？ - 還可能存在哪些額外關切？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——利害關係人盤點</p>
+<ul class="points">
+<li>辨識你職場中使用的一套 AI 系統。 列出受其使用影響的利害關係人。 針對每一方，回答： - 他們可能有哪些關切？ - 應如何回應這些關切？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>人際與溝通</strong><p>向不同持份者說明 AI 流程；在人機協作團隊中有效溝通限制與回饋途徑。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. AI 系統的利害關係人包括：</strong></p>
+<ul class="opts">
+<li>A. 僅技術團隊</li>
+<li>B. 任何受 AI 使用影響的人</li>
+<li>C. 僅管理層</li>
+<li>D. 僅客戶</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 任何受 AI 使用影響的人</p></details>
+<p class="q"><strong>2. 利害關係人參與有助於：</strong></p>
+<ul class="opts">
+<li>A. 降低透明度</li>
+<li>B. 建立對 AI 系統的信任</li>
+<li>C. 消除溝通</li>
+<li>D. 避免監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 建立對 AI 系統的信任</p></details>
+<p class="q"><strong>3. 員工透過以下方式支持參與：</strong></p>
+<ul class="opts">
+<li>A. 隱瞞 AI 的使用</li>
+<li>B. 透明地溝通</li>
+<li>C. 忽略利害關係人的關切</li>
+<li>D. 避免回饋</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 透明地溝通</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-13">
-<h2>第 13 章 · 真實世界 AI 個案</h2>
-<p class="master">這一章要掌握什麼：從支援、招聘、預測、發票、監察等領域辨識<strong>不同失敗模式</strong>與負責任回應。本站個案為虛構教學情境，不是對具名機構的已核實調查。轉移的是經測試的原則，不是原封不動的設定。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>看似合理的故事≠特定事件已發生的證據。</li>
-<li>套用前比較：任務、受影響的人、資料與錯誤後果是否相似。</li>
-<li>他處成功不是你環境的保證；門檻與審核頻率常需重設。</li>
-<li>常見誤解：背誦個案細節就等於學會；或以為「別人用過就可以照抄」。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>讀完「客服自動回覆出錯」的虛構個案後，改寫成科學館服務台版本：哪些聲稱必須對照場館通告、何時必須轉真人。</div>
+<h2>第 13 章 · 真實世界的 AI 案例研究</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-25">課 25 · 從五個個案領域學習</a>　·　<a href="../#literacy-26">課 26 · 轉移教訓而不照搬</a></p>
-<p class="selfq"><strong>自問：</strong>你想借用的一項「他處做法」，哪三個條件在你單位並不成立？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>理解 AI 如何應用於真實職場環境</li>
+<li>辨識促成 AI 成功採用的因素</li>
+<li>認識 AI 實施中常見的挑戰與風險</li>
+<li>運用倫理與治理框架分析案例研究</li>
+<li>將所學經驗應用於自己的職場情境</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 帶來顯著的職場效益；實施挑戰需要監督；倫理、治理與利害關係人因素影響成敗；案例研究提供實務學習機會。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">案例研究一——用於客服自動化的 AI</p>
+<ul class="points">
+<li>一家公司導入 AI 聊天機器人來處理例行客戶詢問。</li>
+<li>概述：一家公司導入 AI 聊天機器人來處理例行客戶詢問。</li>
+<li>目標：- 縮短回應時間</li>
+<li>達成的效益：- 更快的客戶回應</li>
+<li>遭遇的挑戰：- AI 誤解複雜問題</li>
+</ul>
+<p class="subhead">案例研究二——招聘流程中的 AI</p>
+<ul class="points">
+<li>概述：某組織使用 AI 篩選求職申請。</li>
+<li>目標：- 提升招募效率</li>
+<li>達成的效益：- 更快的履歷篩選</li>
+<li>倫理挑戰：- AI 對特定候選人輪廓表現出偏見</li>
+<li>關鍵教訓：- 必須監測 AI 系統的公平性</li>
+</ul>
+<p class="subhead">案例研究三——用於財務預測的 AI</p>
+<ul class="points">
+<li>一家金融機構導入 AI 工具來預測市場趨勢。</li>
+<li>概述：一家金融機構導入 AI 工具來預測市場趨勢。</li>
+<li>目標：- 提升預測準確度</li>
+<li>達成的效益：- 更快的資料分析</li>
+<li>遭遇的風險：- AI 預測高度依賴歷史資料</li>
+</ul>
+<p class="subhead">案例研究四——工作流程自動化中的 AI</p>
+<ul class="points">
+<li>一家公司導入 AI 以自動化發票處理。</li>
+<li>概述：一家公司導入 AI 以自動化發票處理。</li>
+<li>目標：- 減少人工資料輸入</li>
+<li>達成的效益：- 更快的處理時間</li>
+<li>挑戰：- 資料不一致導致處理錯誤</li>
+</ul>
+<p class="subhead">案例研究五——績效監測中的 AI</p>
+<ul class="points">
+<li>某組織使用 AI 分析來評估員工生產力。</li>
+<li>概述：某組織使用 AI 分析來評估員工生產力。</li>
+<li>效益：- 辨識工作流程中的低效之處</li>
+<li>提出的疑慮：- 員工擔憂隱私</li>
+<li>關鍵教訓：- 利害關係人參與不可或缺</li>
+</ul>
+<p class="subhead">AI 實施的常見成功因素</p>
+<ul class="points">
+<li>清楚的組織目標</li>
+<li>穩健的治理框架</li>
+<li>員工訓練與 AI 素養</li>
+<li>透明的溝通</li>
+<li>持續的監測與評估</li>
+</ul>
+<p class="subhead">AI 實施的常見挑戰</p>
+<ul class="points">
+<li>偏見風險</li>
+<li>隱私疑慮</li>
+<li>利害關係人抗拒</li>
+<li>資料品質問題</li>
+<li>過度依賴自動化</li>
+</ul>
+<p class="subhead">應用案例研究的教訓</p>
+<ul class="points">
+<li>員工可透過以下方式應用案例研究的洞察：。</li>
+<li>在使用 AI 工具前評估風險</li>
+<li>對 AI 輸出維持監督</li>
+<li>透明地溝通 AI 的使用</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>在採用前評估 AI 風險</li>
+<li>確保 AI 流程的透明度</li>
+<li>維持人類監督</li>
+<li>持續監測 AI 效能</li>
+<li>主動與利害關係人互動</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>讀完「客服自動回覆出錯」的虛構個案後，改寫成科學館服務台版本：哪些聲稱必須對照場館通告、何時必須轉真人。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：分析一個 AI 案例** 使用經核准的 AI 助理。 &gt; 提示：「請提供一個在職場環境中使用人工智慧的範例，並描述相關風險。」 審閱回應後，評估： - 該範例是否實際？ - 風險是否被清楚辨識？ - 還有哪些額外考量適用？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——案例研究分析</p>
+<ul class="points">
+<li>選擇你組織中使用的一款 AI 工具。 回答： - 它帶來哪些效益？ - 使用它伴隨哪些風險？ - 應採取哪些保障措施？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>分析技能 · 實務應用</strong><p>從個案抽取可遷移原則，按本機構情境調整，而非照搬設定。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 成功的 AI 實施需要：</strong></p>
+<ul class="opts">
+<li>A. 消除監督</li>
+<li>B. 清楚的目標與治理</li>
+<li>C. 忽略利害關係人關切</li>
+<li>D. 避免訓練</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 清楚的目標與治理</p></details>
+<p class="q"><strong>2. AI 案例研究顯示：</strong></p>
+<ul class="opts">
+<li>A. AI 消除風險</li>
+<li>B. AI 需要監測與評估</li>
+<li>C. AI 取代人類決策</li>
+<li>D. AI 保證準確</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. AI 需要監測與評估</p></details>
+<p class="q"><strong>3. AI 實施中的透明度有助於：</strong></p>
+<ul class="opts">
+<li>A. 降低信任</li>
+<li>B. 建立利害關係人信心</li>
+<li>C. 消除溝通</li>
+<li>D. 增加偏見</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 建立利害關係人信心</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-14">
-<h2>第 14 章 · 職場 AI 的未來</h2>
-<p class="master">這一章要掌握什麼：為合理變化做準備——情境、技能練習、定期覆核——而不是對職位結果的確定預測。持續素養需要刻意練習與可覆核的證據，信心應由觀察支持。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>更多自動化、整合與決策支援是方向，不是對每個職位的保證。</li>
-<li>職場影響取決於科技、機構選擇與外在條件。</li>
-<li>學習計劃應含具體任務、回饋與可覆核結果，而非只有自我感覺。</li>
-<li>常見誤解：保證「沒有職位會變」或把單一預測當成確定。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>為展教同事訂一週練習：每天核對一則 AI 草擬的訪客回覆，並記下修訂類型——月底用紀錄覆核，而不是只憑「感覺更熟練」。</div>
+<h2>第 14 章 · 職場中 AI 的未來</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-27">課 27 · 為變化做計劃</a>　·　<a href="../#literacy-28">課 28 · 持續學習計劃</a></p>
-<p class="selfq"><strong>自問：</strong>你的下一個覆核日期與要檢查的假設是什麼？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>辨識人工智慧的新興趨勢</li>
+<li>理解 AI 可能如何重塑職場角色</li>
+<li>認識未來 AI 採用的機會與挑戰</li>
+<li>描述員工在 AI 驅動環境中所需的技能</li>
+<li>為持續的技術變革做好準備</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">AI 採用預期將增加；職場角色將演變，而非消失；將需要新技能；終身學習是適應的關鍵。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">新興 AI 趨勢</p>
+<ul class="points">
+<li>數項關鍵趨勢正在塑造人工智慧的未來。</li>
+<li>自動化程度提升：預期 AI 系統將在各行業自動化更多例行性與重複性任務。</li>
+<li>AI 增強的決策：AI 將透過提供預測洞察與資料分析，日益支援複雜決策。</li>
+<li>自然語言 AI 的擴展：能理解並生成人類語言的 AI 系統正變得更加先進。</li>
+<li>AI 跨系統整合：預期組織將把 AI 整合進多個營運系統。</li>
+</ul>
+<p class="subhead">AI 可能如何改變職場角色</p>
+<ul class="points">
+<li>預期 AI 將重塑工作角色，而非完全消除它們。</li>
+<li>任務轉型：例行性任務可能自動化，讓員工得以專注於：</li>
+<li>新角色的產生：可能出現新角色，包括：</li>
+<li>技能演變：員工可能需要培養：</li>
+</ul>
+<p class="subhead">AI 帶來的機會</p>
+<ul class="points">
+<li>生產力提升：自動化可減少人工工作量。</li>
+<li>決策品質改善：AI 洞察可支援資料驅動的決策。</li>
+<li>創新強化：AI 工具讓實驗與新解決方案成為可能。</li>
+</ul>
+<p class="subhead">未來 AI 採用相關的挑戰</p>
+<ul class="points">
+<li>儘管有益，未來的 AI 採用可能涉及挑戰。</li>
+<li>勞動力調適：員工可能需要適應新技術與新工作流程。</li>
+<li>倫理風險：先進的 AI 系統可能帶來新的倫理疑慮。</li>
+<li>資料隱私問題：AI 使用增加可能涉及更大的資料量。</li>
+<li>技能落差：組織可能需要提供持續訓練。</li>
+</ul>
+<p class="subhead">為 AI 驅動的未來做好準備</p>
+<ul class="points">
+<li>培養 AI 素養技能</li>
+<li>參與訓練課程</li>
+<li>隨時掌握新興技術</li>
+<li>維持適應力與持續學習</li>
+</ul>
+<p class="subhead">終身學習的重要性</p>
+<ul class="points">
+<li>由於 AI 技術快速演進，持續學習不可或缺。</li>
+<li>定期更新知識</li>
+<li>負責任地探索新 AI 工具</li>
+<li>投入專業發展</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>隨時掌握技術發展</li>
+<li>建立基礎 AI 素養技能</li>
+<li>維持彈性與適應力</li>
+<li>投入持續學習</li>
+<li>參與組織訓練課程</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>為展教同事訂一週練習：每天核對一則 AI 草擬的訪客回覆，並記下修訂類型——月底用紀錄覆核，而不是只憑「感覺更熟練」。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：探索未來趨勢** 使用經核准的 AI 助理。 &gt; 提示：「請描述人工智慧的未來趨勢及其對職場的潛在影響。」 審閱回應後，評估： - 這些趨勢是否實際？ - 風險與機會是否均衡呈現？ - 還有哪些額外考量可能適用？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——未來準備度評估</p>
+<ul class="points">
+<li>回答以下問題： - 哪些 AI 趨勢與你的角色最相關？ - 你需要哪些技能來適應？ - 你應追求哪些訓練機會？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>適應技能</strong><p>面對快速變化的工具與要求；承諾終身學習與定期覆核假設。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 未來的 AI 趨勢預期將：</strong></p>
+<ul class="opts">
+<li>A. 消除所有工作</li>
+<li>B. 增加自動化與決策支援</li>
+<li>C. 移除人類監督</li>
+<li>D. 消除治理</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 增加自動化與決策支援</p></details>
+<p class="q"><strong>2. 員工可透過以下方式為 AI 變革做準備：</strong></p>
+<ul class="opts">
+<li>A. 迴避新技術</li>
+<li>B. 培養 AI 素養技能</li>
+<li>C. 忽略訓練機會</li>
+<li>D. 消除監督</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 培養 AI 素養技能</p></details>
+<p class="q"><strong>3. AI 整合很可能：</strong></p>
+<ul class="opts">
+<li>A. 減少資料使用</li>
+<li>B. 增加系統連結性</li>
+<li>C. 消除法規</li>
+<li>D. 移除倫理疑慮</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 增加系統連結性</p></details>
+</div>
 </article>
 
 <article class="chapter" id="chapter-15">
-<h2>第 15 章 · 負責任使用 AI 的最佳做法</h2>
-<p class="master">這一章要掌握什麼：把前述主題收成流程——<strong>界定、撰寫指示、審核、運用判斷、記錄結果</strong>。使用前清單（任務適合度、工具批准、敏感資料、指示與輸出審核）是自我提醒，<strong>不授予</strong>機構批准。交接要讓另一個人看得懂貢獻、證據、限制與下一步。</p>
-<h3 class="sec">重點知識</h3>
-<ul class="points">
-<li>未解決的批准問題：釐清後才使用，勿把自填清單當成批准。</li>
-<li>有用交接含：任務、證據、擁有人、未解決問題與下一步——不只最終草稿。</li>
-<li>結合清楚任務、最少獲准輸入、可審核輸出與具名擁有人。</li>
-<li>常見誤解：勾完檢查表就可以對外發布；或聲稱「AI 處理了一切」。</li>
-</ul>
-<div class="macao"><strong>澳門情境提示：</strong>把活動簡介審核交接給同事時，附上：用了哪些核准來源、哪幾句仍待場地組確認、誰負責最終發布——而不是只丟一個「已完成」檔案。</div>
+<h2>第 15 章 · 負責任使用 AI 的最佳實務</h2>
 <p class="lessons"><strong>配套課：</strong> <a href="../#literacy-29">課 29 · 負責任使用流程順序</a>　·　<a href="../#literacy-30">課 30 · 負責任使用的交接</a></p>
-<p class="selfq"><strong>自問：</strong>若你明天休假，接手的人能否只靠你的交接重建決定？</p>
+<h3 class="sec">學習目標</h3>
+<p class="lead-note">讀完本章後，你應能夠：</p>
+<ul class="points">
+<li>在職場中應用負責任的 AI 使用實務</li>
+<li>辨識 AI 整合的安全工作流程</li>
+<li>使用 AI 工具時維持監督與問責</li>
+<li>認識風險並防止誤用</li>
+<li>遵循結構化方法進行倫理的 AI 採用</li>
+</ul>
+<h3 class="sec">這一章要掌握什麼</h3>
+<p class="master">負責任的 AI 使用需要監督、驗證與倫理意識；結構化工作流程可提升安全性與有效性；員工在負責任採用中扮演核心角色；持續監測確保長期可靠性。</p>
+<h3 class="sec">重點知識</h3>
+<p class="subhead">員工的安全 AI 工作流程</p>
+<ul class="points">
+<li>負責任的 AI 使用涉及結構化的工作流程。</li>
+<li>工作流程範例：使用 AI 草擬報告：1. 定義報告目標</li>
+<li>工作流程範例：使用 AI 進行資料分析：1. 提供匿名化資料</li>
+</ul>
+<p class="subhead">常見的 AI 誤用風險</p>
+<ul class="points">
+<li>未經審查即依賴 AI</li>
+<li>將機密資料輸入未經核准的系統</li>
+<li>在無監督下將 AI 用於關鍵決策</li>
+<li>忽略倫理考量</li>
+</ul>
+<p class="subhead">持續監測的角色</p>
+<ul class="points">
+<li>長期準確性</li>
+<li>結果的公平性</li>
+<li>法規遵循</li>
+</ul>
+<p class="subhead">課程完成總結</p>
+<ul class="points">
+<li>基本的 AI 概念</li>
+<li>職場實務應用</li>
+<li>提示與評估技巧</li>
+<li>倫理與治理原則</li>
+<li>負責任的 AI 使用實務</li>
+</ul>
+<h3 class="sec">實務建議</h3>
+<ul class="points">
+<li>審查 AI 輸出</li>
+<li>應用專業判斷</li>
+<li>維持問責</li>
+<li>查核資訊事實</li>
+<li>交叉比對可信來源</li>
+<li>確認與任務的相關性</li>
+<li>資訊摘要</li>
+<li>內容草擬</li>
+</ul>
+<div class="macao"><strong>澳門情境：</strong>把活動簡介審核交接給同事時，附上：用了哪些核准來源、哪幾句仍待場地組確認、誰負責最終發布——而不是只丟一個「已完成」檔案。</div>
+<h3 class="sec">練習與反思</h3>
+<div class="practice-box">
+<p class="subhead">AI 輔助學習活動</p>
+<ul class="points">
+<li>**活動：負責任 AI 評估** 使用經核准的 AI 助理。 &gt; 提示：「請列出職場環境中負責任使用 AI 的最佳實務。」 審閱回應後，評估： - 是否包含倫理與治理考量？ - 建議是否務實？ - 還有哪些最佳實務適用？</li>
+</ul></div>
+<div class="practice-box">
+<p class="subhead">實務練習——AI 使用檢核表</p>
+<ul class="points">
+<li>在使用 AI 之前，回答： - 此任務適合 AI 輔助嗎？ - 該 AI 工具是否獲得組織核准？ - 是否會涉及任何敏感資料？ - 需要哪些監督步驟？</li>
+</ul></div>
+<h3 class="sec">職場能力提示</h3>
+<div class="cap-box"><strong>跨域能力小結</strong><p>結合技術理解、實務整合、分析核實、倫理評估與持續學習，形成可交接的負責任工作流。</p></div>
+<h3 class="sec">小測驗</h3>
+<div class="quiz">
+<p class="q"><strong>1. 負責任的 AI 使用需要：</strong></p>
+<ul class="opts">
+<li>A. 消除監督</li>
+<li>B. 在使用前驗證輸出</li>
+<li>C. 忽略倫理考量</li>
+<li>D. 規避治理政策</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 在使用前驗證輸出</p></details>
+<p class="q"><strong>2. 員工應：</strong></p>
+<ul class="opts">
+<li>A. 自由分享機密資料</li>
+<li>B. 對 AI 輔助的決策維持問責</li>
+<li>C. 允許 AI 獨立運作</li>
+<li>D. 避免審查輸出</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 對 AI 輔助的決策維持問責</p></details>
+<p class="q"><strong>3. AI 工作流程應包含：</strong></p>
+<ul class="opts">
+<li>A. 無任何評估步驟</li>
+<li>B. 清楚的審查與記錄流程</li>
+<li>C. 消除人類判斷</li>
+<li>D. 移除合規程序</li>
+</ul>
+<details class="ans"><summary>查看答案</summary>
+<p>B. 清楚的審查與記錄流程</p></details>
+</div>
 </article>
 
-<section class="appendix">
-<h2>附錄涵蓋範圍（對照工作室）</h2>
-<p>A：可搜尋詞彙。B：使用前清單實驗室。C：四部分提示工作坊。D：五維輸出審核。E：倫理原則工作紙（連第 8–9 章）。引言與結論分別影響開場課與最終交接專案。</p>
-<p style="margin-top:14px"><a href="../">← 返回工作室開始練習</a>　·　<a href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">Amazon Kindle 原文</a></p>
-</section>
+<section class="appendix" id="appendix"><h2>附錄 A–E 速查</h2><p class="lead-note">快速參考：術語、使用前檢核、提示框架、輸出評估與倫理原則。</p><h3 class="sec">附錄 A——關鍵 AI 術語</h3><ul class="points"><li>人工智慧（AI）：使機器得以執行通常需要人類智慧的任務的技術。</li><li>機器學習：AI 的一個子領域，系統從資料中學習模式以提升效能。</li><li>提示（Prompt）：引導 AI 系統回應的使用者輸入。</li><li>偏見：因資料或設計因素導致 AI 輸出中系統性的不公平。</li><li>治理：用以負責任地管理 AI 的政策與流程。</li></ul><h3 class="sec">附錄 B——負責任 AI 使用檢核表</h3><ul class="points"><li>✔ 此任務適合 AI 輔助嗎？</li><li>✔ 我使用的是經核准的 AI 系統嗎？</li><li>✔ 這是否涉及敏感資料？</li><li>✔ 我是否提供了清楚的指示？</li><li>✔ 我是否會審查輸出的準確性與偏見？</li></ul><h3 class="sec">附錄 C——提示框架</h3><ul class="points"><li>情境</li><li>清楚指示</li><li>期望格式</li><li>對象說明</li></ul><p class="example">範例：請以條列式為高階主管摘要這份報告。</p><h3 class="sec">附錄 D——AI 輸出評估檢核表</h3><ul class="points"><li>驗證事實準確性</li><li>檢查完整性</li><li>評估相關性</li><li>辨識潛在偏見</li><li>應用專業判斷</li></ul><h3 class="sec">附錄 E——倫理 AI 原則</h3><ul class="points"><li>公平性</li><li>透明度</li><li>問責</li><li>隱私保護</li></ul></section>
 
-<p class="foot">本頁為獨立教學導讀摘要，非正式譯本。練習結構改編自 Laurence Lars Svekis,《AI Literacy for All Employees》, © 2026。澳門科學館 Oscar 製作。</p>
+<footer class="foot">
+<p>澳門科學館 Oscar 製作 · AI 素養工作室章節導讀</p>
+<p><a href="../">返回工作室首頁</a></p>
+</footer>
 </div>
 </body>
 </html>
