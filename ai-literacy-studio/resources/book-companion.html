@@ -3,35 +3,321 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>書章對照與改編說明 — AI 素養工作室</title>
+<title>15 章重點導讀 — AI 素養工作室｜澳門科學館</title>
 <style>
-body{font:17px/1.7 system-ui,sans-serif;color:#193744;max-width:850px;margin:40px auto;padding:20px}
-article{padding:20px 0;border-bottom:1px solid #ddd}
-a{color:#135d72}
+:root{--bg:#0b2e2f;--panel:#0f3d3e;--accent:#1a9e8f;--accent2:#f0b429;--text:#1a1a1a;--muted:#5a6670;--card:#fff;--soft:#f3faf9;--line:#d5e5e3;--radius:14px}
+*{box-sizing:border-box}body{margin:0;font:16.5px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 64px}
+.topnav{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}
+.topnav a{color:#7fddd4;text-decoration:none;font-size:.92rem}
+.topnav a:hover{text-decoration:underline}
+.hero{background:linear-gradient(120deg,#0b2e2f,#0f3d3e 55%,#1a9e8f);color:#f3fff9;border-radius:var(--radius);padding:28px 32px;margin-bottom:22px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.hero .eyebrow{font-size:.72rem;letter-spacing:1.5px;font-weight:800;color:#7fddd4;text-transform:uppercase;margin:0 0 10px}
+.hero h1{font-size:clamp(1.5rem,3.5vw,2rem);line-height:1.25;margin:0 0 12px;color:#fff}
+.hero h1 em{color:var(--accent2);font-style:normal}
+.hero p{margin:0 0 10px;color:#d0e8df;font-size:.95rem}
+.hero .meta{font-size:.85rem;color:rgba(255,255,255,.65);margin:14px 0 0}
+.toc{background:var(--card);border-radius:var(--radius);padding:20px 24px;margin-bottom:22px}
+.toc h2{margin:0 0 12px;font-size:1.1rem;color:var(--panel)}
+.toc ol{margin:0;padding-left:1.3em;columns:1}
+@media(min-width:640px){.toc ol{columns:2}}
+.toc li{break-inside:avoid;margin:.35em 0;font-size:.9rem}
+.toc a{color:var(--accent);text-decoration:none}.toc a:hover{text-decoration:underline}
+.note-box{background:#e8f4f2;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:22px;font-size:.92rem;color:#2a4a4a}
+article.chapter{background:var(--card);border-radius:var(--radius);padding:26px 28px 28px;margin-bottom:18px;border-left:5px solid var(--accent);box-shadow:0 4px 20px rgba(0,0,0,.12)}
+article.chapter h2{margin:0 0 12px;font-size:clamp(1.15rem,2.5vw,1.4rem);color:var(--panel);line-height:1.35}
+.master{font-size:.98rem;color:#2a4a4a;margin:0 0 16px}
+h3.sec{font-size:.95rem;color:var(--panel);margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent2);flex-shrink:0}
+ul.points{margin:0 0 8px;padding-left:1.25em}
+ul.points li{margin:.4em 0;font-size:.95rem}
+.macao{background:var(--soft);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:.92rem;color:#2a4a4a;border:1px solid var(--line)}
+.macao strong{color:var(--panel)}
+.lessons{font-size:.9rem;margin:12px 0 0}
+.lessons a{color:var(--accent);font-weight:600;text-decoration:none}
+.lessons a:hover{text-decoration:underline}
+.selfq{margin:14px 0 0;padding:12px 14px;background:#fffbf0;border:1px solid #f0d78a;border-radius:10px;font-size:.9rem}
+.selfq strong{color:#856404}
+.appendix{background:var(--card);border-radius:var(--radius);padding:22px 26px;margin-top:8px}
+.appendix h2{margin:0 0 10px;color:var(--panel);font-size:1.15rem}
+.foot{margin-top:28px;padding:18px;text-align:center;color:rgba(255,255,255,.55);font-size:.8rem}
+.foot a{color:#7fddd4}
+.buy{display:inline-block;margin-top:8px;padding:8px 14px;background:var(--accent2);color:#1a1a1a;border-radius:8px;font-weight:700;font-size:.85rem;text-decoration:none}
+.buy:hover{filter:brightness(1.05)}
 </style>
 </head>
 <body>
-<a href="../">← AI 素養工作室</a>
-<h1>AI 素養工作室 · 章節地圖</h1>
-<p>澳門科學館教學改編 · 練習結構改編自 Laurence Lars Svekis,《AI Literacy for All Employees》, © 2026</p>
-<h2>本改編如何運作</h2>
-<p>本指南涵蓋 15 個編號章、引言、結論與附錄 A–E。每章對應兩課。它教導書中結構與概念，而非聲稱是原文逐字版。第 13 章個案為一般且無名；實驗室新情境明確標示為虛構。關於 AI「從不推理或不使用上下文」的籠統說法，本站改為：需要評估實際能力，而非斷言絕對不可能。人的問責與技術上可自動化決定作區分。對話上下文、產品記憶、資料保留與模型再訓練，不視為同一件事。未來職位影響不確定，而非保證。移除識別資料不保證匿名化。管治練習為虛構機構政策，不是特定法域的法律意見。比較多個模型答案可顯示分歧，但不能獨立核實聲稱。</p>
-<article id="chapter-1"><h2>第 1 章 · AI 時刻：理解人工智能為何正在改變工作</h2><p>配套課 1–2：</p><ul><li>盤點工作中已有的 AI — AI 素養從辨識系統、其角色，以及你的責任開始。</li><li>讓責任保持可見 — AI 協助並不會把機構問責轉移給模型。</li></ul></article>
-<article id="chapter-2"><h2>第 2 章 · 人工智能如何運作</h2><p>配套課 3–4：</p><ul><li>分開「訓練」與「使用」 — 訓練會改變模型；推論使用模型產生輸出。</li><li>認識資料如何塑造結果 — 資料、目標與情境會影響系統能做好什麼。</li></ul></article>
-<article id="chapter-3"><h2>第 3 章 · 日常工作中的 AI</h2><p>配套課 5–6：</p><ul><li>區分自動化與增強 — 說明任務被委派了多少，以及人在何處介入。</li><li>提供工作流程所需的情境 — 有用的建議仍需要真實職場的約束條件。</li></ul></article>
-<article id="chapter-4"><h2>第 4 章 · AI 迷思與誤解</h2><p>配套課 7–8：</p><ul><li>挑戰「準確」與「中立」迷思 — 華麗措辭並不能證明正確或公平。</li><li>分開能力聲稱與問責 — 不要因為流暢互動就推斷具有人類般的判斷或權威。</li></ul></article>
-<article id="chapter-5"><h2>第 5 章 · 員工今天如何使用 AI</h2><p>配套課 9–10：</p><ul><li>對外通訊寄出前先審核 — 面向公眾的草稿必須符合你能支持的事實與承諾。</li><li>按完整工作流程選擇用例 — 效益取決於任務、輸入、審核與後果。</li></ul></article>
-<article id="chapter-6"><h2>第 6 章 · 有效的提示（Prompt）</h2><p>配套課 11–12：</p><ul><li>使用書中的四部分提示 — 情境、指示、格式與對象讓期望變得可見。</li><li>依觀察到的落差再修訂 — 跟進應說明什麼要改、什麼必須保持不變。</li></ul></article>
-<article id="chapter-7"><h2>第 7 章 · 評估 AI 輸出</h2><p>配套課 13–14：</p><ul><li>套用全部五項輸出檢查 — 準確、完整、相關、偏見與人的判斷是分開的檢查。</li><li>核實數據洞察與假設 — 檢查分析聲稱的來源、詮釋與決策情境。</li></ul></article>
-<article id="chapter-8"><h2>第 8 章 · 倫理與負責任的 AI 使用</h2><p>配套課 15–16：</p><ul><li>把倫理變成具體行動 — 公平、問責、透明與私隱需要具體做法。</li><li>保留審核與質疑的途徑 — 受影響的人需要有意義的方式提出關注。</li></ul></article>
-<article id="chapter-9"><h2>第 9 章 · 理解 AI 偏見</h2><p>配套課 17–18：</p><ul><li>辨識不同的偏見來源 — 歷史、代表性、量度與評估問題可以互相影響。</li><li>謹慎調查群體差異 — 在下結論前使用比率、分母與情境。</li></ul></article>
-<article id="chapter-10"><h2>第 10 章 · AI 中的私隱與資料保護</h2><p>配套課 19–20：</p><ul><li>分享前先辨識資料 — 個人、機密與特別受保護的資料需要適當處理。</li><li>盡量減少資料並通報關注 — 只提供必要且獲准的資訊，並依循事故流程。</li></ul></article>
-<article id="chapter-11"><h2>第 11 章 · AI 管治與合規</h2><p>配套課 21–22：</p><ul><li>把管治理解為運作中的流程 — 政策、風險審視、監督與文件化組織起負責任使用。</li><li>記錄到足以重建決定 — 有用的紀錄連結輸入、檢查、決定與負責人。</li></ul></article>
-<article id="chapter-12"><h2>第 12 章 · AI 的持份者參與</h2><p>配套課 23–24：</p><ul><li>盤點所有受影響的人 — 持份者包括使用者、受影響的人、擁有人與外部各方。</li><li>說明限制並聆聽回饋 — 信任需要準確說明以及對關注的回應。</li></ul></article>
-<article id="chapter-13"><h2>第 13 章 · 真實世界 AI 個案</h2><p>配套課 25–26：</p><ul><li>從書中五個個案領域學習 — 支援、招聘、預測、發票與監察暴露不同失敗模式。</li><li>轉移教訓而不照搬假設 — 問原因、情境與保障是否適合你自己的用例。</li></ul></article>
-<article id="chapter-14"><h2>第 14 章 · 職場 AI 的未來</h2><p>配套課 27–28：</p><ul><li>為變化做計劃，卻不假裝能預測 — 未來準備是為合理變化做準備，而非對職位結果的確定性。</li><li>建立持續學習計劃 — AI 素養需要刻意練習與定期重新評估。</li></ul></article>
-<article id="chapter-15"><h2>第 15 章 · 負責任使用 AI 的最佳做法</h2><p>配套課 29–30：</p><ul><li>使用負責任使用的流程順序 — 界定、撰寫指示、審核、運用判斷並記錄結果。</li><li>建立負責任使用的交接 — 讓貢獻、證據與下一步對另一個人清楚可懂。</li></ul></article>
-<h2>附錄涵蓋範圍</h2>
-<p>A：可搜尋詞彙。B：使用前清單。C：四部分提示建構器。D：五維度輸出審核。E：倫理原則工作紙與第 8–9 章。引言與結論分別影響開場課與最終交接專案。</p>
-<p><small>本站為獨立教學改編，非原出版社／原站產品。澳門科學館 Oscar 製作。</small></p>
-</body></html>
+<div class="wrap">
+<nav class="topnav">
+<a href="../">← 返回 AI 素養工作室</a>
+<a href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">自行於 Amazon Kindle 購買閱讀原文 ↗</a>
+</nav>
+
+<header class="hero">
+<p class="eyebrow">澳門科學館 · AI 素養工作室</p>
+<h1>15 章<em>重點導讀</em></h1>
+<p>本頁為教學導讀摘要，用自己的話整理各章要掌握的概念、做法與常見誤解，並配上澳門／科學館情境提示。本頁<strong>不是</strong>原書譯本，亦不貼原文長段。</p>
+<p class="meta">練習結構改編自 Laurence Lars Svekis,《AI Literacy for All Employees》, © 2026 · 澳門科學館 Oscar 製作</p>
+<a class="buy" href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">於 Amazon Kindle 閱讀原文</a>
+</header>
+
+<div class="note-box">
+<strong>如何使用：</strong>每章對應工作室兩課（共 30 課）。先讀「要掌握什麼」與「重點知識」，再進實驗室或課節練習。個案與例子若未標明真實機構，一律視為虛構教學情境。真實工作請依所屬機構程序與法例；本站不提供法律意見。
+</div>
+
+<nav class="toc" aria-label="章節目錄">
+<h2>章節目錄</h2>
+<ol>
+<li><a href="#chapter-1">第 1 章 · AI 時刻</a></li>
+<li><a href="#chapter-2">第 2 章 · 人工智能如何運作</a></li>
+<li><a href="#chapter-3">第 3 章 · 日常工作中的 AI</a></li>
+<li><a href="#chapter-4">第 4 章 · AI 迷思與誤解</a></li>
+<li><a href="#chapter-5">第 5 章 · 員工今天如何使用 AI</a></li>
+<li><a href="#chapter-6">第 6 章 · 有效的提示</a></li>
+<li><a href="#chapter-7">第 7 章 · 評估 AI 輸出</a></li>
+<li><a href="#chapter-8">第 8 章 · 倫理與負責任使用</a></li>
+<li><a href="#chapter-9">第 9 章 · 理解 AI 偏見</a></li>
+<li><a href="#chapter-10">第 10 章 · 私隱與資料保護</a></li>
+<li><a href="#chapter-11">第 11 章 · AI 管治與合規</a></li>
+<li><a href="#chapter-12">第 12 章 · 持份者參與</a></li>
+<li><a href="#chapter-13">第 13 章 · 真實世界個案</a></li>
+<li><a href="#chapter-14">第 14 章 · 職場 AI 的未來</a></li>
+<li><a href="#chapter-15">第 15 章 · 負責任使用最佳做法</a></li>
+</ol>
+</nav>
+
+<article class="chapter" id="chapter-1">
+<h2>第 1 章 · AI 時刻：理解人工智能為何正在改變工作</h2>
+<p class="master">這一章要掌握什麼：AI 素養不是先背產品名稱，而是先<strong>盤點</strong>你日常流程裡哪些步驟已有 AI 介入、它實際做什麼，以及<strong>誰仍須負責</strong>。工具可以協助起草或分類，但機構問責不會自動轉移給模型。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>從「功能」入手：寫作助理、預測儀表板、分類器等可能藏在同一軟件裡；行銷標籤不能代替實際說明。</li>
+<li>工作地圖應含：任務、AI 的貢獻、人的責任，以及需要核對的證據。</li>
+<li>AI 可自動化技術步驟，並不代表模型成為法律或行政上的決定擁有人。</li>
+<li>常見誤解：以為「用了 AI」就等於流程已負責任；其實缺審核人、缺拒絕權，風險仍在。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>展教部用助理草擬「週末家庭活動」回覆前，先標出哪句是核准展項資料、誰有權修改與寄出——模型名稱寫在註腳也代替不了這步。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-01">課 1 · 盤點工作中已有的 AI</a>　·　<a href="../#literacy-02">課 2 · 讓責任保持可見</a></p>
+<p class="selfq"><strong>自問：</strong>你本週會接觸的一個工作流程裡，審核人是誰？他／她真的可以拒絕 AI 草稿嗎？</p>
+</article>
+
+<article class="chapter" id="chapter-2">
+<h2>第 2 章 · 人工智能如何運作</h2>
+<p class="master">這一章要掌握什麼：分開<strong>訓練</strong>（改變模型）與<strong>推論／使用</strong>（用已有模型產生輸出）。對話裡給更多上下文，通常不是「即時重新訓練」。資料、目標與情境會限制系統能做好什麼。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>監督式（有標籤例子）、非監督式（分群）、強化學習（回饋）是入門切入口，不是所有現代系統的完整分類。</li>
+<li>對話記憶、產品資料保留、模型參數更新是不同機制；請查產品政策，勿假設「完全不保留」或「永遠在學」。</li>
+<li>在狹窄例子上表現良好，換到另一情境（例如不同訪客類型）可能失效。</li>
+<li>常見誤解：以為「它記得我們剛才說的」就等於模型已永久更新。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>科學館服務台試用查詢分流助手時，先分清：是用已核准回覆範本做推論，還是有人在後台用真實工單重新訓練——兩者批准與風險不同。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-03">課 3 · 分開訓練與使用</a>　·　<a href="../#literacy-04">課 4 · 資料如何塑造結果</a></p>
+<p class="selfq"><strong>自問：</strong>你依賴的工具，哪一項「學習」其實只是工作階段內的對話記憶？</p>
+</article>
+
+<article class="chapter" id="chapter-3">
+<h2>第 3 章 · 日常工作中的 AI</h2>
+<p class="master">這一章要掌握什麼：分清<strong>增強</strong>（人做決定、工具協助）與<strong>自動化</strong>（系統直接執行動作）。同一輸出，後續是否自動寄出／自動改檔，風險完全不同。再好的建議也需要真實期限、審批與人手等約束。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>為同一任務寫出「草稿待審」與「自動執行動作」兩種模式，才能看出審核界線。</li>
+<li>錯誤後果、誰可介入、系統做得不好時會發生什麼，都要寫進流程說明。</li>
+<li>「詳細」的計劃若省略必要審批或依賴，仍不可行。</li>
+<li>常見誤解：以為只要模型輸出品質好，就可以跳過機構依賴檢查。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>活動報名確認信若改成「草稿產生後自動寄出」，必須另訂：誰對活動名額與費用負責、出錯時如何撤回——不能只盯着語氣是否親切。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-05">課 5 · 區分自動化與增強</a>　·　<a href="../#literacy-06">課 6 · 提供工作流程所需情境</a></p>
+<p class="selfq"><strong>自問：</strong>你負責的哪一步，一旦自動執行，錯誤代價會明顯上升？</p>
+</article>
+
+<article class="chapter" id="chapter-4">
+<h2>第 4 章 · AI 迷思與誤解</h2>
+<p class="master">這一章要掌握什麼：華麗、果斷的措辭<strong>不能</strong>證明準確或中立。流暢互動也不等於人類般的判斷或權威。提示裡寫「扮演專家」只是風格指示，不是專業資格。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>信心應來自相關證據與適當評估，不是語氣自信或答案長度。</li>
+<li>預測可能反映不具代表性的資料、不適合的目標或評估漏洞。</li>
+<li>機構仍須指定負責擁有人；技術上可自動化決定，並不免除問責。</li>
+<li>常見誤解：以為「聽起來很專業」就可以對外發布或代替審核。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>學校行政收到一段「一定正確」的政策摘要草稿時，應用官方通告對照日期與範圍，而不是被自信語氣說服。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-07">課 7 · 挑戰準確與中立迷思</a>　·　<a href="../#literacy-08">課 8 · 分開能力聲稱與問責</a></p>
+<p class="selfq"><strong>自問：</strong>你最近一次「相信」AI 輸出時，依據的是證據還是語氣？</p>
+</article>
+
+<article class="chapter" id="chapter-5">
+<h2>第 5 章 · 員工今天如何使用 AI</h2>
+<p class="master">這一章要掌握什麼：面向公眾或訪客的草稿，寄出前必須對照你<strong>能支持</strong>的事實與承諾。效益取決於完整工作流程——任務、輸入、審核與錯誤後果——而不只是「這類任務很適合 AI」的標籤。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>文法完美仍可承諾不存在的服務、錯誤日期或未核准優惠。</li>
+<li>選狹窄用例：寫清輸入來源、審核人、升級路徑，再談擴展。</li>
+<li>內容創作、研究、分析、自動化、決策支援各有不同保障需求。</li>
+<li>常見誤解：友善語氣可以「補救」錯誤事實；任務類別本身保證負責任部署。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>服務台回覆「星球模擬廳今日是否開放」前，對照當日場館通告；AI 草稿寫「全日開放」也不能寄出。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-09">課 9 · 對外通訊寄出前先審核</a>　·　<a href="../#literacy-10">課 10 · 按完整工作流程選擇用例</a></p>
+<p class="selfq"><strong>自問：</strong>你下一個擬用 AI 的用例，審核與升級路徑寫在哪裡？</p>
+</article>
+
+<article class="chapter" id="chapter-6">
+<h2>第 6 章 · 有效的提示（Prompt）</h2>
+<p class="master">這一章要掌握什麼：用<strong>情境、指示、格式、對象</strong>四部分讓期望可見；事實缺失時要加「不得臆測」等約束。第一次不完美是常態——跟進應點名要改什麼、什麼必須保持不變。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>填好範本不是答案質素的證據；仍須測試輸出。</li>
+<li>重覆模糊提示，往往重覆同一問題；應針對具體落差修訂。</li>
+<li>調整對象與用語層級時，應保留必要事實，而不是為了「聽起來簡單」而改事實。</li>
+<li>常見誤解：以為角色扮演或更長提示就能保證正確。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>為公眾訪客寫展項簡介時，在提示註明「對象：家庭觀眾、禁用未核准數字」；若草稿太技術，跟進時要求縮短同時保留開放時間等事實。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-11">課 11 · 四部分提示</a>　·　<a href="../#literacy-12">課 12 · 依落差再修訂</a></p>
+<p class="selfq"><strong>自問：</strong>你上一則提示，四部分裡哪一部分最常空白？</p>
+</article>
+
+<article class="chapter" id="chapter-7">
+<h2>第 7 章 · 評估 AI 輸出</h2>
+<p class="master">這一章要掌握什麼：用五維分開檢查——<strong>準確、完整、相關、偏見、人的判斷</strong>。單一維度通過不代表整體可靠。數據洞察還要核對來源、定義、時期與假設；多個模型答案一致，可能只是重複同一錯誤。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>完整性在問：是否遺漏重要資訊或限定條件（例如時期、適用範圍）。</li>
+<li>把生成的計算與來源或獨立重算對照，而不是選最華麗的圖表。</li>
+<li>決策前寫清：使用、修正，還是升級給負責人。</li>
+<li>常見誤解：三個工具給同一數字就等於已核實。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>展教活動報告出現「訪客滿意度 98%」時，先查分母、問卷時期與是否含學校團體場——再決定是否寫進對外簡報。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-13">課 13 · 五項輸出檢查</a>　·　<a href="../#literacy-14">課 14 · 核實數據洞察</a></p>
+<p class="selfq"><strong>自問：</strong>你最近一次「略過」的檢查維度是哪一個？為什麼？</p>
+</article>
+
+<article class="chapter" id="chapter-8">
+<h2>第 8 章 · 倫理與負責任的 AI 使用</h2>
+<p class="master">這一章要掌握什麼：把公平、問責、透明、私隱變成<strong>可重複的做法、擁有人與紀錄</strong>，而不是海報口號。受影響的人需要真正能提出關注的途徑，而不只是單向宣佈「我們用了 AI」。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>對每個流程問：誰可能受損、誰擁有決定、溝通了什麼、允許哪些資料。</li>
+<li>說明應包含：工具做什麼、誰審核、如何提出關注與預期回覆時間。</li>
+<li>沒有質疑途徑的「透明」，只是宣佈。</li>
+<li>常見誤解：貼上原則標語就等於已負責任部署。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>若內部服務台用 AI 協助排班建議，公告應寫明建議如何產生、誰最終批核，以及員工可向誰提出關注——並給合理回覆時限。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-15">課 15 · 倫理變成具體行動</a>　·　<a href="../#literacy-16">課 16 · 審核與質疑途徑</a></p>
+<p class="selfq"><strong>自問：</strong>你單位若引入一項 AI 協助流程，受影響的人第一個聯絡人是誰？</p>
+</article>
+
+<article class="chapter" id="chapter-9">
+<h2>第 9 章 · 理解 AI 偏見</h2>
+<p class="master">這一章要掌握什麼：偏見可來自歷史模式、代表性不足、不適度量度與不完整評估，且常互相影響。出現群體差異時，先用<strong>比率、分母與情境</strong>調查，差異是調查理由，不是已證明的意圖結論。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>只計「接待次數」可能忽略複雜查詢或語言需求等面向。</li>
+<li>總數相等≠比率相等；比率相等也不自動等於公平。</li>
+<li>差距可合理化加強人工審核，本身不構成法律結論。</li>
+<li>常見誤解：以為「算法沒有情緒」就必然中立。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>若虛構的「導賞員績效」只按場次計分，可能低估照顧特殊教育需要團體的準備時間——指標本身就可能造成不公平印象。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-17">課 17 · 辨識偏見來源</a>　·　<a href="../#literacy-18">課 18 · 謹慎調查群體差異</a></p>
+<p class="selfq"><strong>自問：</strong>你單位常用的一項 KPI，分母與遺漏面向是什麼？</p>
+</article>
+
+<article class="chapter" id="chapter-10">
+<h2>第 10 章 · AI 中的私隱與資料保護</h2>
+<p class="master">這一章要掌握什麼：分享前先辨識資料類型——個人、機密、特別受保護等可並存於同一文件。只提供<strong>必要且獲准</strong>的資訊；刪標題或替換姓名不保證匿名化。懷疑未經授權分享時，停止並依事故流程通報。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>工具「獲准用於公開草稿」≠可自動接收內部或個人資料。</li>
+<li>職位、日期、特殊事件等仍可能識別個人；練習請用虛構輸入。</li>
+<li>概念上應知悉個人資料保護要求（如澳門相關法例框架）；本站不提供法律意見。</li>
+<li>常見誤解：關瀏覽器分頁就等於遠端紀錄已刪除；遮罩等於匿名化。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>活動報名名單含姓名與電話時，不可為了「讓 AI 幫忙分類」就整表貼進未核准工具；先確認用途是否在批准範圍，並盡量最小化欄位。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-19">課 19 · 分享前先辨識資料</a>　·　<a href="../#literacy-20">課 20 · 盡量減少資料並通報</a></p>
+<p class="selfq"><strong>自問：</strong>你下一次貼進助手的內容，是否包含可識別個人的組合資訊？</p>
+</article>
+
+<article class="chapter" id="chapter-11">
+<h2>第 11 章 · AI 管治與合規</h2>
+<p class="master">這一章要掌握什麼：管治是運作中的流程——政策、風險審視、監督與文件化。不清楚時向<strong>負責擁有人</strong>釐清，沉默不是批准。紀錄應足以重建：目的、資料類別、檢查、審核人與結果。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>找出你角色適用的核准用例、資料限制、升級途徑。</li>
+<li>完成線上課程或本工作室，不能證明真實部署已獲機構授權。</li>
+<li>文件應解釋決定，而不是傾倒無關私隱內容。</li>
+<li>常見誤解：請聊天機械人「授權」某用途；只寫「用過 AI」就算問責。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>是否把 AI 草擬的活動簡介發到科學館公眾渠道前，應有簡短問責紀錄：用途、資料來源、誰審核、未解決問題——並存放在獲授權位置。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-21">課 21 · 管治是運作中的流程</a>　·　<a href="../#literacy-22">課 22 · 記錄到足以重建決定</a></p>
+<p class="selfq"><strong>自問：</strong>你現在想試的用途，對應的機構擁有人姓名／職位是否寫得出來？</p>
+</article>
+
+<article class="chapter" id="chapter-12">
+<h2>第 12 章 · AI 的持份者參與</h2>
+<p class="master">這一章要掌握什麼：持份者包括使用者、受結果影響卻不操作工具的人、擁有人與外部各方。信任來自<strong>準確說明限制</strong>與對回饋的真實回應，而不是更多宣傳或保證零錯誤。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>排班或服務工具可影響從不開介面的同事與訪客。</li>
+<li>試點公告宜含：目的、限制、監督、回饋途徑。</li>
+<li>溝通不應誇大保障或排除質疑。</li>
+<li>常見誤解：只有管理員或供應商才算持份者。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>展教部排班試點上線時，除通知操作同事外，也應讓前線導賞員知道建議如何產生、如何提出不公平班次關注。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-23">課 23 · 盤點所有受影響的人</a>　·　<a href="../#literacy-24">課 24 · 說明限制並聆聽回饋</a></p>
+<p class="selfq"><strong>自問：</strong>你下一個試點，有哪個群體「受影響但不操作工具」被漏掉了？</p>
+</article>
+
+<article class="chapter" id="chapter-13">
+<h2>第 13 章 · 真實世界 AI 個案</h2>
+<p class="master">這一章要掌握什麼：從支援、招聘、預測、發票、監察等領域辨識<strong>不同失敗模式</strong>與負責任回應。本站個案為虛構教學情境，不是對具名機構的已核實調查。轉移的是經測試的原則，不是原封不動的設定。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>看似合理的故事≠特定事件已發生的證據。</li>
+<li>套用前比較：任務、受影響的人、資料與錯誤後果是否相似。</li>
+<li>他處成功不是你環境的保證；門檻與審核頻率常需重設。</li>
+<li>常見誤解：背誦個案細節就等於學會；或以為「別人用過就可以照抄」。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>讀完「客服自動回覆出錯」的虛構個案後，改寫成科學館服務台版本：哪些聲稱必須對照場館通告、何時必須轉真人。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-25">課 25 · 從五個個案領域學習</a>　·　<a href="../#literacy-26">課 26 · 轉移教訓而不照搬</a></p>
+<p class="selfq"><strong>自問：</strong>你想借用的一項「他處做法」，哪三個條件在你單位並不成立？</p>
+</article>
+
+<article class="chapter" id="chapter-14">
+<h2>第 14 章 · 職場 AI 的未來</h2>
+<p class="master">這一章要掌握什麼：為合理變化做準備——情境、技能練習、定期覆核——而不是對職位結果的確定預測。持續素養需要刻意練習與可覆核的證據，信心應由觀察支持。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>更多自動化、整合與決策支援是方向，不是對每個職位的保證。</li>
+<li>職場影響取決於科技、機構選擇與外在條件。</li>
+<li>學習計劃應含具體任務、回饋與可覆核結果，而非只有自我感覺。</li>
+<li>常見誤解：保證「沒有職位會變」或把單一預測當成確定。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>為展教同事訂一週練習：每天核對一則 AI 草擬的訪客回覆，並記下修訂類型——月底用紀錄覆核，而不是只憑「感覺更熟練」。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-27">課 27 · 為變化做計劃</a>　·　<a href="../#literacy-28">課 28 · 持續學習計劃</a></p>
+<p class="selfq"><strong>自問：</strong>你的下一個覆核日期與要檢查的假設是什麼？</p>
+</article>
+
+<article class="chapter" id="chapter-15">
+<h2>第 15 章 · 負責任使用 AI 的最佳做法</h2>
+<p class="master">這一章要掌握什麼：把前述主題收成流程——<strong>界定、撰寫指示、審核、運用判斷、記錄結果</strong>。使用前清單（任務適合度、工具批准、敏感資料、指示與輸出審核）是自我提醒，<strong>不授予</strong>機構批准。交接要讓另一個人看得懂貢獻、證據、限制與下一步。</p>
+<h3 class="sec">重點知識</h3>
+<ul class="points">
+<li>未解決的批准問題：釐清後才使用，勿把自填清單當成批准。</li>
+<li>有用交接含：任務、證據、擁有人、未解決問題與下一步——不只最終草稿。</li>
+<li>結合清楚任務、最少獲准輸入、可審核輸出與具名擁有人。</li>
+<li>常見誤解：勾完檢查表就可以對外發布；或聲稱「AI 處理了一切」。</li>
+</ul>
+<div class="macao"><strong>澳門情境提示：</strong>把活動簡介審核交接給同事時，附上：用了哪些核准來源、哪幾句仍待場地組確認、誰負責最終發布——而不是只丟一個「已完成」檔案。</div>
+<p class="lessons"><strong>配套課：</strong> <a href="../#literacy-29">課 29 · 負責任使用流程順序</a>　·　<a href="../#literacy-30">課 30 · 負責任使用的交接</a></p>
+<p class="selfq"><strong>自問：</strong>若你明天休假，接手的人能否只靠你的交接重建決定？</p>
+</article>
+
+<section class="appendix">
+<h2>附錄涵蓋範圍（對照工作室）</h2>
+<p>A：可搜尋詞彙。B：使用前清單實驗室。C：四部分提示工作坊。D：五維輸出審核。E：倫理原則工作紙（連第 8–9 章）。引言與結論分別影響開場課與最終交接專案。</p>
+<p style="margin-top:14px"><a href="../">← 返回工作室開始練習</a>　·　<a href="https://www.amazon.com/dp/B0GQ1LDHGH" rel="noopener" target="_blank">Amazon Kindle 原文</a></p>
+</section>
+
+<p class="foot">本頁為獨立教學導讀摘要，非正式譯本。練習結構改編自 Laurence Lars Svekis,《AI Literacy for All Employees》, © 2026。澳門科學館 Oscar 製作。</p>
+</div>
+</body>
+</html>
