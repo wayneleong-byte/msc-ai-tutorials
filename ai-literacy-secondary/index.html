@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 素養中學生站 — 澳門科學館</title>
+<meta name="description" content="澳門中學生 AI 素養互動學習：關卡、倫理遊戲與總結挑戰。">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script defer src="content.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body class="secondary">
+<a class="skip" href="#main">跳至內容</a>
+<header class="topbar">
+  <a class="brand" href="./">
+    <span class="brandmark">AI</span>
+    <span>澳門科學館<br><small>AI 素養中學生站</small></span>
+  </a>
+  <div class="actions">
+    <button type="button" id="btn-export">匯出進度</button>
+    <button type="button" id="btn-reset">重設</button>
+  </div>
+</header>
+<div class="shell">
+<aside class="sidebar" aria-label="進度與目錄">
+  <div class="progresspanel">
+    <div class="row"><span>學習進度</span><b id="progress-text">0</b></div>
+    <progress id="progress" max="100" value="0"></progress>
+    <p>進度只存在本機瀏覽器，不會上傳。</p>
+  </div>
+  <nav id="side-nav" aria-label="單元目錄"></nav>
+</aside>
+<main id="main">
+  <nav class="tabs" aria-label="主要分區" id="main-tabs"></nav>
+  <div id="view-host"></div>
+  <footer class="site">
+    澳門科學館 · Oscar 製作<br>
+    案例查證日期：2026-10-18（Asia/Macau） · 本站不連線真實 AI，遊戲使用本地規則。<br>
+    練習完成不是認證或法律意見。如遇騙案請向家長／老師求助，或使用官方防詐渠道查證。
+  </footer>
+</main>
+</div>
+<div id="toast" role="status"></div>
+<noscript>請啟用 JavaScript 以使用本互動學習站。</noscript>
+</body>
+</html>
