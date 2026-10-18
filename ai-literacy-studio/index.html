@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 素養工作室 — 澳門科學館</title>
+<meta name="description" content="透過 30 課、11 個練習實驗室與 4 個應用專案，學習理解、評估並負責任地使用人工智能。">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="studio.css">
+<script defer src="content.js"></script>
+<script defer src="app.js"></script>
+<script defer src="labs.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳至工作區</a>
+<header class="topbar">
+<a class="brand" href="./"><span class="brandmark">AI</span>澳門科學館 <span class="division">/</span><strong>AI 素養工作室</strong></a>
+<div class="topactions"><button id="export">匯出進度</button></div>
+</header>
+<div class="shell">
+<aside class="sidebar">
+<div class="course-label"><span class="jsmark">AI</span><div><strong>理解。評估。負起責任。</strong><small>互動教學工作室</small></div></div>
+<div class="progresspanel"><div><span>你的學習進度</span><b id="progress-text">0 / 30</b></div><progress id="progress" max="30" value="0" aria-label="已完成課數"></progress><p>練習即是進步。完成本站練習並非認證。</p></div>
+<label for="search">尋找課節<input id="search" type="search" placeholder="訓練、偏見、私隱、管治…"></label>
+<nav id="lesson-nav" aria-label="課程目錄"></nav>
+<div class="sidebarfoot">
+<label class="filebutton">匯入進度<input id="import" type="file" accept=".json,application/json"></label>
+<button id="reset">重設本工作室</button>
+<p id="save-status"></p>
+</div>
+</aside>
+<main id="main">
+<section class="masthead">
+<div>
+<p class="eyebrow">AI 素養 · 理解與負責任使用</p>
+<h1>理解 AI。<br><em>負責任地使用。</em></h1>
+<p>透過 30 課、職場情境與實用覆核工具，探索 15 章主題。本站為澳門科學館教學改編，練習結構改編自公開 AI 素養教材。</p>
+</div>
+<div class="mast-stats">
+<span><b>30</b> 引導課</span>
+<span><b>11</b> 練習實驗室</span>
+<span><b>4</b> 應用專案</span>
+</div>
+</section>
+<nav class="workspace-nav" aria-label="工作區">
+<button data-view="learn" aria-current="page">學習與練習</button>
+<button data-view="faq">問答</button>
+<button data-view="labs">練習實驗室</button>
+<button data-view="projects">建構專案</button>
+<button data-view="review">覆核與資源</button>
+</nav>
+<section class="view" id="view-learn">
+<div class="lesson-top">
+<div>
+<p class="eyebrow" id="chapter"></p>
+<h2 id="title"></h2>
+<p id="meta" class="muted"></p>
+</div>
+<div class="actions">
+<button id="previous" aria-label="上一課">←</button>
+<button id="next">下一課 →</button>
+</div>
+</div>
+<div class="learn-grid">
+<article id="lesson-content"></article>
+<aside class="panel practice">
+<p class="eyebrow">做出你能解釋的成品</p>
+<h3>你的練習成品</h3>
+<p id="task"></p>
+<label for="artifact">練習筆記、計劃或觀察結果<textarea id="artifact" rows="12" maxlength="12000" placeholder="請使用虛構資料。在此寫下你的嘗試…"></textarea></label>
+<p class="fine">只儲存在本機。不會傳送至任何 AI 服務。長度檢查只確認有嘗試，不評定質素。</p>
+<button id="artifact-download">下載我的嘗試 ↓</button>
+<h3>反思結果</h3>
+<label id="reflect-label" for="reflection"></label>
+<textarea id="reflection" rows="5" maxlength="4000"></textarea>
+<button id="complete" class="primary">完成本課</button>
+<p id="completion" role="status"></p>
+</aside>
+</div>
+</section>
+<section class="view" id="view-faq" hidden>
+<div class="section-intro">
+<p class="eyebrow">找出答案 / 理解原因</p>
+<h2>30 個常見問題，附說明。</h2>
+<p>可按問題、主題或關鍵詞搜尋。答案包含練習步驟與章節對照。請在你實際受影響的環境中核實行為。</p>
+<div class="split">
+<label for="faq-search">搜尋問題與答案<input id="faq-search" type="search" placeholder="提示、摘要、學習、檢查…"></label>
+<label for="faq-topic">主題<select id="faq-topic"><option value="all">全部主題</option></select></label>
+</div>
+<div class="actions"><button id="faq-download">下載問答手冊 ↓</button></div>
+<p id="faq-count" role="status"></p>
+</div>
+<div id="faq-list"></div>
+</section>
+<section class="view" id="view-labs" hidden>
+<div class="section-intro">
+<p class="eyebrow">改變輸入 / 檢視結果</p>
+<h2>你的職場素養實驗室。</h2>
+<p>練習書中概念：辨識學習方法、測試迷思、評估輸出、調查差異，以及計劃負責任使用。本地規則與虛構情境提供回饋。不會連線真實 AI 模型。</p>
+</div>
+<div class="visual-tabs actions" id="lab-tabs"></div>
+<div id="lab-host"></div>
+</section>
+<section class="view" id="view-projects" hidden>
+<div class="section-intro">
+<p class="eyebrow">把想法變成可測試的工作</p>
+<h2>做出你能解釋的東西。</h2>
+<p>建立角色地圖、輸出審核紀錄、負責任試點建議，以及 30 日學習計劃。把證據連到相關書章。</p>
+</div>
+<div id="project-cards" class="project-cards"></div>
+<div id="project-workspace" class="panel"></div>
+</section>
+<section class="view" id="view-review" hidden>
+<div class="section-intro">
+<p class="eyebrow">重溫 / 回想 / 修訂</p>
+<h2>留住你所理解的。</h2>
+</div>
+<div id="dashboard" class="dashboard"></div>
+<div class="split">
+<div class="panel">
+<h3>回想練習</h3>
+<button id="recall-next">抽取一課已完成的課</button>
+<div id="recall-card"></div>
+</div>
+<div class="panel">
+<h3>你的學習紀錄</h3>
+<p>完成條件：答對情境題、練習成品至少 80 字、反思至少 40 字。修改答案或文字會重新開啟該課。</p>
+<p>覆核時間依你自己的評分，不是對掌握程度的量度估計。</p>
+<button id="workbook">下載學習簿 ↓</button>
+</div>
+</div>
+<div class="panel resources">
+<h3>書本與五個附錄</h3>
+<p>練習結構改編自公開 AI 素養教材（Laurence Lars Svekis,《AI Literacy for All Employees》, 2026），本站為獨立教學改編，非原出版社／原站產品。課節沿用書本結構，並加入新練習情境與明確說明。</p>
+<a href="resources/book-companion.html">開啟章節地圖與改編說明 ↗</a>
+<a href="resources/appendix-toolkit.md" download>下載五個附錄工具 ↓</a>
+<a href="resources/case-cards.md" download>下載五張虛構個案卡 ↓</a>
+<h3>附錄 A · 關鍵詞</h3>
+<label for="glossary-search">尋找詞彙<input id="glossary-search" type="search" placeholder="訓練、偏見、管治…"></label>
+<div id="glossary-list"></div>
+<p>附錄 B 為「使用前清單」實驗室；C 為「提示工作坊」；D 為「輸出審核」；E 為工具包中的倫理工作紙與第 8–9 章。</p>
+<p>練習完成不是認證、機構批准或法律意見。虛構政策與個案資料已標示。真實工作請依循所屬機構的實際程序。進度與筆記儲存在此瀏覽器；請匯出備份。</p>
+</div>
+</section>
+<footer>
+<span>澳門科學館 Oscar 製作</span>
+<span>練習結構改編自公開 AI 素養教材（Laurence Lars Svekis,《AI Literacy for All Employees》, 2026），本站為獨立教學改編，非原出版社／原站產品。</span>
+</footer>
+</main>
+</div>
+<div id="toast" role="status"></div>
+<noscript>本互動指南需要啟用 JavaScript。</noscript>
+</body>
+</html>
