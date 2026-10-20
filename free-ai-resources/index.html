@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>免費 AI 資源｜第一批示範</title>
-  <meta name="description" content="已驗證的免費 AI API 與網站資源目錄：搜尋、篩選、主機位址複製、申請 KEY 連結。" />
+  <title>免費 AI 資源</title>
+  <meta name="description" content="已驗證的免費 AI API、網站資源與越獄提示詞研究索引：搜尋、篩選、主機位址複製、申請 KEY 連結。" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="container">
     <header class="hero">
-      <div class="hero-badge">第一批示範 · 已人工核對官方文件</div>
+      <div class="hero-badge">已人工核對官方文件 · 含鑫源近半年索引</div>
       <h1>免費 AI 資源</h1>
-      <p>彙整可申請免費 API Key／免費額度的服務商，以及可直接使用的 AI 網站。每張卡片含主機位址（可複製）、模型類型、申請連結與免費程度說明。</p>
+      <p>彙整可申請免費 API Key／免費額度的服務商、可直接使用的 AI 網站，以及 Telegram 鑫源AI分享公開預覽中的越獄提示詞<strong>目錄索引</strong>（本站不托管提示詞正文）。</p>
       <p class="disclaimer" id="disclaimer"></p>
       <p class="disclaimer" id="verified"></p>
     </header>
 
     <section class="stats" aria-label="資源統計">
-      <div class="stat">
-        <div class="label">資源總數</div>
-        <div class="value" id="count-total">0</div>
-      </div>
       <div class="stat">
         <div class="label">API 供應商</div>
         <div class="value" id="count-api">0</div>
@@ -30,22 +26,24 @@
         <div class="label">網站資源</div>
         <div class="value" id="count-web">0</div>
       </div>
+      <div class="stat">
+        <div class="label">越獄目錄</div>
+        <div class="value" id="count-jb">0</div>
+      </div>
     </section>
+
+    <nav class="tabs" role="tablist" aria-label="資源分類">
+      <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="api" id="tab-api">API 資源</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="website" id="tab-website">網站資源</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="jailbreak" id="tab-jailbreak">越獄提示詞</button>
+    </nav>
 
     <section class="filters" aria-label="搜尋與篩選">
       <div class="search-row">
-        <input id="q" type="search" placeholder="搜尋關鍵字：服務商、模型、主機、說明…" autocomplete="off" />
+        <input id="q" type="search" placeholder="搜尋關鍵字…" autocomplete="off" />
         <button class="btn" type="button" id="reset">清除篩選</button>
       </div>
-      <div class="filter-grid">
-        <div class="filter-group">
-          <label for="type">類型</label>
-          <select id="type">
-            <option value="all">全部</option>
-            <option value="api">API</option>
-            <option value="website">網站</option>
-          </select>
-        </div>
+      <div class="filter-grid" id="filters-api">
         <div class="filter-group">
           <label for="modelType">模型類型</label>
           <select id="modelType">
@@ -67,29 +65,71 @@
             <option value="yes">需綁卡</option>
           </select>
         </div>
-        <div class="filter-group">
+        <div class="filter-group filter-showing">
           <label>&nbsp;</label>
-          <div class="btn" style="pointer-events:none;opacity:.85" id="showing">顯示 0／0</div>
+          <div class="btn showing-pill" id="showing">顯示 0／0</div>
+        </div>
+      </div>
+      <div class="filter-grid hidden" id="filters-website">
+        <div class="filter-group">
+          <label for="verifiedFilter">驗證狀態</label>
+          <select id="verifiedFilter">
+            <option value="all">全部</option>
+            <option value="yes">已通過</option>
+            <option value="no">未通過</option>
+          </select>
+        </div>
+        <div class="filter-group filter-showing">
+          <label>&nbsp;</label>
+          <div class="btn showing-pill" id="showing-web">顯示 0／0</div>
+        </div>
+      </div>
+      <div class="filter-grid hidden" id="filters-jailbreak">
+        <div class="filter-group">
+          <label for="jbModel">模型</label>
+          <select id="jbModel">
+            <option value="all">全部</option>
+          </select>
+        </div>
+        <div class="filter-group filter-showing">
+          <label>&nbsp;</label>
+          <div class="btn showing-pill" id="showing-jb">顯示 0／0</div>
         </div>
       </div>
     </section>
 
-    <div class="section-title">
-      <h2>API 供應商</h2>
-      <span>含主機位址、模型、申請 KEY、免費說明</span>
+    <div id="panel-api" class="tab-panel" role="tabpanel">
+      <div class="section-title">
+        <h2>API 供應商</h2>
+        <span>含主機位址、模型、申請 KEY、免費說明</span>
+      </div>
+      <div class="grid" id="api-grid"></div>
     </div>
-    <div class="grid" id="api-grid"></div>
 
-    <div class="section-title">
-      <h2>網站類型資源</h2>
-      <span>Playground／目錄／開源 Demo（欄位已預留擴充）</span>
+    <div id="panel-website" class="tab-panel hidden" role="tabpanel">
+      <div class="section-title">
+        <h2>網站類型資源</h2>
+        <span>現有示範站＋鑫源AI分享近半年索引（已驗證／未通過皆列出）</span>
+      </div>
+      <div class="grid" id="web-grid"></div>
     </div>
-    <div class="grid" id="web-grid"></div>
+
+    <div id="panel-jailbreak" class="tab-panel hidden" role="tabpanel">
+      <div class="jb-disclaimer" role="note">
+        <strong>研究索引聲明</strong>
+        本目錄來自 Telegram <a href="https://t.me/s/xinyuanai" target="_blank" rel="noopener">@xinyuanai</a> 公開預覽頁。提示詞<strong>全文</strong>在附件或 Notion，需自行用 Telegram 客戶端打開來源帖；本站<strong>不托管</strong>提示詞正文，僅供研究索引，請自行判斷合法性與風險。
+      </div>
+      <div class="section-title">
+        <h2>越獄提示詞目錄</h2>
+        <span>僅標題／摘要／來源連結；不含 prompt 正文</span>
+      </div>
+      <div class="grid" id="jb-grid"></div>
+    </div>
 
     <section class="changelog" id="changelog" aria-label="最近新增或刪除"></section>
 
     <footer>
-      <p>資料來源見上一層 <code>research-2026-10-20.md</code>。更新方式：編輯 <code>data.json</code> 後重新整理頁面。</p>
+      <p>資料來源：本站人工核對＋Telegram 鑫源AI分享公開預覽。更新方式：編輯 <code>data.json</code> 後重新整理頁面。</p>
       <p>未納入：EED／LM Studio／Ollama（內聯網）、Hugging Face Inference API（Free 無月額）、GitHub Models（已退役）等。</p>
     </footer>
   </div>
