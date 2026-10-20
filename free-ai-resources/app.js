@@ -155,6 +155,19 @@ function cardHtml(r) {
   </article>`;
 }
 
+function formatChangeItems(items) {
+  const list = items || [];
+  const hasDetail = list.some((item) => item && typeof item === "object");
+  const parts = list.map((item) => {
+    if (item && typeof item === "object") {
+      const name = escapeHtml(item.name || item.id || "");
+      return item.reason ? `${name}：${escapeHtml(item.reason)}` : name;
+    }
+    return escapeHtml(item ?? "");
+  });
+  return parts.join(hasDetail ? "<br>" : "、");
+}
+
 function renderChangelog() {
   const box = document.getElementById("changelog");
   const adds = state.data.changelog || [];
@@ -164,13 +177,17 @@ function renderChangelog() {
     html += '<p class="placeholder">尚無異動紀錄（預留）</p>';
   } else {
     for (const c of adds) {
-      html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-added">新增</div><div>${escapeHtml((c.items || []).join("、"))}</div></div>`;
+      const removed = c.action === "removed";
+      const tag = removed
+        ? '<div class="tag-deleted">刪除</div>'
+        : '<div class="tag-added">新增</div>';
+      html += `<div class="change-item"><div>${escapeHtml(c.date)}</div>${tag}<div>${formatChangeItems(c.items)}</div></div>`;
     }
     if (!dels.length) {
       html += `<div class="change-item"><div>—</div><div class="tag-deleted">刪除</div><div class="placeholder">尚無刪除項目（預留）</div></div>`;
     } else {
       for (const c of dels) {
-        html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-deleted">刪除</div><div>${escapeHtml((c.items || []).join("、"))}</div></div>`;
+        html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-deleted">刪除</div><div>${formatChangeItems(c.items)}</div></div>`;
       }
     }
   }

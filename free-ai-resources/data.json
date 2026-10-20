@@ -9,9 +9,16 @@
   "changelog": [
     {
       "date": "2026-10-20",
-      "action": "added",
+      "action": "removed",
       "items": [
         "Groq",
+        "Mistral AI（Free mode）"
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "action": "added",
+      "items": [
         "Google Gemini",
         "OpenRouter",
         "Mistral AI",
@@ -35,62 +42,24 @@
       ]
     }
   ],
-  "deletions": [],
-  "resources": [
+  "deletions": [
     {
-      "id": "groq",
-      "type": "api",
-      "name": "Groq",
-      "host": "https://api.groq.com/openai/v1",
-      "keyUrl": "https://console.groq.com/keys",
-      "docsUrl": "https://console.groq.com/docs/openai",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "官方 Free 方案（$0），可直接申請 API Key。速率限制依組織 Limits 頁；Developer 方案為付費升級。",
-      "models": [
+      "date": "2026-10-20",
+      "items": [
         {
-          "id": "openai/gpt-oss-120b",
-          "types": [
-            "chat",
-            "code"
-          ]
+          "id": "groq",
+          "name": "Groq",
+          "reason": "Google 帳號 wayneleong@gmail.com 註冊時回傳 signup_blocked（Mac Ref 4bbcefa911ef449186f76a4351d5e55a；箱內 Ref fb40adcdba298918fc1a0910e266d8f2）。箱內重試結果相同、無地區／IP 提示，判斷為帳號層封鎖，故移出免費示範清單。"
         },
         {
-          "id": "openai/gpt-oss-20b",
-          "types": [
-            "chat",
-            "code"
-          ]
-        },
-        {
-          "id": "qwen/qwen3.8-27b",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "whisper-large-v3",
-          "types": [
-            "audio"
-          ]
-        },
-        {
-          "id": "whisper-large-v3-turbo",
-          "types": [
-            "audio"
-          ]
+          "id": "mistral",
+          "name": "Mistral AI（Free mode）",
+          "reason": "可建立 Studio API key，但 Console 標明 Free 方案需 Upgrade 才啟動 API，實際非免費可用，故移出免費示範清單。key 已存檔備用，Cherry 保持停用。"
         }
-      ],
-      "modelTypes": [
-        "chat",
-        "code",
-        "vision",
-        "audio"
-      ],
-      "verified": "2026-10-20",
-      "notes": "部分舊 Llama 模型已於 2026 陸續下架，請查官方 Models 頁。"
-    },
+      ]
+    }
+  ],
+  "resources": [
     {
       "id": "gemini",
       "type": "api",
@@ -203,34 +172,6 @@
       ],
       "verified": "2026-10-20",
       "notes": "免費清單約數十個以內且每週變動，請查 collections/free-models。"
-    },
-    {
-      "id": "mistral",
-      "type": "api",
-      "name": "Mistral AI（Free mode）",
-      "host": "https://api.mistral.ai/v1",
-      "keyUrl": "https://console.mistral.ai/",
-      "docsUrl": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "預設 Free mode：可建 API Key、有 included monthly usage。公開數字配額已不固定刊登，請看 Admin → Limits。",
-      "models": [
-        {
-          "id": "（以 Studio／Limits 當日可用為準）",
-          "types": [
-            "chat",
-            "code"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "code",
-        "vision",
-        "audio"
-      ],
-      "verified": "2026-10-20",
-      "notes": "勿再引用舊文「$10／月 credits」或「Experiment 10億 tokens」等過時數字。"
     },
     {
       "id": "cohere",
