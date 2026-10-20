@@ -121,11 +121,19 @@ function populateJbModels() {
 
 function allWebsites() {
   const existing = (state.data.resources || []).filter((r) => r.type === "website");
-  const xy = (state.data.xinyuanWebsites || []).map((r) => ({
+  const fromExisting = existing.map((r) => ({
     ...r,
-    fromXinyuan: true
+    fromXinyuan: false,
+    verifiedOk: true,
+    verifiedDateDisplay: r.verified || r.verifiedDate || null
   }));
-  return [...existing.map((r) => ({ ...r, fromXinyuan: false, verified: r.verified !== false })), ...xy];
+  const fromXy = (state.data.xinyuanWebsites || []).map((r) => ({
+    ...r,
+    fromXinyuan: true,
+    verifiedOk: !!r.verified,
+    verifiedDateDisplay: r.verifiedDate || null
+  }));
+  return [...fromExisting, ...fromXy];
 }
 
 function filterApis() {
@@ -158,7 +166,7 @@ function filterApis() {
 
 function filterWebsites() {
   return allWebsites().filter((r) => {
-    const ok = r.verified === true || r.verified === undefined;
+    const ok = r.verifiedOk !== false;
     if (state.verified === "yes" && !ok) return false;
     if (state.verified === "no" && ok) return false;
     if (state.q) {
@@ -283,8 +291,8 @@ function apiCardHtml(r) {
 }
 
 function webCardHtml(r) {
-  const ok = r.verified === true || (r.verified === undefined && !r.fromXinyuan);
-  const fail = r.verified === false;
+  const ok = r.verifiedOk !== false;
+  const fail = r.verifiedOk === false;
   const host = r.url || r.host || "";
   const statusBadge = ok
     ? '<span class="badge ok">已驗證</span>'
@@ -312,7 +320,7 @@ function webCardHtml(r) {
               : ""
           }
         </div>`
-      : `<div class="meta-row"><span>最後更新：${escapeHtml(r.verified || r.verifiedDate || "—")}</span></div>`;
+      : `<div class="meta-row"><span>最後更新：${escapeHtml(r.verifiedDateDisplay || r.verified || "—")}</span></div>`;
 
   const siteBtn = host
     ? `<a class="btn ${fail ? "" : "btn-accent"}" href="${escapeAttr(host)}" target="_blank" rel="noopener">開啟網站</a>`
