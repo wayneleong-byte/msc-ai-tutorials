@@ -335,3 +335,20 @@ footer {
   .filter-grid { grid-template-columns: 1fr; }
   .grid { grid-template-columns: 1fr; }
 }
+
+
+.model-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.model-chip .model-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85rem;
+}
+.btn-copy-model {
+  padding: 0.1rem 0.4rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}

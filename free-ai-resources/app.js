@@ -96,7 +96,8 @@ function modelChips(models) {
   if (!models || !models.length) return '<span class="placeholder">（預留欄位）</span>';
   return models.map((m) => {
     const types = (m.types || []).map((t) => TYPE_LABEL[t] || t).join("、");
-    return `<span class="model-chip">${escapeHtml(m.id)}${types ? `<small>${escapeHtml(types)}</small>` : ""}</span>`;
+    const id = m.id || "";
+    return `<span class="model-chip"><span class="model-id">${escapeHtml(id)}</span>${types ? `<small>${escapeHtml(types)}</small>` : ""}<button class="btn btn-copy btn-copy-model" type="button" data-copy="${escapeAttr(id)}" title="複製模型名">複製</button></span>`;
   }).join("");
 }
 
@@ -155,19 +156,6 @@ function cardHtml(r) {
   </article>`;
 }
 
-function formatChangeItems(items) {
-  const list = items || [];
-  const hasDetail = list.some((item) => item && typeof item === "object");
-  const parts = list.map((item) => {
-    if (item && typeof item === "object") {
-      const name = escapeHtml(item.name || item.id || "");
-      return item.reason ? `${name}：${escapeHtml(item.reason)}` : name;
-    }
-    return escapeHtml(item ?? "");
-  });
-  return parts.join(hasDetail ? "<br>" : "、");
-}
-
 function renderChangelog() {
   const box = document.getElementById("changelog");
   const adds = state.data.changelog || [];
@@ -177,17 +165,19 @@ function renderChangelog() {
     html += '<p class="placeholder">尚無異動紀錄（預留）</p>';
   } else {
     for (const c of adds) {
-      const removed = c.action === "removed";
-      const tag = removed
-        ? '<div class="tag-deleted">刪除</div>'
-        : '<div class="tag-added">新增</div>';
-      html += `<div class="change-item"><div>${escapeHtml(c.date)}</div>${tag}<div>${formatChangeItems(c.items)}</div></div>`;
+      html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-added">新增</div><div>${escapeHtml((c.items || []).join("、"))}</div></div>`;
     }
     if (!dels.length) {
       html += `<div class="change-item"><div>—</div><div class="tag-deleted">刪除</div><div class="placeholder">尚無刪除項目（預留）</div></div>`;
     } else {
       for (const c of dels) {
-        html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-deleted">刪除</div><div>${formatChangeItems(c.items)}</div></div>`;
+        const parts = (c.items || []).map((it) => {
+          if (typeof it === "string") return it;
+          const name = it.name || it.id || "";
+          const reason = it.reason ? `：${it.reason}` : "";
+          return `${name}${reason}`;
+        });
+        html += `<div class="change-item"><div>${escapeHtml(c.date)}</div><div class="tag-deleted">刪除</div><div>${escapeHtml(parts.join("；"))}</div></div>`;
       }
     }
   }

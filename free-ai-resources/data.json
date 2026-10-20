@@ -11,6 +11,14 @@
       "date": "2026-10-20",
       "action": "removed",
       "items": [
+        "OpenRouter Free Models 目錄",
+        "GroqCloud Console"
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "action": "removed",
+      "items": [
         "Groq",
         "Mistral AI（Free mode）"
       ]
@@ -55,6 +63,16 @@
           "id": "mistral",
           "name": "Mistral AI（Free mode）",
           "reason": "可建立 Studio API key，但 Console 標明 Free 方案需 Upgrade 才啟動 API，實際非免費可用，故移出免費示範清單。key 已存檔備用，Cherry 保持停用。"
+        },
+        {
+          "id": "openrouter-web",
+          "name": "OpenRouter Free Models 目錄",
+          "reason": "與 API 條目 OpenRouter（:free）重覆，Oscar 指示只保留 API 側。"
+        },
+        {
+          "id": "groq-console",
+          "name": "GroqCloud Console",
+          "reason": "Groq API 已因 signup_blocked 移出；Console 網站條目一併刪除。"
         }
       ]
     }
@@ -512,36 +530,6 @@
       "notes": ""
     },
     {
-      "id": "openrouter-web",
-      "type": "website",
-      "name": "OpenRouter Free Models 目錄",
-      "url": "https://openrouter.ai/collections/free-models",
-      "host": "https://openrouter.ai/",
-      "keyUrl": "https://openrouter.ai/keys",
-      "docsUrl": "https://openrouter.ai/docs/guides/routing/model-variants/free",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "瀏覽當日 :free 模型排行與說明；可搭配 Chat／API 使用。",
-      "models": [
-        {
-          "id": "當日 free 目錄",
-          "types": [
-            "chat",
-            "vision",
-            "code"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "vision",
-        "code"
-      ],
-      "offers": "免費模型目錄、路由說明、Chat",
-      "verified": "2026-10-20",
-      "notes": ""
-    },
-    {
       "id": "arena",
       "type": "website",
       "name": "Arena（原 LMArena）",
@@ -570,35 +558,6 @@
       "offers": "模型對戰、Leaderboard、Side-by-Side",
       "verified": "2026-10-20",
       "notes": "品牌已更名 Arena；舊網址 lmarena.ai 仍可用。"
-    },
-    {
-      "id": "groq-console",
-      "type": "website",
-      "name": "GroqCloud Console",
-      "url": "https://console.groq.com/",
-      "host": "https://console.groq.com/",
-      "keyUrl": "https://console.groq.com/keys",
-      "docsUrl": "https://console.groq.com/docs/overview",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "官方 Console：Playground、模型、Limits、Billing、申請 API Key。",
-      "models": [
-        {
-          "id": "與 Groq API 相同",
-          "types": [
-            "chat",
-            "audio"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "audio",
-        "code"
-      ],
-      "offers": "Playground、API Key、用量監控",
-      "verified": "2026-10-20",
-      "notes": ""
     },
     {
       "id": "nvidia-build",
