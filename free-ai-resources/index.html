@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>免費 AI 資源｜第一批示範</title>
+  <meta name="description" content="已驗證的免費 AI API 與網站資源目錄：搜尋、篩選、主機位址複製、申請 KEY 連結。" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="hero-badge">第一批示範 · 已人工核對官方文件</div>
+      <h1>免費 AI 資源</h1>
+      <p>彙整可申請免費 API Key／免費額度的服務商，以及可直接使用的 AI 網站。每張卡片含主機位址（可複製）、模型類型、申請連結與免費程度說明。</p>
+      <p class="disclaimer" id="disclaimer"></p>
+      <p class="disclaimer" id="verified"></p>
+    </header>
+
+    <section class="stats" aria-label="資源統計">
+      <div class="stat">
+        <div class="label">資源總數</div>
+        <div class="value" id="count-total">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">API 供應商</div>
+        <div class="value" id="count-api">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">網站資源</div>
+        <div class="value" id="count-web">0</div>
+      </div>
+    </section>
+
+    <section class="filters" aria-label="搜尋與篩選">
+      <div class="search-row">
+        <input id="q" type="search" placeholder="搜尋關鍵字：服務商、模型、主機、說明…" autocomplete="off" />
+        <button class="btn" type="button" id="reset">清除篩選</button>
+      </div>
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label for="type">類型</label>
+          <select id="type">
+            <option value="all">全部</option>
+            <option value="api">API</option>
+            <option value="website">網站</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="modelType">模型類型</label>
+          <select id="modelType">
+            <option value="all">全部</option>
+            <option value="chat">對話</option>
+            <option value="vision">視覺</option>
+            <option value="embedding">嵌入</option>
+            <option value="image">圖像</option>
+            <option value="audio">音訊</option>
+            <option value="code">程式</option>
+            <option value="rerank">重排</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="card">信用卡</label>
+          <select id="card">
+            <option value="all">全部</option>
+            <option value="no">免信用卡</option>
+            <option value="yes">需綁卡</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>&nbsp;</label>
+          <div class="btn" style="pointer-events:none;opacity:.85" id="showing">顯示 0／0</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h2>API 供應商</h2>
+      <span>含主機位址、模型、申請 KEY、免費說明</span>
+    </div>
+    <div class="grid" id="api-grid"></div>
+
+    <div class="section-title">
+      <h2>網站類型資源</h2>
+      <span>Playground／目錄／開源 Demo（欄位已預留擴充）</span>
+    </div>
+    <div class="grid" id="web-grid"></div>
+
+    <section class="changelog" id="changelog" aria-label="最近新增或刪除"></section>
+
+    <footer>
+      <p>資料來源見上一層 <code>research-2026-10-20.md</code>。更新方式：編輯 <code>data.json</code> 後重新整理頁面。</p>
+      <p>未納入：EED／LM Studio／Ollama（內聯網）、Hugging Face Inference API（Free 無月額）、GitHub Models（已退役）等。</p>
+    </footer>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
