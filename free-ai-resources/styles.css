@@ -459,3 +459,20 @@ footer {
   .filter-showing { grid-column: auto; }
   .tab { min-width: 0; }
 }
+
+pre.prompt-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  background: rgba(0,0,0,.04);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  max-height: 320px;
+  overflow: auto;
+  margin: 0.35rem 0 0;
+}
+.stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
