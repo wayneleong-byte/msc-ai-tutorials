@@ -27,7 +27,11 @@
         "Arena（LMArena）",
         "GroqCloud Console",
         "NVIDIA build.nvidia.com",
-        "Hugging Face Spaces"
+        "Hugging Face Spaces",
+        "書生·端硯（Intern InkStone）",
+        "Atria Dawn Preview（Atria ASI）",
+        "書生·端硯 AI 科研助手",
+        "Atria ASI（Dawn Preview）"
       ]
     }
   ],
@@ -44,13 +48,46 @@
       "commercialOk": true,
       "freeSummary": "官方 Free 方案（$0），可直接申請 API Key。速率限制依組織 Limits 頁；Developer 方案為付費升級。",
       "models": [
-        { "id": "openai/gpt-oss-120b", "types": ["chat", "code"] },
-        { "id": "openai/gpt-oss-20b", "types": ["chat", "code"] },
-        { "id": "qwen/qwen3.8-27b", "types": ["chat", "vision"] },
-        { "id": "whisper-large-v3", "types": ["audio"] },
-        { "id": "whisper-large-v3-turbo", "types": ["audio"] }
+        {
+          "id": "openai/gpt-oss-120b",
+          "types": [
+            "chat",
+            "code"
+          ]
+        },
+        {
+          "id": "openai/gpt-oss-20b",
+          "types": [
+            "chat",
+            "code"
+          ]
+        },
+        {
+          "id": "qwen/qwen3.8-27b",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "whisper-large-v3",
+          "types": [
+            "audio"
+          ]
+        },
+        {
+          "id": "whisper-large-v3-turbo",
+          "types": [
+            "audio"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code", "vision", "audio"],
+      "modelTypes": [
+        "chat",
+        "code",
+        "vision",
+        "audio"
+      ],
       "verified": "2026-10-20",
       "notes": "部分舊 Llama 模型已於 2026 陸續下架，請查官方 Models 頁。"
     },
@@ -65,16 +102,70 @@
       "commercialOk": true,
       "freeSummary": "有 Free tier：部分模型輸入／輸出免費，免綁 Cloud Billing。Free 內容可用於改進 Google 產品。配額見 AI Studio Rate Limits。",
       "models": [
-        { "id": "gemini-3.8-flash", "types": ["chat", "vision"] },
-        { "id": "gemini-3.6-flash", "types": ["chat", "vision"] },
-        { "id": "gemini-3.5-flash-lite", "types": ["chat", "vision"] },
-        { "id": "gemini-3.1-flash-lite", "types": ["chat", "vision"] },
-        { "id": "gemini-2.5-flash", "types": ["chat", "vision"] },
-        { "id": "gemini-2.5-flash-lite", "types": ["chat", "vision"] },
-        { "id": "gemini-2.5-pro", "types": ["chat", "vision", "code"] },
-        { "id": "gemini-embedding-2", "types": ["embedding"] }
+        {
+          "id": "gemini-3.8-flash",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-3.6-flash",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-3.5-flash-lite",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-3.1-flash-lite",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-2.5-flash",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-2.5-flash-lite",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "types": [
+            "chat",
+            "vision",
+            "code"
+          ]
+        },
+        {
+          "id": "gemini-embedding-2",
+          "types": [
+            "embedding"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "embedding", "audio", "code"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "embedding",
+        "audio",
+        "code"
+      ],
       "verified": "2026-10-20",
       "notes": "Gemini 4 Argon 與部分影像／Pro 產品不在 Free。旗艦與配額以官方 Pricing 為準。"
     },
@@ -89,10 +180,27 @@
       "commercialOk": true,
       "freeSummary": "模型 ID 後加 :free，或使用路由器 openrouter/free。Token 價 $0，但有速率與供應限制；fallback 到付費模型會收費。",
       "models": [
-        { "id": "openrouter/free", "types": ["chat", "vision"] },
-        { "id": "（其他見 :free 目錄，常變動）", "types": ["chat", "code", "vision"] }
+        {
+          "id": "openrouter/free",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        },
+        {
+          "id": "（其他見 :free 目錄，常變動）",
+          "types": [
+            "chat",
+            "code",
+            "vision"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "code"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "code"
+      ],
       "verified": "2026-10-20",
       "notes": "免費清單約數十個以內且每週變動，請查 collections/free-models。"
     },
@@ -107,9 +215,20 @@
       "commercialOk": true,
       "freeSummary": "預設 Free mode：可建 API Key、有 included monthly usage。公開數字配額已不固定刊登，請看 Admin → Limits。",
       "models": [
-        { "id": "（以 Studio／Limits 當日可用為準）", "types": ["chat", "code"] }
+        {
+          "id": "（以 Studio／Limits 當日可用為準）",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code", "vision", "audio"],
+      "modelTypes": [
+        "chat",
+        "code",
+        "vision",
+        "audio"
+      ],
       "verified": "2026-10-20",
       "notes": "勿再引用舊文「$10／月 credits」或「Experiment 10億 tokens」等過時數字。"
     },
@@ -124,12 +243,38 @@
       "commercialOk": false,
       "freeSummary": "註冊即送 Trial Key：免費但約 1,000 calls／月；Chat 約 20 req/min。官方禁止用於 production／commercial。",
       "models": [
-        { "id": "command-a / command-r 系列", "types": ["chat"] },
-        { "id": "embed 系列", "types": ["embedding"] },
-        { "id": "rerank 系列", "types": ["rerank"] },
-        { "id": "command-a-vision", "types": ["vision", "chat"] }
+        {
+          "id": "command-a / command-r 系列",
+          "types": [
+            "chat"
+          ]
+        },
+        {
+          "id": "embed 系列",
+          "types": [
+            "embedding"
+          ]
+        },
+        {
+          "id": "rerank 系列",
+          "types": [
+            "rerank"
+          ]
+        },
+        {
+          "id": "command-a-vision",
+          "types": [
+            "vision",
+            "chat"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "embedding", "rerank", "vision"],
+      "modelTypes": [
+        "chat",
+        "embedding",
+        "rerank",
+        "vision"
+      ],
       "verified": "2026-10-20",
       "notes": "標籤：試用（Trial）。Production Key 需走 Go to Production 流程並付費。"
     },
@@ -144,9 +289,19 @@
       "commercialOk": false,
       "freeSummary": "Developer 帳號可建 Key；託管 NIM 供原型／開發／研究免費試用，非 production。速率限制未公開細表。",
       "models": [
-        { "id": "（見 build.nvidia.com 目錄）", "types": ["chat", "code"] }
+        {
+          "id": "（見 build.nvidia.com 目錄）",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code", "vision"],
+      "modelTypes": [
+        "chat",
+        "code",
+        "vision"
+      ],
       "verified": "2026-10-20",
       "notes": "OpenAI 相容端點；模型清單隨平台更新。"
     },
@@ -161,13 +316,45 @@
       "commercialOk": true,
       "freeSummary": "每日 10,000 Neurons 免費額（UTC 00:00 重置）。超額需 Workers Paid。部分前沿模型需付費方式。",
       "models": [
-        { "id": "@cf/meta/llama-3.1-8b-instruct", "types": ["chat"] },
-        { "id": "@cf/meta/llama-3.2-11b-vision-instruct", "types": ["vision", "chat"] },
-        { "id": "@cf/baai/bge-m3", "types": ["embedding"] },
-        { "id": "@cf/black-forest-labs/flux-1-schnell", "types": ["image"] },
-        { "id": "@cf/openai/whisper", "types": ["audio"] }
+        {
+          "id": "@cf/meta/llama-3.1-8b-instruct",
+          "types": [
+            "chat"
+          ]
+        },
+        {
+          "id": "@cf/meta/llama-3.2-11b-vision-instruct",
+          "types": [
+            "vision",
+            "chat"
+          ]
+        },
+        {
+          "id": "@cf/baai/bge-m3",
+          "types": [
+            "embedding"
+          ]
+        },
+        {
+          "id": "@cf/black-forest-labs/flux-1-schnell",
+          "types": [
+            "image"
+          ]
+        },
+        {
+          "id": "@cf/openai/whisper",
+          "types": [
+            "audio"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "embedding", "image", "audio"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "embedding",
+        "image",
+        "audio"
+      ],
       "verified": "2026-10-20",
       "notes": "需 Cloudflare Account ID + API Token。OpenAI 相容路徑見官方文件。"
     },
@@ -182,9 +369,18 @@
       "commercialOk": true,
       "freeSummary": "新戶 $5 試用額度，須先綁定已驗證付款方式；額度 30 天到期。加卡本身不收費，僅在加購時扣款。",
       "models": [
-        { "id": "（見 Cloud Console 公開模型）", "types": ["chat", "code"] }
+        {
+          "id": "（見 Cloud Console 公開模型）",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code"],
+      "modelTypes": [
+        "chat",
+        "code"
+      ],
       "verified": "2026-10-20",
       "notes": "非永久免費方案；屬限時試用 credits。"
     },
@@ -199,11 +395,31 @@
       "commercialOk": true,
       "freeSummary": "官方提供多個 *-free 模型、註冊免卡。文件亦寫新戶試用約 10 次／模型，儲值後解鎖更高配額——請以控制台當日配額為準。",
       "models": [
-        { "id": "gpt-5.5-free / gpt-4.1-free 等", "types": ["chat"] },
-        { "id": "coding-glm-*-free 等", "types": ["code"] },
-        { "id": "gpt-image-2-free 等", "types": ["image"] }
+        {
+          "id": "gpt-5.5-free / gpt-4.1-free 等",
+          "types": [
+            "chat"
+          ]
+        },
+        {
+          "id": "coding-glm-*-free 等",
+          "types": [
+            "code"
+          ]
+        },
+        {
+          "id": "gpt-image-2-free 等",
+          "types": [
+            "image"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code", "image", "vision"],
+      "modelTypes": [
+        "chat",
+        "code",
+        "image",
+        "vision"
+      ],
       "verified": "2026-10-20",
       "notes": "第三方聚合；模型與配額變動快。建議對照 aihubmix.com/models/free。"
     },
@@ -218,11 +434,29 @@
       "commercialOk": true,
       "freeSummary": "Free API Key：Embedding／Rerank 約 100 RPM 與 100,000 TPM。另有 Reader（r.jina.ai）等產品分檔。",
       "models": [
-        { "id": "jina-embeddings 系列", "types": ["embedding"] },
-        { "id": "jina-reranker 系列", "types": ["rerank"] },
-        { "id": "Reader / Search API", "types": ["other"] }
+        {
+          "id": "jina-embeddings 系列",
+          "types": [
+            "embedding"
+          ]
+        },
+        {
+          "id": "jina-reranker 系列",
+          "types": [
+            "rerank"
+          ]
+        },
+        {
+          "id": "Reader / Search API",
+          "types": [
+            "other"
+          ]
+        }
       ],
-      "modelTypes": ["embedding", "rerank"],
+      "modelTypes": [
+        "embedding",
+        "rerank"
+      ],
       "verified": "2026-10-20",
       "notes": "偏搜尋基礎建設（embedding／rerank／reader），非一般聊天模型。"
     },
@@ -237,11 +471,75 @@
       "commercialOk": true,
       "freeSummary": "國際站有新用戶免費 credits 宣傳；另有標價 ¥0 的免費模型。地區／實名政策不同，請以控制台為準。國內端點常見 api.siliconflow.cn。",
       "models": [
-        { "id": "（見平台 Models／免費價目）", "types": ["chat", "embedding", "image"] }
+        {
+          "id": "（見平台 Models／免費價目）",
+          "types": [
+            "chat",
+            "embedding",
+            "image"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "embedding", "image", "audio"],
+      "modelTypes": [
+        "chat",
+        "embedding",
+        "image",
+        "audio"
+      ],
       "verified": "2026-10-20",
       "notes": "Oscar Cherry 內 Silicon／SF 系列與此相關；內聯網 EED／Ollama 已排除。"
+    },
+    {
+      "id": "intern-inkstone",
+      "type": "api",
+      "name": "書生·端硯（Intern InkStone）",
+      "host": "https://discovery-api.intern-ai.org.cn/v1",
+      "keyUrl": "https://discovery.intern-ai.org.cn/",
+      "docsUrl": "https://discovery-home.intern-ai.org.cn/",
+      "cardRequired": false,
+      "commercialOk": false,
+      "freeSummary": "上海人工智能實驗室科研工作台／科學發現平台 API（OpenAI 相容路徑）。公開頁可註冊登入做文獻檢索與研究分析；免費額度、收費方式、澳門註冊條件未在公開頁確認，請以官方為準，勿假設全部免費。",
+      "models": [
+        {
+          "id": "端硯科研助手／科學大模型（平台內可選）",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
+      ],
+      "modelTypes": [
+        "chat",
+        "code"
+      ],
+      "verified": "2026-10-20",
+      "notes": "入口：discovery.intern-ai.org.cn（助手）、discovery-home.intern-ai.org.cn（工作台／SCP-Lab 申請）。應用領域含生命科學、材料、半導體、核聚變、量子、氣象等。Oscar 補充。"
+    },
+    {
+      "id": "atria-dawn",
+      "type": "api",
+      "name": "Atria Dawn Preview（Atria ASI）",
+      "host": "https://api.atria-asi.ai/v1",
+      "keyUrl": "https://atria-asi.ai/",
+      "docsUrl": "https://huggingface.co/internlm/Atria-Dawn-Preview",
+      "cardRequired": false,
+      "commercialOk": false,
+      "freeSummary": "上海人工智能實驗室經 InternLM 發布嘅智能體向科研／工程長任務模型 API。公開頁強調示範與開源權限；API 免費額度、申請條件未在公開頁完全確認，請以官方為準。",
+      "models": [
+        {
+          "id": "Atria-Dawn-Preview（744B MoE／文字）",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
+      ],
+      "modelTypes": [
+        "chat",
+        "code"
+      ],
+      "verified": "2026-10-20",
+      "notes": "基於智譜 GLM-5.2；上下文以模型卡 256K 為準（部分第三方文件寫 1M，勿採）。MIT 開源（BF16／FP8）。網站 atria-asi.ai。Oscar 補充。"
     },
     {
       "id": "google-ai-studio",
@@ -255,9 +553,19 @@
       "commercialOk": true,
       "freeSummary": "網頁 Playground 試 Gemini、管理 Prompt，並可建立 API Key。Studio 使用官方標明免費（綁付費專案 key 除外）。",
       "models": [
-        { "id": "Gemini 系列（Studio 內可選）", "types": ["chat", "vision"] }
+        {
+          "id": "Gemini 系列（Studio 內可選）",
+          "types": [
+            "chat",
+            "vision"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "audio"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "audio"
+      ],
       "offers": "Playground、API Key、Prompt 管理",
       "verified": "2026-10-20",
       "notes": ""
@@ -274,9 +582,20 @@
       "commercialOk": true,
       "freeSummary": "瀏覽當日 :free 模型排行與說明；可搭配 Chat／API 使用。",
       "models": [
-        { "id": "當日 free 目錄", "types": ["chat", "vision", "code"] }
+        {
+          "id": "當日 free 目錄",
+          "types": [
+            "chat",
+            "vision",
+            "code"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "code"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "code"
+      ],
       "offers": "免費模型目錄、路由說明、Chat",
       "verified": "2026-10-20",
       "notes": ""
@@ -293,9 +612,20 @@
       "commercialOk": true,
       "freeSummary": "匿名模型對戰與公開排行榜。免帳號可試；登入可提高額度。Battle 模式不耗 credits（以官方說明為準）。",
       "models": [
-        { "id": "多模型對戰（匿名）", "types": ["chat", "vision", "image"] }
+        {
+          "id": "多模型對戰（匿名）",
+          "types": [
+            "chat",
+            "vision",
+            "image"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "vision", "image"],
+      "modelTypes": [
+        "chat",
+        "vision",
+        "image"
+      ],
       "offers": "模型對戰、Leaderboard、Side-by-Side",
       "verified": "2026-10-20",
       "notes": "品牌已更名 Arena；舊網址 lmarena.ai 仍可用。"
@@ -312,9 +642,19 @@
       "commercialOk": true,
       "freeSummary": "官方 Console：Playground、模型、Limits、Billing、申請 API Key。",
       "models": [
-        { "id": "與 Groq API 相同", "types": ["chat", "audio"] }
+        {
+          "id": "與 Groq API 相同",
+          "types": [
+            "chat",
+            "audio"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "audio", "code"],
+      "modelTypes": [
+        "chat",
+        "audio",
+        "code"
+      ],
       "offers": "Playground、API Key、用量監控",
       "verified": "2026-10-20",
       "notes": ""
@@ -331,9 +671,20 @@
       "commercialOk": false,
       "freeSummary": "NIM 模型目錄與網頁試玩，可產生 API Key 供原型開發。",
       "models": [
-        { "id": "NIM 目錄模型", "types": ["chat", "code", "vision"] }
+        {
+          "id": "NIM 目錄模型",
+          "types": [
+            "chat",
+            "code",
+            "vision"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "code", "vision"],
+      "modelTypes": [
+        "chat",
+        "code",
+        "vision"
+      ],
       "offers": "模型試玩、API Key、文件",
       "verified": "2026-10-20",
       "notes": ""
@@ -350,12 +701,81 @@
       "commercialOk": true,
       "freeSummary": "社群託管 AI demo 網頁，多數可免費試玩。注意：Inference Providers API 對 Free 用戶無月額 credits，故本站只列為網站資源。",
       "models": [
-        { "id": "各 Space 自選模型", "types": ["chat", "image", "audio", "vision"] }
+        {
+          "id": "各 Space 自選模型",
+          "types": [
+            "chat",
+            "image",
+            "audio",
+            "vision"
+          ]
+        }
       ],
-      "modelTypes": ["chat", "image", "audio", "vision"],
+      "modelTypes": [
+        "chat",
+        "image",
+        "audio",
+        "vision"
+      ],
       "offers": "互動 Demo、開源應用託管",
       "verified": "2026-10-20",
       "notes": "不要與「免費 Inference API」混淆。"
+    },
+    {
+      "id": "intern-discovery",
+      "type": "website",
+      "name": "書生·端硯 AI 科研助手",
+      "url": "https://discovery.intern-ai.org.cn/",
+      "host": "https://discovery.intern-ai.org.cn/",
+      "keyUrl": "https://discovery.intern-ai.org.cn/",
+      "docsUrl": "https://discovery-home.intern-ai.org.cn/",
+      "cardRequired": false,
+      "commercialOk": false,
+      "freeSummary": "網頁入口：智能對話、論文檢索、文獻精讀、科研問題分析。配額／收費／澳門可否註冊請以官方為準。",
+      "models": [
+        {
+          "id": "端硯平台內模型",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
+      ],
+      "modelTypes": [
+        "chat",
+        "code"
+      ],
+      "offers": "文獻發現、研究分析、科研工作台介紹",
+      "verified": "2026-10-20",
+      "notes": "工作台介紹見 discovery-home.intern-ai.org.cn。Oscar 補充。"
+    },
+    {
+      "id": "atria-asi-web",
+      "type": "website",
+      "name": "Atria ASI（Dawn Preview）",
+      "url": "https://atria-asi.ai/",
+      "host": "https://atria-asi.ai/",
+      "keyUrl": "https://atria-asi.ai/",
+      "docsUrl": "https://huggingface.co/internlm/Atria-Dawn-Preview",
+      "cardRequired": false,
+      "commercialOk": false,
+      "freeSummary": "官方網站：智能體示範（Discovery／Creation／Delivery／Cybersecurity）與模型介紹。開源權限見 Hugging Face；線上試用／API 額度以官方為準。",
+      "models": [
+        {
+          "id": "Atria-Dawn-Preview",
+          "types": [
+            "chat",
+            "code"
+          ]
+        }
+      ],
+      "modelTypes": [
+        "chat",
+        "code"
+      ],
+      "offers": "示範、技術說明、模型卡連結",
+      "verified": "2026-10-20",
+      "notes": "適合作 AI 素養課「人機協作／人類判斷」案例（團隊公開日誌數據）。Oscar 補充。"
     }
   ]
 }
