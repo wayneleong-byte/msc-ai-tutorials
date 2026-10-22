@@ -75,6 +75,7 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 .req-table th{background:#e8f4f2;color:var(--panel);font-size:1.05rem}
 .req-table.compact{font-size:.98rem}
 .req-table tr.hl td,.req-table tr.demo-row td{background:#fff8e6}
+.mat-table a{color:var(--accent);word-break:break-all;font-weight:700}
 .callout{margin:14px 0;padding:14px 18px;border-radius:10px;font-size:1.15rem;line-height:1.65}
 .callout-h{font-weight:800;margin-bottom:6px;font-size:1.2rem}
 .callout.info{background:#eef6ff;border:1px solid #9cc3ef}.callout.info .callout-h{color:#1d4f91}
@@ -105,7 +106,7 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
   <div class="topbar">
     <span class="brand">Gemini Notebook · 公眾班</span>
     <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
-    <span class="counter" id="counter">1 / 56</span>
+    <span class="counter" id="counter">1 / 57</span>
     <button type="button" class="btn-icon" id="toc-open" title="目錄" aria-label="目錄">☰</button>
   </div>
   <div class="stage">
@@ -132,7 +133,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <ol class="toc" id="toc-list"></ol>
 <p class="hint">點擊標題跳轉；右上角 ☰ 亦可隨時開啟目錄。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="今天學什麼" data-sec="A" id="s3">
 
@@ -146,7 +146,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <div class="callout info"><div class="callout-h">公眾場景貫穿</div><div>S1 行前準備 → S2 館內／回家聽導覽 → S3 家庭小測 → S4 通勤 → S5 帶回家 → S6 分享隱私</div></div>
 <p class="note">對象：約 12 歲以上家庭與一般訪客。這不是教師備課培訓。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="這不是隨便問 AI" data-sec="A" id="s4">
 
@@ -160,7 +159,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ul>
 <div class="callout check"><div class="callout-h">記住</div><div>有引用 ≠ 一定對。下一頁起我們會示範怎麼抓錯。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="名稱演進" data-sec="A" id="s5">
 
@@ -178,7 +176,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ul>
 <p class="note">來源：blog.google 改名公告、Workspace Updates（2026-07）</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="免費 vs 付費" data-sec="A" id="s6">
 
@@ -201,7 +198,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <p class="note">來源：support.google.com plans／usage limits（查證 2026-10-23）</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="本示範帳說明" data-sec="A" id="s7">
 
@@ -215,7 +211,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ul>
 <div class="callout limit"><div class="callout-h">付費色帶頁</div><div>之後有付費專頁會加色帶，提醒免費用戶勿以為操作錯誤。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="澳門／香港存取注意" data-sec="A" id="s8">
 
@@ -235,7 +230,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>勿假設每位訪客回家都能登入</li>
 </ul>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="示範筆記本與材料" data-sec="A" id="s9">
 
@@ -243,16 +237,36 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <p class="scene"><span class="scene-tag">S1</span> 行前準備：出發前讀導賞稿</p>
 <p class="lead">筆記本名稱：<strong>MSC公眾・力與能量</strong></p>
 <ul class="bullets big">
-<li><code>01</code> 力與簡單機械（PDF）</li>
-<li><code>02</code> 能量轉換與可持續（PDF）</li>
-<li><code>03</code> 參觀學習重點（一頁 PDF）</li>
-<li>YouTube 來源（見 materials；用產品「來源連結」，勿盜下載）</li>
-<li>（選）<code>05</code> 實驗假資料 CSV——<strong>示例數據，非館方實測</strong></li>
-<li>探索單 <code>04</code> 紙本可發，不必上傳</li>
+<li><code>01</code> <a href="materials/01-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E5%8A%9B%E8%88%87%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0.pdf" download>力與簡單機械（PDF · 566 KB）</a></li>
+<li><code>02</code> <a href="materials/02-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E8%83%BD%E9%87%8F%E8%BD%89%E6%8F%9B%E8%88%87%E5%8F%AF%E6%8C%81%E7%BA%8C.pdf" download>能量轉換與可持續（PDF · 576 KB）</a></li>
+<li><code>03</code> <a href="materials/03-%E5%8F%83%E8%A7%80%E5%AD%B8%E7%BF%92%E9%87%8D%E9%BB%9E%E4%B8%80%E9%A0%81.pdf" download>參觀學習重點（一頁 PDF · 448 KB）</a></li>
+<li>探索單 <code>04</code> <a href="materials/04-%E5%8F%83%E8%A7%80%E7%B4%80%E9%8C%84-%E6%8E%A2%E7%B4%A2%E5%96%AE.pdf" download>參觀紀錄探索單（PDF · 442 KB）</a>——紙本可發，不必上傳</li>
+<li>YouTube 來源：<a href="materials/youtube-source.txt" download>youtube-source.txt（2 KB）</a>（用產品「來源連結」，勿盜下載）</li>
+<li>（選）<a href="materials/05-%E5%AF%A6%E9%A9%97%E5%81%87%E8%B3%87%E6%96%99.csv" download>05-實驗假資料.csv（1 KB）</a>——<strong>示例數據，非館方實測</strong></li>
 </ul>
+<p class="lead"><a href="downloads/">開啟「示範材料與成品下載」獨立頁 →</a></p>
 <div class="callout info"><div class="callout-h">版權提醒</div><div>材料為工作坊原創示範導賞稿，非教育局課綱。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="材料與成品下載" data-sec="A" id="s9b">
+
+<h2>材料與成品下載</h2>
+<p class="lead">一次取得本班來源材料；Studio 成品請先在產品內下載（本站陸續補檔）。</p>
+<p style="margin:14px 0"><a class="copy-btn" style="display:inline-block;text-decoration:none;padding:14px 22px;font-size:1.25rem" href="downloads/">開啟下載中心 →</a>
+<a class="copy-btn" style="display:inline-block;text-decoration:none;padding:14px 22px;font-size:1.15rem;background:#0d2f44;margin-left:8px" href="downloads/materials-msc-force-energy.zip" download>來源材料 ZIP（826 KB）</a></p>
+<table class="req-table mat-table">
+<thead><tr><th>檔案</th><th>類型</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td><a href="materials/01-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E5%8A%9B%E8%88%87%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0.pdf" download>01-展項導賞-力與簡單機械.pdf</a>（566 KB）</td><td>PDF</td><td>力與簡單機械導賞稿</td></tr>
+<tr><td><a href="materials/02-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E8%83%BD%E9%87%8F%E8%BD%89%E6%8F%9B%E8%88%87%E5%8F%AF%E6%8C%81%E7%BA%8C.pdf" download>02-展項導賞-能量轉換與可持續.pdf</a>（576 KB）</td><td>PDF</td><td>能量轉換與可持續導賞稿</td></tr>
+<tr><td><a href="materials/03-%E5%8F%83%E8%A7%80%E5%AD%B8%E7%BF%92%E9%87%8D%E9%BB%9E%E4%B8%80%E9%A0%81.pdf" download>03-參觀學習重點一頁.pdf</a>（448 KB）</td><td>PDF</td><td>參觀學習重點一頁</td></tr>
+<tr><td><a href="materials/04-%E5%8F%83%E8%A7%80%E7%B4%80%E9%8C%84-%E6%8E%A2%E7%B4%A2%E5%96%AE.pdf" download>04-參觀紀錄-探索單.pdf</a>（442 KB）</td><td>PDF</td><td>現場探索單</td></tr>
+<tr><td><a href="materials/05-%E5%AF%A6%E9%A9%97%E5%81%87%E8%B3%87%E6%96%99.csv" download>05-實驗假資料.csv</a>（1 KB）</td><td>CSV</td><td>示例數據（非館方實測）</td></tr>
+<tr><td><a href="materials/youtube-source.txt" download>youtube-source.txt</a>（2 KB）</td><td>TXT</td><td>YouTube 來源清單</td></tr>
+</tbody>
+</table>
+<p class="note">完整列表（含 Markdown）與 Studio 成品狀態見 <a href="downloads/">downloads/</a>。</p>
+
 </section>
 <section class="slide" data-title="建立 Notebook" data-sec="B" id="s10">
 
@@ -276,7 +290,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </div>
 <p class="note">按鈕文案若改版，以當日介面為準；勿死記座標。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="上傳來源：PDF" data-sec="B" id="s11">
 
@@ -284,23 +297,26 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <span class="badge free">Free</span>
 <ol class="steps">
 <li>在來源區新增檔案</li>
-<li>上傳 01、02、03 三份 PDF</li>
+<li>上傳三份 PDF：
+  <a href="materials/01-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E5%8A%9B%E8%88%87%E7%B0%A1%E5%96%AE%E6%A9%9F%E6%A2%B0.pdf" download>01 力與簡單機械</a>、
+  <a href="materials/02-%E5%B1%95%E9%A0%85%E5%B0%8E%E8%B3%9E-%E8%83%BD%E9%87%8F%E8%BD%89%E6%8F%9B%E8%88%87%E5%8F%AF%E6%8C%81%E7%BA%8C.pdf" download>02 能量轉換與可持續</a>、
+  <a href="materials/03-%E5%8F%83%E8%A7%80%E5%AD%B8%E7%BF%92%E9%87%8D%E9%BB%9E%E4%B8%80%E9%A0%81.pdf" download>03 參觀學習重點</a></li>
 <li>確認來源面板出現三份文件</li>
 </ol>
+<p class="hint">下載：見上列連結，或到 <a href="downloads/">材料下載頁</a>。</p>
 <figure class="shot">
 <img src="screenshots/03-sources-pdfs-uploaded.png" alt="來源區可見 PDF" loading="lazy">
 <figcaption>來源區可見 PDF</figcaption>
 </figure>
 <p class="hint">免費方案每本來源數有上限（Standard 約 50）；本示範遠低於上限。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="新增 YouTube／網站" data-sec="B" id="s12">
 
 <h2>新增 YouTube／網站</h2>
 <span class="badge free">Free</span>
 <ol class="steps">
-<li>用「網站／YouTube」類來源，貼上 URL（見 materials/youtube-source.txt）</li>
+<li>用「網站／YouTube」類來源，貼上 URL（下載清單：<a href="materials/youtube-source.txt" download>youtube-source.txt</a>）</li>
 <li>等待來源就緒</li>
 <li><strong>勿盜下載影片</strong>——用產品提供的來源連結方式即可</li>
 </ol>
@@ -309,7 +325,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>來源含 YouTube</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="（選）表格／CSV" data-sec="B" id="s13">
 
@@ -317,7 +332,7 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <span class="badge free">Free</span>
 <p class="scene"><span class="scene-tag">S1</span> 可問「哪一角較快」——但要講清楚是假資料</p>
 <ul class="bullets big">
-<li>上傳 <code>05-實驗假資料.csv</code> 或貼上表格</li>
+<li>上傳 <a href="materials/05-%E5%AF%A6%E9%A9%97%E5%81%87%E8%B3%87%E6%96%99.csv" download>05-實驗假資料.csv</a> 或貼上表格</li>
 <li>之後可用 Chat 問數據（見 E05）</li>
 </ul>
 <div class="callout check"><div class="callout-h">強調</div><div>這是<strong>假資料示例</strong>，不是科學館官方實測。真正參觀以現場展項為準。</div></div>
@@ -326,7 +341,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>CSV／表格來源</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="「發現」來源" data-sec="B" id="s14">
 
@@ -342,7 +356,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>發現來源 UI · skip-if-missing</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Chat 三欄心智模型" data-sec="C" id="s15">
 
@@ -355,7 +368,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <p class="note">以當日版面為準；名稱或欄位可能改版。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="問一個可核對的問題" data-sec="C" id="s16">
 
@@ -373,7 +385,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <p class="hint">下一頁：每條 citation 都點一次。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="點引用回原文" data-sec="C" id="s17">
 
@@ -390,7 +401,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <div class="callout info"><div class="callout-h">示範習慣</div><div>每條 citation 都點一次——不是順便，是教學重點。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="有引用仍可能錯" data-sec="C" id="s18">
 
@@ -405,7 +415,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </table>
 <div class="callout check"><div class="callout-h">原則</div><div>有引用仍可能錯 → 點回原文 + 用物理常識覆核。家庭也可玩「抓錯」。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Save to Note" data-sec="C" id="s19">
 
@@ -420,7 +429,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>存成筆記後可見</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Guided Learning" data-sec="C" id="s20">
 
@@ -438,7 +446,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <p class="hint">現場沒有此入口就跳過，改用一般 Chat 加上「不要直接給答案」提示。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Studio 總覽" data-sec="D" id="s21">
 
@@ -451,7 +458,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <p class="note">名稱以當日 Studio 面板為準；額度分級見各功能頁。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Mind Map" data-sec="D" id="s22">
 
@@ -474,7 +480,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 </div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Audio Overview 是什麼" data-sec="D" id="s23">
 
@@ -488,7 +493,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>長度：Shorter／Default／Longer（文件標 Longer＝English Only）</li>
 </ul>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Audio：寫 audience＋focus" data-sec="D" id="s24">
 
@@ -510,8 +514,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 </div>
 <p class="hint">現場可只播 20–30 秒示範。</p>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Audio Interactive" data-sec="D" id="s25">
 
@@ -528,7 +532,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Interactive 入口 · skip-if-missing；標 English</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Video Overview" data-sec="D" id="s26">
 
@@ -556,8 +559,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Video Overview 成品 · Explainer「澳門科學館：能量探索之旅」· 約 7:01（當日實測）</figcaption>
 </figure>
 </div>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Cinematic／Producer 門檻" data-sec="D" id="s27">
 
@@ -579,7 +582,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Producer notes · Ultra only；Pro 無則 skip</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="同一本多份 Studio" data-sec="D" id="s28">
 
@@ -599,8 +601,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <img src="screenshots/22-second-audio-same-notebook.png" alt="同一本兩份 Audio：第二份「斜面省力與位能轉換」1:03 播放中" loading="lazy">
 <figcaption>同一本兩份 Audio · 第二份「斜面省力與位能轉換」· 約 1:03 播放中</figcaption>
 </figure>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Reports／Study guide" data-sec="D" id="s29">
 
@@ -620,8 +622,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <img src="screenshots/23-report-or-study-guide.png" alt="Report／Study guide 成品" loading="lazy">
 <figcaption>Report／Study guide 成品</figcaption>
 </figure>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Infographic ＋ Slide Deck" data-sec="D" id="s30">
 
@@ -649,8 +651,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 </div>
 <p class="hint">每日次數依方案分級；用盡見 Generate later。</p>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Flashcards vs Quiz" data-sec="E" id="s31">
 
@@ -663,7 +665,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <tr><td>之後</td><td colspan="2">答完用 Chat 問弱項、點回來源</td></tr>
 </table>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Flashcards" data-sec="E" id="s32">
 
@@ -682,8 +683,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <img src="screenshots/26-flashcards.png" alt="Flashcards 介面" loading="lazy">
 <figcaption>Flashcards 介面</figcaption>
 </figure>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Quizzes" data-sec="E" id="s33">
 
@@ -703,8 +704,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <img src="screenshots/27-quiz.png" alt="Quiz 複習畫面：能量與機械測驗題庫 12/12" loading="lazy">
 <figcaption>Quiz 複習結果 · 「能量與機械測驗題庫」· 12／12 Medium · 繁中</figcaption>
 </figure>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="家庭小測怎麼玩" data-sec="E" id="s34">
 
@@ -717,7 +718,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ol>
 <div class="callout info"><div class="callout-h">抓錯遊戲</div><div>也可投影 AI 怪異解讀（見 E01–E03），請大家抓錯——同樣練核對習慣。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="（選）CSV 問數據" data-sec="E" id="s35">
 
@@ -731,7 +731,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>針對 CSV 的 Chat</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="分享基本款" data-sec="F" id="s36">
 
@@ -749,7 +748,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>分享對話框（實際可見選項）</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="公眾帳隱私守則" data-sec="F" id="s37">
 
@@ -763,7 +761,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>教育帳請走機構允許的發佈方式</li>
 </ul>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Advanced sharing" data-sec="F" id="s38">
 
@@ -780,7 +777,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>進階分享 · Paid；無則 skip</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="與 Gemini App 同步" data-sec="F" id="s39">
 
@@ -796,7 +792,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>App 內可見筆記本或官方說明</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="下載結構化輸出" data-sec="F" id="s40">
 
@@ -811,8 +806,8 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <div class="ph">截圖待補<br><code>32-download-artifact.png</code></div>
 <figcaption>任一下載畫面 · 可用 Infographic／Slide／Audio 下載示意</figcaption>
 </figure>
+<p class="note">示範成品檔請先在產品內下載；本站彙整見 <a href="downloads/">材料與成品下載頁</a>。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Cloud computer／跑碼" data-sec="F" id="s41">
 
@@ -828,7 +823,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Cloud computer UI · skip-if-missing</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Chat 找來源（Web research）" data-sec="F" id="s42">
 
@@ -844,7 +838,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>導引找來源 · skip-if-missing</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="Mobile：語音／錄音／拍照" data-sec="F" id="s43">
 
@@ -861,7 +854,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Mobile 語音或拍照 · 滾動；無裝置則 skip</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="輸出語言" data-sec="G" id="s44">
 
@@ -877,7 +869,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <figcaption>Output Language · 覆寫為<strong>中文（繁體）</strong>（當日實測）</figcaption>
 </figure>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="額度與 Generate later" data-sec="G" id="s45">
 
@@ -895,7 +886,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </figure>
 <div class="callout limit"><div class="callout-h">現場策略</div><div>Video 先開生成再講其他；額度緊時優先 Chat＋Mind Map＋Quiz。</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="AI 會錯／有瑕疵" data-sec="G" id="s46">
 
@@ -908,7 +898,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>實測錯誤見「有引用仍可能錯」頁（鑷子、溜滑梯、輪軸）</li>
 </ul>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="引用核對習慣（總結）" data-sec="G" id="s47">
 
@@ -921,7 +910,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ol>
 <div class="callout check"><div class="callout-h">口號</div><div>來源為王、引用必點、分享先想隱私</div></div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="未滿 18 歲與浮水印" data-sec="G" id="s48">
 
@@ -934,7 +922,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ul>
 <p class="note">公眾班若有未成年人，優先 Explainer／Audio／Quiz，勿強推 Cinematic。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="版權" data-sec="G" id="s49">
 
@@ -946,7 +933,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <li>YouTube：用產品「來源連結」，勿盜傳檔案</li>
 </ul>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="提示碼一覽 pmt01–pmt10" data-sec="H" id="s50">
 
@@ -1003,7 +989,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <pre class="prompt-text" id="txt-pmt10">難度 Medium；出 5 題；偏理解不偏背定義；題幹避免超出來源內容。</pre>
 </div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="場景複習卡" data-sec="H" id="s51">
 
@@ -1018,7 +1003,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <tr><td>S6</td><td>分享給親友</td><td>分享＋隱私</td></tr>
 </table>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="15 分鐘現場快演示" data-sec="H" id="s52">
 
@@ -1035,7 +1019,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </table>
 <p class="note">細節見 <code>demo-plan.md</code>。事前已建好筆記本與來源。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="約 26 項功能地圖" data-sec="H" id="s53">
 
@@ -1062,7 +1045,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <tr><td>23–26</td><td>Guided Learning／Save to Note／Generate later／輸出語言</td><td>Free</td></tr>
 </table>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="常見問題" data-sec="H" id="s54">
 
@@ -1077,7 +1059,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 <tr><td>AI 講錯鑷子／斜面？</td><td>有引用仍可能錯（C04）</td></tr>
 </table>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="延伸自學連結" data-sec="H" id="s55">
 
@@ -1091,7 +1072,6 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 </ul>
 <p class="note">僅列研究已收錄 URL。額度與按鈕以官方當日為準。</p>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
 <section class="slide" data-title="結尾" data-sec="H" id="s56">
 
@@ -1102,11 +1082,10 @@ html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengH
 示範筆記本：MSC公眾・力與能量<br>
 查證：2026-10-23 Asia/Macau<br>
 澳門／香港不在官方支援地區名單——現場以實測為準</p>
-<p class="credit">澳門科學館 Oscar 製作 · Preview（尚未部署）</p>
+<p class="credit">澳門科學館 Oscar 製作 · 已上線</p>
 <p class="hint">額度／地區／按鈕以官方當日介面為準</p>
 </div>
 
-<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
 </section>
   </div>
   <nav class="nav" aria-label="翻頁">

@@ -1,0 +1,30 @@
+# YouTube 來源建議（公眾班・Gemini Notebook 可作 Source）
+# 驗證日期：2026-10-23（Asia/Macau）
+# 原則：公開教育向短片；上傳／貼網址前請再確認仍可公開播放與著作權設定。
+
+---
+1) 簡單機械（槓桿／滑輪／斜面等）
+標題：Simple Machines for Kids: Science and Engineering for Children - FreeSchool
+網址：https://www.youtube.com/watch?v=fvOmaf2GfCY
+頻道：FreeSchool（知名兒童科學教育頻道）
+為何合適：
+  - 清楚介紹六種簡單機械，含槓桿、滑輪、斜面，與本工作坊展項導賞直接對應。
+  - 英語解說、圖像具體，適合 12 歲以上與家長共同觀看；可作 Notebook 第二來源，與繁中導賞稿交叉引用。
+驗證：2026-10-23 以 WebFetch 確認頁面與字幕／逐字內容存在。狀態：已確認可取用頁面。
+
+---
+2) 可再生能源（可持續討論）
+標題：Renewable Energy for Kids
+網址：https://www.youtube.com/watch?v=Q6f7CcekmpI
+頻道：LearnBrite／相關教育內容（片末導向 learnbrite.org）
+為何合適：
+  - 概述太陽能、風能、水力等再生能源及其利弊，銜接「能量轉換與可持續」導賞。
+  - 片長適中，適合公眾班作為討論引子；可提醒學員區分「影片通論」與「澳門在地情境」。
+驗證：2026-10-23 以 WebFetch 確認頁面與內容存在。狀態：已確認可取用頁面。
+備註：片中一併提及核能等分類，導賞時可引導「再生／非再生」討論焦點，不必全部採納片中歸類用語。
+
+---
+使用提示（公眾班）：
+- 在 Gemini Notebook 新增來源時可貼 YouTube 網址（以當日產品介面為準）。
+- 建議先上傳兩篇繁中導賞稿 + 本頁所列 1～2 支影片，再產 Audio／Quiz，避免來源過雜。
+- 若網址失效或地區限制，請改搜同主題 FreeSchool／主流教育頻道影片，並在 MATERIALS 註明「待查證」。
