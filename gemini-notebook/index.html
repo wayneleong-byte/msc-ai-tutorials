@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini Notebook 公眾班：力與能量｜澳門科學館</title>
+<meta name="description" content="澳門科學館公眾班互動教程：Gemini Notebook（原 NotebookLM）· 力、能量與可持續。查證 2026-10-23 Asia/Macau。">
+<style>
+
+:root{--bg:#0a1f2e;--panel:#0d2f44;--accent:#1a9e8f;--accent2:#f0b429;--text:#141414;--muted:#4a5560;--card:#fff;--warn:#b33;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+.app{display:flex;flex-direction:column;height:100%}
+.topbar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);color:#fff;flex-shrink:0;z-index:20}
+.topbar .brand{font-weight:700;font-size:1.05rem;white-space:nowrap;color:#fff;text-decoration:none}
+.progress-wrap{flex:1;height:8px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7fddd4);transition:width .25s}
+.counter{font-size:1rem;opacity:.95;min-width:5em;text-align:right;font-weight:600}
+.btn-icon{background:rgba(255,255,255,.12);border:0;color:#fff;width:40px;height:40px;border-radius:8px;cursor:pointer;font-size:1.2rem}
+.btn-icon:hover{background:rgba(255,255,255,.22)}
+.stage{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px 18px 88px}
+.slide{display:none;max-width:1040px;margin:0 auto;background:var(--card);border-radius:var(--radius);padding:32px 36px 40px;box-shadow:0 10px 40px rgba(0,0,0,.28);min-height:min(72vh,760px)}
+.slide.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide h2{font-size:clamp(1.75rem,3.2vw,2.25rem);color:var(--panel);margin-bottom:16px;line-height:1.3;font-weight:800}
+.slide h3{font-size:1.35rem;margin:16px 0 8px;color:var(--panel)}
+.slide p,.slide li{line-height:1.75;font-size:1.2rem}
+.lead{font-size:1.35rem!important;font-weight:600;margin:8px 0 14px;line-height:1.55}
+.big-list{margin:12px 0 16px 1.3em;font-size:1.3rem}
+.big-list li{margin:.55em 0;line-height:1.55}
+.bullets{margin:10px 0 14px 1.3em}.bullets.big li{margin:.45em 0;font-size:1.25rem}
+.bullets a,.links a,.links-inline a{color:var(--accent);word-break:break-all}
+.steps{margin:12px 0 16px 1.3em;font-size:1.25rem}.steps li{margin:.5em 0}
+.tips{margin:14px 0;padding:12px 16px;background:#f3faf9;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;list-style:none}
+.note,.hint{font-size:1.05rem;color:var(--muted);margin:10px 0;line-height:1.6}
+.badge{display:inline-block;font-size:.85rem;padding:3px 10px;border-radius:6px;vertical-align:middle;font-weight:700;margin:0 4px 4px 0}
+.badge.free{background:#e6f5f3;color:#0f6e66}
+.badge.mixed{background:#fff3cd;color:#856404}
+.badge.paid,.badge.pro,.badge.ultra{background:#fde8e8;color:#9b1c1c}
+.badge.rolling{background:#e8eaf6;color:#283593}
+.badge.risk{background:#fce4ec;color:#880e4f}
+.badge.en{background:#e3f2fd;color:#0d47a1}
+.prompt-box{margin:14px 0;border:2px solid #b8d9d5;border-radius:12px;overflow:hidden;background:#fafcfc}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#e8f4f2;font-size:1.05rem;font-weight:700;color:var(--panel)}
+.copy-btn{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:1rem;font-weight:700}
+.copy-btn:hover{filter:brightness(1.08)}.copy-btn.copied{background:#2d6a4f}
+.prompt-text{padding:14px 16px;white-space:pre-wrap;word-break:break-word;font-size:1.1rem;line-height:1.7;max-height:220px;overflow:auto;font-family:inherit}
+.shots{display:grid;gap:14px;margin:14px 0}
+@media(min-width:700px){.shots{grid-template-columns:1fr 1fr}}
+.shots.one{grid-template-columns:1fr}
+.shot{margin:0}.shot img{width:100%;height:auto;border-radius:8px;border:1px solid #e0e8e7;display:block}
+.shot figcaption{font-size:.95rem;color:var(--muted);margin-top:6px;line-height:1.45}
+.placeholder .ph{background:#f5f5f5;border:2px dashed #bbb;border-radius:8px;padding:48px 16px;text-align:center;font-size:1.15rem;color:#666;line-height:1.6}
+.placeholder .ph code{font-size:1rem;color:#333}
+.cover{text-align:center;padding:40px 12px 20px}
+.cover-badge{display:inline-block;background:#e6f5f3;color:var(--accent);padding:8px 16px;border-radius:99px;font-size:1.05rem;margin-bottom:20px;font-weight:700}
+.cover h1{font-size:clamp(2rem,5vw,2.9rem);color:var(--panel);line-height:1.25;margin-bottom:16px;font-weight:800}
+.cover-sub{font-size:1.25rem;color:var(--muted);line-height:1.7}
+.cover-meta{margin-top:22px;color:var(--muted);font-size:1.1rem;line-height:1.7}
+.credit{margin-top:18px;font-size:1.05rem;color:var(--panel);font-weight:700}
+.credit-line{margin-top:1.5rem;font-size:.9rem;opacity:.75;color:var(--panel);font-weight:600}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:10px;padding:12px;background:rgba(10,31,46,.94);backdrop-filter:blur(8px);z-index:30}
+.nav button{background:var(--accent);color:#fff;border:0;padding:12px 24px;border-radius:10px;font-size:1.1rem;cursor:pointer;min-width:110px;font-weight:700}
+.nav button:hover{filter:brightness(1.08)}.nav button:disabled{opacity:.4;cursor:default}
+.nav .toc-btn{background:rgba(255,255,255,.15)}
+.toc{columns:1;margin:8px 0 16px 1.2em;font-size:1.1rem}@media(min-width:700px){.toc{columns:2}}
+.toc li{margin:.4em 0;break-inside:avoid}.toc a{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:600}.toc a:hover{text-decoration:underline}
+.toc-drawer{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:stretch;justify-content:flex-end}
+.toc-drawer.open{display:flex}
+.toc-panel{width:min(400px,92vw);background:#fff;padding:22px;overflow:auto;box-shadow:-4px 0 24px rgba(0,0,0,.2)}
+.toc-panel h3{margin-bottom:12px;color:var(--panel);font-size:1.35rem}
+.toc-panel ol{margin-left:1.2em;font-size:1.05rem}.toc-panel a{color:var(--accent);text-decoration:none;display:block;padding:5px 0;cursor:pointer}
+.req-table{width:100%;border-collapse:collapse;font-size:1.05rem;margin:12px 0}
+.req-table th,.req-table td{border:1px solid #d5e0df;padding:10px 12px;text-align:left;vertical-align:top}
+.req-table th{background:#e8f4f2;color:var(--panel);font-size:1.05rem}
+.req-table.compact{font-size:.98rem}
+.req-table tr.hl td,.req-table tr.demo-row td{background:#fff8e6}
+.callout{margin:14px 0;padding:14px 18px;border-radius:10px;font-size:1.15rem;line-height:1.65}
+.callout-h{font-weight:800;margin-bottom:6px;font-size:1.2rem}
+.callout.info{background:#eef6ff;border:1px solid #9cc3ef}.callout.info .callout-h{color:#1d4f91}
+.callout.check{background:#fff1f0;border:2px solid #e05a4f}.callout.check .callout-h{color:#b42318}
+.callout.limit{background:#f3f0ff;border:2px solid #7a5af8}.callout.limit .callout-h{color:#5925dc}
+.scene{margin:8px 0 14px;font-size:1.15rem;color:#2a4a4a;background:#f3faf9;padding:10px 14px;border-radius:8px}
+.scene-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.85rem;font-weight:800;padding:2px 8px;border-radius:6px;margin-right:6px}
+.paid-band{background:linear-gradient(90deg,#9b1c1c,#c0392b);color:#fff;font-weight:800;font-size:1rem;padding:8px 14px;border-radius:8px;margin:0 0 14px;letter-spacing:.02em}
+.slide img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,15,16,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 12px 40px;cursor:zoom-out}
+.lb.open{display:flex;animation:lbIn .18s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb img{max-width:min(1600px,98vw);max-height:calc(100vh - 100px);width:auto;height:auto;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+.lb-cap{color:#e8f4f2;font-size:.95rem;margin-top:10px;text-align:center;max-width:92vw;line-height:1.5}
+.lb-close{position:absolute;top:10px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.4rem;cursor:pointer}
+.lb-hint{position:absolute;top:18px;left:16px;color:rgba(255,255,255,.6);font-size:.85rem}
+@media(max-width:600px){
+  .slide{padding:20px 16px 28px}
+  .stage{padding:10px 8px 96px}
+  .nav button{min-width:80px;padding:12px 14px;font-size:1rem}
+  .slide p,.slide li{font-size:1.1rem}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <span class="brand">Gemini Notebook · 公眾班</span>
+    <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+    <span class="counter" id="counter">1 / 56</span>
+    <button type="button" class="btn-icon" id="toc-open" title="目錄" aria-label="目錄">☰</button>
+  </div>
+  <div class="stage">
+<section class="slide active" data-title="封面" data-sec="A" id="s1">
+
+<div class="cover">
+<div class="cover-badge">澳門科學館 · 公眾班（家庭／訪客）· 非教師培訓</div>
+<h1>Gemini Notebook 公眾班<br>從科學館展項讀懂力與能量</h1>
+<p class="cover-sub">正式產品名 <strong>Gemini Notebook</strong>（原 NotebookLM，2026-07-16 改名）<br>
+入口 <a href="https://notebook.google/" target="_blank" rel="noopener">https://notebook.google/</a></p>
+<p class="cover-meta">示範筆記本：<strong>MSC公眾・力與能量</strong><br>
+查證日期：2026-10-23（Asia/Macau, UTC+8）<br>
+示範帳：Oscar · Google AI Pro（付費畫面會標明門檻）</p>
+<p class="credit">澳門科學館 Oscar 製作</p>
+<p class="hint" style="margin-top:18px">← → 鍵、下方按鈕或左右滑動翻頁；點擊截圖可放大<br>
+額度／地區／按鈕以官方當日介面為準</p>
+</div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="目錄" data-sec="A" id="s2">
+
+<h2>目錄</h2>
+<ol class="toc" id="toc-list"></ol>
+<p class="hint">點擊標題跳轉；右上角 ☰ 亦可隨時開啟目錄。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="今天學什麼" data-sec="A" id="s3">
+
+<h2>今天學什麼 · 四個目標</h2>
+<ol class="big-list">
+<li>會建一本<strong>只吃你放進去的來源</strong>的筆記本</li>
+<li>會點<strong>引用（citation）</strong>核對原文</li>
+<li>會產 <strong>Audio／Quiz／圖卡</strong>帶回家</li>
+<li>知道<strong>免費／付費</strong>與<strong>隱私</strong>邊界</li>
+</ol>
+<div class="callout info"><div class="callout-h">公眾場景貫穿</div><div>S1 行前準備 → S2 館內／回家聽導覽 → S3 家庭小測 → S4 通勤 → S5 帶回家 → S6 分享隱私</div></div>
+<p class="note">對象：約 12 歲以上家庭與一般訪客。這不是教師備課培訓。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="這不是隨便問 AI" data-sec="A" id="s4">
+
+<h2>這不是「隨便問 AI」</h2>
+<span class="badge free">Free</span>
+<p class="lead"><strong>Source-grounded</strong>＝答案應來自你上傳的導賞稿／影片／網頁。</p>
+<ul class="bullets big">
+<li>答得出來 → 多半在來源裡（仍要點引用核對）</li>
+<li>答不出來 → 可能<strong>不在來源裡</strong>——這是設計，不是壞掉</li>
+<li>不要當成通用搜尋引擎</li>
+</ul>
+<div class="callout check"><div class="callout-h">記住</div><div>有引用 ≠ 一定對。下一頁起我們會示範怎麼抓錯。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="名稱演進" data-sec="A" id="s5">
+
+<h2>名稱演進（簡表）</h2>
+<table class="req-table">
+<tr><th>時間</th><th>名稱</th></tr>
+<tr><td>2023-05</td><td>Project Tailwind</td></tr>
+<tr><td>2023-07</td><td>NotebookLM</td></tr>
+<tr class="hl"><td><strong>2026-07-16</strong></td><td><strong>Gemini Notebook</strong>（正式改名）</td></tr>
+</table>
+<ul class="bullets">
+<li>舊連結多會自動轉向</li>
+<li>搜尋時建議同時用「Gemini Notebook」與「NotebookLM」</li>
+<li>入口：<a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a></li>
+</ul>
+<p class="note">來源：blog.google 改名公告、Workspace Updates（2026-07）</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="免費 vs 付費" data-sec="A" id="s6">
+
+<h2>免費 vs 付費（消費者）</h2>
+<span class="badge mixed">Mixed</span>
+<table class="req-table">
+<tr><th>方案</th><th>筆記本／用戶</th><th>來源／本</th></tr>
+<tr><td>Standard（免費用 Gmail）</td><td>100</td><td>50</td></tr>
+<tr><td>Google AI Plus</td><td>200</td><td>100</td></tr>
+<tr class="demo-row"><td>Google AI Pro（本示範帳）</td><td>500</td><td>300</td></tr>
+<tr><td>Google AI Ultra</td><td>500</td><td>500–600</td></tr>
+</table>
+<ul class="bullets">
+<li>用量改為 <strong>compute-based</strong>；約每 <strong>5 小時</strong>刷新，另有每週上限</li>
+<li>複雜提示、長對話、Video 較耗額度</li>
+</ul>
+<figure class="shot">
+<img src="screenshots/38-plans-or-pro-badge.png" alt="方案／Pro 相關畫面（示範帳）" loading="lazy">
+<figcaption>方案／Pro 相關畫面（示範帳）</figcaption>
+</figure>
+<p class="note">來源：support.google.com plans／usage limits（查證 2026-10-23）</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="本示範帳說明" data-sec="A" id="s7">
+
+<h2>本示範帳說明</h2>
+<span class="badge pro">Pro+</span>
+<p class="lead">Oscar 帳為 <strong>Google AI Pro</strong> → 畫面可能出現付費選項。</p>
+<ul class="bullets big">
+<li>投影片會標 <span class="badge paid">Paid</span> <span class="badge pro">Pro+</span> <span class="badge ultra">Ultra</span></li>
+<li>免費用戶跟做 <strong>Free／Mixed</strong> 即可，不必強求付費項</li>
+<li>「可能看不到？」＝多數是方案或地區門檻，不是你按錯</li>
+</ul>
+<div class="callout limit"><div class="callout-h">付費色帶頁</div><div>之後有付費專頁會加色帶，提醒免費用戶勿以為操作錯誤。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="澳門／香港存取注意" data-sec="A" id="s8">
+
+<h2>澳門／香港存取注意</h2>
+<span class="badge risk">風險</span>
+<div class="callout check"><div class="callout-h">必須說清楚</div><div>官方支援說明（<a href="https://support.google.com/gemininotebook/answer/16164461" target="_blank" rel="noopener">support.google.com/gemininotebook/answer/16164461</a>）所列支援地區中，
+<strong>澳門（Macau）與香港（Hong Kong）不在官方支援國家／地區名單</strong>。
+現場可能出現 <code>location=unsupported</code> 或無法正常使用。</div></div>
+<figure class="shot">
+<img src="screenshots/39-location-unsupported.png" alt="地區不受支援畫面（實測）" loading="lazy">
+<figcaption>地區不受支援畫面（實測） · 地區可能顯示 location=unsupported</figcaption>
+</figure>
+<ul class="bullets big">
+<li>工作坊若要演示，可能需要<strong>已支援地區的網路環境</strong>；這只是事實說明</li>
+<li><strong>本教程不指導</strong>任何規避法規或服務條款的做法</li>
+<li>打不開時：先確認帳號地區／網路；勿硬試註冊付費</li>
+<li>勿假設每位訪客回家都能登入</li>
+</ul>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="示範筆記本與材料" data-sec="A" id="s9">
+
+<h2>示範筆記本與材料</h2>
+<p class="scene"><span class="scene-tag">S1</span> 行前準備：出發前讀導賞稿</p>
+<p class="lead">筆記本名稱：<strong>MSC公眾・力與能量</strong></p>
+<ul class="bullets big">
+<li><code>01</code> 力與簡單機械（PDF）</li>
+<li><code>02</code> 能量轉換與可持續（PDF）</li>
+<li><code>03</code> 參觀學習重點（一頁 PDF）</li>
+<li>YouTube 來源（見 materials；用產品「來源連結」，勿盜下載）</li>
+<li>（選）<code>05</code> 實驗假資料 CSV——<strong>示例數據，非館方實測</strong></li>
+<li>探索單 <code>04</code> 紙本可發，不必上傳</li>
+</ul>
+<div class="callout info"><div class="callout-h">版權提醒</div><div>材料為工作坊原創示範導賞稿，非教育局課綱。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="建立 Notebook" data-sec="B" id="s10">
+
+<h2>建立 Notebook</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S1</span> 一主題一本——勿把旅遊攻略跟科學導賞混同一本</p>
+<ol class="steps">
+<li>開啟 <a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a></li>
+<li>新建筆記本，命名 <strong>MSC公眾・力與能量</strong></li>
+<li>確認來源面板是空的，準備上傳</li>
+</ol>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/01-home-notebooks.png" alt="首頁／筆記本列表" loading="lazy">
+<figcaption>首頁／筆記本列表</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/02-new-notebook-named.png" alt="已命名並開啟的筆記本" loading="lazy">
+<figcaption>已命名並開啟的筆記本</figcaption>
+</figure>
+</div>
+<p class="note">按鈕文案若改版，以當日介面為準；勿死記座標。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="上傳來源：PDF" data-sec="B" id="s11">
+
+<h2>上傳來源：PDF</h2>
+<span class="badge free">Free</span>
+<ol class="steps">
+<li>在來源區新增檔案</li>
+<li>上傳 01、02、03 三份 PDF</li>
+<li>確認來源面板出現三份文件</li>
+</ol>
+<figure class="shot">
+<img src="screenshots/03-sources-pdfs-uploaded.png" alt="來源區可見 PDF" loading="lazy">
+<figcaption>來源區可見 PDF</figcaption>
+</figure>
+<p class="hint">免費方案每本來源數有上限（Standard 約 50）；本示範遠低於上限。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="新增 YouTube／網站" data-sec="B" id="s12">
+
+<h2>新增 YouTube／網站</h2>
+<span class="badge free">Free</span>
+<ol class="steps">
+<li>用「網站／YouTube」類來源，貼上 URL（見 materials/youtube-source.txt）</li>
+<li>等待來源就緒</li>
+<li><strong>勿盜下載影片</strong>——用產品提供的來源連結方式即可</li>
+</ol>
+<figure class="shot">
+<img src="screenshots/04-source-youtube-added.png" alt="來源含 YouTube" loading="lazy">
+<figcaption>來源含 YouTube</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="（選）表格／CSV" data-sec="B" id="s13">
+
+<h2>（選）表格／CSV</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S1</span> 可問「哪一角較快」——但要講清楚是假資料</p>
+<ul class="bullets big">
+<li>上傳 <code>05-實驗假資料.csv</code> 或貼上表格</li>
+<li>之後可用 Chat 問數據（見 E05）</li>
+</ul>
+<div class="callout check"><div class="callout-h">強調</div><div>這是<strong>假資料示例</strong>，不是科學館官方實測。真正參觀以現場展項為準。</div></div>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>05-source-csv-or-table.png</code></div>
+<figcaption>CSV／表格來源</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="「發現」來源" data-sec="B" id="s14">
+
+<h2>「發現」來源（若介面有）</h2>
+<span class="badge free">Free</span>
+<ul class="bullets big">
+<li>研究文件寫：亦可「發現」新來源</li>
+<li>現場有則點給大家看；<strong>無則跳過</strong></li>
+<li>不臆造按鈕文案</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>06-discover-sources-if-any.png</code></div>
+<figcaption>發現來源 UI · skip-if-missing</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Chat 三欄心智模型" data-sec="C" id="s15">
+
+<h2>Chat 三欄心智模型</h2>
+<span class="badge free">Free</span>
+<p class="lead">常見版面：<strong>來源 ｜ 對話 ｜ Studio</strong></p>
+<figure class="shot">
+<img src="screenshots/07-chat-three-pane.png" alt="來源｜Chat｜Studio（或當日等效）" loading="lazy">
+<figcaption>來源｜Chat｜Studio（或當日等效）</figcaption>
+</figure>
+<p class="note">以當日版面為準；名稱或欄位可能改版。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="問一個可核對的問題" data-sec="C" id="s16">
+
+<h2>問一個可核對的問題</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S1</span> 對象＝來科學館的家庭</p>
+<div class="prompt-box" id="box-pmt01">
+<div class="prompt-head"><span>提示碼 <strong>pmt01</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt01">複製</button></div>
+<pre class="prompt-text" id="txt-pmt01">你是科學館導賞助手。只根據筆記本來源，用 12 歲以上家庭聽得懂的話，列出今天參觀「力與簡單機械」必懂的 5 個概念；每一點附引用。少公式、多生活例子。</pre>
+</div>
+<figure class="shot">
+<img src="screenshots/08-chat-pmt01-answer.png" alt="使用 pmt01 後的回覆" loading="lazy">
+<figcaption>使用 pmt01 後的回覆</figcaption>
+</figure>
+<p class="hint">下一頁：每條 citation 都點一次。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="點引用回原文" data-sec="C" id="s17">
+
+<h2>點引用回原文</h2>
+<span class="badge free">Free</span>
+<ol class="steps">
+<li>看答案旁的引用編號</li>
+<li><strong>點一下</strong>，對照來源片段／PDF 原段</li>
+<li>可請觀眾在探索單「來源核對欄」打勾</li>
+</ol>
+<figure class="shot">
+<img src="screenshots/09-citation-click-source.png" alt="點擊行內引用後原文被標示" loading="lazy">
+<figcaption>點擊行內引用後原文被標示</figcaption>
+</figure>
+<div class="callout info"><div class="callout-h">示範習慣</div><div>每條 citation 都點一次——不是順便，是教學重點。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="有引用仍可能錯" data-sec="C" id="s18">
+
+<h2>習慣：有引用仍可能錯</h2>
+<span class="badge risk">風險</span>
+<p class="lead">Grounding 降風險 ≠ 保證正確。以下為本筆記本實測錯誤（2026-10-23）。</p>
+<table class="req-table">
+<tr><th>#</th><th>AI 說法</th><th>問題</th><th>正確提醒</th></tr>
+<tr><td>E01</td><td>「找對支點，力氣瞬間變大」並列<strong>鑷子</strong>與蹺蹺板、開瓶器</td><td>鑷子屬第三類槓桿，通常<strong>更費力</strong>換精細控制</td><td>第三類≠省力；省力常見一／二類（視支點）</td></tr>
+<tr><td>E02</td><td>斜面例子含「溜滑梯」</td><td>溜滑梯是重力向下滑，不是用更長路徑<strong>抬重</strong>省力</td><td>改舉無障礙斜坡、搬重物走斜坡</td></tr>
+<tr><td>E03</td><td>輪軸：大輪施小力並「減少摩擦力」（腳踏車／汽車輪胎）</td><td>把滾動減阻與輪軸力矩機械混在一起</td><td>分開：輪軸（方向盤、絞盤）vs 滾動減阻</td></tr>
+</table>
+<div class="callout check"><div class="callout-h">原則</div><div>有引用仍可能錯 → 點回原文 + 用物理常識覆核。家庭也可玩「抓錯」。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Save to Note" data-sec="C" id="s19">
+
+<h2>Save to Note</h2>
+<span class="badge free">Free</span>
+<ul class="bullets big">
+<li>Chat 產出要<strong>存成筆記</strong>，否則對話可能不保留</li>
+<li>介面名稱以當日為準（Save to note／存成筆記）</li>
+</ul>
+<figure class="shot">
+<img src="screenshots/10-save-to-note.png" alt="存成筆記後可見" loading="lazy">
+<figcaption>存成筆記後可見</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Guided Learning" data-sec="C" id="s20">
+
+<h2>Guided Learning</h2>
+<span class="badge free">Free</span>
+<p class="lead">偏蘇格拉底：<strong>引導你自己想</strong>，不是直接給答案。</p>
+<div class="prompt-box" id="box-pmt02">
+<div class="prompt-head"><span>提示碼 <strong>pmt02</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt02">複製</button></div>
+<pre class="prompt-text" id="txt-pmt02">不要直接給答案。用引導式問題，幫我自己想清楚：槓桿的支點、施力、抗力分別是什麼？一次只問一個問題。</pre>
+</div>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>11-guided-learning-if-any.png</code></div>
+<figcaption>Guided Learning UI · skip-if-missing；有則示範</figcaption>
+</figure>
+<p class="hint">現場沒有此入口就跳過，改用一般 Chat 加上「不要直接給答案」提示。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Studio 總覽" data-sec="D" id="s21">
+
+<h2>Studio 總覽</h2>
+<span class="badge mixed">Mixed</span>
+<p class="lead">Audio／Video／Mind Map／Reports／Cards／Quiz／Infographic／Slide…</p>
+<figure class="shot">
+<img src="screenshots/12-studio-panel-overview.png" alt="Studio 面板總覽" loading="lazy">
+<figcaption>Studio 面板總覽</figcaption>
+</figure>
+<p class="note">名稱以當日 Studio 面板為準；額度分級見各功能頁。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Mind Map" data-sec="D" id="s22">
+
+<h2>Mind Map</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S1</span> 點節點可回 Chat 追問迷思；可下載</p>
+<ol class="steps">
+<li>在 Studio 產心智圖</li>
+<li>看力／能量／可持續等分支</li>
+<li>點一節點追問（若行為存在）</li>
+</ol>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/13-mind-map.png" alt="Mind Map 成品" loading="lazy">
+<figcaption>Mind Map 成品</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/14-mind-map-node-to-chat.png" alt="點節點觸發 Chat" loading="lazy">
+<figcaption>點節點觸發 Chat</figcaption>
+</figure>
+</div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Audio Overview 是什麼" data-sec="D" id="s23">
+
+<h2>Audio Overview 是什麼</h2>
+<span class="badge mixed">Mixed</span>
+<p class="scene"><span class="scene-tag">S2／S4</span> 館內複習／通勤聽導覽</p>
+<ul class="bullets big">
+<li>AI 主持人<strong>討論式摘要</strong></li>
+<li>格式：Deep Dive／The Brief／The Critique／The Debate</li>
+<li>語言含 <strong>Chinese (Traditional)</strong>（80+ 語言）</li>
+<li>長度：Shorter／Default／Longer（文件標 Longer＝English Only）</li>
+</ul>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Audio：寫 audience＋focus" data-sec="D" id="s24">
+
+<h2>Audio：寫 audience＋focus</h2>
+<span class="badge mixed">Mixed</span>
+<div class="prompt-box" id="box-pmt03">
+<div class="prompt-head"><span>提示碼 <strong>pmt03</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt03">複製</button></div>
+<pre class="prompt-text" id="txt-pmt03">Audience：來澳門科學館的家庭訪客（約 12 歲以上）。Focus：省力原理與動能／勢能轉換；少公式；語氣像友善導賞員。格式建議 The Brief；語言 Traditional Chinese。</pre>
+</div>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/15-audio-overview-settings.png" alt="Audio 設定：格式／語言／提示" loading="lazy">
+<figcaption>Audio 設定：格式／語言／提示</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/16-audio-overview-playing.png" alt="Audio 已生成可播放" loading="lazy">
+<figcaption>Audio 已生成可播放</figcaption>
+</figure>
+</div>
+<p class="hint">現場可只播 20–30 秒示範。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Audio Interactive" data-sec="D" id="s25">
+
+<div class="paid-band">付費／語言門檻說明</div>
+<h2>Audio Interactive mode</h2>
+<span class="badge free">Free</span><span class="badge en">English only</span>
+<div class="callout limit"><div class="callout-h">僅 English</div><div>用語音加入討論——官方文件標<strong>僅 English</strong>。繁中公眾班多數現場<strong>跳過</strong>。</div></div>
+<ul class="bullets big">
+<li>功能本身可見，但語言限制硬</li>
+<li>不要告訴觀眾「用粵語／普通話講進去就行」——目前文件不支援</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>17-audio-interactive-english.png</code></div>
+<figcaption>Interactive 入口 · skip-if-missing；標 English</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Video Overview" data-sec="D" id="s26">
+
+<h2>Video Overview</h2>
+<span class="badge mixed">Mixed</span>
+<p class="scene"><span class="scene-tag">S5</span> 做一頁／一支短片帶回家</p>
+<ul class="bullets big">
+<li>格式：Cinematic／Explainer／Short（約 60 秒）</li>
+<li>本班演示：<strong>Explainer</strong>（或 Short）</li>
+<li>可寫 steering prompt</li>
+<li><strong>生成可能很久</strong>（官方：可能 &gt;30 分鐘）——現場可先啟動或播預產</li>
+</ul>
+<div class="prompt-box" id="box-pmt04">
+<div class="prompt-head"><span>提示碼 <strong>pmt04</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt04">複製</button></div>
+<pre class="prompt-text" id="txt-pmt04">Audience：家庭訪客。Focus：用滾珠／斜面故事講能量轉換；畫面節奏清楚；語言與帳戶輸出設定一致（優先繁中若可用）。避免誇大「一定省力多少倍」。</pre>
+</div>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/18-video-overview-settings.png" alt="Video 設定（Explainer／Short 等）" loading="lazy">
+<figcaption>Video 設定（Explainer／Short 等）</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/19-video-overview-result.png" alt="Video Overview 成品：Explainer「澳門科學館：能量探索之旅」7:01" loading="lazy">
+<figcaption>Video Overview 成品 · Explainer「澳門科學館：能量探索之旅」· 約 7:01（當日實測）</figcaption>
+</figure>
+</div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Cinematic／Producer 門檻" data-sec="D" id="s27">
+
+<div class="paid-band">Paid／Pro+／Ultra</div>
+<h2>Cinematic／Producer 門檻</h2>
+<span class="badge paid">Paid</span><span class="badge pro">Pro+</span><span class="badge ultra">Ultra</span>
+<table class="req-table">
+<tr><th>項目</th><th>門檻（文件）</th></tr>
+<tr><td>Cinematic Video</td><td><strong>18+</strong>、多為 <strong>Pro／Ultra</strong>、<strong>僅 English</strong></td></tr>
+<tr><td>Producer notes（先審再渲染）</td><td><strong>僅 Google AI Ultra</strong></td></tr>
+</table>
+<div class="callout limit"><div class="callout-h">本示範帳</div><div>Oscar 為 Pro → 可能<strong>沒有</strong> Producer notes。本班演示 Explainer，不強求 Cinematic。</div></div>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>20-cinematic-or-gate.png</code></div>
+<figcaption>Cinematic 選項或門檻 · skip-if-missing</figcaption>
+</figure>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>21-producer-notes-ultra.png</code></div>
+<figcaption>Producer notes · Ultra only；Pro 無則 skip</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="同一本多份 Studio" data-sec="D" id="s28">
+
+<h2>同一本多份 Studio</h2>
+<span class="badge free">Free</span>
+<p class="lead">同一筆記本可存多份 Audio／Video／Mind Map／Report…</p>
+<ul class="bullets">
+<li>例：第一份 Audio＝「力與機械」、第二份＝「只講斜面」</li>
+<li>或繁／簡程度不同</li>
+</ul>
+<div class="prompt-box" id="box-pmt05">
+<div class="prompt-head"><span>提示碼 <strong>pmt05</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt05">複製</button></div>
+<pre class="prompt-text" id="txt-pmt05">同上 audience，但 Focus 改為「只關斜面與滾落，不講槓桿」；長度 Shorter。</pre>
+</div>
+<figure class="shot">
+<img src="screenshots/22-second-audio-same-notebook.png" alt="同一本兩份 Audio：第二份「斜面省力與位能轉換」1:03 播放中" loading="lazy">
+<figcaption>同一本兩份 Audio · 第二份「斜面省力與位能轉換」· 約 1:03 播放中</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Reports／Study guide" data-sec="D" id="s29">
+
+<h2>Reports／Study guide</h2>
+<span class="badge mixed">Mixed</span>
+<p class="scene"><span class="scene-tag">S5</span> 參觀後 10 分鐘複習包</p>
+<ul class="bullets">
+<li>學習指南、簡報文件、FAQ、自訂報告</li>
+<li>2026-09：Interactive learning overviews（摘要＋infographic／quiz／flashcards 彙整）</li>
+</ul>
+<div class="prompt-box" id="box-pmt06">
+<div class="prompt-head"><span>提示碼 <strong>pmt06</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt06">複製</button></div>
+<pre class="prompt-text" id="txt-pmt06">做一份「參觀後 10 分鐘複習」學習指南：三個必記句子、兩個常見誤解、三題自問自答；對象＝家庭訪客，非考試卷。</pre>
+</div>
+<figure class="shot">
+<img src="screenshots/23-report-or-study-guide.png" alt="Report／Study guide 成品" loading="lazy">
+<figcaption>Report／Study guide 成品</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Infographic ＋ Slide Deck" data-sec="D" id="s30">
+
+<h2>Infographic ＋ Slide Deck</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S5</span> 一次一個主題，勿塞太滿</p>
+<div class="prompt-box" id="box-pmt07">
+<div class="prompt-head"><span>提示碼 <strong>pmt07</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt07">複製</button></div>
+<pre class="prompt-text" id="txt-pmt07">一張圖說清「三種簡單機械＋各一個科學館情境例子」；大字、少字、適合手機分享。</pre>
+</div>
+<div class="prompt-box" id="box-pmt08">
+<div class="prompt-head"><span>提示碼 <strong>pmt08</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt08">複製</button></div>
+<pre class="prompt-text" id="txt-pmt08">Presenter 風格、約 6 頁：封面、力、簡單機械、能量轉換、可持續、回家可以做的一件事；對象＝公眾班投影。</pre>
+</div>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/24-infographic.png" alt="Infographic（可下載 PNG）" loading="lazy">
+<figcaption>Infographic（可下載 PNG）</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/25-slide-deck.png" alt="Slide Deck（Detailed／Presenter；可下載 PDF／PPTX）" loading="lazy">
+<figcaption>Slide Deck（Detailed／Presenter；可下載 PDF／PPTX）</figcaption>
+</figure>
+</div>
+<p class="hint">每日次數依方案分級；用盡見 Generate later。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Flashcards vs Quiz" data-sec="E" id="s31">
+
+<h2>Flashcards vs Quiz</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S3</span> 家庭小測：爸媽／孩子輪流</p>
+<table class="req-table">
+<tr><th></th><th>Flashcards</th><th>Quiz</th></tr>
+<tr><td>用途</td><td>複習（翻卡記概念）</td><td>提取練習（先答再揭曉）</td></tr>
+<tr><td>之後</td><td colspan="2">答完用 Chat 問弱項、點回來源</td></tr>
+</table>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Flashcards" data-sec="E" id="s32">
+
+<h2>Flashcards</h2>
+<span class="badge free">Free</span>
+<ul class="bullets">
+<li>難度 Easy／Medium／Hard</li>
+<li>Explain；可 CSV 下載</li>
+</ul>
+<div class="prompt-box" id="box-pmt09">
+<div class="prompt-head"><span>提示碼 <strong>pmt09</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt09">複製</button></div>
+<pre class="prompt-text" id="txt-pmt09">難度 Medium；範圍＝力、支點、動能、勢能、可再生能源；正面詞彙、背面一句人話解釋。</pre>
+</div>
+<figure class="shot">
+<img src="screenshots/26-flashcards.png" alt="Flashcards 介面" loading="lazy">
+<figcaption>Flashcards 介面</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Quizzes" data-sec="E" id="s33">
+
+<h2>Quizzes</h2>
+<span class="badge free">Free</span>
+<ul class="bullets big">
+<li>Hint／Review／Retake</li>
+<li>更多題型（短答、複選、填空）滾動推出</li>
+<li>本示範曾產：題庫名「能量與機械測驗題庫」· <strong>12／12 Medium · 繁中</strong>（見下圖）</li>
+</ul>
+<div class="prompt-box" id="box-pmt10">
+<div class="prompt-head"><span>提示碼 <strong>pmt10</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt10">複製</button></div>
+<pre class="prompt-text" id="txt-pmt10">難度 Medium；出 5 題；偏理解不偏背定義；題幹避免超出來源內容。</pre>
+</div>
+<figure class="shot">
+<img src="screenshots/27-quiz.png" alt="Quiz 複習畫面：能量與機械測驗題庫 12/12" loading="lazy">
+<figcaption>Quiz 複習結果 · 「能量與機械測驗題庫」· 12／12 Medium · 繁中</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="家庭小測怎麼玩" data-sec="E" id="s34">
+
+<h2>家庭小測怎麼玩</h2>
+<p class="scene"><span class="scene-tag">S3</span> 大字投影 3 題</p>
+<ol class="steps">
+<li>投影 3 題，先讓觀眾／家人<strong>口頭作答</strong></li>
+<li>再揭曉；錯題按 Explain</li>
+<li>點回來源＋探索單核對欄</li>
+</ol>
+<div class="callout info"><div class="callout-h">抓錯遊戲</div><div>也可投影 AI 怪異解讀（見 E01–E03），請大家抓錯——同樣練核對習慣。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="（選）CSV 問數據" data-sec="E" id="s35">
+
+<h2>（選）CSV 問數據</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S1</span> 示例數據</p>
+<p class="lead">問：「哪一個角度平均滾落較快？」</p>
+<div class="callout check"><div class="callout-h">再次提醒</div><div>數據是示例；真正參觀以現場展項為準。</div></div>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>28-chat-csv-question.png</code></div>
+<figcaption>針對 CSV 的 Chat</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="分享基本款" data-sec="F" id="s36">
+
+<h2>分享基本款</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S6</span> 分享給親友前先看帳號類型</p>
+<ul class="bullets big">
+<li>私人／指定人</li>
+<li>Consumer（一般 Gmail）可有「Anyone with link」</li>
+<li><strong>Workspace Education／Enterprise</strong> 預設多半<strong>不能公開</strong></li>
+<li>公眾 Gmail 與學校帳不同——現場先試權限</li>
+</ul>
+<figure class="shot">
+<img src="screenshots/29-share-dialog.png" alt="分享對話框（實際可見選項）" loading="lazy">
+<figcaption>分享對話框（實際可見選項）</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="公眾帳隱私守則" data-sec="F" id="s37">
+
+<h2>公眾帳隱私守則</h2>
+<span class="badge risk">風險</span>
+<p class="scene"><span class="scene-tag">S6</span> 公開連結＝當成公開網頁</p>
+<ul class="bullets big">
+<li>分享者可能看到來源</li>
+<li>勿放身分證／學生個資／未授權教材</li>
+<li>寧願<strong>下載檔案</strong>再傳親友</li>
+<li>教育帳請走機構允許的發佈方式</li>
+</ul>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Advanced sharing" data-sec="F" id="s38">
+
+<div class="paid-band">Paid／Education Pro</div>
+<h2>Advanced sharing</h2>
+<span class="badge paid">Paid</span>
+<ul class="bullets big">
+<li>Chat-only（不可見來源）</li>
+<li>Analytics（共用分析）</li>
+<li>點到即可；免費用戶可能沒有</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>30-advanced-sharing-if-any.png</code></div>
+<figcaption>進階分享 · Paid；無則 skip</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="與 Gemini App 同步" data-sec="F" id="s39">
+
+<h2>與 Gemini App 同步</h2>
+<span class="badge free">Free</span>
+<p class="scene"><span class="scene-tag">S4</span> 通勤可用手機端（若地區／帳號允許）</p>
+<ul class="bullets">
+<li>在 Gemini App 內建立／存取，與獨立站同步（改名公告）</li>
+<li>仍受地區可用性影響（見澳門存取頁）</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>31-gemini-app-sync-hint.png</code></div>
+<figcaption>App 內可見筆記本或官方說明</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="下載結構化輸出" data-sec="F" id="s40">
+
+<h2>下載結構化輸出</h2>
+<span class="badge mixed">Mixed</span>
+<p class="scene"><span class="scene-tag">S5</span> 帶回家：檔案比公開連結更穩妥</p>
+<ul class="bullets big">
+<li>常見：PDF／docx／xlsx／pptx／csv／json／圖 png‧svg</li>
+<li>能力隨 cloud computer／方案</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>32-download-artifact.png</code></div>
+<figcaption>任一下載畫面 · 可用 Infographic／Slide／Audio 下載示意</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Cloud computer／跑碼" data-sec="F" id="s41">
+
+<div class="paid-band">Paid 優先（滾動至 Pro）</div>
+<h2>Cloud computer／跑碼</h2>
+<span class="badge paid">Paid</span>
+<ul class="bullets big">
+<li>筆記本內寫碼分析——文件寫 Paid 優先，再滾到 Pro</li>
+<li>有則可用 05 CSV 示意；無則標「付費／滾動」跳過</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>33-cloud-computer-if-any.png</code></div>
+<figcaption>Cloud computer UI · skip-if-missing</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Chat 找來源（Web research）" data-sec="F" id="s42">
+
+<div class="paid-band">Mixed／滾動（文件寫 Ultra／Expanded 等）</div>
+<h2>Chat 找來源（Web research）</h2>
+<span class="badge mixed">Mixed</span><span class="badge rolling">滾動中</span>
+<ul class="bullets big">
+<li>從模糊想法用 Google Search 找來源再加入</li>
+<li><strong>使用者仍控管來源</strong>——不是自動亂塞</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>34-web-research-if-any.png</code></div>
+<figcaption>導引找來源 · skip-if-missing</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="Mobile：語音／錄音／拍照" data-sec="F" id="s43">
+
+<h2>Mobile：語音／錄音／拍照</h2>
+<span class="badge rolling">滾動中</span>
+<ul class="bullets big">
+<li>即時語音對話筆記本（近 100 語言）——2026-09 滾動</li>
+<li>錄音／拍照作來源——滾動中</li>
+<li>有裝置則示意；無則跳過</li>
+<li>仍受地區可用性影響</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>35-mobile-voice-or-capture.png</code></div>
+<figcaption>Mobile 語音或拍照 · 滾動；無裝置則 skip</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="輸出語言" data-sec="G" id="s44">
+
+<h2>輸出語言</h2>
+<span class="badge free">Free</span>
+<ul class="bullets big">
+<li>預設跟 Google 帳戶語言</li>
+<li>可改 Output Language</li>
+<li>Audio 語言表含<strong>繁中</strong></li>
+</ul>
+<figure class="shot">
+<img src="screenshots/36-output-language.png" alt="Output Language 覆寫為中文（繁體）" loading="lazy">
+<figcaption>Output Language · 覆寫為<strong>中文（繁體）</strong>（當日實測）</figcaption>
+</figure>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="額度與 Generate later" data-sec="G" id="s45">
+
+<h2>額度與 Generate later</h2>
+<span class="badge free">Free</span>
+<ul class="bullets big">
+<li>compute-based；複雜提示＋Video 耗額</li>
+<li>約每 5 小時刷新；另有每週上限</li>
+<li>用盡可在 web 用 <strong>Generate later</strong> 排程</li>
+<li>接近上限時介面可能出現用量橫幅（本示範帳曾見過）</li>
+</ul>
+<figure class="shot placeholder">
+<div class="ph">截圖待補<br><code>37-usage-or-generate-later.png</code></div>
+<figcaption>用量提示或 Generate later · 勿刻意耗盡只為截圖；有則補</figcaption>
+</figure>
+<div class="callout limit"><div class="callout-h">現場策略</div><div>Video 先開生成再講其他；額度緊時優先 Chat＋Mind Map＋Quiz。</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="AI 會錯／有瑕疵" data-sec="G" id="s46">
+
+<h2>AI 會錯／有瑕疵</h2>
+<span class="badge risk">風險</span>
+<ul class="bullets big">
+<li>Audio／Video 官方明文：可能不準、有 glitch</li>
+<li>安全過濾可能擋敏感詞（即使在歷史文本）</li>
+<li>答案不在來源就拒答／空答——正常</li>
+<li>實測錯誤見「有引用仍可能錯」頁（鑷子、溜滑梯、輪軸）</li>
+</ul>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="引用核對習慣（總結）" data-sec="G" id="s47">
+
+<h2>引用核對習慣（總結）</h2>
+<p class="scene"><span class="scene-tag">S3</span> 家庭也可玩抓錯</p>
+<ol class="big-list">
+<li>看答案</li>
+<li>點 citation</li>
+<li>對照探索單核對欄／物理常識</li>
+</ol>
+<div class="callout check"><div class="callout-h">口號</div><div>來源為王、引用必點、分享先想隱私</div></div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="未滿 18 歲與浮水印" data-sec="G" id="s48">
+
+<h2>未滿 18 歲與浮水印</h2>
+<span class="badge risk">風險</span>
+<ul class="bullets big">
+<li>未滿 18 歲：更嚴內容政策</li>
+<li>Cinematic 等功能 <strong>18+</strong></li>
+<li>部分地區可見浮水印／SynthID</li>
+</ul>
+<p class="note">公眾班若有未成年人，優先 Explainer／Audio／Quiz，勿強推 Cinematic。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="版權" data-sec="G" id="s49">
+
+<h2>版權</h2>
+<span class="badge risk">風險</span>
+<ul class="bullets big">
+<li>只上傳你有權使用的材料</li>
+<li>本班用原創導賞稿</li>
+<li>YouTube：用產品「來源連結」，勿盜傳檔案</li>
+</ul>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="提示碼一覽 pmt01–pmt10" data-sec="H" id="s50">
+
+<h2>提示碼一覽（pmt01–pmt10）</h2>
+<p class="lead">全部為<strong>公眾／家庭</strong>語氣。點「複製」即可貼上。各功能頁已重複對應碼。</p>
+<div class="prompt-box" id="box-pmt01">
+<div class="prompt-head"><span>提示碼 <strong>pmt01</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt01">複製</button></div>
+<pre class="prompt-text" id="txt-pmt01">你是科學館導賞助手。只根據筆記本來源，用 12 歲以上家庭聽得懂的話，列出今天參觀「力與簡單機械」必懂的 5 個概念；每一點附引用。少公式、多生活例子。</pre>
+</div>
+<div class="prompt-box" id="box-pmt02">
+<div class="prompt-head"><span>提示碼 <strong>pmt02</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt02">複製</button></div>
+<pre class="prompt-text" id="txt-pmt02">不要直接給答案。用引導式問題，幫我自己想清楚：槓桿的支點、施力、抗力分別是什麼？一次只問一個問題。</pre>
+</div>
+<div class="prompt-box" id="box-pmt03">
+<div class="prompt-head"><span>提示碼 <strong>pmt03</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt03">複製</button></div>
+<pre class="prompt-text" id="txt-pmt03">Audience：來澳門科學館的家庭訪客（約 12 歲以上）。Focus：省力原理與動能／勢能轉換；少公式；語氣像友善導賞員。格式建議 The Brief；語言 Traditional Chinese。</pre>
+</div>
+<div class="prompt-box" id="box-pmt04">
+<div class="prompt-head"><span>提示碼 <strong>pmt04</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt04">複製</button></div>
+<pre class="prompt-text" id="txt-pmt04">Audience：家庭訪客。Focus：用滾珠／斜面故事講能量轉換；畫面節奏清楚；語言與帳戶輸出設定一致（優先繁中若可用）。避免誇大「一定省力多少倍」。</pre>
+</div>
+<div class="prompt-box" id="box-pmt05">
+<div class="prompt-head"><span>提示碼 <strong>pmt05</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt05">複製</button></div>
+<pre class="prompt-text" id="txt-pmt05">同上 audience，但 Focus 改為「只關斜面與滾落，不講槓桿」；長度 Shorter。</pre>
+</div>
+<div class="prompt-box" id="box-pmt06">
+<div class="prompt-head"><span>提示碼 <strong>pmt06</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt06">複製</button></div>
+<pre class="prompt-text" id="txt-pmt06">做一份「參觀後 10 分鐘複習」學習指南：三個必記句子、兩個常見誤解、三題自問自答；對象＝家庭訪客，非考試卷。</pre>
+</div>
+<div class="prompt-box" id="box-pmt07">
+<div class="prompt-head"><span>提示碼 <strong>pmt07</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt07">複製</button></div>
+<pre class="prompt-text" id="txt-pmt07">一張圖說清「三種簡單機械＋各一個科學館情境例子」；大字、少字、適合手機分享。</pre>
+</div>
+<div class="prompt-box" id="box-pmt08">
+<div class="prompt-head"><span>提示碼 <strong>pmt08</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt08">複製</button></div>
+<pre class="prompt-text" id="txt-pmt08">Presenter 風格、約 6 頁：封面、力、簡單機械、能量轉換、可持續、回家可以做的一件事；對象＝公眾班投影。</pre>
+</div>
+<div class="prompt-box" id="box-pmt09">
+<div class="prompt-head"><span>提示碼 <strong>pmt09</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt09">複製</button></div>
+<pre class="prompt-text" id="txt-pmt09">難度 Medium；範圍＝力、支點、動能、勢能、可再生能源；正面詞彙、背面一句人話解釋。</pre>
+</div>
+<div class="prompt-box" id="box-pmt10">
+<div class="prompt-head"><span>提示碼 <strong>pmt10</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt10">複製</button></div>
+<pre class="prompt-text" id="txt-pmt10">難度 Medium；出 5 題；偏理解不偏背定義；題幹避免超出來源內容。</pre>
+</div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="場景複習卡" data-sec="H" id="s51">
+
+<h2>場景複習卡</h2>
+<table class="req-table">
+<tr><th>碼</th><th>場景</th><th>主要功能</th></tr>
+<tr><td>S1</td><td>行前準備</td><td>來源、Chat＋引用、Mind Map</td></tr>
+<tr><td>S2</td><td>館內／回家複習</td><td>Audio Overview（繁中、Brief）</td></tr>
+<tr><td>S3</td><td>家庭小測</td><td>Quizzes、Flashcards</td></tr>
+<tr><td>S4</td><td>通勤複習</td><td>Audio；Mobile 語音（滾動）</td></tr>
+<tr><td>S5</td><td>做一頁帶回家</td><td>Infographic、Slide、Report、下載</td></tr>
+<tr><td>S6</td><td>分享給親友</td><td>分享＋隱私</td></tr>
+</table>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="15 分鐘現場快演示" data-sec="H" id="s52">
+
+<h2>15 分鐘現場快演示</h2>
+<table class="req-table">
+<tr><th>時間</th><th>做什麼</th></tr>
+<tr><td>0:00–1:00</td><td>打開筆記本，指來源區：「只根據我們放進去的回答」</td></tr>
+<tr><td>1:00–3:30</td><td>Chat＋點引用（槓桿／支點）</td></tr>
+<tr><td>3:30–5:30</td><td>再問勢能／動能轉換</td></tr>
+<tr><td>5:30–8:30</td><td>Audio Overview（家庭、Brief、繁中）播 20–30 秒</td></tr>
+<tr><td>8:30–11:00</td><td>Mind Map 或 Report 擇一</td></tr>
+<tr><td>11:00–13:30</td><td>Flashcards 或 Quiz 出 3 題</td></tr>
+<tr><td>13:30–15:00</td><td>（選）CSV＋收束：下載／隱私</td></tr>
+</table>
+<p class="note">細節見 <code>demo-plan.md</code>。事前已建好筆記本與來源。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="約 26 項功能地圖" data-sec="H" id="s53">
+
+<h2>約 26 項功能地圖</h2>
+<p class="hint">現場以介面為準。徽章：Free／Mixed／Paid／滾動。</p>
+<table class="req-table compact">
+<tr><th>#</th><th>功能</th><th>標記</th></tr>
+<tr><td>1</td><td>建立 Notebook</td><td>Free</td></tr>
+<tr><td>2</td><td>上傳／新增來源</td><td>Free</td></tr>
+<tr><td>3</td><td>來源式對話＋引用</td><td>Free</td></tr>
+<tr><td>4</td><td>Audio Overview</td><td>Mixed</td></tr>
+<tr><td>5</td><td>Audio Interactive</td><td>Free※English</td></tr>
+<tr><td>6</td><td>Video Overview</td><td>Mixed；Cinematic Paid</td></tr>
+<tr><td>7</td><td>Producer notes</td><td>Ultra</td></tr>
+<tr><td>8</td><td>Mind Map</td><td>Free</td></tr>
+<tr><td>9</td><td>Reports／Study guides</td><td>Mixed</td></tr>
+<tr><td>10–11</td><td>Flashcards／Quizzes</td><td>Free※額度</td></tr>
+<tr><td>12–13</td><td>Infographic／Slide Deck</td><td>Free※額度</td></tr>
+<tr><td>14</td><td>多份同類型 Studio</td><td>Free</td></tr>
+<tr><td>15–16</td><td>分享／進階分享</td><td>Free／Paid</td></tr>
+<tr><td>17</td><td>Gemini App 同步</td><td>Free</td></tr>
+<tr><td>18–20</td><td>Cloud computer／下載／Web research</td><td>Paid／Mixed／滾動</td></tr>
+<tr><td>21–22</td><td>Mobile 語音／錄音拍照</td><td>滾動</td></tr>
+<tr><td>23–26</td><td>Guided Learning／Save to Note／Generate later／輸出語言</td><td>Free</td></tr>
+</table>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="常見問題" data-sec="H" id="s54">
+
+<h2>常見問題</h2>
+<table class="req-table">
+<tr><th>問題</th><th>去哪一頁</th></tr>
+<tr><td>打不開／location=unsupported？</td><td>澳門／香港存取注意（A07）</td></tr>
+<tr><td>額度沒了？</td><td>Generate later（G02）</td></tr>
+<tr><td>Education 不能公開連結？</td><td>分享基本款（F01）＋隱私（F02）</td></tr>
+<tr><td>繁中 Interactive Audio？</td><td>不行——僅 English（D05）</td></tr>
+<tr><td>Cinematic 做不出來？</td><td>18+／Pro+／Ultra／English（D07）</td></tr>
+<tr><td>AI 講錯鑷子／斜面？</td><td>有引用仍可能錯（C04）</td></tr>
+</table>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="延伸自學連結" data-sec="H" id="s55">
+
+<h2>延伸自學連結</h2>
+<ul class="bullets big links">
+<li><a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a> — 產品入口</li>
+<li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank" rel="noopener">blog.google 改名公告</a></li>
+<li><a href="https://support.google.com/gemininotebook/" target="_blank" rel="noopener">support.google.com/gemininotebook</a></li>
+<li><a href="https://support.google.com/gemininotebook/answer/16164461" target="_blank" rel="noopener">Learn about／支援地區</a></li>
+<li><a href="https://edu.google.com/intl/ALL_us/ai-notebooklm/" target="_blank" rel="noopener">edu.google.com AI Notebook</a></li>
+</ul>
+<p class="note">僅列研究已收錄 URL。額度與按鈕以官方當日為準。</p>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+<section class="slide" data-title="結尾" data-sec="H" id="s56">
+
+<div class="cover">
+<div class="cover-badge">記住三句</div>
+<h1>來源為王<br>引用必點<br>分享先想隱私</h1>
+<p class="cover-sub">正式名 <strong>Gemini Notebook</strong>（原 NotebookLM）· <a href="https://notebook.google/" target="_blank" rel="noopener">notebook.google</a><br>
+示範筆記本：MSC公眾・力與能量<br>
+查證：2026-10-23 Asia/Macau<br>
+澳門／香港不在官方支援地區名單——現場以實測為準</p>
+<p class="credit">澳門科學館 Oscar 製作 · Preview（尚未部署）</p>
+<p class="hint">額度／地區／按鈕以官方當日介面為準</p>
+</div>
+
+<p class="credit-line">澳門科學館 Oscar 製作 · Gemini Notebook 公眾班 · 2026-10-23</p>
+</section>
+  </div>
+  <nav class="nav" aria-label="翻頁">
+    <button type="button" id="prev" disabled>← 上一頁</button>
+    <button type="button" class="toc-btn" id="toc-open-2" onclick="document.getElementById('toc-open').click()">目錄</button>
+    <button type="button" id="next">下一頁 →</button>
+  </nav>
+</div>
+<div class="toc-drawer" id="toc-drawer" aria-hidden="true">
+  <div class="toc-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <h3>目錄</h3>
+      <button type="button" class="btn-icon" id="toc-close" style="background:#0d2f44" aria-label="關閉">✕</button>
+    </div>
+    <ol id="drawer-list"></ol>
+  </div>
+</div>
+<script>
+
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;let idx=0;
+  const bar=document.getElementById('progress'),counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev'),nextBtn=document.getElementById('next');
+  const tocList=document.getElementById('toc-list'),drawer=document.getElementById('toc-drawer'),drawerList=document.getElementById('drawer-list');
+  const titles=slides.map((s,i)=>s.dataset.title||('投影片 '+(i+1)));
+  function buildToc(el){if(!el)return;el.innerHTML='';titles.forEach((t,i)=>{const li=document.createElement('li');const a=document.createElement('a');a.textContent=(i+1)+'. '+t;a.href='#'+(i+1);a.addEventListener('click',ev=>{ev.preventDefault();go(i);closeToc();});li.appendChild(a);el.appendChild(li);});}
+  buildToc(tocList);buildToc(drawerList);
+  function go(i){
+    if(i<0||i>=total)return;
+    slides[idx].classList.remove('active');idx=i;slides[idx].classList.add('active');
+    bar.style.width=((idx+1)/total*100)+'%';counter.textContent=(idx+1)+' / '+total;
+    prevBtn.disabled=idx===0;nextBtn.disabled=idx===total-1;
+    document.querySelector('.stage').scrollTop=0;
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  function closeToc(){drawer.classList.remove('open');}
+  document.getElementById('toc-open').addEventListener('click',()=>drawer.classList.add('open'));
+  drawer.addEventListener('click',ev=>{if(ev.target===drawer)closeToc();});
+  document.getElementById('toc-close').addEventListener('click',closeToc);
+  prevBtn.addEventListener('click',()=>go(idx-1));nextBtn.addEventListener('click',()=>go(idx+1));
+  document.addEventListener('keydown',ev=>{
+    const tag=(ev.target&&ev.target.tagName)||'';
+    if(tag==='INPUT'||tag==='TEXTAREA')return;
+    if(ev.key==='ArrowRight'||ev.key==='PageDown'||(ev.key===' '&&tag!=='BUTTON'&&tag!=='A')){ev.preventDefault();go(idx+1);}
+    else if(ev.key==='ArrowLeft'||ev.key==='PageUp'){ev.preventDefault();go(idx-1);}
+    else if(ev.key==='Escape')closeToc();
+    else if(ev.key==='Home'){ev.preventDefault();go(0);}
+    else if(ev.key==='End'){ev.preventDefault();go(total-1);}
+  });
+  let tx=null,ty=null;const stage=document.querySelector('.stage');
+  stage.addEventListener('touchstart',ev=>{tx=ev.changedTouches[0].screenX;ty=ev.changedTouches[0].screenY;},{passive:true});
+  stage.addEventListener('touchend',ev=>{if(tx==null)return;const dx=ev.changedTouches[0].screenX-tx,dy=ev.changedTouches[0].screenY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)go(idx+1);else go(idx-1);}tx=null;},{passive:true});
+  function copyText(t){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+    return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(x){rej(x);}ta.remove();});}
+  document.addEventListener('click',ev=>{const btn=ev.target.closest('.copy-btn');if(!btn)return;
+    const tgt=document.getElementById(btn.dataset.target);const text=tgt?tgt.textContent:(btn.dataset.copy||'');
+    copyText(text).then(()=>{btn.classList.add('copied');btn.textContent='已複製';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='複製';},1500);});});
+  const hash=parseInt(location.hash.replace('#',''),10);
+  go((hash>=1&&hash<=total)?hash-1:0);
+})();
+(function(){
+  const lb=document.createElement('div');
+  lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','放大圖片');
+  lb.innerHTML='<span class="lb-hint">按 Esc 或點擊任何位置關閉</span><button type="button" class="lb-close" aria-label="關閉">✕</button><img alt=""><div class="lb-cap"></div>';
+  document.body.appendChild(lb);
+  const big=lb.querySelector('img'),cap=lb.querySelector('.lb-cap'),closeBtn=lb.querySelector('.lb-close');
+  let lastFocus=null,isOpen=false;
+  function open(img){
+    big.src=img.currentSrc||img.src;big.alt=img.alt||'';
+    const fig=img.closest('figure');const fc=fig&&fig.querySelector('figcaption');
+    cap.textContent=(fc&&fc.textContent)||img.alt||'';
+    lastFocus=document.activeElement;isOpen=true;lb.classList.add('open');closeBtn.focus({preventScroll:true});
+  }
+  function close(){
+    if(!isOpen)return;isOpen=false;lb.classList.remove('open');big.removeAttribute('src');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.slide img').forEach(img=>{
+    img.setAttribute('tabindex','0');img.setAttribute('role','button');
+    if(!img.title)img.title='點擊放大';
+  });
+  document.addEventListener('click',e=>{
+    if(isOpen)return;
+    const img=e.target.closest&&e.target.closest('.slide img');
+    if(img){e.preventDefault();open(img);}
+  });
+  lb.addEventListener('click',e=>{e.stopPropagation();close();});
+  window.addEventListener('keydown',e=>{
+    if(isOpen){
+      e.stopImmediatePropagation();
+      if(e.key==='Escape'||e.key==='Enter'||e.key===' '){e.preventDefault();close();}
+      else if(e.key.indexOf('Arrow')===0||e.key==='PageUp'||e.key==='PageDown'||e.key==='Home'||e.key==='End'||e.key==='Tab'){e.preventDefault();}
+      return;
+    }
+    const a=document.activeElement;
+    if(e.key==='Enter'&&a&&a.matches&&a.matches('.slide img')){e.preventDefault();e.stopImmediatePropagation();open(a);}
+  },true);
+})();
+
+</script>
+</body>
+</html>
