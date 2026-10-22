@@ -2,11 +2,21 @@
   "meta": {
     "title": "免費 AI 資源",
     "subtitle": "已驗證免費 API／網站｜新聞及教學｜越獄提示詞（每模型最新兩版）",
-    "verifiedDate": "2026-10-20",
+    "verifiedDate": "2026-10-23",
     "timezone": "Asia/Macau",
     "disclaimer": "配額與模型清單會變動，請以各服務商官方控制台為準。本站不含任何真實 API Key。越獄分頁已篩每模型最新兩版；正文以驗證到的為準（Notion 匿名大多無法讀取，Telegram 附件需自行打開）。僅供研究索引，請自行判斷合法性與風險。"
   },
   "changelog": [
+    {
+      "date": "2026-10-23",
+      "action": "removed",
+      "items": [
+        "Google Gemini（AI Studio）（id=gemini）：Cherry Studio 未開啟，避免誤會",
+        "OpenRouter（:free）（id=openrouter）：Cherry Studio 未開啟，避免誤會",
+        "Cloudflare Workers AI（id=cloudflare-workers-ai）：Cherry Studio 未開啟，避免誤會",
+        "Cerebras Inference（id=cerebras）：Cherry Studio 未開啟，避免誤會"
+      ]
+    },
     {
       "date": "2026-10-20",
       "action": "updated",
@@ -96,6 +106,34 @@
     }
   ],
   "deletions": [
+    {
+      "id": "gemini",
+      "name": "Google Gemini（AI Studio）",
+      "section": "resources",
+      "date": "2026-10-23",
+      "reason": "Cherry Studio 未開啟，避免誤會"
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter（:free）",
+      "section": "resources",
+      "date": "2026-10-23",
+      "reason": "Cherry Studio 未開啟，避免誤會"
+    },
+    {
+      "id": "cloudflare-workers-ai",
+      "name": "Cloudflare Workers AI",
+      "section": "resources",
+      "date": "2026-10-23",
+      "reason": "Cherry Studio 未開啟，避免誤會"
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras Inference",
+      "section": "resources",
+      "date": "2026-10-23",
+      "reason": "Cherry Studio 未開啟，避免誤會"
+    },
     {
       "date": "2026-10-20",
       "items": [
@@ -219,119 +257,6 @@
   ],
   "resources": [
     {
-      "id": "gemini",
-      "type": "api",
-      "name": "Google Gemini（AI Studio）",
-      "host": "https://generativelanguage.googleapis.com/v1beta",
-      "keyUrl": "https://aistudio.google.com/apikey",
-      "docsUrl": "https://ai.google.dev/gemini-api/docs/pricing",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "有 Free tier：部分模型輸入／輸出免費，免綁 Cloud Billing。Free 內容可用於改進 Google 產品。配額見 AI Studio Rate Limits。",
-      "models": [
-        {
-          "id": "gemini-3.8-flash",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-3.6-flash",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-3.5-flash-lite",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-3.1-flash-lite",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-2.5-flash",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-2.5-flash-lite",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "gemini-2.5-pro",
-          "types": [
-            "chat",
-            "vision",
-            "code"
-          ]
-        },
-        {
-          "id": "gemini-embedding-2",
-          "types": [
-            "embedding"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "vision",
-        "embedding",
-        "audio",
-        "code"
-      ],
-      "verified": "2026-10-20",
-      "notes": "Gemini 4 Argon 與部分影像／Pro 產品不在 Free。旗艦與配額以官方 Pricing 為準。"
-    },
-    {
-      "id": "openrouter",
-      "type": "api",
-      "name": "OpenRouter（:free）",
-      "host": "https://openrouter.ai/api/v1",
-      "keyUrl": "https://openrouter.ai/keys",
-      "docsUrl": "https://openrouter.ai/docs/guides/routing/model-variants/free",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "模型 ID 後加 :free，或使用路由器 openrouter/free。Token 價 $0，但有速率與供應限制；fallback 到付費模型會收費。",
-      "models": [
-        {
-          "id": "openrouter/free",
-          "types": [
-            "chat",
-            "vision"
-          ]
-        },
-        {
-          "id": "（其他見 :free 目錄，常變動）",
-          "types": [
-            "chat",
-            "code",
-            "vision"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "vision",
-        "code"
-      ],
-      "verified": "2026-10-20",
-      "notes": "免費清單約數十個以內且每週變動，請查 collections/free-models。"
-    },
-    {
       "id": "cohere",
       "type": "api",
       "name": "Cohere（Trial）",
@@ -403,85 +328,6 @@
       ],
       "verified": "2026-10-20",
       "notes": "OpenAI 相容端點；模型清單隨平台更新。"
-    },
-    {
-      "id": "cloudflare-workers-ai",
-      "type": "api",
-      "name": "Cloudflare Workers AI",
-      "host": "https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1",
-      "keyUrl": "https://dash.cloudflare.com/",
-      "docsUrl": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
-      "cardRequired": false,
-      "commercialOk": true,
-      "freeSummary": "每日 10,000 Neurons 免費額（UTC 00:00 重置）。超額需 Workers Paid。部分前沿模型需付費方式。",
-      "models": [
-        {
-          "id": "@cf/meta/llama-3.1-8b-instruct",
-          "types": [
-            "chat"
-          ]
-        },
-        {
-          "id": "@cf/meta/llama-3.2-11b-vision-instruct",
-          "types": [
-            "vision",
-            "chat"
-          ]
-        },
-        {
-          "id": "@cf/baai/bge-m3",
-          "types": [
-            "embedding"
-          ]
-        },
-        {
-          "id": "@cf/black-forest-labs/flux-1-schnell",
-          "types": [
-            "image"
-          ]
-        },
-        {
-          "id": "@cf/openai/whisper",
-          "types": [
-            "audio"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "vision",
-        "embedding",
-        "image",
-        "audio"
-      ],
-      "verified": "2026-10-20",
-      "notes": "需 Cloudflare Account ID + API Token。OpenAI 相容路徑見官方文件。"
-    },
-    {
-      "id": "cerebras",
-      "type": "api",
-      "name": "Cerebras Inference",
-      "host": "https://api.cerebras.ai/v1",
-      "keyUrl": "https://cloud.cerebras.ai/",
-      "docsUrl": "https://inference-docs.cerebras.ai/console/account-billing",
-      "cardRequired": true,
-      "commercialOk": true,
-      "freeSummary": "新戶 $5 試用額度，須先綁定已驗證付款方式；額度 30 天到期。加卡本身不收費，僅在加購時扣款。",
-      "models": [
-        {
-          "id": "（見 Cloud Console 公開模型）",
-          "types": [
-            "chat",
-            "code"
-          ]
-        }
-      ],
-      "modelTypes": [
-        "chat",
-        "code"
-      ],
-      "verified": "2026-10-20",
-      "notes": "非永久免費方案；屬限時試用 credits。"
     },
     {
       "id": "aihubmix",
