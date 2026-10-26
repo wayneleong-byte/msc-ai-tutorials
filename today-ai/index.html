@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>today.ai 國際版：個人 AI 助理入門｜澳門科學館</title>
+<meta name="description" content="澳門科學館通用班互動教程：today.ai 國際版 · Living Memory／Proactive／Tasks／Connectors。查證 2026-10-26 Asia/Macau。">
+<style>
+
+
+:root{--bg:#0a1f2e;--panel:#0d2f44;--accent:#1a9e8f;--accent2:#f0b429;--text:#141414;--muted:#4a5560;--card:#fff;--warn:#b33;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+.app{display:flex;flex-direction:column;height:100%}
+.topbar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);color:#fff;flex-shrink:0;z-index:20}
+.topbar .brand{font-weight:700;font-size:1.05rem;white-space:nowrap;color:#fff;text-decoration:none}
+.progress-wrap{flex:1;height:8px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7fddd4);transition:width .25s}
+.counter{font-size:1rem;opacity:.95;min-width:5em;text-align:right;font-weight:600}
+.btn-icon{background:rgba(255,255,255,.12);border:0;color:#fff;width:40px;height:40px;border-radius:8px;cursor:pointer;font-size:1.2rem}
+.btn-icon:hover{background:rgba(255,255,255,.22)}
+.stage{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px 18px 88px}
+.slide{display:none;max-width:1040px;margin:0 auto;background:var(--card);border-radius:var(--radius);padding:32px 36px 40px;box-shadow:0 10px 40px rgba(0,0,0,.28);min-height:min(72vh,760px)}
+.slide.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slide h2{font-size:clamp(1.75rem,3.2vw,2.25rem);color:var(--panel);margin-bottom:16px;line-height:1.3;font-weight:800}
+.slide h3{font-size:1.35rem;margin:16px 0 8px;color:var(--panel)}
+.slide p,.slide li{line-height:1.75;font-size:1.2rem}
+.lead{font-size:1.35rem!important;font-weight:600;margin:8px 0 14px;line-height:1.55}
+.big-list{margin:12px 0 16px 1.3em;font-size:1.3rem}
+.big-list li{margin:.55em 0;line-height:1.55}
+.bullets{margin:10px 0 14px 1.3em}.bullets.big li{margin:.45em 0;font-size:1.25rem}
+.bullets a,.links a,.links-inline a{color:var(--accent);word-break:break-all}
+.steps{margin:12px 0 16px 1.3em;font-size:1.25rem}.steps li{margin:.5em 0}
+.tips{margin:14px 0;padding:12px 16px;background:#f3faf9;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;list-style:none}
+.note,.hint{font-size:1.05rem;color:var(--muted);margin:10px 0;line-height:1.6}
+.badge{display:inline-block;font-size:.85rem;padding:3px 10px;border-radius:6px;vertical-align:middle;font-weight:700;margin:0 4px 4px 0}
+.badge.free{background:#e6f5f3;color:#0f6e66}
+.badge.mixed{background:#fff3cd;color:#856404}
+.badge.paid,.badge.pro,.badge.ultra{background:#fde8e8;color:#9b1c1c}
+.badge.rolling{background:#e8eaf6;color:#283593}
+.badge.risk{background:#fce4ec;color:#880e4f}
+.badge.en{background:#e3f2fd;color:#0d47a1}
+.prompt-box{margin:14px 0;border:2px solid #b8d9d5;border-radius:12px;overflow:hidden;background:#fafcfc}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#e8f4f2;font-size:1.05rem;font-weight:700;color:var(--panel)}
+.copy-btn{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:1rem;font-weight:700}
+.copy-btn:hover{filter:brightness(1.08)}.copy-btn.copied{background:#2d6a4f}
+.prompt-text{padding:14px 16px;white-space:pre-wrap;word-break:break-word;font-size:1.1rem;line-height:1.7;max-height:220px;overflow:auto;font-family:inherit}
+.shots{display:grid;gap:14px;margin:14px 0}
+@media(min-width:700px){.shots{grid-template-columns:1fr 1fr}}
+.shots.one{grid-template-columns:1fr}
+.shot{margin:0}.shot img{width:100%;height:auto;border-radius:8px;border:1px solid #e0e8e7;display:block}
+.shot figcaption{font-size:.95rem;color:var(--muted);margin-top:6px;line-height:1.45}
+.placeholder .ph{background:#f5f5f5;border:2px dashed #bbb;border-radius:8px;padding:48px 16px;text-align:center;font-size:1.15rem;color:#666;line-height:1.6}
+.placeholder .ph code{font-size:1rem;color:#333}
+.cover{text-align:center;padding:40px 12px 20px}
+.cover-badge{display:inline-block;background:#e6f5f3;color:var(--accent);padding:8px 16px;border-radius:99px;font-size:1.05rem;margin-bottom:20px;font-weight:700}
+.cover h1{font-size:clamp(2rem,5vw,2.9rem);color:var(--panel);line-height:1.25;margin-bottom:16px;font-weight:800}
+.cover-sub{font-size:1.25rem;color:var(--muted);line-height:1.7}
+.cover-meta{margin-top:22px;color:var(--muted);font-size:1.1rem;line-height:1.7}
+.credit{margin-top:18px;font-size:1.05rem;color:var(--panel);font-weight:700}
+.credit-line{margin-top:1.5rem;font-size:.9rem;opacity:.75;color:var(--panel);font-weight:600}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:10px;padding:12px;background:rgba(10,31,46,.94);backdrop-filter:blur(8px);z-index:30}
+.nav button{background:var(--accent);color:#fff;border:0;padding:12px 24px;border-radius:10px;font-size:1.1rem;cursor:pointer;min-width:110px;font-weight:700}
+.nav button:hover{filter:brightness(1.08)}.nav button:disabled{opacity:.4;cursor:default}
+.nav .toc-btn{background:rgba(255,255,255,.15)}
+.toc{columns:1;margin:8px 0 16px 1.2em;font-size:1.1rem}@media(min-width:700px){.toc{columns:2}}
+.toc li{margin:.4em 0;break-inside:avoid}.toc a{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:600}.toc a:hover{text-decoration:underline}
+.toc-drawer{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:stretch;justify-content:flex-end}
+.toc-drawer.open{display:flex}
+.toc-panel{width:min(400px,92vw);background:#fff;padding:22px;overflow:auto;box-shadow:-4px 0 24px rgba(0,0,0,.2)}
+.toc-panel h3{margin-bottom:12px;color:var(--panel);font-size:1.35rem}
+.toc-panel ol{margin-left:1.2em;font-size:1.05rem}.toc-panel a{color:var(--accent);text-decoration:none;display:block;padding:5px 0;cursor:pointer}
+.req-table{width:100%;border-collapse:collapse;font-size:1.05rem;margin:12px 0}
+.req-table th,.req-table td{border:1px solid #d5e0df;padding:10px 12px;text-align:left;vertical-align:top}
+.req-table th{background:#e8f4f2;color:var(--panel);font-size:1.05rem}
+.req-table.compact{font-size:.98rem}
+.req-table tr.hl td,.req-table tr.demo-row td{background:#fff8e6}
+.mat-table a{color:var(--accent);word-break:break-all;font-weight:700}
+.callout{margin:14px 0;padding:14px 18px;border-radius:10px;font-size:1.15rem;line-height:1.65}
+.callout-h{font-weight:800;margin-bottom:6px;font-size:1.2rem}
+.callout.info{background:#eef6ff;border:1px solid #9cc3ef}.callout.info .callout-h{color:#1d4f91}
+.callout.check{background:#fff1f0;border:2px solid #e05a4f}.callout.check .callout-h{color:#b42318}
+.callout.limit{background:#f3f0ff;border:2px solid #7a5af8}.callout.limit .callout-h{color:#5925dc}
+.scene{margin:8px 0 14px;font-size:1.15rem;color:#2a4a4a;background:#f3faf9;padding:10px 14px;border-radius:8px}
+.scene-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.85rem;font-weight:800;padding:2px 8px;border-radius:6px;margin-right:6px}
+.paid-band{background:linear-gradient(90deg,#9b1c1c,#c0392b);color:#fff;font-weight:800;font-size:1rem;padding:8px 14px;border-radius:8px;margin:0 0 14px;letter-spacing:.02em}
+.slide img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(5,15,16,.92);display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 12px 40px;cursor:zoom-out}
+.lb.open{display:flex;animation:lbIn .18s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lb img{max-width:min(1600px,98vw);max-height:calc(100vh - 100px);width:auto;height:auto;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+.lb-cap{color:#e8f4f2;font-size:.95rem;margin-top:10px;text-align:center;max-width:92vw;line-height:1.5}
+.lb-close{position:absolute;top:10px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.4rem;cursor:pointer}
+.lb-hint{position:absolute;top:18px;left:16px;color:rgba(255,255,255,.6);font-size:.85rem}
+@media(max-width:600px){
+  .slide{padding:20px 16px 28px}
+  .stage{padding:10px 8px 96px}
+  .nav button{min-width:80px;padding:12px 14px;font-size:1rem}
+  .slide p,.slide li{font-size:1.1rem}
+}
+
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <span class="brand">today.ai 國際版 · 通用班</span>
+    <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+    <span class="counter" id="counter">1 / 65</span>
+    <button type="button" class="btn-icon" id="toc-open" title="目錄" aria-label="目錄">☰</button>
+  </div>
+  <div class="stage">
+<section class="slide active" data-title="封面" data-sec="A">
+
+<div class="cover">
+<div class="cover-badge">澳門科學館 · 通用班（教師／公眾／長者）</div>
+<h1>today.ai 國際版<br>個人 AI 助理入門</h1>
+<p class="cover-sub">Living Memory · Proactive · Tasks · Connectors<br>
+入口 <a href="https://today.ai/" target="_blank" rel="noopener">https://today.ai/</a></p>
+<p class="cover-meta">示範場景：個人生活 ＋ Office（日程、郵件、文件、日常整理）<br>
+查證日期：2026-10-26（Asia/Macau, UTC+8）<br>
+示範帳：Pro 7 日試用（實操當日）</p>
+<p class="credit">澳門科學館 Oscar 製作</p>
+<p class="hint" style="margin-top:18px">← → 鍵、下方按鈕或左右滑動翻頁；點擊截圖可放大<br>
+價錢／功能以官方當日畫面為準 · 中國版對比稍後另頁</p>
+</div>
+<p class="credit-line">澳門科學館 Oscar 製作 · today.ai 國際版 · 2026-10-26</p>
+
+</section>
+
+<section class="slide" data-title="目錄" data-sec="A">
+
+<h2>目錄</h2>
+<ol class="toc" id="toc-list"></ol>
+<p class="hint">點擊標題跳轉；右上角 ☰ 亦可隨時開啟目錄。</p>
+
+</section>
+
+<section class="slide" data-title="學習目標" data-sec="A">
+
+<h2>今天學什麼 · 五個目標</h2>
+<ol class="big-list">
+<li>明白 today.ai 是<strong>個人 AI Agent</strong>（記憶、主動協助、任務、連接器）</li>
+<li>會用 <strong>Google</strong> 登入，並看懂<strong>強制連接來源</strong>與權限</li>
+<li>看清<strong>方案牆</strong>：實操見 Pro／Ultra；試用要綁付款方式</li>
+<li>會做三類示範：待辦摘要、虛構日程、草稿郵件；以及<strong>粵語科普草稿＋人把關</strong></li>
+<li>知道同 <strong>Grok Bot</strong> 分工：雲端個人助理 vs 箱／內網／多隊友</li>
+</ol>
+<div class="callout info"><div class="callout-h">通用班</div><div>教師培訓、公眾班、長者班都適用——中庸字級、高對比、短句。</div></div>
+
+</section>
+
+<section class="slide" data-title="班別與場景" data-sec="A">
+
+<h2>班別與示範場景</h2>
+<div class="scene"><span class="scene-tag">班別</span>通用：教師／公眾／長者都啱</div>
+<div class="scene"><span class="scene-tag">場景</span>個人生活 ＋ Office（日程、郵件、文件、日常整理）</div>
+<ul class="bullets big">
+<li>人設（虛構）：在職「阿樂」——同時處理工作郵件／日曆與個人待辦</li>
+<li><strong>不使用</strong>真實學生／家長資料</li>
+<li>對外動作（寄信、改日曆、發帖）一律<strong>人確認先做</strong></li>
+</ul>
+<p class="note">頁尾註：中國版對比稍後另頁。查證 2026-10-26 Asia/Macau。</p>
+
+</section>
+
+<section class="slide" data-title="什麼是 today.ai" data-sec="B">
+
+<h2>什麼是 today.ai？</h2>
+<p class="lead">官方定位：<strong>Personal Agent</strong>（個人 AI 助理），不是一次性聊天框。</p>
+<ul class="bullets big">
+<li>記住你的偏好／人／專案（Living Memory）</li>
+<li>主動摘要與建議（Proactive Help；對外動作需確認）</li>
+<li>多步驟任務執行與回報（Task Execution）</li>
+<li>連接郵件、日曆、檔案、訊息等（Connectors；目錄稱 50+）</li>
+</ul>
+<p class="note">平台文宣：Mac／iPhone／Android；網頁入口 today.ai/login。公司相關：Today AI PTE. LTD.（第三方提及新加坡；以官網／條款為準）。</p>
+
+</section>
+
+<section class="slide" data-title="四大面向" data-sec="B">
+
+<h2>四大面向（記四個詞）</h2>
+<table class="req-table">
+<tr><th>面向</th><th>你會看到</th></tr>
+<tr><td><strong>Living Memory</strong></td><td>記住偏好；可檢視／修正／刪除</td></tr>
+<tr><td><strong>Proactive</strong></td><td>Morning Brief、建議下一步</td></tr>
+<tr><td><strong>Tasks</strong></td><td>排程／即時任務、多步驟工具</td></tr>
+<tr><td><strong>Connectors</strong></td><td>Gmail／Calendar／Drive／Contacts／GitHub 等</td></tr>
+</table>
+<ul class="bullets">
+<li>另有：Research、Cloud Computer、Skills、Channels、語音／圖片／檔案輸入</li>
+<li>Today Recording（會議錄音→摘要）見官方部落格——今次網頁示範未深測</li>
+</ul>
+
+</section>
+
+<section class="slide" data-title="登入入口" data-sec="C">
+
+<h2>登入入口</h2>
+<ol class="steps">
+<li>開啟 <a href="https://today.ai/login" target="_blank" rel="noopener">https://today.ai/login</a></li>
+<li>選擇 <strong>Continue with Google</strong></li>
+<li>揀 Google 帳號 → 同意身份／權限（可選項目稍後再連）</li>
+</ol>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/01-login.png" alt="登入頁：Continue with Google" loading="lazy">
+<figcaption>登入頁：Continue with Google</figcaption>
+</figure>
+</div>
+<p class="note">實操帳：Google SSO 成功（2026-10-26）。</p>
+
+</section>
+
+<section class="slide" data-title="揀 Google 帳號" data-sec="C">
+
+<h2>步驟：揀 Google 帳號</h2>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/02-google-account-chooser.png" alt="Google 帳號選擇器" loading="lazy">
+<figcaption>Google 帳號選擇器</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/03-google-signin-consent-identity.png" alt="身份同意畫面" loading="lazy">
+<figcaption>身份同意畫面</figcaption>
+</figure>
+</div>
+<p class="hint">點擊截圖可放大。介面文字以當日英文為準。</p>
+
+</section>
+
+<section class="slide" data-title="可選權限" data-sec="C">
+
+<h2>可選 Gmail／Calendar（首次）</h2>
+<p class="lead">首次登入可<strong>暫不勾</strong>額外範圍；稍後 onboarding 會強制再連來源。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/04-google-optional-gmail-calendar-unchecked.png" alt="可選範圍未勾選" loading="lazy">
+<figcaption>可選範圍未勾選</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="歡迎與 App" data-sec="C">
+
+<h2>歡迎畫面 · 下載 App</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/05-welcome-download-app.png" alt="歡迎／下載桌面或流動 App 提示" loading="lazy">
+<figcaption>歡迎／下載桌面或流動 App 提示</figcaption>
+</figure>
+</div>
+<p class="note">網頁版亦可繼續；文宣另有 Mac／iPhone／Android。</p>
+
+</section>
+
+<section class="slide" data-title="輸入你的名字" data-sec="C">
+
+<h2>Onboarding：輸入名字</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/06-onboarding-name.png" alt="輸入顯示名稱" loading="lazy">
+<figcaption>輸入顯示名稱</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="強制連接來源" data-sec="D">
+
+<h2>強制：至少連一個來源</h2>
+<div class="callout check"><div class="callout-h">關卡</div><div>畫面上寫 <strong>Connect at least 1 more to continue</strong>——未連任何來源前，進不了主 UI／Settings。</div></div>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/07-onboarding-connect-sources.png" alt="可連來源清單" loading="lazy">
+<figcaption>可連來源清單</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/09-connector-gate.png" alt="再次出現的連接關卡" loading="lazy">
+<figcaption>再次出現的連接關卡</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="pricing／plans 404" data-sec="D">
+
+<h2>官網 pricing/plans → 404</h2>
+<span class="badge mixed">實測</span>
+<p class="lead">直接開 pricing／plans 路徑當時回傳 <strong>404</strong>。價錢以登入後方案牆／商店為準。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/08-pricing-404.png" alt="pricing/plans 404 畫面" loading="lazy">
+<figcaption>pricing/plans 404 畫面</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="連 Google Workspace" data-sec="D">
+
+<h2>連接 Google Workspace</h2>
+<ol class="steps">
+<li>撳 Connect <strong>Google Workspace</strong>（Emails, meetings, files）</li>
+<li>再揀帳號 → 勾選同意範圍</li>
+<li>實操勾選：Drive／Calendar／Gmail；Contacts 當日未勾（稍後可再連）</li>
+</ol>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/10-google-account-chooser.png" alt="再揀帳號" loading="lazy">
+<figcaption>再揀帳號</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/11-google-consent-scopes-unchecked.png" alt="同意範圍（未勾）" loading="lazy">
+<figcaption>同意範圍（未勾）</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="同意範圍已勾" data-sec="D">
+
+<h2>同意範圍已勾 · 已連接</h2>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/12-google-consent-gmail-calendar-drive-checked.png" alt="Gmail／Calendar／Drive 已勾" loading="lazy">
+<figcaption>Gmail／Calendar／Drive 已勾</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/13-google-workspace-connected-continue.png" alt="Workspace 已連，可 Continue" loading="lazy">
+<figcaption>Workspace 已連，可 Continue</figcaption>
+</figure>
+</div>
+<div class="callout info"><div class="callout-h">權限提醒</div><div>連接後可隨時在 Settings → Connectors <strong>Disconnect</strong>。教學截圖已遮個人資料。</div></div>
+
+</section>
+
+<section class="slide" data-title="助手名稱" data-sec="E">
+
+<h2>Onboarding：助手名稱</h2>
+<p class="lead">示範過程助手曾名 <strong>Comet</strong>（Surprise me）。Oscar 開通後系統助手名為 <strong>Today</strong>。</p>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/14-onboarding-name-assistant.png" alt="為助手取名" loading="lazy">
+<figcaption>為助手取名</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/15-onboarding-name-comet.png" alt="示範時選了 Comet" loading="lazy">
+<figcaption>示範時選了 Comet</figcaption>
+</figure>
+</div>
+<p class="note">之後主畫面頭像標籤顯示「Today」。</p>
+
+</section>
+
+<section class="slide" data-title="揀頭像" data-sec="E">
+
+<h2>揀助手頭像（Look）</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/16-onboarding-pick-look.png" alt="預設頭像／外觀選擇" loading="lazy">
+<figcaption>預設頭像／外觀選擇</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Memory 預覽" data-sec="E">
+
+<h2>About memory 預覽</h2>
+<p class="lead">系統會預覽它「記得」的關於你的資料——可稍後在 Memories 檢查／修正。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/17-onboarding-memory-preview.png" alt="Memory preview" loading="lazy">
+<figcaption>Memory preview</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="隱私說明" data-sec="E">
+
+<h2>Privacy 說明</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/18-onboarding-privacy.png" alt="隱私／資料使用說明頁" loading="lazy">
+<figcaption>隱私／資料使用說明頁</figcaption>
+</figure>
+</div>
+<p class="hint">對外寄信、改日曆、發帖——一律要你確認。AI 草稿 ≠ 已發送。</p>
+
+</section>
+
+<section class="slide" data-title="方案牆" data-sec="F">
+
+<div class="paid-band">付費／試用牆 · 實操無 Free 入門卡</div>
+<h2>方案牆：只有 Pro／Ultra</h2>
+<p class="lead">連完來源後進入方案比較。畫面<strong>無 Free 略過</strong>；未撳試用／Ultra 則停在此牆。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/19-plan-pro-ultra-wall.png" alt="Pro（7 日試用後 $20／月）與 Ultra（$200／月）" loading="lazy">
+<figcaption>Pro（7 日試用後 $20／月）與 Ultra（$200／月）</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Pro 方案" data-sec="F">
+
+<div class="paid-band">Pro · 當日畫面</div>
+<h2>Pro 含什麼？（當日文案）</h2>
+<span class="badge pro">Pro $20／月</span>
+<ul class="bullets big">
+<li><strong>7-Day Free</strong> trial → 之後 <strong>$20/month</strong></li>
+<li>Monthly frontier AI usage</li>
+<li>Long-term memory</li>
+<li>Daily briefings and proactive follow-ups</li>
+<li>Scheduled and on-demand tasks</li>
+</ul>
+<p class="note">價錢以購買畫面為準（2026-10-26 實操）。</p>
+
+</section>
+
+<section class="slide" data-title="Ultra 方案" data-sec="F">
+
+<div class="paid-band">Ultra · 當日畫面</div>
+<h2>Ultra 含什麼？（當日文案）</h2>
+<span class="badge ultra">Ultra $200／月</span>
+<ul class="bullets big">
+<li>Everything in Pro</li>
+<li><strong>10×</strong> more monthly AI usage</li>
+<li>Priority processing</li>
+<li>More capacity for long-running tasks</li>
+<li>條款：Ultra <strong>無</strong>試用</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/31-plan-ultra-200-not-upgraded.png" alt="Plan 頁 Ultra 分頁（未升級）" loading="lazy">
+<figcaption>Plan 頁 Ultra 分頁（未升級） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="試用要綁卡" data-sec="F">
+
+<div class="paid-band">試用 ≠ 免付款方式</div>
+<h2>Start 7-day free trial → 付款頁</h2>
+<ul class="bullets big">
+<li>RevenueCat／Stripe：Today Pro Monthly</li>
+<li>Try free for 1 week · <strong>之後 $20.00／月</strong></li>
+<li>Total due today — <strong>$0</strong></li>
+<li>試用結束日畫面寫 Nov 2, 2026（另見 GPay 寫 Nov 1——以當日彈窗為準）</li>
+<li>可用 GPay 或卡（Visa／Mastercard／UnionPay／Amex）</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/20-pro-trial-payment-checkout.png" alt="Complete your purchase 結帳頁" loading="lazy">
+<figcaption>Complete your purchase 結帳頁</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="GPay 流程" data-sec="F">
+
+<h2>Buy with GPay</h2>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/21-pro-checkout-gpay-visible.png" alt="結帳頁可見 GPay" loading="lazy">
+<figcaption>結帳頁可見 GPay</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/22-gpay-pay-google-confirm.png" alt="pay.google.com 確認（$0 until…）" loading="lazy">
+<figcaption>pay.google.com 確認（$0 until…）</figcaption>
+</figure>
+</div>
+<p class="note">實操曾見 GPay 失敗「Try again」；其後由用戶自行完成開通。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/23-gpay-try-again.png" alt="GPay 失敗後 Try again" loading="lazy">
+<figcaption>GPay 失敗後 Try again</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="無 Free 入門路徑" data-sec="F">
+
+<div class="paid-band">重要觀察（已核實）</div>
+<h2>似乎不加入付費 plan 就不能用純免費版</h2>
+<ul class="bullets big">
+<li>Oscar 觀察：一開始不加入付費 plan，就不能使用純免費版</li>
+<li><strong>實操核實：</strong>Settings → Manage → Plan 頁<strong>只有 Pro／Ultra 兩個分頁</strong>，無 Free 方案卡</li>
+<li>唯一「Free」字樣：Mode「Balanced · Included with Free」——是模型模式標籤，不是可選 Free 方案</li>
+<li>未用新帳／登出重測；以上以當日已開通帳為準</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/30-plan-pro-20-current.png" alt="Plan 比較：Pro 為 Current plan（無 Free 分頁）" loading="lazy">
+<figcaption>Plan 比較：Pro 為 Current plan（無 Free 分頁） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Pro 試用就緒" data-sec="G">
+
+<h2>Your Pro trial is ready</h2>
+<p class="lead">「7-day free trial is active with full Pro access。」</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/24-pro-trial-ready.png" alt="Pro 試用就緒彈窗" loading="lazy">
+<figcaption>Pro 試用就緒彈窗</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="主畫面" data-sec="G">
+
+<h2>主畫面 · 開場提示</h2>
+<p class="lead">助手頭像標籤為 <strong>Today</strong>。右側可開 Morning Brief／Tasks／Memories／Profile。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/25-home-chat-starter-prompts.png" alt="主畫面與 starter prompts" loading="lazy">
+<figcaption>主畫面與 starter prompts <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+<p class="hint"><span class="badge risk">截圖已遮個人資料</span></p>
+
+</section>
+
+<section class="slide" data-title="Settings 總覽" data-sec="H">
+
+<h2>Settings：Subscription／Mode／Usage</h2>
+<ul class="bullets">
+<li>Subscription：Pro 徽章 · 7-Day Free Trial · Full Pro access is active</li>
+<li>Mode：Balanced（Included with Free）／Power（Pro & Ultra）</li>
+<li>Monthly Usage：見下一專頁</li>
+<li>Billing／Account／Connectors／Devices／Skills／Channels</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/26-settings-subscription-usage-before.png" alt="Settings 訂閱與用量（試用前量度）" loading="lazy">
+<figcaption>Settings 訂閱與用量（試用前量度） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Mode：Balanced vs Power" data-sec="H">
+
+<h2>Mode：點揀模型風格</h2>
+<table class="req-table">
+<tr><th>Mode</th><th>說明（當日 UI）</th><th>標籤</th></tr>
+<tr class="hl"><td><strong>Balanced</strong></td><td>Capable models matched to your needs.</td><td>Included with Free</td></tr>
+<tr><td><strong>Power</strong></td><td>Always uses Claude Opus…（當日文案）</td><td>Available on Pro &amp; Ultra</td></tr>
+</table>
+<div class="callout info"><div class="callout-h">勿混淆</div><div>「Included with Free」是 Mode 標籤，<strong>不是</strong>說你而家用緊 Free 方案。Plan 頁仍然只有 Pro／Ultra。</div></div>
+
+</section>
+
+<section class="slide" data-title="Connections／About" data-sec="H">
+
+<h2>Connections · General · About</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/27-settings-connections-general-about.png" alt="Settings 連接與一般設定" loading="lazy">
+<figcaption>Settings 連接與一般設定 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Billing" data-sec="H">
+
+<h2>Billing</h2>
+<ul class="bullets big">
+<li>Open billing portal</li>
+<li>Payment method／Invoices</li>
+<li>Cancel subscription（教學<strong>未撳</strong>）</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/29-settings-billing.png" alt="Billing 頁" loading="lazy">
+<figcaption>Billing 頁 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Account" data-sec="H">
+
+<h2>Account Settings</h2>
+<p class="lead">可睇帳號電郵、暱稱；有 Delete Account（勿亂撳）。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/38-account-settings.png" alt="Account Settings" loading="lazy">
+<figcaption>Account Settings <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Credit 用量專頁" data-sec="I">
+
+<h2>Credit／用量：如實記錄</h2>
+<div class="callout limit"><div class="callout-h">結論先行</div><div>試用前後 4 次短對話後，用量仍顯示 <strong>100% left／0% total used</strong>。介面<strong>無逐則 credit</strong>。因此<strong>無法</strong>用此 UI 估算「Free 能做幾次」。</div></div>
+<ul class="bullets">
+<li>Resets <strong>Dec 2, 2026, 7:55 AM</strong>（Asia/Macau 顯示）</li>
+<li>Available resets：0；Reset now 停用</li>
+<li>Breakdown 類別：Tasks、Conversation、Scheduled Tasks、Daily Brief、Suggestions &amp; Reminders、Memory Updates、Cloud Computer——各 0%</li>
+</ul>
+
+</section>
+
+<section class="slide" data-title="用量：示範前" data-sec="I">
+
+<h2>Monthly Usage · 示範前</h2>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/28-usage-breakdown-before-100-left.png" alt="100% Left · 0% total used" loading="lazy">
+<figcaption>100% Left · 0% total used <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="用量：示範後" data-sec="I">
+
+<h2>示範後仍 100% left</h2>
+<p class="lead">四次短對話（待辦、虛構 brief、郵件草稿、粵語科普）後再睇——用量<strong>沒有下降</strong>。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/50-usage-breakdown-after-demos-still-100.png" alt="示範後仍 100% Left／0% total used" loading="lazy">
+<figcaption>示範後仍 100% Left／0% total used</figcaption>
+</figure>
+</div>
+<table class="req-table compact">
+<tr><th>時間（Asia/Macau）</th><th>動作</th><th>Meter</th></tr>
+<tr><td>~08:02–03</td><td>開 Settings／Usage</td><td>100% left</td></tr>
+<tr><td>08:08–10</td><td>4 次短對話示範</td><td>聊天窗無即時 meter</td></tr>
+<tr><td>08:10</td><td>再開 Usage</td><td>仍 100%／0%</td></tr>
+</table>
+
+</section>
+
+<section class="slide" data-title="無法估算 Free 次數" data-sec="I">
+
+<h2>為何估不到 Free 能做幾次？</h2>
+<ol class="big-list">
+<li>Plan 揀選器<strong>沒有 Free 方案</strong></li>
+<li>Pro 用量只顯示粗略<strong>百分比</strong>，輕量對話可長期停在 0%</li>
+<li>聊天窗<strong>沒有</strong>逐則 credit 計數</li>
+</ol>
+<p class="note">教學如實寫：不要用今次數字宣稱「Free 每月 N 次」。條款亦寫功能與額度因帳戶／平台／地區／渠道而異。</p>
+
+</section>
+
+<section class="slide" data-title="Connectors：Google" data-sec="J">
+
+<h2>Connectors：Google 已連</h2>
+<p class="lead">Gmail、Google Calendar、Google Drive、Google Contacts——綠勾 Connected。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/32-connectors-google-connected.png" alt="Google 系列連接器" loading="lazy">
+<figcaption>Google 系列連接器 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Connectors：GitHub" data-sec="J">
+
+<h2>Connectors：GitHub</h2>
+<p class="lead">Oscar 另增加連了 GitHub。Status：Connected on October 26, 2026。</p>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/33-connectors-github-connected.png" alt="連接器列表含 GitHub" loading="lazy">
+<figcaption>連接器列表含 GitHub <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/34-connector-github-detail-connected.png" alt="GitHub 詳情（帳號已遮）" loading="lazy">
+<figcaption>GitHub 詳情（帳號已遮） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Skills" data-sec="K">
+
+<h2>Skills</h2>
+<p class="lead">實操見 <strong>Active Skills</strong> 列表。當日介面<strong>未見</strong>「Community Skills」獨立標籤。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/35-skills-active.png" alt="Active Skills" loading="lazy">
+<figcaption>Active Skills <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Devices／Cloud Computer" data-sec="K">
+
+<h2>Devices · Cloud Computer</h2>
+<ul class="bullets big">
+<li><strong>Cloud Computer</strong>：標示 <strong>24h Available</strong>（今次<strong>未</strong>啟動 session）</li>
+<li>可連提示：Mac、Windows、Linux、iPhone、Android、Browser Extension</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/36-devices-cloud-computer.png" alt="Devices 與 Cloud Computer" loading="lazy">
+<figcaption>Devices 與 Cloud Computer <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Channels" data-sec="K">
+
+<h2>Channels</h2>
+<p class="lead">Telegram／Slack／Discord／WeChat——當日皆顯示 Connect（未連接）。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/37-channels.png" alt="Channels 入口" loading="lazy">
+<figcaption>Channels 入口 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Tasks" data-sec="L">
+
+<h2>Tasks 建議模板</h2>
+<p class="lead">可見 Daily Priority List、Daily Email Digest 等建議；今次<strong>未建立</strong>正式任務。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/39-tasks-suggestions.png" alt="Tasks 建議" loading="lazy">
+<figcaption>Tasks 建議 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Memories" data-sec="L">
+
+<h2>Memories</h2>
+<ul class="bullets">
+<li>總覽＋資料夾（Work、Preferences、Projects…）</li>
+<li>新增選單：Add files about you、Set up connectors、Chat with Today、Create Folder</li>
+<li>資料夾內：Import files／Create Folder——當日<strong>無</strong>純文字記憶輸入欄</li>
+</ul>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/40-memories-overview.png" alt="Memories 總覽" loading="lazy">
+<figcaption>Memories 總覽 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/41-memories-add-menu.png" alt="新增選單" loading="lazy">
+<figcaption>新增選單 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/42-memories-preferences-tools.png" alt="Preferences 資料夾" loading="lazy">
+<figcaption>Preferences 資料夾 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Morning Brief 準備中" data-sec="L">
+
+<h2>Morning Brief · 準備中</h2>
+<p class="lead">實操期間 brief 卡長期停在「Reading through your Gmail…／preparing your first brief」——<strong>未完成</strong>，故教學<strong>未展示</strong>真實收件匣內容。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/43-morning-brief-preparing.png" alt="Brief 準備中" loading="lazy">
+<figcaption>Brief 準備中 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Profile：助手 Today" data-sec="L">
+
+<h2>Profile：助手名 Today</h2>
+<ul class="bullets big">
+<li>助手名：<strong>Today</strong></li>
+<li>Connection：Familiar</li>
+<li>No diaries yet</li>
+<li>Daily Affirmation「Reveal」教學未撳</li>
+</ul>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/44-profile-today-connection.png" alt="Profile 頁" loading="lazy">
+<figcaption>Profile 頁 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="Search" data-sec="L">
+
+<h2>Search 對話框</h2>
+<p class="lead">可搜 Messages／Files／Links／Images。今次開啟後未輸入查詢即關閉。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/45-search-dialog.png" alt="Search" loading="lazy">
+<figcaption>Search <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="示範：待辦摘要" data-sec="M">
+
+<h2>Office＋生活：待辦摘要</h2>
+<div class="scene"><span class="scene-tag">示範</span>虛構一週待辦 → 分組摘要＋優先次序（不連真實郵箱）</div>
+<div class="prompt-box" id="box-pmt01">
+<div class="prompt-head"><span>提示碼 <strong>pmt01</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt01">複製</button></div>
+<pre class="prompt-text" id="txt-pmt01">請整理以下虛構一週待辦，只回短摘要（分 Personal／Office），再給 Top 3 優先次序。不要讀取我的真實 Gmail／Calendar／Drive／GitHub。
+
+【Personal】
+- Mon：Grocery run for Alex Rivera
+- Wed：Dentist call
+- Sat：Park walk
+
+【Office · Project Lighthouse】
+- Tue：Draft exhibit-label for Northwind Museum
+- Thu：Standup notes
+- Fri：Review lighthouse-budget-demo.xlsx</pre>
+</div>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/46-demo-todo-summary.png" alt="待辦摘要回覆" loading="lazy">
+<figcaption>待辦摘要回覆 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="示範：虛構日程 brief" data-sec="M">
+
+<h2>虛構星期二日程 brief</h2>
+<div class="scene"><span class="scene-tag">示範</span>要求 Morning-brief 風格；明確禁止讀真實資料、禁止建事件</div>
+<div class="prompt-box" id="box-pmt02">
+<div class="prompt-head"><span>提示碼 <strong>pmt02</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt02">複製</button></div>
+<pre class="prompt-text" id="txt-pmt02">用 morning-brief 風格，摘要一個虛構星期二日程（通勤、standup、寫稿、午餐、預算表、散步）。不要讀取真實 Gmail／Calendar／Drive／GitHub，不要建立任何日曆事件。只輸出時間線＋一句 Suggested prep。</pre>
+</div>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/47-demo-morning-brief-fictional.png" alt="虛構日程 brief" loading="lazy">
+<figcaption>虛構日程 brief <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="示範：改期郵件草稿" data-sec="M">
+
+<h2>改期郵件草稿（未寄）</h2>
+<div class="callout check"><div class="callout-h">安全規則</div><div>提示寫明 <strong>Draft only — do not send</strong>。實操<strong>無</strong>寄出／確認對話框。</div></div>
+<div class="prompt-box" id="box-pmt03">
+<div class="prompt-head"><span>提示碼 <strong>pmt03</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt03">複製</button></div>
+<pre class="prompt-text" id="txt-pmt03">Draft only — do not send. 用虛構人名 Alex Rivera → Jordan Hale，寫一封改期郵件模板：把周四 15:00 的 Project Lighthouse check-in 改去周二 10:30 或周三 14:00。不要連接真實郵箱、不要寄出。</pre>
+</div>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/48-demo-email-template-not-sent.png" alt="郵件模板（標明未寄）" loading="lazy">
+<figcaption>郵件模板（標明未寄） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="RacSo Life 式用法" data-sec="N">
+
+<div class="paid-band">內容生產 · 必備：人把關先發</div>
+<h2>RacSo Life 式用法</h2>
+<ol class="big-list">
+<li><strong>揀題</strong>——日常科學現象（適合科學館訪客）</li>
+<li><strong>寫粵語科普稿</strong>——約 150 字、短句、生活化</li>
+<li><strong>未獲確認前唔好發佈</strong>——AI 只交草稿</li>
+</ol>
+<div class="callout check"><div class="callout-h">記住</div><div>AI 起草，人最後把關。沒有確認＝不能當已發佈。</div></div>
+
+</section>
+
+<section class="slide" data-title="雪糕頭痛草稿" data-sec="N">
+
+<h2>示範：雪糕頭痛（草稿未發佈）</h2>
+<div class="prompt-box" id="box-pmt04">
+<div class="prompt-head"><span>提示碼 <strong>pmt04</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt04">複製</button></div>
+<pre class="prompt-text" id="txt-pmt04">請揀一個適合澳門科學館訪客嘅短題，用粵語寫約 150 字科普草稿。
+規則：未獲我確認前唔好發佈／唔好發帖。回覆開頭標明「草稿，未發佈」。</pre>
+</div>
+<p class="lead">模型揀題：<strong>點解雪糕食完會頭痛？</strong>（brain freeze）· 回覆標「草稿，未發佈」· 無發帖鈕。</p>
+<div class="shots one">
+<figure class="shot">
+<img src="screenshots/49-demo-cantonese-science-draft-not-published.png" alt="粵語科普草稿（未發佈）" loading="lazy">
+<figcaption>粵語科普草稿（未發佈） <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="slide" data-title="同 Grok Bot 比較" data-sec="O">
+
+<h2>同 Grok Bot 比較（必讀）</h2>
+<p class="lead">today.ai 擅長把郵件／日曆／檔案連埋做<strong>個人助理</strong>；要打入<strong>公司內網</strong>或一組專責 bot，就要用 Grok Bot 同隊友。</p>
+<p class="note">下頁表：2026-10-26 實操更新。Grok Bot 欄以 Oscar 現用助手生態說明（非兩家官方對照表）。</p>
+
+</section>
+
+<section class="slide" data-title="比較表" data-sec="O">
+
+<h2>比較表（摘要）</h2>
+<table class="req-table compact">
+<tr><th>面向</th><th>today.ai（Pro 試用實操）</th><th>Grok Bot（現用）</th></tr>
+<tr><td>定位</td><td>個人 Agent：記憶、主動摘要、任務、連接器、Channels</td><td>桌面助手＋多專責隊友；箱瀏覽器／連接器／內網</td></tr>
+<tr><td>多裝置</td><td>Devices 可連 Mac／Win／Linux／手機／Extension；Cloud Computer「24h Available」（未啟動）</td><td>手機／電腦 App 可並行；<strong>每助手各有箱桌面</strong></td></tr>
+<tr><td>VM／雲端</td><td>有 Cloud Computer 入口</td><td>共享 Linux <strong>箱</strong>＋桌面；可裝軟體、截圖、部署教學站</td></tr>
+<tr><td>內聯網 HR／EHR</td><td>連接器為雲端服務；<strong>未見</strong>公司內網／私有 IP 審批</td><td>可經用戶電腦／登記電腦／內網 bot 處理<strong>公司內網</strong></td></tr>
+<tr><td>發佈把關</td><td>可起草；示範標草稿未發——仍須人確認</td><td>RacSo 等：揀題→寫稿→<strong>人確認先發</strong>固定工作流</td></tr>
+<tr><td>方案</td><td>入門強制 Pro／Ultra；$20／$200；Plan 無 Free 卡</td><td>依 Cursor／Grok Bot 帳戶</td></tr>
+</table>
+
+</section>
+
+<section class="slide" data-title="何時用邊個" data-sec="O">
+
+<h2>何時用邊個？</h2>
+<table class="req-table">
+<tr><th>需求</th><th>建議</th></tr>
+<tr class="hl"><td>個人日程／郵件／Drive／GitHub 日常代理、跨裝置個人助理</td><td><strong>today.ai</strong></td></tr>
+<tr class="hl"><td>科學館教學 HTML 部署、內網審批、多 bot 協作、箱內實操截圖</td><td><strong>Grok Bot／隊友</strong></td></tr>
+</table>
+<div class="callout info"><div class="callout-h">教學句式</div><div>today.ai 做到個人雲端助理；Grok Bot 做到箱桌面、內網同多專責隊友。兩邊可互補，不是互斥。</div></div>
+
+</section>
+
+
+
+<section class="slide" data-title="隊友功能對照" data-sec="O">
+<div class="paid-band">探測 · 2026-10-26 Pro 試用 · 08:19–08:26 Asia/Macau</div>
+<h2>同 Grok Bot 隊友功能對照</h2>
+<p class="lead">輕量探測：只讀／只問／草稿。無寄信、無改日曆、無建立排程、無發帖、無 push、無開內網。</p>
+<ul class="bullets big">
+<li><strong>today.ai 做到：</strong>Gmail 未讀摘要、Calendar 本週只讀、會議筆記→簡報大綱、對話內草稿＋人確認閘</li>
+<li><strong>聲稱可做（今次未真正做）：</strong>排程監察 Gmail label、Cloud Computer 寫碼、GitHub Pages 部署</li>
+<li><strong>做唔到／仍要 Grok Bot：</strong>公司內網 172.x、一帳戶多專責 bot、WhatsApp、Reddit／HN 原生監聽、本機 Cherry／ChatGPT RPA、真正部署教學站</li>
+</ul>
+<p class="note">來源：<code>research/bot-capability-probe-results.md</code>。用量探測後仍 100% left。</p>
+</section>
+
+<section class="slide" data-title="today.ai 做到" data-sec="O">
+<h2>today.ai 做到（實操）</h2>
+<table class="req-table">
+<tr><th>能力</th><th>結果</th><th>說明</th></tr>
+<tr class="hl"><td>Gmail 未讀摘要</td><td>yes</td><td>只讀；列出最近未讀。無 send／reply</td></tr>
+<tr class="hl"><td>Calendar 本週</td><td>yes</td><td>只讀；無建立／修改行程</td></tr>
+<tr><td>會議筆記→簡報大綱</td><td>yes</td><td>虛構筆記→3 頁大綱；無 PPTX 檔</td></tr>
+<tr><td>草稿＋人確認閘</td><td>partial</td><td>對話內唔會自行發佈；Channels <strong>不能</strong>推社交／網站</td></tr>
+<tr><td>排程監察 Gmail label</td><td>yes*</td><td>口頭「doable」；<strong>未真正建立</strong>每日任務</td></tr>
+<tr><td>Cloud Computer 寫碼</td><td>yes*</td><td>Devices「24h Available」；<strong>未開 session</strong></td></tr>
+<tr><td>HTML＋GitHub Pages</td><td>yes*</td><td>聲稱可寫檔＋push；<strong>未產生檔、未 push</strong></td></tr>
+</table>
+<p class="hint">*＝模型／UI 聲稱支援，今次探測按規則未執行。</p>
+
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/56-probe-gmail-calendar-schedule-sheets.png" alt="Gmail／Calendar 探測回覆（已遮郵件內容）" loading="lazy">
+<figcaption>Gmail／Calendar／排程／Sheets 探測 <span class="badge risk">截圖已遮個人資料</span></figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/55-connectors-gmail-calendar-drive-x.png" alt="已連 Gmail／Calendar／Drive；X 未連" loading="lazy">
+<figcaption>Connectors：Gmail／Calendar／Drive 已連；X 有卡未連</figcaption>
+</figure>
+</div>
+</section>
+
+<section class="slide" data-title="仍要 Grok Bot" data-sec="O">
+<h2>做唔到／仍要 Grok Bot</h2>
+<table class="req-table">
+<tr><th>能力</th><th>today.ai</th><th>要靠</th></tr>
+<tr class="hl"><td>公司內網 172.x（HR／EHR／表格）</td><td><strong>no</strong>——雲端只到公網；未開內網 URL</td><td>Grok Bot／登記電腦／內網 bot</td></tr>
+<tr class="hl"><td>一帳戶多專責 bot（RacSo＋Overheard…）</td><td><strong>no</strong>——one named assistant</td><td>Grok Bot 多隊友</td></tr>
+<tr><td>WhatsApp</td><td><strong>no</strong>——目錄無；Channels 無</td><td>其他方案／Grok 生態外</td></tr>
+<tr><td>Reddit／HN 原生監聽</td><td><strong>no</strong>——無連接器；最多排程網頁搜尋（≥15 分）</td><td>專責監聽隊友</td></tr>
+<tr><td>本機 Cherry／ChatGPT RPA</td><td>不可靠／要裝 Operate Computer；今次<strong>未裝</strong></td><td>箱桌面／本機助手</td></tr>
+<tr class="hl"><td>真正部署教學站（GitHub Pages）</td><td>聲稱可；今次<strong>未 push</strong></td><td><strong>仍由 Grok Bot／箱做</strong></td></tr>
+</table>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/57-probe-channels-social-whatsapp-agents-lan.png" alt="WhatsApp／多 agent／內網探測回覆" loading="lazy">
+<figcaption>Channels／社交／WhatsApp／多 agent／LAN 探測回覆</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/52-channels-telegram-slack-discord-wechat.png" alt="Channels：Telegram／Slack／Discord／WeChat" loading="lazy">
+<figcaption>Channels 僅 Telegram／Slack／Discord／WeChat（皆未連）</figcaption>
+</figure>
+</div>
+</section>
+
+<section class="slide" data-title="部分做到" data-sec="O">
+<h2>partial：有入口但未就緒</h2>
+<ul class="bullets big">
+<li><strong>X／Twitter：</strong>有連接器卡，狀態未連（+）；唔係 Channel；今次無監聽</li>
+<li><strong>Google Sheets：</strong>口頭話 Drive／Sheets 可讀寫格；目錄搜尋 sheet／Sheets「No related content」——記 <strong>partial</strong>，未開表</li>
+<li><strong>本機檔案：</strong>雲端對話話到唔到；目錄有 Desktop／Documents／Operate Computer／Command Line——要裝本機 App；今次<strong>未裝、未改檔</strong></li>
+</ul>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/53-devices-cloud-computer-24h.png" alt="Cloud Computer 24h Available" loading="lazy">
+<figcaption>Devices：Cloud Computer「24h Available」（未啟動）</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/54-connectors-local-files-operate-computer.png" alt="本機檔案與 Operate Computer 連接器" loading="lazy">
+<figcaption>本機檔案／Operate Computer 連接器（未連）</figcaption>
+</figure>
+</div>
+</section>
+
+<section class="slide" data-title="探測用量仍 100%" data-sec="O">
+<h2>探測後用量仍 100% left</h2>
+<div class="callout limit"><div class="callout-h">Credit</div><div>三輪對話（含真讀 Gmail／Calendar）後，Settings → Usage 仍 <strong>100% Left／0% total used</strong>。七類皆 0%。Resets Dec 2, 2026, 7:55 AM。<strong>無法</strong>用此 UI 估算 Free 能做幾次。</div></div>
+<div class="shots">
+<figure class="shot">
+<img src="screenshots/51-usage-before-probe-100.png" alt="探測前用量 100% left" loading="lazy">
+<figcaption>探測前：100% left</figcaption>
+</figure>
+<figure class="shot">
+<img src="screenshots/58-probe-html-cloud-local-usage-still-100.png" alt="探測後用量仍 100% left" loading="lazy">
+<figcaption>探測後（含 HTML／Cloud／本機問答）：仍 100% left</figcaption>
+</figure>
+</div>
+<p class="note">教學站今次部署仍由 Grok Bot／箱完成——同探測結論一致。</p>
+</section>
+
+<section class="slide" data-title="常見問題" data-sec="P">
+
+<h2>常見問題／限制</h2>
+<table class="req-table">
+<tr><th>問題</th><th>實操答案</th></tr>
+<tr><td>有無 Free 可直接用？</td><td>當日 Plan 頁只有 Pro／Ultra；入門見方案牆</td></tr>
+<tr><td>試用要唔要卡？</td><td>要綁付款方式；今日 $0，之後 $20／月</td></tr>
+<tr><td>pricing 頁？</td><td>當日 404；以應用內為準</td></tr>
+<tr><td>用量點計？</td><td>只有月百分比；輕對話可仍 0%</td></tr>
+<tr><td>會唔會自動寄信／發帖？</td><td>示範未見自動寄出；仍要人確認</td></tr>
+<tr><td>助手叫咩名？</td><td>開通後為 <strong>Today</strong>（示範曾用 Comet）</td></tr>
+</table>
+
+</section>
+
+<section class="slide" data-title="教師要檢查" data-sec="P">
+
+<h2>教師要檢查（AI 可能錯）</h2>
+<ol class="big-list">
+<li>草稿有無<strong>捏造日期／人名／價錢</strong>？</li>
+<li>有無誤讀真實郵件／日曆？（示範應禁止或用人核對）</li>
+<li>學員有無明白<strong>Disconnect</strong> 同<strong>取消訂閱</strong>入口？</li>
+<li>發佈前有無人眼覆核？（RacSo 原則）</li>
+<li>價錢／額度以<strong>當日官方畫面</strong>為準，勿背死教學截圖</li>
+</ol>
+<div class="callout check"><div class="callout-h">AI 可能錯</div><div>有禮貌、有條理 ≠ 正確。對外溝通前必查。</div></div>
+
+</section>
+
+<section class="slide" data-title="小測驗" data-sec="P">
+
+<h2>練習小測驗（3 題）</h2>
+<ol class="big-list">
+<li>入門時 Plan 頁見到邊啲方案？<br><span class="hint">答案：當日只有 Pro／Ultra；無 Free 方案卡。</span></li>
+<li>Pro 7 日試用今日要付幾多？之後呢？<br><span class="hint">答案：今日 $0；之後 $20／月（要綁付款方式）。</span></li>
+<li>粵語科普草稿可唔可以直接當已發佈？<br><span class="hint">答案：唔可以。要標草稿，人確認先發。</span></li>
+</ol>
+<p class="note">加分：點解估唔到 Free 能做幾次？（無 Free 方案＋無逐則 credit＋百分比粗）</p>
+
+</section>
+
+<section class="slide" data-title="提示詞一覽" data-sec="P">
+
+<h2>提示詞一覽（一鍵複製）</h2>
+<p class="hint">同一提示亦出現在對應示範頁。可按「複製」貼上 today.ai。</p>
+<div class="prompt-box" id="box-pmt01b">
+<div class="prompt-head"><span>提示碼 <strong>pmt01b</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt01b">複製</button></div>
+<pre class="prompt-text" id="txt-pmt01b">請整理以下虛構一週待辦，只回短摘要（分 Personal／Office），再給 Top 3 優先次序。不要讀取我的真實 Gmail／Calendar／Drive／GitHub。
+
+【Personal】
+- Mon：Grocery run for Alex Rivera
+- Wed：Dentist call
+- Sat：Park walk
+
+【Office · Project Lighthouse】
+- Tue：Draft exhibit-label for Northwind Museum
+- Thu：Standup notes
+- Fri：Review lighthouse-budget-demo.xlsx</pre>
+</div>
+<div class="prompt-box" id="box-pmt02b">
+<div class="prompt-head"><span>提示碼 <strong>pmt02b</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt02b">複製</button></div>
+<pre class="prompt-text" id="txt-pmt02b">用 morning-brief 風格，摘要一個虛構星期二日程（通勤、standup、寫稿、午餐、預算表、散步）。不要讀取真實 Gmail／Calendar／Drive／GitHub，不要建立任何日曆事件。只輸出時間線＋一句 Suggested prep。</pre>
+</div>
+<div class="prompt-box" id="box-pmt03b">
+<div class="prompt-head"><span>提示碼 <strong>pmt03b</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt03b">複製</button></div>
+<pre class="prompt-text" id="txt-pmt03b">Draft only — do not send. 用虛構人名 Alex Rivera → Jordan Hale，寫一封改期郵件模板：把周四 15:00 的 Project Lighthouse check-in 改去周二 10:30 或周三 14:00。不要連接真實郵箱、不要寄出。</pre>
+</div>
+<div class="prompt-box" id="box-pmt04b">
+<div class="prompt-head"><span>提示碼 <strong>pmt04b</strong></span>
+<button type="button" class="copy-btn" data-target="txt-pmt04b">複製</button></div>
+<pre class="prompt-text" id="txt-pmt04b">請揀一個適合澳門科學館訪客嘅短題，用粵語寫約 150 字科普草稿。
+規則：未獲我確認前唔好發佈／唔好發帖。回覆開頭標明「草稿，未發佈」。</pre>
+</div>
+
+</section>
+
+<section class="slide" data-title="官方連結" data-sec="P">
+
+<h2>官方連結與來源</h2>
+<ul class="bullets big links">
+<li><a href="https://today.ai/" target="_blank" rel="noopener">https://today.ai/</a> — 產品入口</li>
+<li><a href="https://today.ai/login" target="_blank" rel="noopener">https://today.ai/login</a> — 登入</li>
+<li><a href="https://today.ai/articles/capabilities" target="_blank" rel="noopener">Capabilities</a></li>
+<li><a href="https://today.ai/articles/integrations" target="_blank" rel="noopener">Integrations</a></li>
+<li><a href="https://today.ai/articles/blog/what-is-today" target="_blank" rel="noopener">What is Today</a></li>
+<li><a href="https://today.ai/terms" target="_blank" rel="noopener">Terms</a>（條款日期參考 2026-09-07）</li>
+</ul>
+<p class="note">僅列研究已收錄 URL。pricing/plans 當日 404。</p>
+
+</section>
+
+<section class="slide" data-title="結尾" data-sec="P">
+
+<div class="cover">
+<div class="cover-badge">記住三句</div>
+<h1>連來源先起步<br>試用要綁付款方式<br>草稿要人把關先發</h1>
+<p class="cover-sub">today.ai 國際版 · <a href="https://today.ai/" target="_blank" rel="noopener">today.ai</a><br>
+查證：2026-10-26 Asia/Macau<br>
+中國版對比稍後另頁<br>
+部署：msc-ai-tutorials / <code>today-ai/</code></p>
+<p class="credit">澳門科學館 Oscar 製作</p>
+<p class="hint">價錢／功能／按鈕以官方當日介面為準</p>
+</div>
+
+</section>
+
+  </div>
+  <nav class="nav" aria-label="翻頁">
+    <button type="button" id="prev" disabled>← 上一頁</button>
+    <button type="button" class="toc-btn" id="toc-open-2" onclick="document.getElementById('toc-open').click()">目錄</button>
+    <button type="button" id="next">下一頁 →</button>
+  </nav>
+</div>
+<div class="toc-drawer" id="toc-drawer" aria-hidden="true">
+  <div class="toc-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <h3>目錄</h3>
+      <button type="button" class="btn-icon" id="toc-close" style="background:#0d2f44" aria-label="關閉">✕</button>
+    </div>
+    <ol id="drawer-list"></ol>
+  </div>
+</div>
+<script>
+
+
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;let idx=0;
+  const bar=document.getElementById('progress'),counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prev'),nextBtn=document.getElementById('next');
+  const tocList=document.getElementById('toc-list'),drawer=document.getElementById('toc-drawer'),drawerList=document.getElementById('drawer-list');
+  const titles=slides.map((s,i)=>s.dataset.title||('投影片 '+(i+1)));
+  function buildToc(el){if(!el)return;el.innerHTML='';titles.forEach((t,i)=>{const li=document.createElement('li');const a=document.createElement('a');a.textContent=(i+1)+'. '+t;a.href='#'+(i+1);a.addEventListener('click',ev=>{ev.preventDefault();go(i);closeToc();});li.appendChild(a);el.appendChild(li);});}
+  buildToc(tocList);buildToc(drawerList);
+  function go(i){
+    if(i<0||i>=total)return;
+    slides[idx].classList.remove('active');idx=i;slides[idx].classList.add('active');
+    bar.style.width=((idx+1)/total*100)+'%';counter.textContent=(idx+1)+' / '+total;
+    prevBtn.disabled=idx===0;nextBtn.disabled=idx===total-1;
+    document.querySelector('.stage').scrollTop=0;
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  function closeToc(){drawer.classList.remove('open');}
+  document.getElementById('toc-open').addEventListener('click',()=>drawer.classList.add('open'));
+  drawer.addEventListener('click',ev=>{if(ev.target===drawer)closeToc();});
+  document.getElementById('toc-close').addEventListener('click',closeToc);
+  prevBtn.addEventListener('click',()=>go(idx-1));nextBtn.addEventListener('click',()=>go(idx+1));
+  document.addEventListener('keydown',ev=>{
+    const tag=(ev.target&&ev.target.tagName)||'';
+    if(tag==='INPUT'||tag==='TEXTAREA')return;
+    if(ev.key==='ArrowRight'||ev.key==='PageDown'||(ev.key===' '&&tag!=='BUTTON'&&tag!=='A')){ev.preventDefault();go(idx+1);}
+    else if(ev.key==='ArrowLeft'||ev.key==='PageUp'){ev.preventDefault();go(idx-1);}
+    else if(ev.key==='Escape')closeToc();
+    else if(ev.key==='Home'){ev.preventDefault();go(0);}
+    else if(ev.key==='End'){ev.preventDefault();go(total-1);}
+  });
+  let tx=null,ty=null;const stage=document.querySelector('.stage');
+  stage.addEventListener('touchstart',ev=>{tx=ev.changedTouches[0].screenX;ty=ev.changedTouches[0].screenY;},{passive:true});
+  stage.addEventListener('touchend',ev=>{if(tx==null)return;const dx=ev.changedTouches[0].screenX-tx,dy=ev.changedTouches[0].screenY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)go(idx+1);else go(idx-1);}tx=null;},{passive:true});
+  function copyText(t){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
+    return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');res();}catch(x){rej(x);}ta.remove();});}
+  document.addEventListener('click',ev=>{const btn=ev.target.closest('.copy-btn');if(!btn)return;
+    const tgt=document.getElementById(btn.dataset.target);const text=tgt?tgt.textContent:(btn.dataset.copy||'');
+    copyText(text).then(()=>{btn.classList.add('copied');btn.textContent='已複製';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='複製';},1500);});});
+  const hash=parseInt(location.hash.replace('#',''),10);
+  go((hash>=1&&hash<=total)?hash-1:0);
+})();
+(function(){
+  const lb=document.createElement('div');
+  lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','放大圖片');
+  lb.innerHTML='<span class="lb-hint">按 Esc 或點擊任何位置關閉</span><button type="button" class="lb-close" aria-label="關閉">✕</button><img alt=""><div class="lb-cap"></div>';
+  document.body.appendChild(lb);
+  const big=lb.querySelector('img'),cap=lb.querySelector('.lb-cap'),closeBtn=lb.querySelector('.lb-close');
+  let lastFocus=null,isOpen=false;
+  function open(img){
+    big.src=img.currentSrc||img.src;big.alt=img.alt||'';
+    const fig=img.closest('figure');const fc=fig&&fig.querySelector('figcaption');
+    cap.textContent=(fc&&fc.textContent)||img.alt||'';
+    lastFocus=document.activeElement;isOpen=true;lb.classList.add('open');closeBtn.focus({preventScroll:true});
+  }
+  function close(){
+    if(!isOpen)return;isOpen=false;lb.classList.remove('open');big.removeAttribute('src');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+  }
+  document.querySelectorAll('.slide img').forEach(img=>{
+    img.setAttribute('tabindex','0');img.setAttribute('role','button');
+    if(!img.title)img.title='點擊放大';
+  });
+  document.addEventListener('click',e=>{
+    if(isOpen)return;
+    const img=e.target.closest&&e.target.closest('.slide img');
+    if(img){e.preventDefault();open(img);}
+  });
+  lb.addEventListener('click',e=>{e.stopPropagation();close();});
+  window.addEventListener('keydown',e=>{
+    if(isOpen){
+      e.stopImmediatePropagation();
+      if(e.key==='Escape'||e.key==='Enter'||e.key===' '){e.preventDefault();close();}
+      else if(e.key.indexOf('Arrow')===0||e.key==='PageUp'||e.key==='PageDown'||e.key==='Home'||e.key==='End'||e.key==='Tab'){e.preventDefault();}
+      return;
+    }
+    const a=document.activeElement;
+    if(e.key==='Enter'&&a&&a.matches&&a.matches('.slide img')){e.preventDefault();e.stopImmediatePropagation();open(a);}
+  },true);
+})();
+
+
+</script>
+</body>
+</html>
