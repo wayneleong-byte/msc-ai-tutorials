@@ -78,7 +78,8 @@ mark.tag.r{background:var(--risk-l);color:var(--risk)}
 code{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:.88em}
 
 /* ---------- cover ---------- */
-.cover{text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:70vh}
+.cover{text-align:center;flex-direction:column;justify-content:center;min-height:70vh}
+.slide.cover.is-on{display:flex}
 .cover h1{font-size:clamp(2.3rem,6vw,4.1rem);line-height:1.1;margin:.2em 0 .25em;letter-spacing:-1.5px}
 .cover h1 span{background:linear-gradient(120deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 .cover .sub{font-size:1.22rem;color:var(--ink-2);max-width:60ch;margin:0 auto 26px}
@@ -187,6 +188,31 @@ td b{color:var(--ink)}
 .kbdhint{font-size:.78rem;color:var(--ink-3)}
 kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:.8em;font-family:inherit;font-weight:700}
 
+
+/* ---------- interface mockups ---------- */
+svg.mock{width:100%;height:auto;display:block;margin:14px 0 6px;
+  border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.mocknote{font-size:.82rem;color:var(--ink-3);margin:0 0 18px}
+.mocknote b{color:var(--warn)}
+.figlabel{display:flex;gap:10px;align-items:baseline;margin:22px 0 0;flex-wrap:wrap}
+.figlabel h3{margin:0;font-size:1.08rem}
+.figlabel span{font-size:.78rem;font-weight:800;color:var(--accent);
+  background:var(--accent-l);border-radius:999px;padding:3px 10px}
+/* ---------- downloads ---------- */
+.dl{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin:18px 0}
+.dlcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+  border-left:5px solid var(--brand);border-radius:var(--r);padding:16px 18px}
+.dlcard h4{margin:0 0 6px;font-size:1rem}
+.dlcard p{margin:0 0 12px;font-size:.88rem;color:var(--ink-2);flex:1 1 auto}
+.dlcard .meta{font-size:.76rem;color:var(--ink-3);margin:0 0 10px;font-weight:700}
+.dlcard a{display:inline-block;text-decoration:none;font-weight:800;font-size:.88rem;
+  background:var(--brand);color:#fff;padding:9px 18px;border-radius:10px;text-align:center}
+.dlcard a:hover{background:var(--brand-d)}
+.dlcard.alt{border-left-color:var(--accent)}
+.dlcard.alt a{background:var(--accent)}
+.dlcard.alt a:hover{background:#551fae}
+@media print{.dlcard a{border:1px solid var(--line);color:var(--ink);background:#fff}}
+
 svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
 
 @media (max-width:760px){
@@ -198,6 +224,7 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
   body{background:#fff}
   .topbar,.navbar{display:none}
   .slide{display:block !important;page-break-after:always;box-shadow:none;border:0;min-height:0;padding:0 0 26px}
+  .slide.cover{display:block !important}
   .acc > div{display:block !important}
   .steppanes > div{display:block !important}
   .fb{display:block !important}
@@ -221,7 +248,7 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
 <section class="slide cover" data-nav="封面">
   <p class="eyebrow">澳門科學館 · 教育員培訓 / 公眾課程</p>
   <h1>用 <span>Canva AI</span><br>做好展覽與教育設計</h1>
-  <p class="sub">由「識用 Canva」到「用 AI 快手出稿」。全程以 Canva 官方說明中心查證嘅功能為準，附科學館實際應用案例同六十分鐘實作練習。</p>
+  <p class="sub">由「識用 Canva」到「用 AI 快手出稿」。全程以 Canva 官方說明中心查證嘅功能為準，附介面示意圖、成品範例、可下載教學材料、科學館應用案例同六十分鐘實作練習。</p>
   <div class="metarow">
     <div>📅 2026 年 10 月版</div>
     <div>⏱️ 建議 90 分鐘</div>
@@ -242,7 +269,8 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
     <div class="card kb"><h4>③ 用量制度</h4><p>Standard / Premium / Ultra 三層額度，先搞清楚先唔會中途卡住。</p></div>
     <div class="card ka"><h4>④ 提示語寫法</h4><p>四件事公式：對象、內容、風格、尺寸。</p></div>
     <div class="card ka"><h4>⑤ 科學館案例</h4><p>展板、活動海報、教材簡報、社交媒體宣傳圖四條實際流程。</p></div>
-    <div class="card ka"><h4>⑥ 實作＋測驗</h4><p>60 分鐘動手做一套宣傳組合，10 題自我檢查。</p></div>
+    <div class="card ka"><h4>⑥ 介面示意＋材料</h4><p>六張自製介面示意圖、兩份成品範例、七份可下載教學材料。</p></div>
+    <div class="card ka"><h4>⑦ 實作＋測驗</h4><p>60 分鐘動手做一套宣傳組合，10 題自我檢查。</p></div>
   </div>
   <div class="note i"><b>關於本簡報嘅資料來源：</b>所有功能名稱、分層同用量規則，均取自 Canva 官方說明中心（Canva Help Center）及官方新聞室頁面，最後查證日期為 2026 年 10 月 26 日。凡屬本簡報自行設計嘅教學例子、練習題或示範數據，均會明確標示 <mark class="tag a">示例</mark>。</div>
 </section>
@@ -589,6 +617,615 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
   </div>
   <p class="src">各功能用途依官方說明；Magic Activities 句式同提示限制引自 Canva Help Center「Get better results with Magic Activities」。流程編排與活動主題為本簡報自行設計 <mark class="tag a">示例</mark>。</p>
 </section>
+
+<!-- ================= 示意圖 1 ================= -->
+<section class="slide" data-nav="介面示意·對話與文圖">
+  <p class="eyebrow">Interface · 介面示意圖</p>
+  <h2>介面長咩樣（一）：對話、文字、圖像</h2>
+  <p class="mocknote"><b>重要：</b>以下全部係本簡報<b>自製嘅介面示意圖</b>，用嚟說明操作位置同流程，
+  <b>並非 Canva 實際截圖</b>。Canva 介面需登入帳號才可擷取，且會隨版本更新；
+  實際畫面、按鈕位置同文字以你登入後所見為準。</p>
+
+  <div class="figlabel"><h3>① Canva AI 2.0 對話式設計</h3><span>Ultra 層級</span></div>
+  <p class="small">左側工具列頂部嘅 Canva AI 入口、中央畫布、右側對話面板。重點睇對話係「一路傾一路改」，唔係落一次單。</p>
+  <svg class="mock" viewBox="0 0 980 470" role="img"
+  aria-label="Canva AI 2.0 對話式設計介面示意圖：左側工具列、中央畫布、右側 AI 對話面板">
+  
+  <rect x="0" y="0" width="980" height="470" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="980" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="980" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="830" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">canva.com/design/… — 編輯器</text>
+  <line x1="0" y1="38" x2="980" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <!-- left tool rail -->
+  <rect x="10" y="48" width="74" height="410" rx="9" fill="#f7fafc" stroke="#e3eaf1"/>
+  <g font-size="9.5" fill="#5a6b7d" text-anchor="middle">
+    <rect x="22" y="58" width="50" height="40" rx="7" fill="#e3f4f6" stroke="#0a7b8c"/>
+    <text x="47" y="75" font-size="15" fill="#0a7b8c">✦</text><text x="47" y="91" fill="#055d6b">Canva AI</text>
+    <rect x="22" y="106" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="128">設計</text>
+    <rect x="22" y="150" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="172">元素</text>
+    <rect x="22" y="194" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="216">文字</text>
+    <rect x="22" y="238" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="260">品牌</text>
+    <rect x="22" y="282" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="304">上傳</text>
+    <rect x="22" y="326" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="348">繪圖</text>
+    <rect x="22" y="370" width="50" height="36" rx="7" fill="#fff" stroke="#e3eaf1"/><text x="47" y="392">專案</text>
+  </g>
+  <!-- canvas -->
+  <rect x="94" y="48" width="536" height="410" fill="#eef2f6"/>
+  <rect x="150" y="70" width="424" height="366" rx="4" fill="#0d1b3a"/>
+  <circle cx="300" cy="150" r="2" fill="#fff"/><circle cx="380" cy="120" r="1.6" fill="#fff"/>
+  <circle cx="455" cy="170" r="2.2" fill="#fff"/><circle cx="240" cy="200" r="1.5" fill="#fff"/>
+  <circle cx="500" cy="110" r="1.8" fill="#fff"/><circle cx="350" cy="230" r="1.5" fill="#fff"/>
+  <text x="362" y="140" font-size="26" font-weight="800" fill="#ffffff" text-anchor="middle">夜探星空</text>
+  <text x="362" y="170" font-size="13" fill="#f5c76e" text-anchor="middle">親子天文觀測夜</text>
+  <g transform="translate(300,250)">
+    <ellipse cx="62" cy="128" rx="78" ry="7" fill="#1b2d52"/>
+    <path d="M30 128 L38 72 L46 128 Z" fill="#101c38"/>
+    <line x1="38" y1="74" x2="86" y2="52" stroke="#101c38" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="20" cy="104" r="11" fill="#101c38"/><rect x="13" y="112" width="15" height="24" rx="6" fill="#101c38"/>
+    <circle cx="104" cy="98" r="13" fill="#101c38"/><rect x="95" y="108" width="19" height="28" rx="7" fill="#101c38"/>
+    <circle cx="70" cy="118" r="5" fill="#f5c76e" opacity=".75"/>
+  </g>
+  <text x="362" y="420" font-size="10.5" fill="#cfd8e3" text-anchor="middle">11 月下旬 · 19:00–21:30 · 名額 40 組家庭（示例）</text>
+  <!-- right AI chat panel -->
+  <rect x="640" y="48" width="330" height="410" rx="9" fill="#fbfcfe" stroke="#e3eaf1"/>
+  <rect x="640" y="48" width="330" height="34" rx="9" fill="#f0e9fd"/>
+  <rect x="640" y="70" width="330" height="12" fill="#f0e9fd"/>
+  <text x="656" y="70" font-size="11.5" font-weight="800" fill="#6c2bd9">✦ Canva AI · 對話式設計</text>
+  <!-- user bubble -->
+  <rect x="712" y="94" width="246" height="56" rx="10" fill="#0a7b8c"/>
+  <text x="726" y="114" font-size="10.5" fill="#ffffff">幫我做一張親子天文觀測夜海報，</text>
+  <text x="726" y="130" font-size="10.5" fill="#ffffff">深藍夜空色系，標題放上方，底部</text>
+  <text x="726" y="146" font-size="10.5" fill="#ffffff">留位放日期同報名 QR 碼</text>
+  <!-- ai bubble -->
+  <rect x="652" y="160" width="258" height="52" rx="10" fill="#ffffff" stroke="#e3eaf1"/>
+  <text x="666" y="180" font-size="10.5" fill="#2d4055">已生成初稿，並套用你嘅品牌色。</text>
+  <text x="666" y="196" font-size="10.5" fill="#2d4055">想我調整標題大小定換主視覺？</text>
+  <!-- user follow-up -->
+  <rect x="736" y="222" width="222" height="38" rx="10" fill="#0a7b8c"/>
+  <text x="750" y="241" font-size="10.5" fill="#ffffff">標題改兩行，第二行細一級</text>
+  <text x="750" y="255" font-size="10.5" fill="#ffffff"></text>
+  <rect x="652" y="270" width="230" height="36" rx="10" fill="#ffffff" stroke="#e3eaf1"/>
+  <text x="666" y="292" font-size="10.5" fill="#2d4055">已更新。仲需要出其他尺寸嗎？</text>
+  <!-- tier badge -->
+  <rect x="652" y="318" width="306" height="42" rx="9" fill="#fdeaec" stroke="#f3c3c9"/>
+  <text x="666" y="336" font-size="10.5" font-weight="800" fill="#b22234">Ultra AI 層級</text>
+  <text x="666" y="352" font-size="10" fill="#7d1724">對話式設計耗額度最多，留喺要反覆傾嘅項目</text>
+  <!-- input box -->
+  <rect x="652" y="372" width="306" height="36" rx="18" fill="#ffffff" stroke="#c9d6e2"/>
+  <text x="668" y="395" font-size="10.5" fill="#9aa7b4">描述你想做嘅設計…</text>
+  <circle cx="936" cy="390" r="13" fill="#6c2bd9"/><text x="936" y="395" font-size="12" fill="#fff" text-anchor="middle">↑</text>
+  <text x="656" y="428" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+</svg>
+
+  <div class="figlabel"><h3>② Magic Write 與 Dream Lab</h3><span>Standard / Premium</span></div>
+  <p class="small">左邊示範文字生成同「追問修正」；右邊示範圖像生成——留意一次出四張、參考圖位置、以及 Boost resolution。</p>
+  <svg class="mock" viewBox="0 0 980 440" role="img"
+  aria-label="Magic Write 與 Dream Lab 介面示意圖：左為文字生成與追問，右為四張圖像結果與參考圖">
+  <!-- Magic Write panel -->
+  
+  <rect x="0" y="0" width="478" height="440" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="478" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="478" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="328" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">Magic Write — 文字生成</text>
+  <line x1="0" y1="38" x2="478" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <text x="18" y="62" font-size="12.5" font-weight="800" fill="#0d1b2a">✎ Magic Write</text>
+  <rect x="18" y="72" width="60" height="18" rx="9" fill="#e4f3ea" stroke="#bde0ca"/>
+  <text x="48" y="85" font-size="9.5" font-weight="800" fill="#157347" text-anchor="middle">Standard</text>
+  <text x="86" y="85" font-size="9.5" fill="#5a6b7d">付費方案不計入每月額度</text>
+  <!-- prompt box -->
+  <rect x="18" y="100" width="442" height="74" rx="9" fill="#f7fafc" stroke="#c9d6e2"/>
+  <text x="30" y="120" font-size="10.5" fill="#2d4055">為澳門科學館親子天文觀測夜寫海報文案，</text>
+  <text x="30" y="137" font-size="10.5" fill="#2d4055">繁體中文約 60 字，對象 6–12 歲小朋友同家長，</text>
+  <text x="30" y="154" font-size="10.5" fill="#2d4055">語氣親切帶期待感，要提到望遠鏡實測同球幕節目</text>
+  <rect x="368" y="180" width="92" height="26" rx="13" fill="#0a7b8c"/>
+  <text x="414" y="197" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">生成</text>
+  <!-- result -->
+  <text x="18" y="228" font-size="10.5" font-weight="800" fill="#055d6b">生成結果</text>
+  <rect x="18" y="236" width="442" height="68" rx="9" fill="#ffffff" stroke="#e3eaf1"/>
+  <text x="30" y="256" font-size="10.5" fill="#0d1b2a">親手轉動望遠鏡，親眼認出第一個星座。</text>
+  <text x="30" y="274" font-size="10.5" fill="#0d1b2a">「夜探星空．親子天文觀測夜」—— 望遠鏡實測、</text>
+  <text x="30" y="292" font-size="10.5" fill="#0d1b2a">星座辨認、天文館球幕節目，一晚齊集。</text>
+  <!-- follow-ups -->
+  <text x="18" y="328" font-size="10.5" font-weight="800" fill="#6c2bd9">追問修正（第四步，最重要）</text>
+  <g font-size="10">
+    <rect x="18" y="336" width="78" height="24" rx="12" fill="#f0e9fd" stroke="#dcc9f7"/>
+    <text x="57" y="352" fill="#6c2bd9" text-anchor="middle">短一半</text>
+    <rect x="104" y="336" width="150" height="24" rx="12" fill="#f0e9fd" stroke="#dcc9f7"/>
+    <text x="179" y="352" fill="#6c2bd9" text-anchor="middle">語氣再親切少少</text>
+    <rect x="262" y="336" width="150" height="24" rx="12" fill="#f0e9fd" stroke="#dcc9f7"/>
+    <text x="337" y="352" fill="#6c2bd9" text-anchor="middle">第二句改成提問句</text>
+  </g>
+  <rect x="18" y="370" width="442" height="42" rx="9" fill="#fdf0e0" stroke="#f0d3ad"/>
+  <text x="30" y="388" font-size="10" font-weight="800" fill="#6b3706">唔好重新寫一次提示語由頭做。</text>
+  <text x="30" y="403" font-size="10" fill="#6b3706">官方建議：繼續對話來修正結果。</text>
+  <text x="18" y="430" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+
+  <!-- Dream Lab panel -->
+  <g transform="translate(502,0)">
+  
+  <rect x="0" y="0" width="478" height="440" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="478" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="478" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="328" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">Dream Lab — AI 圖像生成</text>
+  <line x1="0" y1="38" x2="478" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <text x="18" y="62" font-size="12.5" font-weight="800" fill="#0d1b2a">✦ Dream Lab</text>
+  <rect x="18" y="72" width="62" height="18" rx="9" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="49" y="85" font-size="9.5" font-weight="800" fill="#055d6b" text-anchor="middle">Premium</text>
+  <text x="88" y="85" font-size="9.5" fill="#5a6b7d">入口：首頁 → More → Dream Lab</text>
+  <rect x="18" y="100" width="340" height="50" rx="9" fill="#f7fafc" stroke="#c9d6e2"/>
+  <text x="30" y="120" font-size="10" fill="#2d4055">一家人用望遠鏡望星空嘅剪影，深藍夜空配暖黃</text>
+  <text x="30" y="137" font-size="10" fill="#2d4055">燈光，扁平插畫風格，上方三分一留白，直幅</text>
+  <!-- reference image slot -->
+  <rect x="366" y="100" width="94" height="50" rx="9" fill="#f0e9fd" stroke="#dcc9f7" stroke-dasharray="4 3"/>
+  <text x="413" y="120" font-size="9.5" font-weight="800" fill="#6c2bd9" text-anchor="middle">+ 參考圖</text>
+  <text x="413" y="136" font-size="8.5" fill="#6c2bd9" text-anchor="middle">引導風格／構圖</text>
+  <!-- 4 results -->
+  <text x="18" y="174" font-size="10.5" font-weight="800" fill="#055d6b">每個提示語一次出 4 張</text>
+  <g>
+    <rect x="18" y="182" width="106" height="106" rx="6" fill="#0d1b3a" stroke="#0a7b8c" stroke-width="2.5"/>
+    <circle cx="50" cy="208" r="1.6" fill="#fff"/><circle cx="92" cy="220" r="1.8" fill="#fff"/>
+    <path d="M52 268 L58 232 L64 268 Z" fill="#1b2d52"/>
+    <line x1="58" y1="234" x2="86" y2="220" stroke="#1b2d52" stroke-width="4"/>
+    <circle cx="38" cy="256" r="6" fill="#1b2d52"/><circle cx="76" cy="252" r="7" fill="#1b2d52"/>
+    <circle cx="60" cy="262" r="3" fill="#f5c76e"/>
+    <rect x="18" y="182" width="30" height="16" rx="4" fill="#0a7b8c"/>
+    <text x="33" y="194" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">已選</text>
+    <rect x="132" y="182" width="106" height="106" rx="6" fill="#132444" stroke="#e3eaf1"/>
+    <circle cx="170" cy="212" r="1.6" fill="#fff"/><circle cx="205" cy="230" r="1.5" fill="#fff"/>
+    <ellipse cx="185" cy="266" rx="36" ry="5" fill="#1f3358"/>
+    <circle cx="170" cy="252" r="7" fill="#1f3358"/><circle cx="198" cy="248" r="8" fill="#1f3358"/>
+    <rect x="246" y="182" width="106" height="106" rx="6" fill="#0b1830" stroke="#e3eaf1"/>
+    <circle cx="280" cy="220" r="2" fill="#fff"/><circle cx="320" cy="206" r="1.6" fill="#fff"/>
+    <path d="M286 270 L292 236 L298 270 Z" fill="#1a2b4d"/>
+    <circle cx="316" cy="256" r="7" fill="#1a2b4d"/>
+    <rect x="360" y="182" width="106" height="106" rx="6" fill="#101f3c" stroke="#e3eaf1"/>
+    <circle cx="392" cy="214" r="1.8" fill="#fff"/><circle cx="434" cy="236" r="1.6" fill="#fff"/>
+    <ellipse cx="413" cy="268" rx="40" ry="5" fill="#1d2f54"/>
+    <circle cx="400" cy="252" r="8" fill="#1d2f54"/><circle cx="428" cy="256" r="6" fill="#1d2f54"/>
+  </g>
+  <!-- actions -->
+  <g font-size="10">
+    <rect x="18" y="300" width="104" height="26" rx="13" fill="#fff" stroke="#c9d6e2"/>
+    <text x="70" y="317" fill="#2d4055" text-anchor="middle">追加指令修改</text>
+    <rect x="130" y="300" width="90" height="26" rx="13" fill="#fff" stroke="#c9d6e2"/>
+    <text x="175" y="317" fill="#2d4055" text-anchor="middle">Edit image</text>
+    <rect x="228" y="300" width="124" height="26" rx="13" fill="#fdf0e0" stroke="#f0d3ad"/>
+    <text x="290" y="317" fill="#6b3706" text-anchor="middle">Boost resolution</text>
+    <rect x="360" y="300" width="106" height="26" rx="13" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="413" y="317" fill="#157347" text-anchor="middle">用於設計</text>
+  </g>
+  <rect x="18" y="338" width="448" height="38" rx="9" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="30" y="355" font-size="10" font-weight="800" fill="#063e47">追加指令範例（官方）：Make the car blue.</text>
+  <text x="30" y="370" font-size="10" fill="#063e47">Boost resolution 同使用參考圖均可能耗用 AI 額度。</text>
+  <rect x="18" y="384" width="448" height="30" rx="9" fill="#fdeaec" stroke="#f3c3c9"/>
+  <text x="30" y="403" font-size="10" font-weight="800" fill="#7d1724">生成圖只可當插畫／示意圖，不可當真實天文攝影。</text>
+  <text x="18" y="430" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+  </g>
+</svg>
+</section>
+<!-- ================= 示意圖 2 ================= -->
+<section class="slide" data-nav="介面示意·編輯與改版">
+  <p class="eyebrow">Interface · 介面示意圖</p>
+  <h2>介面長咩樣（二）：影像編輯、改版、數據、互動</h2>
+  <p class="mocknote"><b>同上：</b>全部為自製介面示意圖，非 Canva 實際截圖。</p>
+
+  <div class="figlabel"><h3>③ 四個「樣樣似」嘅影像工具＋Magic Layers</h3><span>最易撞板</span></div>
+  <p class="small">同一張展場照片，四個工具四種結果。呢張圖建議喺培訓時停久一陣——係最多同事搞錯嘅地方。</p>
+  <svg class="mock" viewBox="0 0 980 450" role="img"
+  aria-label="影像編輯功能示意圖：Magic Grab 保留背景、Background Remover 去背、Magic Eraser 清除物件、Magic Layers 還原可編輯設計">
+  
+  <rect x="0" y="0" width="980" height="450" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="980" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="980" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="830" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">編輯器 → Edit → Tools — 影像編輯工具</text>
+  <line x1="0" y1="38" x2="980" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <text x="18" y="62" font-size="12.5" font-weight="800" fill="#0d1b2a">同一張展場照片，四個工具四種結果</text>
+  <text x="18" y="80" font-size="10" fill="#5a6b7d">左起：原圖 → Magic Grab（保留背景）→ Background Remover（只剩主體）→ Magic Eraser（令物件消失）</text>
+
+  <!-- original -->
+  <g transform="translate(18,92)">
+    <rect x="0" y="0" width="222" height="150" rx="7" fill="#dde7ee" stroke="#c9d6e2"/>
+    <rect x="0" y="112" width="222" height="38" fill="#cbd8e2"/>
+    <rect x="34" y="44" width="56" height="70" rx="4" fill="#0a7b8c"/>
+    <circle cx="62" cy="34" r="13" fill="#0e97ab"/>
+    <rect x="140" y="80" width="30" height="34" rx="3" fill="#a8540a"/>
+    <rect x="180" y="92" width="22" height="22" rx="3" fill="#8a6038"/>
+    <text x="111" y="168" font-size="10.5" font-weight="800" fill="#2d4055" text-anchor="middle">原圖（展品＋雜物）</text>
+  </g>
+  <!-- magic grab -->
+  <g transform="translate(258,92)">
+    <rect x="0" y="0" width="222" height="150" rx="7" fill="#dde7ee" stroke="#c9d6e2"/>
+    <rect x="0" y="112" width="222" height="38" fill="#cbd8e2"/>
+    <rect x="140" y="80" width="30" height="34" rx="3" fill="#a8540a"/>
+    <rect x="180" y="92" width="22" height="22" rx="3" fill="#8a6038"/>
+    <g transform="translate(76,-6)">
+      <rect x="34" y="44" width="56" height="70" rx="4" fill="#0a7b8c"/>
+      <circle cx="62" cy="34" r="13" fill="#0e97ab"/>
+      <rect x="22" y="18" width="80" height="104" rx="5" fill="none" stroke="#6c2bd9" stroke-width="2" stroke-dasharray="5 3"/>
+      <circle cx="22" cy="18" r="4" fill="#6c2bd9"/><circle cx="102" cy="18" r="4" fill="#6c2bd9"/>
+      <circle cx="22" cy="122" r="4" fill="#6c2bd9"/><circle cx="102" cy="122" r="4" fill="#6c2bd9"/>
+    </g>
+    <path d="M96 84 L150 72" stroke="#6c2bd9" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+    <text x="111" y="168" font-size="10.5" font-weight="800" fill="#6c2bd9" text-anchor="middle">Magic Grab：可搬可縮，背景仍在</text>
+  </g>
+  <!-- bg remover -->
+  <g transform="translate(498,92)">
+    <rect x="0" y="0" width="222" height="150" rx="7" fill="#ffffff" stroke="#c9d6e2"/>
+    <g opacity=".5">
+      <rect x="0" y="0" width="18" height="18" fill="#eef2f6"/><rect x="36" y="0" width="18" height="18" fill="#eef2f6"/>
+      <rect x="72" y="0" width="18" height="18" fill="#eef2f6"/><rect x="108" y="0" width="18" height="18" fill="#eef2f6"/>
+      <rect x="144" y="0" width="18" height="18" fill="#eef2f6"/><rect x="180" y="0" width="18" height="18" fill="#eef2f6"/>
+      <rect x="18" y="18" width="18" height="18" fill="#eef2f6"/><rect x="54" y="18" width="18" height="18" fill="#eef2f6"/>
+      <rect x="90" y="18" width="18" height="18" fill="#eef2f6"/><rect x="126" y="18" width="18" height="18" fill="#eef2f6"/>
+      <rect x="162" y="18" width="18" height="18" fill="#eef2f6"/><rect x="198" y="18" width="18" height="18" fill="#eef2f6"/>
+      <rect x="0" y="36" width="18" height="18" fill="#eef2f6"/><rect x="36" y="36" width="18" height="18" fill="#eef2f6"/>
+      <rect x="72" y="36" width="18" height="18" fill="#eef2f6"/><rect x="108" y="36" width="18" height="18" fill="#eef2f6"/>
+      <rect x="144" y="36" width="18" height="18" fill="#eef2f6"/><rect x="180" y="36" width="18" height="18" fill="#eef2f6"/>
+      <rect x="18" y="54" width="18" height="18" fill="#eef2f6"/><rect x="54" y="54" width="18" height="18" fill="#eef2f6"/>
+      <rect x="90" y="54" width="18" height="18" fill="#eef2f6"/><rect x="126" y="54" width="18" height="18" fill="#eef2f6"/>
+      <rect x="162" y="54" width="18" height="18" fill="#eef2f6"/><rect x="198" y="54" width="18" height="18" fill="#eef2f6"/>
+      <rect x="0" y="72" width="18" height="18" fill="#eef2f6"/><rect x="36" y="72" width="18" height="18" fill="#eef2f6"/>
+      <rect x="72" y="72" width="18" height="18" fill="#eef2f6"/><rect x="108" y="72" width="18" height="18" fill="#eef2f6"/>
+      <rect x="144" y="72" width="18" height="18" fill="#eef2f6"/><rect x="180" y="72" width="18" height="18" fill="#eef2f6"/>
+      <rect x="18" y="90" width="18" height="18" fill="#eef2f6"/><rect x="54" y="90" width="18" height="18" fill="#eef2f6"/>
+      <rect x="90" y="90" width="18" height="18" fill="#eef2f6"/><rect x="126" y="90" width="18" height="18" fill="#eef2f6"/>
+      <rect x="162" y="90" width="18" height="18" fill="#eef2f6"/><rect x="198" y="90" width="18" height="18" fill="#eef2f6"/>
+      <rect x="0" y="108" width="18" height="18" fill="#eef2f6"/><rect x="36" y="108" width="18" height="18" fill="#eef2f6"/>
+      <rect x="72" y="108" width="18" height="18" fill="#eef2f6"/><rect x="108" y="108" width="18" height="18" fill="#eef2f6"/>
+      <rect x="144" y="108" width="18" height="18" fill="#eef2f6"/><rect x="180" y="108" width="18" height="18" fill="#eef2f6"/>
+      <rect x="18" y="126" width="18" height="18" fill="#eef2f6"/><rect x="54" y="126" width="18" height="18" fill="#eef2f6"/>
+      <rect x="90" y="126" width="18" height="18" fill="#eef2f6"/><rect x="126" y="126" width="18" height="18" fill="#eef2f6"/>
+      <rect x="162" y="126" width="18" height="18" fill="#eef2f6"/><rect x="198" y="126" width="18" height="18" fill="#eef2f6"/>
+    </g>
+    <rect x="80" y="38" width="56" height="70" rx="4" fill="#0a7b8c"/>
+    <circle cx="108" cy="28" r="13" fill="#0e97ab"/>
+    <text x="111" y="168" font-size="10.5" font-weight="800" fill="#055d6b" text-anchor="middle">Background Remover：只剩主體</text>
+  </g>
+  <!-- magic eraser -->
+  <g transform="translate(738,92)">
+    <rect x="0" y="0" width="222" height="150" rx="7" fill="#dde7ee" stroke="#c9d6e2"/>
+    <rect x="0" y="112" width="222" height="38" fill="#cbd8e2"/>
+    <rect x="34" y="44" width="56" height="70" rx="4" fill="#0a7b8c"/>
+    <circle cx="62" cy="34" r="13" fill="#0e97ab"/>
+    <ellipse cx="160" cy="98" rx="38" ry="26" fill="#d5e0e8" stroke="#b22234" stroke-width="1.6" stroke-dasharray="4 3"/>
+    <text x="160" y="102" font-size="9.5" fill="#b22234" text-anchor="middle">雜物已清除</text>
+    <text x="111" y="168" font-size="10.5" font-weight="800" fill="#b22234" text-anchor="middle">Magic Eraser：令物件消失</text>
+  </g>
+
+  <!-- magic layers strip -->
+  <rect x="18" y="276" width="942" height="112" rx="10" fill="#f7fafc" stroke="#e3eaf1"/>
+  <text x="34" y="298" font-size="11.5" font-weight="800" fill="#6c2bd9">Magic Layers：手上只剩一張 JPG 舊海報，想改字改圖</text>
+  <g transform="translate(34,306)">
+    <rect x="0" y="0" width="112" height="72" rx="5" fill="#0d1b3a"/>
+    <text x="56" y="30" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">舊海報</text>
+    <text x="56" y="48" font-size="8.5" fill="#cfd8e3" text-anchor="middle">扁平 JPG</text>
+    <text x="56" y="62" font-size="8" fill="#8fa0b5" text-anchor="middle">改唔到</text>
+  </g>
+  <text x="164" y="348" font-size="18" fill="#6c2bd9">→</text>
+  <g transform="translate(192,306)">
+    <rect x="0" y="0" width="112" height="72" rx="5" fill="#fff" stroke="#6c2bd9" stroke-dasharray="4 3"/>
+    <rect x="8" y="8" width="96" height="18" rx="3" fill="#f0e9fd" stroke="#6c2bd9" stroke-width=".8"/>
+    <text x="56" y="21" font-size="8.5" fill="#6c2bd9" text-anchor="middle">文字框（可編輯）</text>
+    <rect x="8" y="32" width="44" height="32" rx="3" fill="#e3f4f6" stroke="#0a7b8c" stroke-width=".8"/>
+    <text x="30" y="51" font-size="8" fill="#055d6b" text-anchor="middle">圖像層</text>
+    <rect x="58" y="32" width="46" height="32" rx="3" fill="#fdf0e0" stroke="#a8540a" stroke-width=".8"/>
+    <text x="81" y="51" font-size="8" fill="#6b3706" text-anchor="middle">圖形層</text>
+  </g>
+  <text x="326" y="348" font-size="10.5" fill="#2d4055">分析設計整體結構同元素關係，將文字還原成真正可編輯嘅文字框、</text>
+  <text x="326" y="366" font-size="10.5" fill="#2d4055">把元素分離，同時保留原本版面。官方說明：並非單純描圖。</text>
+  <rect x="800" y="320" width="146" height="46" rx="9" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="873" y="339" font-size="10" font-weight="800" fill="#055d6b" text-anchor="middle">Canva Design Model</text>
+  <text x="873" y="355" font-size="9.5" fill="#063e47" text-anchor="middle">Premium 層級</text>
+  <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0 0 L6 3 L0 6 Z" fill="#6c2bd9"/></marker></defs>
+  <text x="18" y="412" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+</svg>
+
+  <div class="figlabel"><h3>④ Magic Switch：一份母版出齊尺寸</h3><span>最省時間</span></div>
+  <p class="small">注意每個輸出下面嘅標籤：邊啲直接可用、邊啲要人手微調。</p>
+  <svg class="mock" viewBox="0 0 980 330" role="img"
+  aria-label="Magic Switch 介面示意圖：一份母版設計一鍵轉出五個尺寸">
+  
+  <rect x="0" y="0" width="980" height="330" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="980" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="980" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="830" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">編輯器 → Resize &amp; Magic Switch</text>
+  <line x1="0" y1="38" x2="980" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <text x="18" y="62" font-size="12.5" font-weight="800" fill="#0d1b2a">⇄ Magic Switch：一份母版，一鍵出齊尺寸</text>
+  <rect x="18" y="72" width="78" height="18" rx="9" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="57" y="85" font-size="9.5" font-weight="800" fill="#055d6b" text-anchor="middle">付費方案</text>
+  <text x="104" y="85" font-size="9.5" fill="#5a6b7d">科學館工作中最省時間嘅一步</text>
+
+  <!-- master -->
+  <g transform="translate(18,104)">
+    <rect x="0" y="0" width="128" height="178" rx="6" fill="#0d1b3a" stroke="#0a7b8c" stroke-width="2.5"/>
+    <text x="64" y="40" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">夜探星空</text>
+    <text x="64" y="58" font-size="8.5" fill="#f5c76e" text-anchor="middle">親子天文觀測夜</text>
+    <circle cx="40" cy="86" r="1.6" fill="#fff"/><circle cx="92" cy="78" r="1.4" fill="#fff"/>
+    <path d="M46 150 L52 112 L58 150 Z" fill="#1b2d52"/>
+    <line x1="52" y1="114" x2="80" y2="100" stroke="#1b2d52" stroke-width="4"/>
+    <circle cx="34" cy="138" r="7" fill="#1b2d52"/><circle cx="72" cy="134" r="8" fill="#1b2d52"/>
+    <text x="64" y="168" font-size="7" fill="#cfd8e3" text-anchor="middle">11月下旬 · 名額40組</text>
+    <text x="64" y="194" font-size="10" font-weight="800" fill="#055d6b" text-anchor="middle">母版 A2 直幅</text>
+  </g>
+  <text x="162" y="200" font-size="22" fill="#0a7b8c">→</text>
+
+  <!-- outputs -->
+  <g transform="translate(196,104)">
+    <rect x="0" y="26" width="104" height="104" rx="5" fill="#0d1b3a" stroke="#e3eaf1"/>
+    <text x="52" y="60" font-size="9.5" font-weight="800" fill="#fff" text-anchor="middle">夜探星空</text>
+    <circle cx="30" cy="80" r="1.4" fill="#fff"/><circle cx="74" cy="72" r="1.2" fill="#fff"/>
+    <circle cx="36" cy="110" r="6" fill="#1b2d52"/><circle cx="64" cy="106" r="7" fill="#1b2d52"/>
+    <text x="52" y="146" font-size="9.5" font-weight="800" fill="#2d4055" text-anchor="middle">IG 方圖 1:1</text>
+    <rect x="18" y="154" width="68" height="16" rx="8" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="52" y="166" font-size="8.5" fill="#157347" text-anchor="middle">直接可用</text>
+  </g>
+  <g transform="translate(320,104)">
+    <rect x="18" y="8" width="66" height="122" rx="5" fill="#0d1b3a" stroke="#e3eaf1"/>
+    <text x="51" y="36" font-size="8.5" font-weight="800" fill="#fff" text-anchor="middle">夜探星空</text>
+    <circle cx="36" cy="60" r="1.3" fill="#fff"/><circle cx="68" cy="52" r="1.2" fill="#fff"/>
+    <circle cx="40" cy="106" r="5" fill="#1b2d52"/><circle cx="62" cy="102" r="6" fill="#1b2d52"/>
+    <text x="51" y="146" font-size="9.5" font-weight="800" fill="#2d4055" text-anchor="middle">Story 9:16</text>
+    <rect x="12" y="154" width="78" height="16" rx="8" fill="#fdf0e0" stroke="#f0d3ad"/>
+    <text x="51" y="166" font-size="8.5" fill="#6b3706" text-anchor="middle">需微調版面</text>
+  </g>
+  <g transform="translate(428,104)">
+    <rect x="0" y="44" width="150" height="78" rx="5" fill="#0d1b3a" stroke="#e3eaf1"/>
+    <text x="75" y="74" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">夜探星空</text>
+    <circle cx="36" cy="92" r="1.4" fill="#fff"/><circle cx="112" cy="86" r="1.3" fill="#fff"/>
+    <circle cx="54" cy="110" r="6" fill="#1b2d52"/><circle cx="96" cy="106" r="7" fill="#1b2d52"/>
+    <text x="75" y="146" font-size="9.5" font-weight="800" fill="#2d4055" text-anchor="middle">Facebook 橫圖</text>
+    <rect x="41" y="154" width="68" height="16" rx="8" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="75" y="166" font-size="8.5" fill="#157347" text-anchor="middle">直接可用</text>
+  </g>
+  <g transform="translate(600,104)">
+    <rect x="0" y="40" width="176" height="86" rx="5" fill="#0d1b3a" stroke="#e3eaf1"/>
+    <text x="88" y="74" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">夜探星空</text>
+    <text x="88" y="92" font-size="7.5" fill="#f5c76e" text-anchor="middle">親子天文觀測夜</text>
+    <circle cx="40" cy="108" r="5" fill="#1b2d52"/><circle cx="130" cy="106" r="6" fill="#1b2d52"/>
+    <text x="88" y="146" font-size="9.5" font-weight="800" fill="#2d4055" text-anchor="middle">展場電視橫幅</text>
+    <rect x="46" y="154" width="84" height="16" rx="8" fill="#fdf0e0" stroke="#f0d3ad"/>
+    <text x="88" y="166" font-size="8.5" fill="#6b3706" text-anchor="middle">字體需加大</text>
+  </g>
+  <g transform="translate(798,104)">
+    <rect x="22" y="18" width="110" height="112" rx="5" fill="#fff" stroke="#c9d6e2"/>
+    <text x="77" y="46" font-size="9" font-weight="800" fill="#0d1b2a" text-anchor="middle">夜探星空</text>
+    <line x1="36" y1="60" x2="118" y2="60" stroke="#dde7ee" stroke-width="3"/>
+    <line x1="36" y1="72" x2="118" y2="72" stroke="#dde7ee" stroke-width="3"/>
+    <line x1="36" y1="84" x2="96" y2="84" stroke="#dde7ee" stroke-width="3"/>
+    <text x="77" y="112" font-size="7.5" fill="#5a6b7d" text-anchor="middle">內部通告 A4</text>
+    <text x="77" y="146" font-size="9.5" font-weight="800" fill="#2d4055" text-anchor="middle">單色可印版</text>
+    <rect x="43" y="154" width="68" height="16" rx="8" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="77" y="166" font-size="8.5" fill="#157347" text-anchor="middle">直接可用</text>
+  </g>
+  <rect x="18" y="290" width="942" height="26" rx="8" fill="#fdf0e0" stroke="#f0d3ad"/>
+  <text x="34" y="307" font-size="10" fill="#6b3706">實務觀察：最極端嘅比例（9:16 同超寬橫幅）最易出問題，轉完一定要逐個檢查版面有冇走位。</text>
+  <text x="840" y="85" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+</svg>
+
+  <div class="figlabel"><h3>⑤ Canva Sheets：Formulas／Insights／Charts</h3><span>數據工具三件套</span></div>
+  <p class="small">右上角特別標註咗「提示語留空 → 出數據摘要」，呢個係官方明文規定嘅條件。圖表數據為示範用虛構數據。</p>
+  <svg class="mock" viewBox="0 0 980 440" role="img"
+  aria-label="Canva Sheets 介面示意圖：試算表數據、Magic Formulas 公式生成、Magic Insights 摘要、Magic Charts 圖表">
+  
+  <rect x="0" y="0" width="980" height="440" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="980" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="980" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="830" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">Canva Sheets — 參觀數據（示例數據）</text>
+  <line x1="0" y1="38" x2="980" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <!-- toolbar -->
+  <g font-size="9.5">
+    <rect x="12" y="46" width="92" height="22" rx="11" fill="#f0e9fd" stroke="#dcc9f7"/>
+    <text x="58" y="61" font-weight="800" fill="#6c2bd9" text-anchor="middle">✦ Magic Insights</text>
+    <rect x="110" y="46" width="86" height="22" rx="11" fill="#e3f4f6" stroke="#b7e0e5"/>
+    <text x="153" y="61" font-weight="800" fill="#055d6b" text-anchor="middle">Magic Charts</text>
+    <rect x="202" y="46" width="94" height="22" rx="11" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="249" y="61" font-weight="800" fill="#157347" text-anchor="middle">Magic Formulas</text>
+    <rect x="302" y="46" width="62" height="22" rx="11" fill="#fff" stroke="#e3eaf1"/>
+    <text x="333" y="61" fill="#5a6b7d" text-anchor="middle">Translate</text>
+  </g>
+  <!-- spreadsheet -->
+  <g transform="translate(12,78)">
+    <rect x="0" y="0" width="470" height="196" rx="6" fill="#fff" stroke="#d6e0ea"/>
+    <rect x="0" y="0" width="470" height="24" fill="#0d1b2a"/>
+    <g font-size="9" fill="#fff" font-weight="800">
+      <text x="10" y="16">月份</text><text x="92" y="16">平日人次</text><text x="176" y="16">週末人次</text>
+      <text x="266" y="16">團體場次</text><text x="352" y="16">工作坊</text><text x="422" y="16">球幕</text>
+    </g>
+    <g font-size="9" fill="#2d4055">
+      <rect x="0" y="24" width="470" height="21" fill="#fafcfe"/>
+      <text x="10" y="39">2026-04</text><text x="92" y="39">10,240</text><text x="176" y="39">15,870</text>
+      <text x="266" y="39">28</text><text x="352" y="39">215</text><text x="422" y="39">3,890</text>
+      <text x="10" y="60">2026-05</text><text x="92" y="60">9,870</text><text x="176" y="60">14,960</text>
+      <text x="266" y="60">31</text><text x="352" y="60">188</text><text x="422" y="60">3,610</text>
+      <rect x="0" y="66" width="470" height="21" fill="#fafcfe"/>
+      <text x="10" y="81">2026-06</text><text x="92" y="81">8,650</text><text x="176" y="81">13,240</text>
+      <text x="266" y="81">22</text><text x="352" y="81">174</text><text x="422" y="81">3,280</text>
+      <text x="10" y="102">2026-07</text><text x="92" y="102">13,480</text><text x="176" y="102">19,850</text>
+      <text x="266" y="102">8</text><text x="352" y="102">264</text><text x="422" y="102">4,720</text>
+      <rect x="0" y="108" width="470" height="21" fill="#fafcfe"/>
+      <text x="10" y="123">2026-08</text><text x="92" y="123">14,120</text><text x="176" y="123">20,340</text>
+      <text x="266" y="123">6</text><text x="352" y="123">281</text><text x="422" y="123">4,960</text>
+      <text x="10" y="144">2026-09</text><text x="92" y="144">9,340</text><text x="176" y="144">13,870</text>
+      <text x="266" y="144">26</text><text x="352" y="144">192</text><text x="422" y="144">3,420</text>
+    </g>
+    <line x1="0" y1="150" x2="470" y2="150" stroke="#d6e0ea"/>
+    <!-- formula bar -->
+    <rect x="8" y="158" width="454" height="30" rx="6" fill="#e4f3ea" stroke="#bde0ca"/>
+    <text x="18" y="171" font-size="8.5" font-weight="800" fill="#157347">Magic Formulas — 用口語描述即可：</text>
+    <text x="18" y="183" font-size="8.5" fill="#0d4a2e">「計算每個月參觀人數嘅環比增長率」 → =（B3-B2）/B2</text>
+  </g>
+  <!-- insights panel -->
+  <g transform="translate(494,78)">
+    <rect x="0" y="0" width="474" height="196" rx="6" fill="#fbfcfe" stroke="#e3eaf1"/>
+    <rect x="0" y="0" width="474" height="26" rx="6" fill="#f0e9fd"/>
+    <rect x="0" y="16" width="474" height="10" fill="#f0e9fd"/>
+    <text x="12" y="18" font-size="10.5" font-weight="800" fill="#6c2bd9">✦ Magic Insights</text>
+    <rect x="300" y="4" width="166" height="18" rx="9" fill="#fff" stroke="#dcc9f7"/>
+    <text x="383" y="17" font-size="8.5" fill="#6c2bd9" text-anchor="middle">提示語留空 → 出數據摘要</text>
+    <text x="12" y="46" font-size="9.5" font-weight="800" fill="#0d1b2a">數據摘要（AI 生成，須核對原始數據）</text>
+    <g font-size="9" fill="#2d4055">
+      <circle cx="18" cy="60" r="2.5" fill="#6c2bd9"/>
+      <text x="28" y="63">七至八月為全年高峰，週末人次較平日高約 44%。</text>
+      <circle cx="18" cy="80" r="2.5" fill="#6c2bd9"/>
+      <text x="28" y="83">學校團體場次於暑假期間明顯回落（8 月僅 6 場）。</text>
+      <circle cx="18" cy="100" r="2.5" fill="#6c2bd9"/>
+      <text x="28" y="103">工作坊報名與球幕觀眾走勢一致，呈正相關。</text>
+      <circle cx="18" cy="120" r="2.5" fill="#6c2bd9"/>
+      <text x="28" y="123">九月回落至接近五至六月水平，符合開學季模式。</text>
+    </g>
+    <rect x="12" y="134" width="450" height="26" rx="7" fill="#fdeaec" stroke="#f3c3c9"/>
+    <text x="22" y="151" font-size="8.5" fill="#7d1724">數據底線：AI 摘要係幫你睇快啲，對外公佈嘅數字一定要返回原始數據核對。</text>
+    <rect x="12" y="166" width="214" height="22" rx="11" fill="#fff" stroke="#c9d6e2"/>
+    <text x="119" y="181" font-size="9" fill="#2d4055" text-anchor="middle">生成嘅圖表同公式可再編輯</text>
+    <rect x="234" y="166" width="228" height="22" rx="11" fill="#fff" stroke="#c9d6e2"/>
+    <text x="348" y="181" font-size="9" fill="#2d4055" text-anchor="middle">加入設計 → 年報／展板版面</text>
+  </g>
+  <!-- magic charts -->
+  <g transform="translate(12,286)">
+    <rect x="0" y="0" width="956" height="124" rx="8" fill="#f7fafc" stroke="#e3eaf1"/>
+    <text x="14" y="20" font-size="10.5" font-weight="800" fill="#055d6b">Magic Charts：圖表與表格數據實時同步 —— 數據一改，圖表跟住變</text>
+    <g transform="translate(20,30)">
+      <line x1="40" y1="74" x2="900" y2="74" stroke="#c9d6e2"/>
+      <line x1="40" y1="74" x2="40" y2="8" stroke="#c9d6e2"/>
+      <text x="30" y="14" font-size="7.5" fill="#8a97a5" text-anchor="end">20k</text>
+      <text x="30" y="78" font-size="7.5" fill="#8a97a5" text-anchor="end">0</text>
+      <g>
+        <rect x="70" y="40" width="26" height="34" fill="#0a7b8c"/><rect x="100" y="21" width="26" height="53" fill="#6c2bd9"/>
+        <text x="98" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">4月</text>
+        <rect x="200" y="43" width="26" height="31" fill="#0a7b8c"/><rect x="230" y="24" width="26" height="50" fill="#6c2bd9"/>
+        <text x="228" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">5月</text>
+        <rect x="330" y="48" width="26" height="26" fill="#0a7b8c"/><rect x="360" y="30" width="26" height="44" fill="#6c2bd9"/>
+        <text x="358" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">6月</text>
+        <rect x="460" y="29" width="26" height="45" fill="#0a7b8c"/><rect x="490" y="8" width="26" height="66" fill="#6c2bd9"/>
+        <text x="488" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">7月</text>
+        <rect x="590" y="27" width="26" height="47" fill="#0a7b8c"/><rect x="620" y="6" width="26" height="68" fill="#6c2bd9"/>
+        <text x="618" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">8月</text>
+        <rect x="720" y="45" width="26" height="29" fill="#0a7b8c"/><rect x="750" y="28" width="26" height="46" fill="#6c2bd9"/>
+        <text x="748" y="88" font-size="7.5" fill="#5a6b7d" text-anchor="middle">9月</text>
+      </g>
+      <rect x="820" y="12" width="12" height="12" fill="#0a7b8c"/><text x="838" y="22" font-size="8.5" fill="#2d4055">平日</text>
+      <rect x="820" y="30" width="12" height="12" fill="#6c2bd9"/><text x="838" y="40" font-size="8.5" fill="#2d4055">週末</text>
+    </g>
+  </g>
+  <text x="820" y="61" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+</svg>
+
+  <div class="figlabel"><h3>⑥ Canva Code：互動小測驗</h3><span>毋須寫程式</span></div>
+  <p class="small">左邊提示語，右邊成品。生成嘅程式碼你唔需要識讀，亦唔需要改。</p>
+  <svg class="mock" viewBox="0 0 980 360" role="img"
+  aria-label="Canva Code 介面示意圖：以提示語生成互動小測驗，可嵌入設計或發佈成網站">
+  
+  <rect x="0" y="0" width="980" height="360" rx="12" fill="#ffffff" stroke="#d6e0ea" stroke-width="1.5"/>
+  <rect x="0" y="0" width="980" height="38" rx="12" fill="#f2f6fa"/>
+  <rect x="0" y="26" width="980" height="12" fill="#f2f6fa"/>
+  <circle cx="20" cy="19" r="5" fill="#e0e6ec"/><circle cx="37" cy="19" r="5" fill="#e0e6ec"/>
+  <circle cx="54" cy="19" r="5" fill="#e0e6ec"/>
+  <rect x="72" y="11" width="830" height="16" rx="8" fill="#e6edf3"/>
+  <text x="82" y="23" font-size="10.5" fill="#7b8794">Canva Code — 互動元素</text>
+  <line x1="0" y1="38" x2="980" y2="38" stroke="#d6e0ea" stroke-width="1.5"/>
+  <text x="18" y="62" font-size="12.5" font-weight="800" fill="#0d1b2a">&lt;/&gt; Canva Code：毋須寫程式嘅互動元素</text>
+  <rect x="18" y="72" width="62" height="18" rx="9" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="49" y="85" font-size="9.5" font-weight="800" fill="#055d6b" text-anchor="middle">Premium</text>
+  <text x="88" y="85" font-size="9.5" fill="#5a6b7d">可嵌入其他設計重複使用，亦可發佈成獨立網站</text>
+
+  <!-- prompt -->
+  <g transform="translate(18,100)">
+    <rect x="0" y="0" width="420" height="92" rx="8" fill="#f7fafc" stroke="#c9d6e2"/>
+    <text x="14" y="22" font-size="9.5" font-weight="800" fill="#055d6b">提示語</text>
+    <text x="14" y="42" font-size="10" fill="#2d4055">做一個 5 題嘅互動選擇題測驗，主題係簡單機械，</text>
+    <text x="14" y="59" font-size="10" fill="#2d4055">對象係小學五年級學生，答錯要顯示解釋，</text>
+    <text x="14" y="76" font-size="10" fill="#2d4055">最後顯示分數，繁體中文，字體要大。</text>
+    <rect x="0" y="104" width="420" height="72" rx="8" fill="#0d1b2a"/>
+    <text x="14" y="124" font-size="9" fill="#7fe3c4" font-family="monospace">&lt;!-- Canva Code 自動生成 --&gt;</text>
+    <text x="14" y="140" font-size="9" fill="#9ad7ff" font-family="monospace">const quiz = [ … 5 questions … ]</text>
+    <text x="14" y="156" font-size="9" fill="#9ad7ff" font-family="monospace">function grade() { … }</text>
+    <text x="14" y="170" font-size="8.5" fill="#8a97a5" font-family="monospace">毋須你自己寫，亦毋須識讀</text>
+  </g>
+  <text x="452" y="160" font-size="22" fill="#0a7b8c">→</text>
+
+  <!-- rendered result -->
+  <g transform="translate(486,100)">
+    <rect x="0" y="0" width="476" height="176" rx="8" fill="#fff" stroke="#d6e0ea"/>
+    <rect x="0" y="0" width="476" height="28" rx="8" fill="#e3f4f6"/>
+    <rect x="0" y="18" width="476" height="10" fill="#e3f4f6"/>
+    <text x="14" y="19" font-size="10" font-weight="800" fill="#055d6b">簡單機械小測驗　第 2 / 5 題</text>
+    <text x="14" y="50" font-size="10.5" font-weight="800" fill="#0d1b2a">以下邊一樣係槓桿？</text>
+    <rect x="14" y="60" width="448" height="24" rx="7" fill="#e4f3ea" stroke="#a8d8bb"/>
+    <text x="26" y="76" font-size="10" fill="#0d4a2e">A. 剪刀　　✓ 正確</text>
+    <rect x="14" y="90" width="448" height="24" rx="7" fill="#fff" stroke="#e3eaf1"/>
+    <text x="26" y="106" font-size="10" fill="#2d4055">B. 滑輪</text>
+    <rect x="14" y="120" width="448" height="24" rx="7" fill="#fff" stroke="#e3eaf1"/>
+    <text x="26" y="136" font-size="10" fill="#2d4055">C. 斜面</text>
+    <rect x="14" y="150" width="300" height="18" rx="6" fill="#f7fafc" stroke="#e3eaf1"/>
+    <text x="24" y="163" font-size="8.5" fill="#5a6b7d">解釋：剪刀由兩支槓桿組成，支點在中間。</text>
+    <rect x="322" y="150" width="140" height="18" rx="9" fill="#0a7b8c"/>
+    <text x="392" y="163" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">下一題 →</text>
+  </g>
+  <rect x="18" y="292" width="944" height="26" rx="8" fill="#e3f4f6" stroke="#b7e0e5"/>
+  <text x="34" y="309" font-size="10" fill="#063e47">科學館用法：展場互動小測驗、線上教材、參觀數據儀表板。做好一個可以嵌入唔同設計，重複使用。</text>
+  <text x="820" y="85" font-size="11.5" fill="#8a97a5" font-style="italic">自製介面示意圖 · 非 Canva 實際截圖</text>
+</svg>
+</section>
+<!-- ================= 成品範例 ================= -->
+<section class="slide" data-nav="成品範例">
+  <p class="eyebrow">Samples · 成品範例</p>
+  <h2>成品應該長咩樣？</h2>
+  <p class="lede">練習最難嘅唔係操作，係「唔知做到幾完整才叫完成」。以下兩份完整成品範例可以下載對照，
+  兩份都係<mark class="tag a">示例</mark>——由本簡報作者撰寫，示範 AI 生成後經人手修訂潤飾嘅合理水準，
+  並非 Canva AI 嘅實際輸出紀錄。</p>
+
+  <div class="grid two">
+    <div class="card ka">
+      <h4>範例一：活動宣傳組合</h4>
+      <p>「夜探星空．親子天文觀測夜」整套物料文案（活動為虛構）：</p>
+      <ul style="font-size:.92rem;margin:8px 0 0">
+        <li>官網長版文案（約 150 字）</li>
+        <li>海報中版文案（約 60 字）</li>
+        <li>IG 短版文案（約 25 字）＋話題標籤</li>
+        <li>報名須知（含觀測禮儀、天氣備案）</li>
+        <li>主視覺設計說明（給設計同事嘅交接文件）</li>
+        <li>六個尺寸輸出清單</li>
+      </ul>
+    </div>
+    <div class="card ka">
+      <h4>範例二：展板說明文字三版本</h4>
+      <p>同一主題「太陽能發電（光電效應）」，寫給三種對象：</p>
+      <ul style="font-size:.92rem;margin:8px 0 0">
+        <li><b>小學中高年級</b>（約 120 字）—— 現象層面，生活化提問結尾</li>
+        <li><b>中學生</b>（約 150 字）—— 可用光子、半導體、載流子等術語，討論物理限制</li>
+        <li><b>長者班</b>（約 110 字）—— 短句、一句一概念、連繫本地經驗</li>
+      </ul>
+      <p style="margin-top:10px">附三者分別對照表，同「一稿轉三個對象」嘅追問句。</p>
+    </div>
+  </div>
+
+  <div class="note i"><b>培訓用法建議：</b>第一段練習做完之後才派發範例。先讓學員自己寫，
+  再對照範例睇完整度差距——比一開始就睇範例有效得多。</div>
+
+  <div class="note w"><b>關於範例二嘅內容：</b>太陽能光電效應之表述屬一般科學常識嘅通俗寫法，
+  示範用途。如實際採用於展板，仍須由內容同事核實後方可印製——呢個正係本簡報一再強調嘅流程。</div>
+
+  <p class="src">兩份範例檔案可於下一頁「教學材料下載」取得。</p>
+</section>
 <!-- ================= 12 實作練習 ================= -->
 <section class="slide" data-nav="實作練習">
   <p class="eyebrow">Hands-on · 60 分鐘 <mark class="tag a">練習設計示例</mark></p>
@@ -802,6 +1439,67 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
   <div class="note o"><b>如果同事問「AI 會唔會取代設計？」</b>可以咁答：AI 令「出初稿」嘅成本接近零，所以價值就全部轉移到<b>判斷</b>上面 —— 揀邊個方向、改邊一句、邊張圖唔可以用、邊個數字要核實。呢啲全部係我們嘅專業，而且需求只會多咗。</div>
 </section>
 
+
+<!-- ================= 下載 ================= -->
+<section class="slide" data-nav="教學材料下載">
+  <p class="eyebrow">Downloads · 教學材料</p>
+  <h2>教學材料下載</h2>
+  <p class="lede">七份材料，點掣即可下載。檔案已直接內嵌喺本頁，<b>離線亦可下載</b>，毋須連網或登入。
+  Markdown 檔用記事本、Word、VS Code 都開得；CSV 檔可直接匯入 Canva Sheets、Excel 或 Google Sheets。</p>
+
+  <div class="dl">
+  <div class="dlcard alt">
+    <h4>提示語模板庫</h4>
+    <p>六大類現成提示語模板（展板文字、活動海報、社交文案、教學活動、數據處理、互動元素），方括號換掉就可以用，附常用追問句同留白自填欄。</p>
+    <p class="meta">Markdown 文字檔 · 4.1 KB · 檔名 01-提示語模板庫.md</p>
+    <a href="data:text/markdown;charset=utf-8;base64,IyBDYW52YSBBSSDmj5DnpLroqp7mqKHmnb/luqsK5r6z6ZaA56eR5a246aSo5pWZ6IKy5ZOh5Z+56KiT55So44CA772c44CA54mI5pysIDIwMjYtMTAtMjYK4oC7IOacrOaWh+S7tuaJgOacieaPkOekuuiqnuevhOS+i+Wdh+eCuuiHquihjOioreioiOS5i+aVmeWtuOekuuS+i++8jOa0u+WLleWQjeeoseWPiuaVuOaTmueCuuiZm+ani+OAggoKLS0tCgojIyDkvb/nlKjoqqrmmI4KCuavj+WAi+aooeadv+aMieOAjOWwjeixoSDihpIg5YWn5a65IOKGkiDpoqjmoLwg4oaSIOi/veWVj+OAjeWbm+atpeWvq+aIkOOAggrmlrnmi6zomZ8gWyBdIOWFp+eCuumcgOimgeS9oOabv+aPm+WYhemDqOWIhuOAggrlu7rorbDlgZrms5XvvJropIfoo73mqKHmnb8g4oaSIOaPm+aOieaWueaLrOiZnyDihpIg6LK85YWlIENhbnZhIOKGkiDnlKjov73llY/pgJDmraXkv67mraPjgIIKCi0tLQoKIyMgQS4g5bGV5p2/6Kqq5piO5paH5a2X77yITWFnaWMgV3JpdGXvvIkKCiMjIyBBMSDln7rmnKzmrL4K54K65r6z6ZaA56eR5a246aSoW+WxleWNgOWQjeeosV3kuIDloYrlsZXmnb/vvIzlr6vkuIDmrrXlkJFb5bCN6LGh5bm06b2h5bGkXeWPg+ingOiAheS7i+e0uVvkuLvpoYxd5ZiF6Kqq5piO5paH5a2X77yMCue0hFvlrZfmlbhd5a2X57mB6auU5Lit5paH77yM6KaB5o+Q5YiwW+mHjem7nuS4gF3lkIxb6YeN6bue5LqMXe+8jOmBv+WFjeeUqFvopoHpgb/plovlmIXooZPoqp5d77yM57WQ5bC+5Yqg5LiA5Y+l5LqS5YuV5o+Q5ZWP44CCCgojIyMgQTIg6ZuZ6Kqe54mICuWQjOS4iu+8jOWujOaIkOS4reaWh+eJiOW+jOi/veWVj++8mgrjgIDjgIzluavmiJHora/miJDoi7HmlofvvIzoqp7msKPkv53mjIHlkIzkuK3mlofniYjkuIDoh7TvvIzpganlkIjlnIvpmpvlj4Pop4DogIXplrHoroDjgI0K4oC7IOitr+aWh+W/hemgiOeUseWQjOS6i+Wvqeagoe+8jOWUlOWPr+S7peebtOaOpeaOoeeUqOOAggoKIyMjIEEzIOmVt+iAheePreeJiOacrArngrrmvrPploDnp5HlrbjppKhb5Li76aGMXemVt+iAheePreWvq+S4gOauteiqquaYju+8jOe0hFvlrZfmlbhd5a2X57mB6auU5Lit5paH77yMCueUqOefreWPpeOAgemBv+WFjeWkluS+huiqnuWQjOe4ruWvq++8jOavj+WAi+amguW/teeUqOS4gOWAi+eUn+a0u+WMluS+i+WtkOiqquaYju+8jOiqnuawo+iAkOW/g+imquWIh+OAggoKIyMjIOW4uOeUqOi/veWVjwrjg7vnn63kuIDljYoK44O76Kqe5rCj5YaN6Kaq5YiH5bCR5bCR77yM5Ly85ZCM5bCP5pyL5Y+L6Kyb6KmxCuODu+aKiuesrOS6jOWPpeaUueWvq+aIkOaPkOWVj+WPpQrjg7vmj5vkuIDlgIvnlJ/mtLvljJbkvovlrZDvvIzllJTlpb3nlKhb5Y6f5pys5L6L5a2QXQoKLS0tCgojIyBCLiDmtLvli5XmtbfloLHvvIhDYW52YSBBSSAvIE1hZ2ljIERlc2lnbu+8iQoKIyMjIEIxIOeJiOmdoueUn+aIkArngrrmvrPploDnp5HlrbjppKhb5rS75YuV5ZCN56ixXeWBmlvlsLrlr7hd5rW35aCx77yMW+iJsuezu+aPj+i/sF3vvIwK5qiZ6aGM5Y2A5ZyoW+S9jee9rl3vvIzkuK3plpPmlL7kuLvoppboprrvvIzlupXpg6jnlZnkvY3mlL7ml6XmnJ/jgIHlnLDpu57lkIzloLHlkI0gUVIg56K877yMCuWwjeixoeS/glvlsI3osaHmj4/ov7Bd44CCCgojIyMgQjIg5Li76KaW6Ka65o+S55Wr77yIRHJlYW0gTGFi77yJClvnlavpnaLlhaflrrnmj4/ov7Bd77yMW+miqOagvOaPj+i/sF3mj5LnlavpoqjmoLzvvIxb6Imy57O7Xe+8jArmp4vlnJbnlZnnmb3llrpb5L2N572uXeS7peS+v+aUvuaomemhjO+8jFvmqavluYXvvI/nm7TluYVd44CCCgojIyMg5bi455So6L+95ZWPCuODu+S/neeVmeani+Wclu+8jOa3qOS/guaPm+iDjOaZr+iJsuWBmlvpoY/oibJdCuODu+aomemhjOaUueeUqOWFqeihjO+8jOesrOS6jOihjOe0sOS4gOe0mgrjg7vkuLvpq5Tnp7vliLDlt6bpgorvvIzlj7PpgornlZnlpJrllbLnmb3kvY0KCi0tLQoKIyMgQy4g56S+5Lqk5aqS6auU5paH5qGI77yITWFnaWMgV3JpdGXvvIkKCiMjIyBDMSDkuInnqK7plbfluqbkuIDmrKHopoEK54K65r6z6ZaA56eR5a246aSoW+a0u+WLleWQjeeosV3lr6vnpL7kuqTlqpLpq5TmlofmoYjvvIznuYHpq5TkuK3mlofvvIzkuIDmrKHntabmiJHkuInlgIvniYjmnKzvvJoK6ZW354mI57SEIDE1MCDlrZfmlL7lrpjntrLjgIHkuK3niYjntIQgNjAg5a2X5pS+5rW35aCx44CB55+t54mI57SEIDI1IOWtl+aUviBJRyDpppblj6XjgIIK5bCN6LGh5L+CW+WwjeixoeaPj+i/sF3vvIzoqp7msKNb6Kqe5rCj5o+P6L+wXeOAggoKIyMjIEMyIOWKoOipsemhjOaomeexpArov73llY/vvJrjgIzluavmiJHliqAgNSDlgIvpganlkIjmvrPploDmnKzlnLDop4DnnL7lmIXoqbHpoYzmqJnnsaTjgI0KCi0tLQoKIyMgRC4g5pWZ5a245rS75YuV77yITWFnaWMgQWN0aXZpdGllc++8iQoKIyMjIEQxIOWumOaWueW7uuitsOWPpeW8j++8iOmgiOeUqOiLseaWh+WPpeW8j+i8uOWFpe+8iQpTdHVkZW50cyB3aWxsIGJlIGFibGUgdG8gW2FjdGlvbiB2ZXJiXSBhYm91dCBbc3BlY2lmaWMgdG9waWNdLgoK5bu66K2w5YuV6Kme77yIQmxvb20ncyBUYXhvbm9tee+8ie+8mgphbmFseXpl44CBY29tcGFyZeOAgWV2YWx1YXRl44CBaW52ZXN0aWdhdGXjgIFkZXNpZ27jgIFjcmVhdGXjgIFzeW50aGVzaXplCgojIyMgRDIg56+E5L6LClN0dWRlbnRzIHdpbGwgYmUgYWJsZSB0byBpbnZlc3RpZ2F0ZSBob3cgYWlyIHByZXNzdXJlIGFmZmVjdHMgYSBiYWxsb29uIHJvY2tldC4KU3R1ZGVudHMgd2lsbCBiZSBhYmxlIHRvIGNvbXBhcmUgdGhlIGVuZXJneSBzb3VyY2VzIHVzZWQgaW4gTWFjYW8uClN0dWRlbnRzIHdpbGwgYmUgYWJsZSB0byBldmFsdWF0ZSB0aGUgaW1wYWN0IG9mIGxpZ2h0IHBvbGx1dGlvbiBvbiBzdGFyIHZpc2liaWxpdHkuCgojIyMg5rOo5oSP77yI5a6Y5pa55piO5paH6KaB5rGC77yJCuODu+avj+asoeiBmueEpuS4gOWAi+WtuOe/kuebruaome+8jOWUlOWlveS4gOasoeWhnuWkmuWAiwrjg7vlpJrmraXpqZ/miJbpgY7mlrzopIfpm5zlmIXmj5DnpLroqp7mnIPku6TntZDmnpzmt7fkuoLvvIzmh4nmi4bplosK44O76Kqy5aCC5L2/55So5YmN5b+F6aCI5a+p6Zax77ya5bm06b2h6YGp5YiH5oCn44CB5rqW56K65oCn44CB5paH5YyW5pWP5oSf5bqmCgotLS0KCiMjIEUuIOaVuOaTmuiZleeQhu+8iENhbnZhIFNoZWV0c++8iQoKIyMjIEUxIE1hZ2ljIEZvcm11bGFzCueUqOWPo+iqnuaPj+i/sOWNs+WPr++8jOS+i+Wmgu+8mgrjgIDjgIzoqIjnrpfmr4/lgIvmnIjlj4Pop4DkurrmlbjlmIXnkrDmr5Tlop7plbfnjofjgI0K44CA44CM5oqK5aCx5ZCN6KGo5Lit6YeN6KSH5ZiF6Zu76Kmx6Jmf56K85qiZ56S65Ye65Zqf44CNCgojIyMgRTIgTWFnaWMgSW5zaWdodHMK4oC7IOmXnOmNte+8muaDs+imgeOAjOaVuOaTmuaRmOimgeOAjeWwseimgeaKiuaPkOekuuiqnueVmeepuuOAggrpnIDopoHnibnlrprliIbmnpDmmYLmiY3lr6vvvIzkvovlpoLvvJoK44CA44CM5q+U6LyD6YCx5pyr5ZCM5bmz5pel5ZiF5Y+D6KeA5Lq65pW45YiG5biD44CNCgotLS0KCiMjIEYuIOS6kuWLleWFg+e0oO+8iENhbnZhIENvZGXvvIkKCiMjIyBGMSDlsI/muKzpqZcK5YGa5LiA5YCLW+mhjOaVuF3poYzlmIXkupLli5Xpgbjmk4fpoYzmuKzpqZfvvIzkuLvpoYzkv4Jb5Li76aGMXe+8jArlsI3osaHkv4Jb5bCN6LGh5o+P6L+wXe+8jOetlOmMr+imgemhr+ekuuino+mHi++8jOacgOW+jOmhr+ekuuWIhuaVuOOAggoKIyMjIEYyIOioiOeul+apn++8j+S6kuWLleW3peWFtwrlgZrkuIDlgIvkupLli5Vb5bel5YW36aGe5Z6LXe+8jOS9v+eUqOiAhei8uOWFpVvovLjlhaXpoIVd77yM6aGv56S6W+i8uOWHuumghV3vvIwK5LuL6Z2i57Ch5r2U77yM57mB6auU5Lit5paH77yM5a2X6auU6KaB5aSn44CCCgotLS0KCiMjIOiHquW3seWYheaooeadv++8iOeVmeeZveiHquihjOWhq+Wvq++8iQoK55So6YCU77yaX19fX19fX19fX19fX19fX+OAgOOAgOaXpeacn++8ml9fX19fX19fCuaPkOekuuiqnu+8mgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCuaViOaenOWmguS9le+8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCuS4i+asoeimgeaUue+8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCg==" download="01-提示語模板庫.md">下載 01-提示語模板庫.md</a>
+  </div>
+  <div class="dlcard ">
+    <h4>實作練習工作紙</h4>
+    <p>60 分鐘四段練習嘅填寫式工作紙：文案三版本、Dream Lab 追問記錄、五個尺寸轉換檢查表、互評表。可列印派發。</p>
+    <p class="meta">Markdown 文字檔 · 3.4 KB · 檔名 02-實作練習工作紙.md</p>
+    <a href="data:text/markdown;charset=utf-8;base64,IyDlr6bkvZznt7Tnv5Llt6XkvZzntJkKQ2FudmEgQUkg5bel5YW35pWZ5a2444CA772c44CANjAg5YiG6ZCY44CA772c44CA5r6z6ZaA56eR5a246aSo5pWZ6IKy5ZOh5Z+56KiTCuKAuyDmnKznt7Tnv5LkuYvmtLvli5XlkI3nqLHjgIHml6XmnJ/jgIHmlbjmk5rlhajpg6jngrromZvmp4vmlZnlrbjnpLrkvovjgIIKCuWnk+WQje+8ml9fX19fX19fX19fX+OAgOe1hOWIpe+8ml9fX19fX19f44CA5pel5pyf77yaX19fX19fX19fX19fCgotLS0KCiMjIOe3tOe/kuioreWumu+8iOiZm+ani++8iQoK5rS75YuV5ZCN56ix77ya5aSc5o6i5pif56m677yO6Kaq5a2Q5aSp5paH6KeA5ris5aScCuWwjeixoe+8mjbigJMxMiDmrbLlhZLnq6Xlj4rlrrbplbcK5pel5pyf77yaMTEg5pyI5LiL5pes5p+Q5pif5pyf5YWtCuaZgumWk++8mjE5OjAw4oCTMjE6MzAK5Zyw6bue77ya5r6z6ZaA56eR5a246aSo5aSp5paH6aSo5Y+K5oi25aSW5bmz5Y+wCuWQjemhje+8mjQwIOe1hOWutuW6rQrph43pu57vvJrmnJvpgaDpj6Hlr6bmuKzjgIHmmJ/luqfovqjoqo3jgIHlpKnmlofppKjnkIPluZXnr4Dnm64KCi0tLQoKIyMg56ys5LiA5q6177yIMTUg5YiG6ZCY77yJ5paH5qGI77yaTWFnaWMgV3JpdGUKCuS7u+WLme+8muWvq+WHuuS4ieeorumVt+W6puaWh+ahiO+8jOavj+eorumDveimgeeUqOi/veWVj+S/ruato+iHs+WwkeS4gOasoeOAggoKIyMjIOmVt+eJiO+8iOe0hCAxNTAg5a2X77yM5pS+5a6Y57ay77yJCuesrOS4gOasoeeUn+aIkO+8mgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwoK5oiR5ZiF6L+95ZWP77yaX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KCuS/ruato+W+jO+8mgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwoKIyMjIOS4reeJiO+8iOe0hCA2MCDlrZfvvIzmlL7mtbfloLHvvIkKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwoKIyMjIOefreeJiO+8iOe0hCAyNSDlrZfvvIzmlL4gSUcg6aaW5Y+l77yJCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwoKIyMjIOiHquaIkeaqouafpQrilqEg5LiJ5YCL54mI5pys6YO95pyJ44CA4pahIOiHs+Wwkei/veWVj+mBjuS4gOasoeOAgOKWoSDlhajnuYHpq5TkuK3mlocK4pahIOizh+ioiuato+eiuu+8iOaXpeacn+OAgeaZgumWk+OAgeWcsOm7nuOAgeWQjemhje+8iQoKLS0tCgojIyDnrKzkuozmrrXvvIgxNSDliIbpkJjvvInkuLvoppboprrvvJpEcmVhbSBMYWIKCiMjIyDmiJHlmIXnrKzkuIDmrKHmj5DnpLroqp7vvIjopoHlr6vpvYrkupTpoIXvvIkK5YWn5a6577yaX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCumiqOagvO+8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwroibLns7vvvJpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K5qeL5ZyW77yaX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCueVmeeZveS9jee9ru+8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCgojIyMg5Zub5by157WQ5p6c77yM5oiR5o+A56ysIF9fX19fXyDlvLXvvIzljp/lm6DvvJoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCgojIyMg6L+95ZWP6KiY6YyECuesrOS4gOasoei/veWVj++8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwrmlYjmnpzvvJpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K56ys5LqM5qyh6L+95ZWP77yaX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCuaViOaenO+8ml9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwoKIyMjIOiHquaIkeaqouafpQrilqEg5bey55So6L+95ZWP5L+u5q2j6Iez5bCR5YWp5qyhCuKWoSDlt7LmqJnmmI7mraTlnJbngrrmj5LnlavvvI/npLrmhI/lnJYK4pahIOWGh+eVtuaIkOecn+WvpuWkqeaWh+aUneW9seS9v+eUqAoKLS0tCgojIyDnrKzkuInmrrXvvIgyMCDliIbpkJjvvInlh7rpvYrlsLrlr7jvvJpNYWdpYyBTd2l0Y2gKCuWOn+Wni+ioreioiOWwuuWvuO+8ml9fX19fX19fX19fX19fCgp8IOebruaomeWwuuWvuCB8IOmcgOS6uuaJi+iqv+aVtO+8nyB8IOimgeaUueWSqSB8CnwtLS18LS0tfC0tLXwKfCBBMiDnm7TluYXmtbfloLEgfCDilqEg6KaB44CA4pahIOWUlOimgSB8IHwKfCBJRyDmlrnlnJYgMToxIHwg4pahIOimgeOAgOKWoSDllJTopoEgfCB8CnwgSUcgU3RvcnkgOToxNiB8IOKWoSDopoHjgIDilqEg5ZSU6KaBIHwgfAp8IEZhY2Vib29rIOapq+WcliB8IOKWoSDopoHjgIDilqEg5ZSU6KaBIHwgfAp8IOWxleWgtOmbu+imluapq+W5hSB8IOKWoSDopoHjgIDilqEg5ZSU6KaBIHwgfAoK6KeA5a+f77ya6YKK5YCL5bC65a+45pyA5piT5Ye65ZWP6aGM77yf54K65LuA6bq877yfCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KCi0tLQoKIyMg56ys5Zub5q6177yIMTAg5YiG6ZCY77yJ5LqS6KmVCgrkupLoqZXlkIzkuovlp5PlkI3vvJpfX19fX19fX19fX18KCnwg5qiZ5rqWIHwg5YGa5b6X5aW95ZiF5LiA5qijIHwg6KaB5pS55ZiF5LiA5qijIHwKfC0tLXwtLS18LS0tfAp8IOioiuaBr+a4heaZsO+8iOS4ieenkuWFp+edh+W+l+WHuu+8iSB8IHwgfAp8IOWwjeixoeWwjeS9je+8iOiqnuawo+imluimuu+8iSB8IHwgfAp8IOa6lueiuuiIh+iqoOWvpu+8iOizh+ioiu+8j+aomeekuu+8iSB8IHwgfAp8IOmkqOaWueiqv+aAp++8iOWQjOWFtuS7lueJqeaWmeS4gOiHtO+8iSB8IHwgfAoKLS0tCgojIyDmlLbloILvvJrmiJHopoHluLbotbDlmIXkuInlj6Xmj5DnpLroqp4KCjEuIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KMi4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwozLiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCgrmiJHkuIvkuIDlgIvopoHoqablmIXnnJ/lr6bpoIXnm67vvIjntLDopo/mqKHjgIHkvY7poqjpmqrvvInvvJoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCg==" download="02-實作練習工作紙.md">下載 02-實作練習工作紙.md</a>
+  </div>
+  <div class="dlcard ">
+    <h4>功能速查表（CSV）</h4>
+    <p>29 項功能嘅官方用途、科學館適用場景同額度層級。可直接匯入 Canva Sheets、Excel 或 Google Sheets 篩選排序。</p>
+    <p class="meta">CSV 表格 · 3.6 KB · 檔名 03-功能速查表.csv</p>
+    <a href="data:text/csv;charset=utf-8;base64,5Yqf6IO95ZCN56ixLOWIhumhnizlrpjmlrnnlKjpgJQs56eR5a246aSo6YGp55So5aC05pmvLOmhjeW6puWxpOe0mgpDYW52YSBBSSAyLjAs5bCN6Kmx57i95oyH5o+uLOWWuue3qOi8r+WZqOS7peWwjeipseaWueW8j+WJteW7uua9pOmjvuS/ruaUueaVtOS7veioreioiOS4puS/neaMgeWTgeeJjOS4gOiHtCzkuIDlj6XorJvlrozpnIDmsYLnm7TmjqXlh7rmtLvli5XnsKHloLHmiJbmtbfloLHliJ3nqL/lho3pgJDlj6Xlgr7kvY/mlLksVWx0cmEKTWVtb3J5IExpYnJhcnks5bCN6Kmx57i95oyH5o+uLENhbnZhIEFJIDIuMCDlip/og73mr4vpoIjnlLHpm7bplovlp4vljbPlj6/mm7TmlrDoqK3oqIgs5ZCM5LiA57O75YiX5rS75YuV54mp5paZ5L+d5oyB6aKo5qC86YCj6LKrLFVsdHJhCk1hZ2ljIERlc2lnbizlsI3oqbHnuL3mjIfmj64s5qC55pOa5o+Q56S66Kqe5oiW5LiK5YKz57Sg5p2Q5bu66K2w5Y+v57eo6Lyv54mI6Z2iLOS4iuWCs+WxleimveeFp+eJh+WNs+WHuuS4gOe1hOeJiOmdoumBuOaThyxQcmVtaXVtCk1hZ2ljIFdyaXRlLOaWh+WtlyzojYnmk6zmkZjopoHmk7Tlr6vmlLnlr6vmloflrZcs5bGV5p2/6Kqq5piO5Yid56i/5rS75YuV57Ch5LuL5paw6IGe56i/56S+5Lqk5biW5paH5paH5qGILFN0YW5kYXJkClRyYW5zbGF0ZSzmloflrZcs5bCx5Zyw5bCH6Kit6KiI5YWn5paH5a2X57+76K2v5oiQ5YW25LuW6Kqe6KiALOS4reiLsembmeiqnuWxleadv+WwjeWkluWuo+WCs+eJqeaWmSxTdGFuZGFyZApNYWdpYyBBY3Rpdml0aWVzLOaWh+Wtlyzkvp3lrbjnv5Lnm67mqJnnlJ/miJDmlZnlrbjmtLvli5Us5bel5L2c5Z2K5LqS5YuV55Kw56+A5a245qCh5ZyY6auU5bu25Ly45rS75YuVLOS+neaWueahiApUcmFuc2Zvcm0gaW50byBEb2Ms5paH5a2XLOWwh+WFp+Wuuei9ieaIkOaWh+S7tuagvOW8jyznsKHloLHovYnmlZnmoYjmloflrZfniYjmtL7nmbznlKjorJvnvqks5L6d5pa55qGICk1hZ2ljIE1lZGlhLOWcluWDj+eUn+aIkCzmloflrZfnlJ/miJDlnJblg4/lj4rlvbHniYcs5oq96LGh56eR5a245qaC5b+156S65oSP5ZyWLFByZW1pdW0KRHJlYW0gTGFiLOWcluWDj+eUn+aIkCxBSSDlnJblg4/nlJ/miJDlmajmr4/mj5DnpLrlh7rlm5vlvLXlj6/liqDlj4PogIPlnJblj6/ov73liqDmjIfku6Tlj6/mj5DljYfop6PmnpDluqYs6ZyA6KaB57Wx5LiA5o+S55Wr6aKo5qC85ZiF5pW05aWX5bGV6Ka96KaW6Ka6LFByZW1pdW0KSW1hZ2UgdG8gVmlkZW8s5ZyW5YOP55Sf5oiQLOeUsemdnOaFi+WclueUn+aIkOW9seeJhyznpL7kuqTlqpLpq5Tnn63niYflsZXloLTlvqrnkrDmkq3mlL7nlavpnaIsUHJlbWl1bQpBSSBNdXNpYyBhbmQgU291bmQgRWZmZWN0cyzlnJblg4/nlJ/miJAs55Sf5oiQ6Z+z5qiC5ZCM6Z+z5pWILOWxleWNgOiDjOaZr+mfs+efreeJh+mFjeaogixQcmVtaXVtCkFJIFZvaWNlLOWcluWDj+eUn+aIkCxBSSDoqp7pn7PnlJ/miJAs5bCO6Ka95peB55m96I2J56i/54Sh6Zqc56SZ6Kqe6Z+z54mI6Kqq5piOLFN0YW5kYXJkCk1hZ2ljIEVkaXQs5b2x5YOP57eo6LyvLOWhl+aKueaIlum7numBuOWcluS4reevhOWcjeaPj+i/sOaDs+WKoOaIluaPm+WYheWFp+WuuSzmm7/mj5vlsZXloLTnhafniYfkuK3pm5znianliqDlhaXpgZPlhbcs5L6d5pa55qGICk1hZ2ljIEVyYXNlcizlvbHlg4/nt6jovK8s5Yi36LWw5ZyW5Lit5ZSU5oOz6KaB5ZiF54mp5Lu2LOa4hei1sOWxleWgtOeFp+eJh+S4rei3r+manOWeg+WcvuahtuiHqOaZguWRiuekuizkvp3mlrnmoYgKTWFnaWMgR3JhYizlvbHlg4/nt6jovK8s5bCH5ZyW5Lit54mp5Lu25oq95Ye65oiQ5Y+v56e75YuV5Y+v57iu5pS+5YWD57Sg5Lim5L+d55WZ6IOM5pmvLOWwh+WxleWTgeeUseeFp+eJh+aKveWHuumHjeaWsOaOkueJiCzkvp3mlrnmoYgKR3JhYiBUZXh0LOW9seWDj+e3qOi8ryzlsIflnJbniYflhafmloflrZforormiJDlj6/nt6jovK/mloflrZfmoYYs6IiK5bGV5p2/54Wn54mH5Lit5ZiF5a2X55u05o6l5pS554mI6YeN55SoLOS+neaWueahiApCYWNrZ3JvdW5kIFJlbW92ZXIs5b2x5YOP57eo6LyvLOenu+mZpOiDjOaZr+WPqueVmeS4u+mrlCzlsZXlk4Hljrvog4zlgZrmtbfloLHkuLvoppbopros5LuY6LK75pa55qGICk1hZ2ljIEV4cGFuZCzlvbHlg4/nt6jovK8s5pO05bGV5ZyW5YOP55Wr6Z2i56+E5ZyNLOapq+WcluijnOaIkOebtOW5heWkoOS9jeaUvuWxleadv+aomemhjCzkvp3mlrnmoYgKTWFnaWMgTGF5ZXJzLOW9seWDj+e3qOi8ryzliIbmnpDoqK3oqIjntZDmp4vlsIfmloflrZfpgoTljp/miJDlj6/nt6jovK/mloflrZfmoYblhYPntKDliIbpm6LkuKbkv53nlZnljp/niYjpnaIs5oqK6IiK5rW35aCx5ZyW5qqU6YKE5Y6f5oiQ5Y+v5pS55ZiF6Kit6KiI5qqULFByZW1pdW0KSW1hZ2UgVXBzY2FsZXIs5b2x5YOP57eo6LyvLOaPkOWNh+WcluWDj+ino+aekOW6pizkvY7op6PmnpDoiIrmqpTmoYjmlL7lpKfliLDlj6/ljbDliLflsLrlr7gsU3RhbmRhcmQKTWFnaWMgU3dpdGNoIC8gTWFnaWMgUmVzaXplLOaUueeJiOWLleaFiyzkuIDpjbXlsIfoqK3oqIjovYnmiJDlpJrnqK7lsLrlr7jmoLzlvI/nlJroh7PovYnmj5voqp7oqIDlkIzlhaflrrnlvaLmhYss5LiA5Lu95Li76KaW6Ka66L2J5rW35aCxIElHIOaWueWcluapq+mhjeewoeWgsemggSzku5josrvmlrnmoYgKTWFnaWMgQW5pbWF0ZSzmlLnniYjli5XmhYss5YiG5p6Q6Kit6KiI5YWn5a655b6M6Ieq5YuV5aWX55So5YuV55WrLOewoeWgseWLleaFi+aViOaenOekvuS6pOefreeJhyzkvp3mlrnmoYgKU3R5bGUgTWF0Y2gs5pS554mI5YuV5oWLLOWll+eUqOaXouaciemiqOagvOWIsOaWsOioreioiCzmlrDnianmlpnlsI3pvYrppKjmlrnnj77mnInoppboprroqr/mgKcsUHJlbWl1bQpDYW52YSBTaGVldHMs5pW45pOa5LqS5YuVLENhbnZhIOWFp+WYheippueul+ihqOaVtOWQiCBBSSDmlbjmk5rlt6Xlhbcs5Y+D6KeA5Lq65pW45rS75YuV5aCx5ZCN5ZWP5Y2357Wx6KiILOS+neW3peWFtwpNYWdpYyBJbnNpZ2h0cyzmlbjmk5rkupLli5Us5bCHIENhbnZhIFNoZWV0cyDmlbjmk5rorormiJDlnJbooajmkZjopoHlkIzlhazlvI/mj5DnpLroqp7nlZnnqbrmmYLlh7rmlbjmk5rmkZjopoEs5pyI5bqm5Y+D6KeA5pW45pOa5pGY6KaB5ZWP5Y2357WQ5p6c6YeN6bueLFByZW1pdW0KTWFnaWMgQ2hhcnRzLOaVuOaTmuS6kuWLlSzllrogQ2FudmEgU2hlZXRzIOWNs+aZguWwh+aVuOaTmuiuiuaIkOWcluihqOS4puiIh+ihqOagvOaVuOaTmuWQjOatpSzlubTloLHlnJbooajlsZXmnb/mlbjmk5roppboprrljJYsUHJlbWl1bQpNYWdpYyBGb3JtdWxhcyzmlbjmk5rkupLli5Us55SxIEFJIOeUn+aIkOippueul+ihqOWHveaVuOWQjOWFrOW8jyzllJToqJjlvpflhazlvI/lr6vms5XmmYLnlKjlj6Poqp7mj4/ov7AsU3RhbmRhcmQKQ2FudmEgQ29kZSzmlbjmk5rkupLli5Us5q+L6aCI5a+r56iL5byP5Y2z5Y+v5YGa5LqS5YuV6Kit6KiI5Y+v5bu65a6M5pW05LqS5YuV6Kit6KiI5Lim55m85L2I5oiQ57ay56uZ5Lqm5Y+v5YGa5LqS5YuV5YWD57Sg5bWM5YWl5YW25LuW6Kit6KiILOWxleWgtOS6kuWLleWwj+a4rOmpl+e3muS4iuaVmeadkOaVuOaTmuWEgOihqOadvyxQcmVtaXVtCkFJIFNoYXBlcyAvIEFJIENoYXJ0cyzmlbjmk5rkupLli5Us5LulIEFJIOeUn+aIkOW9oueLgCAzRCDlnJbooajooajllq7nrYnlhYPntKAs56eR5a245ZyW6Kej5rWB56iL5ZyW5aCx5ZCN6KGo5ZauLFByZW1pdW0K" download="03-功能速查表.csv">下載 03-功能速查表.csv</a>
+  </div>
+  <div class="dlcard ">
+    <h4>示範參觀數據（CSV）</h4>
+    <p>九個月虛構參觀數據，用嚟練習 Canva Sheets 嘅 Magic Formulas、Magic Insights 同 Magic Charts。純練習用，非真實數據。</p>
+    <p class="meta">CSV 表格 · 0.4 KB · 檔名 04-示範數據.csv</p>
+    <a href="data:text/csv;charset=utf-8;base64,5pyI5Lu9LOW5s+aXpeWPg+ingOS6uuasoSzpgLHmnKvlj4Pop4DkurrmrKEs5a245qCh5ZyY6auU5aC05qyhLOW3peS9nOWdiuWgseWQjeS6uuaVuCznkIPluZXnr4Dnm67op4DnnL4KMjAyNi0wMSw4NDIwLDEyNjUwLDE4LDE0MiwzMTgwCjIwMjYtMDIsNzk4MCwxNDMyMCwxMiwxNjgsMzUyMAoyMDI2LTAzLDkxNTAsMTM0ODAsMjQsMTk2LDMzNDAKMjAyNi0wNCwxMDI0MCwxNTg3MCwyOCwyMTUsMzg5MAoyMDI2LTA1LDk4NzAsMTQ5NjAsMzEsMTg4LDM2MTAKMjAyNi0wNiw4NjUwLDEzMjQwLDIyLDE3NCwzMjgwCjIwMjYtMDcsMTM0ODAsMTk4NTAsOCwyNjQsNDcyMAoyMDI2LTA4LDE0MTIwLDIwMzQwLDYsMjgxLDQ5NjAKMjAyNi0wOSw5MzQwLDEzODcwLDI2LDE5MiwzNDIwCg==" download="04-示範數據.csv">下載 04-示範數據.csv</a>
+  </div>
+  <div class="dlcard alt">
+    <h4>出街前檢查清單</h4>
+    <p>七大項逐條打勾：科學準確性、圖像誠實性、文字語言、資訊正確、技術規格、館方調性、審批簽核，附三條紅線。</p>
+    <p class="meta">Markdown 文字檔 · 2.6 KB · 檔名 05-出街前檢查清單.md</p>
+    <a href="data:text/markdown;charset=utf-8;base64,IyBBSSDnlJ/miJDnianmlpnlh7rooZfliY3mqqLmn6XmuIXllq4K5r6z6ZaA56eR5a246aSo44CA772c44CA54mI5pysIDIwMjYtMTAtMjYK4oC7IOacrOa4heWWrueCuuacrOmkqOS+nSBDYW52YSDlrpjmlrnjgIzkvb/nlKjliY3poIjlr6nplrHjgI3ljp/liYfoh6roqILkuYvmk43kvZzlrojliYfnpLrkvovvvIzpnZ4gQ2FudmEg5a6Y5pa55paH5Lu244CCCgrnianmlpnlkI3nqLHvvJpfX19fX19fX19fX19fX19f44CA6LKg6LKs5Lq677yaX19fX19fX1/jgIDml6XmnJ/vvJpfX19fX19fXwoKLS0tCgojIyDkuIDjgIHnp5HlrbjmupbnorrmgKfvvIjmnIDpq5jlhKrlhYjvvIkKCuKWoSDmiYDmnInnp5Hlrbjkuovlr6blt7LnlLHlhaflrrnlkIzkuovmoLjlr6YK4pahIOeJqeeoruWQjeeoseOAgeWtuOWQjeaLvOWvq+ato+eiugrilqEg5pW45a2X44CB5Zau5L2N44CB5bm05Luj44CB5q+U5L6L5q2j56K6CuKWoSDnp5HlrbjlrprlvovvvI/ljp/nkIbooajov7DmupbnorrvvIzlhofpgY7luqbnsKHljJboh7PlpLHnnJ8K4pahIOWGh+ayv+eUqCBBSSDnlJ/miJDogIzmnKrntpPmoLjlr6blmIXjgIzogb3okL3lpb3lkIjnkIbjgI3lmIXoqqrms5UKCuKAuyDmj5DphpLvvJpBSSDmnIPlpb3mnInoh6rkv6HlnLDorJvpjK/jgILlh6EgQUkg5a+r5ZiF56eR5a245YWn5a6577yM5LiA5b6L55W25pyq57aT5qC45a+m6JmV55CG44CCCgotLS0KCiMjIOS6jOOAgeWcluWDj+iqoOWvpuaApwoK4pahIOaJgOaciSBBSSDnlJ/miJDlnJblt7LmqJnmmI7ngrrjgIzmj5LnlavjgI3miJbjgIznpLrmhI/lnJbjgI0K4pahIOWGh+WwhyBBSSDnlJ/miJDlnJbnlbbkvZznnJ/lr6bmqJnmnKznhafjgIHmrbflj7LnhafniYfmiJbnp5HlrbjlvbHlg4/kvb/nlKgK4pahIOWGh+eUqCBBSSDnlJ/miJDmiJbmlLnlnJbomZXnkIbnnJ/kurrogpblg48K4pahIOWGh+eUqCBBSSDnlJ/miJDppKjol4/lr6bnianlnJblg4/lhpLlhYXlr6bniannhafniYcK4pahIOWGh+a2ieWPiuWQiOS9nOapn+ani+WVhuaomeOAgeaomeiqjOWYhSBBSSDnlJ/miJDmiJbmlLnli5UKCi0tLQoKIyMg5LiJ44CB5paH5a2X6IiH6Kqe6KiACgrilqEg5YWo57mB6auU5Lit5paH77yI5oiW5oyH5a6a6Kqe6KiA77yJ77yM55So5a2X57Wx5LiACuKWoSDora/mloflt7LnlLHkurrmiYvlr6nmoKHvvIzpnZ7nm7TmjqXmjqHnlKggQUkg6K2v5paHCuKWoSDlsIjmnInlkI3oqZ7jgIHmqZ/mp4vlkI3nqLHjgIHogbfpipzmraPnoroK4pahIOiqnuawo+mBqeWQiOebruaomeWwjeixoeW5tOm9oeWxpArilqEg5YaH6Yyv5Yil5a2X44CB5YaH57Ch57mB5re355SoCgotLS0KCiMjIOWbm+OAgeizh+ioiuato+eiuuaApwoK4pahIOaXpeacn+OAgeaYn+acn+OAgeaZgumWk+ato+eiugrilqEg5Zyw6bue44CB6ZuG5ZCI6bue44CB5Lqk6YCa5oyH5byV5q2j56K6CuKWoSDlkI3poY3jgIHosrvnlKjjgIHloLHlkI3mlrnlvI/jgIHmiKrmraLml6XmnJ/mraPnoroK4pahIOiBr+e1oembu+ipseOAgembu+mDteOAgee2suWdgOWPr+eUqArilqEgUVIg56K85bey5a+m6Zqb5o6D6YGO5ris6KmmCgotLS0KCiMjIOS6lOOAgeaKgOihk+imj+agvAoK4pahIOino+aekOW6puespuWQiOWNsOWIt+W7oOimgeaxgu+8iOWxleadv+S4gOiIrOmcgOWvpumam+WwuuWvuCAxNTAgZHBpIOS7peS4iu+8jOWFt+mrlOS7peWNsOWIt+W7oOimj+agvOeCuua6lu+8iQrilqEg6Imy5b2p5qih5byP5q2j56K677yI5Y2w5Yi35ZOBIENNWUvvvI/onqLluZUgUkdC77yJCuKWoSDlh7rooYDkvY3jgIHlronlhajpgorot53nrKblkIjopoHmsYIK4pahIOWtl+mrlOWkp+Wwj+espuWQiOingOeci+i3nembou+8iOWxleadv+mBoOi3nemboumWseiugOmcgOWKoOWkp++8iQrilqEg5bCN5q+U5bqm6Laz5aSg77yM6aGn5Y+K6ZW36ICF5Y+K6KaW6Zqc5Y+D6KeA6ICFCgotLS0KCiMjIOWFreOAgemkqOaWueiqv+aApwoK4pahIOeUqOiJsuOAgeWtl+mrlOespuWQiOmkqOaWueimluimuuimj+evhArilqEg5pS+5Z+L5YW25LuW6aSo5pa554mp5paZ5LiA6b2K552H77yM6aKo5qC85LiA6Ie0CuKWoSDppKjlvr3kvb/nlKjmraPnorrvvIjlsLrlr7jjgIHnlZnnmb3jgIHniYjmnKzvvIkKCi0tLQoKIyMg5LiD44CB5a+p5om5CgrilqEg5YWn5a655ZCM5LqL5qC45a+m57C95qC477yaX19fX19fX19fX19fIOaXpeacn++8ml9fX19fX19fCuKWoSDpg6jploDkuLvnrqHlr6nmibnvvJpfX19fX19fX19fX19fX19fIOaXpeacn++8ml9fX19fX19fCuKWoSDlsI3lpJbnmbzkvYjliY3mnIDntYLnorroqo3vvJpfX19fX19fX19fIOaXpeacn++8ml9fX19fX19fCgotLS0KCiMjIOmZhO+8muS4ieainee0hee3mu+8iOS7u+S9leaDheazgeS4jeWPr+mBleWPje+8iQoK5LiA44CBQUkg55Sf5oiQ5ZiF56eR5a245LqL5a+m5b+F6aCI5Lq65omL5qC45a+m5b6M5omN5Y+v5Y2w6KO95oiW55m85L2I44CCCuS6jOOAgUFJIOeUn+aIkOWcluWUlOWPr+S7peeVtuecn+WvpuaomeacrOeFp+OAgeatt+WPsueFp+aIluenkeWtuOW9seWDj+S9v+eUqO+8jOW/hemgiOaomeaYjuS/guaPkueVq++8j+ekuuaEj+WcluOAggrkuInjgIHmtonlj4rnnJ/kurrogpblg4/jgIHppKjol4/lr6bnianjgIHlkIjkvZzmqZ/mp4vllYbmqJnvvIzllJTlpb3kuqTnlLEgQUkg55Sf5oiQ5oiW5pS55ZyW44CCCg==" download="05-出街前檢查清單.md">下載 05-出街前檢查清單.md</a>
+  </div>
+  <div class="dlcard alt">
+    <h4>成品範例：活動宣傳組合</h4>
+    <p>一整套完成品示範——官網長版、海報中版、IG 短版文案、報名須知、主視覺設計交接說明、六個尺寸輸出清單。</p>
+    <p class="meta">Markdown 文字檔 · 4.0 KB · 檔名 06-成品範例-活動宣傳組合.md</p>
+    <a href="data:text/markdown;charset=utf-8;base64,IyDmiJDlk4Hnr4TkvovvvJrmtLvli5XlrqPlgrPntYTlkIgK44CM5aSc5o6i5pif56m677yO6Kaq5a2Q5aSp5paH6KeA5ris5aSc44CN5pW05aWX5paH5qGI5oiQ5ZOBCua+s+mWgOenkeWtuOmkqOaVmeiCsuWToeWfueiok+eUqAoKIyMg4pqgIOmHjeimgeiqquaYjgoK5pys5paH5Lu25L+C5pWZ5a2455So44CM5oiQ5ZOB56+E5L6L44CN77yM56S656+E5LiA5aWX5a6M5oiQ5ZOB5oeJ6Kmy5pyJ5ZiF5qij6LKM5ZCM5a6M5pW05bqm44CCCuaJgOaciea0u+WLleWQjeeoseOAgeaXpeacn+OAgeaZgumWk+OAgeWQjemhjeOAgeaVuOaTmuWdh+eCuuiZm+ani++8jOmdnuWvpumam+mkqOaWuea0u+WLleOAggrmnKzmlofku7blhaflrrnnlLHmnKznsKHloLHkvZzogIXoh6rooYzmkrDlr6vvvIznlKjku6XnpLrnr4QgQ2FudmEgQUkg55Sf5oiQ5b6M44CBCue2k+S6uuaJi+S/ruiogua9pOmjvuS5i+W+jOWYheWQiOeQhuaIkOWTgeawtOa6luKAlOKAlOS4pumdniBDYW52YSBBSSDkuYvlr6bpmpvovLjlh7rntIDpjITjgIIKCuWtuOWToeeUqOazle+8muWwjeeFp+iHquW3see3tOe/kuWYheaIkOaenO+8jOedh+WQk+WujOaVtOW6puOAgeiqnuawo+OAgeizh+ioium9iuWFqOW6puW3ruW5vumBoOOAggoKLS0tCgojIyDkuIDjgIHlrpjntrLplbfniYjmlofmoYjvvIjntIQgMTUwIOWtl++8iQoK5oqs6aCt5pyb5aSp77yM5L2g6KaL5Yiw5bm+5aSa57KS5pif77yfCgrmvrPploDnp5HlrbjppKjjgIzlpJzmjqLmmJ/nqbrvvI7opqrlrZDlpKnmlofop4DmuKzlpJzjgI3luLbkvaDlkIzlsI/mnIvlj4votbDlh7rlrqTlhafvvIwK6Kaq5omL5pON5L2c5aSp5paH5pyb6YGg6Y+h77yM5Za65bCO6LOe5ZOh5oyH5bCO5LiL5bCL5om+55W25pma5pyA5piO5Lqu5ZiF5pif5bqn44CCCuWupOWFp+eSsOevgOaWvOWkqeaWh+mkqOeQg+W5leS4iua8lO+8jOS7peWNiueQg+W9oumKgOW5lemHjeePvuaYn+epuumBi+ihjO+8jArop6Pph4vmmJ/luqfovqjoqo3lmIXmlrnms5XlkIzlhYnlrrPlsI3op4DmmJ/lmIXlvbHpn7/jgIIKCua0u+WLlemBqeWQiCA2IOiHsyAxMiDmrbLlhZLnq6Xlj4rlrrbplbflj4PoiIfvvIzmr4/ntYTlrrbluq3lnYflj6/njbLlvpfkuIDku73op4DmmJ/oqJjpjITljaHvvIwK6KiY6YyE55W25pma6KeA5ris5omA5b6X77yM5bi25Zue5a6257m857qM6KeA5a+f44CCCgrlkI3poY0gNDAg57WE5a625bqt77yM6aGN5ru/5Y2z5q2i44CCCgotLS0KCiMjIOS6jOOAgea1t+WgseS4reeJiOaWh+ahiO+8iOe0hCA2MCDlrZfvvIkKCuimquaJi+i9ieWLleacm+mBoOmPoe+8jOimquecvOiqjeWHuuesrOS4gOWAi+aYn+W6p+OAggoK44CM5aSc5o6i5pif56m677yO6Kaq5a2Q5aSp5paH6KeA5ris5aSc44CN4oCU4oCUIOacm+mBoOmPoeWvpua4rOOAgeaYn+W6p+i+qOiqjeOAgQrlpKnmlofppKjnkIPluZXnr4Dnm67vvIzkuIDmmZrpvYrpm4bjgIIKCjbigJMxMiDmrbLlhZLnq6Xlj4rlrrbplbfvvZw0MCDntYTlrrbluq3vvZzpoY3mu7/ljbPmraIKCi0tLQoKIyMg5LiJ44CBSUcg55+t54mI5paH5qGI77yI57SEIDI1IOWtl++8iQoK5LuK5pma5ZSU5pyb5omL5qmf77yM5pyb5aSp44CCCuimquWtkOWkqeaWh+ingOa4rOWknO+8jDQwIOe1hOWutuW6re+8jOWgseWQjeS4reOAggoKIyMjIOW7uuitsOipsemhjOaomeexpAoj5r6z6ZaA56eR5a246aSoICPopqrlrZDmtLvli5XmvrPploAgI+WkqeaWh+ingOa4rCAj5pif56m6ICPmvrPploDlpb3ljrvomZUKCi0tLQoKIyMg5Zub44CB5aCx5ZCN6aCI55+lCgrml6XmnJ/vvJoxMSDmnIjkuIvml6zmn5DmmJ/mnJ/lha3vvIjlr6bpmpvml6XmnJ/ku6XlrpjntrLlhazkvYjngrrmupbvvIkK5pmC6ZaT77yaMTk6MDDigJMyMTozMO+8iDE5OjAwIOmbhuWQiO+8jOiri+mgkOeVmSAxNSDliIbpkJjvvIkK5Zyw6bue77ya5r6z6ZaA56eR5a246aSo5aSp5paH6aSo5Y+K5oi25aSW6KeA5ris5bmz5Y+wCuWwjeixoe+8mjbigJMxMiDmrbLlhZLnq6XvvIzpoIjnlLHoh7PlsJHkuIDkvY3lrrbplbflhajnqIvpmarlkIwK5ZCN6aGN77yaNDAg57WE5a625bqt77yI5q+P57WEIDEg5ZCN5YWS56ulICsgMeKAkzIg5ZCN5a626ZW377yJCgrms6jmhI/kuovpoIXvvJoK5LiA44CB5oi25aSW55Kw56+A6KaW5aSp5rCj6ICM5a6a77yM5aaC6YGH6Zmw6Zuo5pS554K65a6k5YWn55CD5bmV5Yqg5a6k5YWn5pWZ5a2444CCCuS6jOOAgeiri+epv+edgOmVt+iiluiho+eJqeWPiuiIkumBqemei+Wxpe+8jOaItuWkluW5s+WPsOaZmumWk+i8g+a2vOOAggrkuInjgIHoq4vli7/mlJzluLblvLflhYnpm7vnrZLvvIznmb3lhYnmnIPlvbHpn7/lhajloLTop4DmuKzogIXlmIXmmpfpganmh4nvvJsK44CA44CA5aaC6ZyA54Wn5piO6KuL55So57SF5YWJ5qih5byP44CCCuWbm+OAgeacm+mBoOmPoeeUsemkqOaWueaPkOS+m++8jOeUseWwjuiznuWToeaMh+WwjuaTjeS9nO+8jOiri+WLv+iHquihjOiqv+aVtOOAggrkupTjgIHmtLvli5XmnJ/plpPoq4vlsIfmiYvmqZ/oqr/oh7PpnZzpn7Plj4rmnIDkvY7kuq7luqbjgIIKCi0tLQoKIyMg5LqU44CB5Li76KaW6Ka66Kit6KiI6Kqq5piO77yI57Wm6Kit6KiI5ZCM5LqL5ZiF5Lqk5o6l6Kqq5piO77yJCgrnlavpnaLlhaflrrnvvJrkuIDlrrbkurrvvIjmiJDkurrlhankvY3jgIHlhZLnq6XkuIDkvY3vvInnq4vmlrzmiLblpJblubPlj7DvvIwK44CA44CA44CA44CA44CA5YW25Lit5YWS56ul5q2j5pON5L2c5pyb6YGg6Y+h77yM5LiJ5Lq65Z2H54K65Ymq5b2x6JmV55CG44CCCuiDjOaZr++8mua3seiXjeiHs+i/kem7keWYheWknOepuua8uOiuiu+8jOaVo+S9iOS4jeWQjOS6ruW6puWYheaYn+m7nu+8jArjgIDjgIDjgIDlj7PkuIrmlrnmnInpioDmsrPluLbmt6Hmt6HmlpzpgY7jgIIK5YWJ5rqQ77ya5pyb6YGg6Y+h5peB5LiA55ue5pqW6buD5bCP54eI77yM54K655Wr6Z2i5ZSv5LiA5pqW6Imy5YWJ5rqQ44CCCumiqOagvO+8muaJgeW5s+WMluaPkueVq++8jOW5vuS9leewoeWMlu+8jOS4jei/veaxguWvq+WvpuOAggroibLns7vvvJrkuLvoibLmt7Hol40gIzBkMWIzYeOAgei8lOiJsuaalum7gyAjZjVjNzZl44CB6bue57a055m95pif6bue44CCCuani+Wclu+8mueVmeeZvembhuS4reaWvOS4iuaWueS4ieWIhuS4gO+8jOS+m+aUvue9ruaomemhjOOAggrlsLrlr7jvvJpBMiDnm7TluYXvvIg0MjAgw5cgNTk0IG1t77yJ54K65q+N54mI44CCCgrigLsg5q2k5ZyW5aaC5LulIEFJIOeUn+aIkO+8jOW/hemgiOaomeaYjueCuuaPkueVq++8m+S4jeWPr+aomeekuuaIluaal+ekuueCuuecn+WvpuWkqeaWh+aUneW9seOAggoKLS0tCgojIyDlha3jgIHlsLrlr7jovLjlh7rmuIXllq4KCnwg55So6YCUIHwg5bC65a+4IHwg5YKZ6Ki7IHwKfC0tLXwtLS18LS0tfAp8IOmkqOWFp+W8teiyvOa1t+WgsSB8IEEyIOebtOW5hSA0MjDDlzU5NG1tIHwg5q+N54mI77yMQ01ZS++8jOWQq+WHuuihgCB8CnwgSUcg6LK85paHIHwgMTA4MMOXMTA4MCBweCB8IOaomemhjOmcgOe4ruefreiHs+WFqeihjCB8CnwgSUcgU3RvcnkgfCAxMDgww5cxOTIwIHB4IHwg5Li76KaW6Ka66ZyA5LiL56e777yM6aCC6YOo55WZ5a6J5YWo5Y2AIHwKfCBGYWNlYm9vayDosrzmlocgfCAxMjAww5c2MzAgcHggfCDmqavlkJHvvIzkurrnianpnIDph43mlrDmjpLkvY0gfAp8IOWxleWgtOmbu+imluapq+W5hSB8IDE5MjDDlzEwODAgcHggfCDlrZfpq5TliqDlpKfvvIzpgaDot53pm6Llj6/oroAgfAp8IOWFp+mDqOmAmuWRiiB8IEE0IOebtOW5hSB8IOWWruiJsuWPr+WNsOeJiOacrCB8CgotLS0KCiMjIOS4g+OAgeiHquaIkeaqouafpe+8iOacrOevhOS+i+W3sumAmumBju+8iQoK4piRIOS4ieenkuWFp+edh+W+l+WHuuS/guWSqea0u+WLleOAgeW5vuaZguOAgemCiuW6puWgseWQjQrimJEg6Kqe5rCj5ZCM6KaW6Ka65bCN5rqW6Kaq5a2Q5a625bqtCuKYkSDmiYDmnInos4foqIrmqJnmmI7ngrromZvmp4vnpLrkvosK4piRIOS4u+imluimuuiqquaYjuW3suiou+aYjiBBSSDnlJ/miJDpoIjmqJnnpLrngrrmj5LnlasK4piRIOazqOaEj+S6i+mghea2teiTi+WuieWFqOOAgeWkqeawo+OAgeingOa4rOemruWEgAo=" download="06-成品範例-活動宣傳組合.md">下載 06-成品範例-活動宣傳組合.md</a>
+  </div>
+  <div class="dlcard alt">
+    <h4>成品範例：展板說明文字</h4>
+    <p>同一個科學主題（太陽能光電效應）寫成小學、中學、長者三個版本，附三者分別對照表同轉換用追問句。</p>
+    <p class="meta">Markdown 文字檔 · 3.0 KB · 檔名 07-成品範例-展板說明文字.md</p>
+    <a href="data:text/markdown;charset=utf-8;base64,IyDmiJDlk4Hnr4TkvovvvJrlsZXmnb/oqqrmmI7mloflrZfvvIjkuInnqK7lsI3osaHniYjmnKzvvIkK5ZCM5LiA56eR5a245Li76aGM77yM5a+r57Wm5LiJ56iu5LiN5ZCM5bCN6LGhCua+s+mWgOenkeWtuOmkqOaVmeiCsuWToeWfueiok+eUqAoKIyMg4pqgIOmHjeimgeiqquaYjgoK5pys5paH5Lu254K65pWZ5a2455So5oiQ5ZOB56+E5L6L77yM55Sx5pys57Ch5aCx5L2c6ICF5pKw5a+r77yM56S656+E5ZCM5LiA5Li76aGMCumHneWwjeS4jeWQjOWwjeixoeaHieacieWYheWvq+azleW3rueVsOOAguWFp+WuueeCuuS4gOiIrOenkeWtuOW4uOitmOS5i+mAmuS/l+ihqOi/sO+8jArlpoLlr6bpmpvnlKjmlrzlsZXmnb/vvIzku43poIjnlLHlhaflrrnlkIzkuovmoLjlr6blvozmlrnlj6/ljbDoo73jgIIKCuS4u+mhjO+8muWkqumZveiDveeZvOmbu++8iOWFiembu+aViOaHie+8iQoKLS0tCgojIyDniYjmnKzkuIDvvJrlsI/lrbjkuK3pq5jlubTntJrvvIg54oCTMTIg5q2y77yM57SEIDEyMCDlrZfvvIkKCiMjIyDpmb3lhYnpu57mqKPorormiJDpm7vvvJ8KCuWkqumZveWFieijj+mdouW4tuS9j+iDvemHj+OAgueVtumZveWFieeFp+iQveWkqumZveiDveadv+ihqOmdou+8jArmnb/oo4/pnaLmnInkuIDnqK7lj6vjgIznn73jgI3lmIXmnZDmlpnvvIzmnIPooqvlhYnlmIXog73ph4/mjqjli5XvvIwK5Luk5p2Q5paZ6KOP6Z2i5ZiF6Zu75a2Q6LWw5YuV6LW36Lqr44CC6Zu75a2Q5LiA6LWw5YuV77yM5bCx6K6K5oiQ6Zu75rWB4oCU4oCUCumbu++8jOWwseS/guWSgeaoo+Wan+WYheOAggoK5omA5Lul5aSq6Zm96IO95p2/5ZSU6ZyA6KaB54eS5Lu75L2V54eD5paZ77yM5ZSU5pyD5o6S5pS+5bui5rCj77yMCuaciemZveWFieWwseaciembu+OAggoK5oOz5LiA5oOz77ya5aaC5p6c5LuK5pel5L+C6Zmw5aSp77yM5aSq6Zm96IO95p2/5Luy55m85ZSU55m86Zu75ZGi77yfCgotLS0KCiMjIOeJiOacrOS6jO+8muS4reWtuOeUn++8iDEz4oCTMTgg5q2y77yM57SEIDE1MCDlrZfvvIkKCiMjIyDlhYnpm7vmlYjmh4nvvJrnlLHlhYnlrZDliLDpm7vmtYEKCuWkqumZveiDveeZvOmbu+WYheaguOW/g+S/guOAjOWFiembu+aViOaHieOAjeOAggoK5YWJ5Y+v5Lul6KaW54K65LiA57KS57KS5bi25pyJ6IO96YeP5ZiF5YWJ5a2Q44CC55W25YWJ5a2Q5pKe5pOK5aSq6Zm96IO95p2/5Lit5ZiFCuWNiuWwjumrlOadkOaWme+8iOacgOW4uOimi+S/guefve+8ie+8jOiLpeWFieWtkOiDvemHj+i2s+WkoO+8jOWwseWPr+S7peS7pOadkOaWmeS4reWYhQrpm7vlrZDohKvpm6Lljp/mnKzkvY3nva7vvIzmiJDngrrlj6/oh6rnlLHnp7vli5XlmIXovInmtYHlrZDjgIIKCuWkqumZveiDveadv+e2k+mBjueJueauiuiZleeQhu+8jOS7pOWRouWVsuiHqueUsembu+WtkOWPquiDveWQkeS4gOWAi+aWueWQkea1geWLle+8jArlvaLmiJDmlrnlkJHkuIDoh7TlmIXpm7vmtYHvvIzlho3nlLHpm7vot6/lsI7lh7rkvb/nlKjjgIIKCuWAvOW+l+azqOaEj+WYheS/gu+8muS4pumdnuaJgOacieazoumVt+WYheWFiemDveiDveacieaViOeUoueUn+WFiembu+aViOaHie+8jArlhYnlrZDog73ph4/lv4XpoIjpq5jmlrzmnZDmlpnlmIXnibnlrprploDmqrvjgILlkaLlgIvnibnmgKfkuqbop6Pph4vlkpcK54K65L2V5aSq6Zm96IO95p2/5ZiF6L2J5o+b5pWI546H5pyJ5YW254mp55CG5LiK6ZmQ44CCCgrlu7bkvLjmgJ3ogIPvvJrngrrkvZXmj5DljYflpKrpmb3og73mnb/mlYjnjofvvIzkv4LkuIDlgIvmnZDmlpnnp5HlrbjllY/poYzvvJ8KCi0tLQoKIyMg54mI5pys5LiJ77ya6ZW36ICF54+t77yI57SEIDExMCDlrZfvvIznn63lj6XngrrkuLvvvIkKCiMjIyDlpKrpmb3og73vvJrmnInlpKrpmb3lsLHmnInpm7sKCuWkqumZveWFieW4tuacieiDvemHj+OAggoK5aSq6Zm96IO95p2/6KGo6Z2i5pyJ5LiA5bGk54m55Yil5ZiF5p2Q5paZ44CCCumZveWFieeFp+S4iuWOu++8jOadkOaWmeijj+mdouWYhee0sOWwj+eykuWtkOWwseacg+WLlei1t+i6q+OAggrnspLlrZDkuIDli5XvvIzlsLHnlKLnlJ/pm7vjgIIKCuWQjOeHkueFpOOAgeeHkuayueWUlOWQjOOAggrlpKrpmb3og73llJTpnIDopoHnh4PmlpnvvIzllJTmnIPlh7rnhZnjgIIK5Y+q6KaB5pyJ5aSq6Zm977yM5bCx5pyD55m86Zu744CCCgrmvrPploDml6XnhaflhYXotrPjgIIK5qiT6aCC6KOd5aSq6Zm96IO95p2/77yM5Y+v5Lul5L6b6Zu757Wm5qiT5LiL5ZiF54eI44CCCgrkvaDkvY/lmIXlnLDmlrnvvIzmnInlhofopovpgY7lpKrpmb3og73mnb/vvJ8KCi0tLQoKIyMg5LiJ5YCL54mI5pys5ZiF5YiG5Yil77yI5pWZ5a246YeN6bue77yJCgp8IOmgheebriB8IOWwj+WtuOeJiCB8IOS4reWtuOeJiCB8IOmVt+iAheeJiCB8CnwtLS18LS0tfC0tLXwtLS18Cnwg5Y+l6ZW3IHwg5Lit562JIHwg6LyD6ZW377yM5Y+v5ZCr5b6e5Y+lIHwg55+t5Y+l77yM5LiA5Y+l5LiA5qaC5b+1IHwKfCDooZPoqp4gfCDpgb/lhY3vvIznlKjjgIzmnZDmlpnjgI0gfCDlj6/nlKjlhYnlrZDjgIHljYrlsI7pq5TjgIHovInmtYHlrZAgfCDpgb/lhY3vvIznlKjjgIzntLDlsI/nspLlrZDjgI0gfAp8IOapn+WItua3seW6piB8IOePvuixoeWxpOmdoiB8IOapn+WItuiIh+mZkOWItiB8IOePvuixoeWxpOmdoiB8Cnwg57WQ5bC+IHwg55Sf5rS75YyW5o+Q5ZWPIHwg5bu25Ly45oCd6ICD6aGMIHwg6YCj57mr5YCL5Lq657aT6amXIHwKfCDmnKzlnLDpgKPnuasgfCDnhKEgfCDnhKEgfCDmnInvvIjmvrPploDml6XnhafvvIkgfAoKIyMjIOWvq+S9nOaPkOekugrlkIzkuIDku70gQUkg55Sf5oiQ5ZiF5Yid56i/77yM5Y+v5Lul55So6L+95ZWP5b+r6YCf6L2J5o+b5bCN6LGh77yaCuOAgOOAjOaKiuS7peS4iuWFp+WuueaUueWvq+aIkOmBqeWQiOmVt+iAhemWseiugO+8jOeUqOefreWPpe+8jOavj+WPpeS4gOWAi+amguW/teOAjQrjgIDjgIzmiorku6XkuIrlhaflrrnmlLnlr6vmiJDkuK3lrbjnqIvluqbvvIzlj6/ku6XnlKjlsIjmpa3ooZPoqp7vvIzliqDlhaXniannkIbpmZDliLblmIXoqI7oq5bjgI0K" download="07-成品範例-展板說明文字.md">下載 07-成品範例-展板說明文字.md</a>
+  </div>
+  </div>
+
+  <div class="note o"><b>建議派發方式：</b>培訓前派「提示語模板庫」同「實作練習工作紙」；
+  第一段練習完成後才派兩份「成品範例」作對照；「出街前檢查清單」建議印出貼喺工作位；
+  「功能速查表」同「示範數據」留作日後自行查閱同練習。</div>
+
+  <div class="note r"><b>所有材料嘅共同限制：</b>材料內所有活動名稱、日期、數據均為虛構教學示例。
+  功能說明依 Canva 官方說明中心（查證 2026-10-26），但 Canva 更新頻密，
+  使用前請以官方頁面及你帳戶實際顯示為準。檢查清單為本館自訂守則，非 Canva 官方文件。</div>
+</section>
 <!-- ================= 15 來源 ================= -->
 <section class="slide" data-nav="資料來源">
   <p class="eyebrow">Sources · 查證日期 2026-10-26</p>
@@ -842,7 +1540,7 @@ svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
 
 <nav class="navbar" aria-label="簡報導覽">
   <button class="nb" id="prev" type="button">← 上一頁</button>
-  <span class="counter" id="counter"><b>1</b> / 15</span>
+  <span class="counter" id="counter"><b>1</b> / 19</span>
   <button class="nb" id="next" type="button">下一頁 →</button>
   <div class="dots" id="dots" aria-label="頁面快速跳轉"></div>
   <span class="kbdhint"><kbd>←</kbd><kbd>→</kbd> 翻頁 · <kbd>F</kbd> 全螢幕 · <kbd>P</kbd> 列印／PDF</span>
