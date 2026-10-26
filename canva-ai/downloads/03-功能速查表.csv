@@ -1,0 +1,30 @@
+功能名稱,分類,官方用途,科學館適用場景,額度層級
+Canva AI 2.0,對話總指揮,喺編輯器以對話方式創建潤飾修改整份設計並保持品牌一致,一句講完需求直接出活動簡報或海報初稿再逐句傾住改,Ultra
+Memory Library,對話總指揮,Canva AI 2.0 功能毋須由零開始即可更新設計,同一系列活動物料保持風格連貫,Ultra
+Magic Design,對話總指揮,根據提示語或上傳素材建議可編輯版面,上傳展覽照片即出一組版面選擇,Premium
+Magic Write,文字,草擬摘要擴寫改寫文字,展板說明初稿活動簡介新聞稿社交帖文文案,Standard
+Translate,文字,就地將設計內文字翻譯成其他語言,中英雙語展板對外宣傳物料,Standard
+Magic Activities,文字,依學習目標生成教學活動,工作坊互動環節學校團體延伸活動,依方案
+Transform into Doc,文字,將內容轉成文件格式,簡報轉教案文字版派發用講義,依方案
+Magic Media,圖像生成,文字生成圖像及影片,抽象科學概念示意圖,Premium
+Dream Lab,圖像生成,AI 圖像生成器每提示出四張可加參考圖可追加指令可提升解析度,需要統一插畫風格嘅整套展覽視覺,Premium
+Image to Video,圖像生成,由靜態圖生成影片,社交媒體短片展場循環播放畫面,Premium
+AI Music and Sound Effects,圖像生成,生成音樂同音效,展區背景音短片配樂,Premium
+AI Voice,圖像生成,AI 語音生成,導覽旁白草稿無障礙語音版說明,Standard
+Magic Edit,影像編輯,塗抹或點選圖中範圍描述想加或換嘅內容,替換展場照片中雜物加入道具,依方案
+Magic Eraser,影像編輯,刷走圖中唔想要嘅物件,清走展場照片中路障垃圾桶臨時告示,依方案
+Magic Grab,影像編輯,將圖中物件抽出成可移動可縮放元素並保留背景,將展品由照片抽出重新排版,依方案
+Grab Text,影像編輯,將圖片內文字變成可編輯文字框,舊展板照片中嘅字直接改版重用,依方案
+Background Remover,影像編輯,移除背景只留主體,展品去背做海報主視覺,付費方案
+Magic Expand,影像編輯,擴展圖像畫面範圍,橫圖補成直幅夠位放展板標題,依方案
+Magic Layers,影像編輯,分析設計結構將文字還原成可編輯文字框元素分離並保留原版面,把舊海報圖檔還原成可改嘅設計檔,Premium
+Image Upscaler,影像編輯,提升圖像解析度,低解析舊檔案放大到可印刷尺寸,Standard
+Magic Switch / Magic Resize,改版動態,一鍵將設計轉成多種尺寸格式甚至轉換語言同內容形態,一份主視覺轉海報 IG 方圖橫額簡報頁,付費方案
+Magic Animate,改版動態,分析設計內容後自動套用動畫,簡報動態效果社交短片,依方案
+Style Match,改版動態,套用既有風格到新設計,新物料對齊館方現有視覺調性,Premium
+Canva Sheets,數據互動,Canva 內嘅試算表整合 AI 數據工具,參觀人數活動報名問卷統計,依工具
+Magic Insights,數據互動,將 Canva Sheets 數據變成圖表摘要同公式提示語留空時出數據摘要,月度參觀數據摘要問卷結果重點,Premium
+Magic Charts,數據互動,喺 Canva Sheets 即時將數據變成圖表並與表格數據同步,年報圖表展板數據視覺化,Premium
+Magic Formulas,數據互動,由 AI 生成試算表函數同公式,唔記得公式寫法時用口語描述,Standard
+Canva Code,數據互動,毋須寫程式即可做互動設計可建完整互動設計並發佈成網站亦可做互動元素嵌入其他設計,展場互動小測驗線上教材數據儀表板,Premium
+AI Shapes / AI Charts,數據互動,以 AI 生成形狀 3D 圖表表單等元素,科學圖解流程圖報名表單,Premium
