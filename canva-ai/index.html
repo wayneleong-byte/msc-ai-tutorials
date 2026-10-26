@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canva AI 工具教學 — 澳門科學館教育員培訓簡報</title>
+<meta name="description" content="澳門科學館教育員培訓用之 Canva AI 互動教學簡報，涵蓋經官方說明中心查證嘅 Canva AI 2.0、Magic Write、Magic Media、Dream Lab、Magic Edit、Magic Grab、Magic Layers、Magic Switch、Canva Sheets 數據工具、Canva Code 等功能，附用量額度制度、提示語寫法、展板與海報等科學館應用案例、六十分鐘實作練習、十題自我測驗及完整官方來源清單。">
+<style>
+:root{
+  --ink:#0d1b2a; --ink-2:#2d4055; --ink-3:#5a6b7d;
+  --paper:#ffffff; --wash:#f2f6fa; --line:#d6e0ea;
+  --brand:#0a7b8c; --brand-d:#055d6b; --brand-l:#e3f4f6;
+  --accent:#6c2bd9; --accent-l:#f0e9fd;
+  --warn:#a8540a; --warn-l:#fdf0e0;
+  --ok:#157347; --ok-l:#e4f3ea;
+  --risk:#b22234; --risk-l:#fdeaec;
+  --r:16px; --sh:0 6px 28px rgba(13,27,42,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Hiragino Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:20px; line-height:1.72; color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #dff0f3 0%, transparent 60%),
+    radial-gradient(1000px 600px at 95% 0%, #ece4fb 0%, transparent 55%),
+    var(--wash);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:18px 22px 132px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:12px 18px; margin-bottom:18px;
+  background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
+  border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--sh);
+}
+.brandmark{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+.brandmark .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--accent));display:inline-block}
+.topbar .sp{flex:1 1 auto}
+.chipnav{display:flex;gap:6px;flex-wrap:wrap}
+.chipnav button{
+  font:inherit; font-size:.72rem; font-weight:700; cursor:pointer;
+  padding:5px 11px; border-radius:999px; border:1px solid var(--line);
+  background:#fff; color:var(--ink-2);
+}
+.chipnav button:hover{border-color:var(--brand);color:var(--brand-d)}
+.chipnav button[aria-current="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.progress{height:6px;border-radius:999px;background:var(--line);overflow:hidden;width:100%;margin-top:4px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--accent));transition:width .28s ease}
+
+/* ---------- slide shell ---------- */
+.deck{position:relative}
+.slide{
+  display:none; background:var(--paper); border:1px solid var(--line);
+  border-radius:22px; box-shadow:var(--sh); padding:44px 48px 48px; min-height:68vh;
+  animation:in .32s ease;
+}
+.slide.is-on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-d);margin:0 0 10px}
+.slide h2{font-size:clamp(1.7rem,3.3vw,2.5rem);line-height:1.22;margin:0 0 6px;letter-spacing:-.4px}
+.slide h3{font-size:1.18rem;margin:26px 0 10px;color:var(--ink)}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:10px 0 22px;max-width:74ch}
+.slide p{margin:0 0 14px;max-width:80ch}
+.slide ul,.slide ol{margin:0 0 16px;padding-left:1.4em}
+.slide li{margin:0 0 9px}
+.small{font-size:.86rem;color:var(--ink-3)}
+.src{font-size:.82rem;color:var(--ink-3);margin-top:12px}
+.hr{height:1px;background:var(--line);border:0;margin:26px 0}
+mark.tag{background:var(--brand-l);color:var(--brand-d);font-weight:800;font-size:.76rem;padding:3px 9px;border-radius:999px}
+mark.tag.a{background:var(--accent-l);color:var(--accent)}
+mark.tag.w{background:var(--warn-l);color:var(--warn)}
+mark.tag.o{background:var(--ok-l);color:var(--ok)}
+mark.tag.r{background:var(--risk-l);color:var(--risk)}
+code{background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:.88em}
+
+/* ---------- cover ---------- */
+.cover{text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:70vh}
+.cover h1{font-size:clamp(2.3rem,6vw,4.1rem);line-height:1.1;margin:.2em 0 .25em;letter-spacing:-1.5px}
+.cover h1 span{background:linear-gradient(120deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .sub{font-size:1.22rem;color:var(--ink-2);max-width:60ch;margin:0 auto 26px}
+.metarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.metarow div{background:var(--wash);border:1px solid var(--line);border-radius:12px;padding:10px 18px;font-size:.9rem;font-weight:700;color:var(--ink-2)}
+
+/* ---------- grids & cards ---------- */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(265px,1fr))}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.card{background:var(--wash);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.card h4{margin:0 0 8px;font-size:1.04rem}
+.card p{margin:0 0 8px;font-size:.95rem;color:var(--ink-2)}
+.card.kb{background:#fff;border-left:5px solid var(--brand)}
+.card.ka{background:#fff;border-left:5px solid var(--accent)}
+.kpi{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:18px 0}
+.kpi div{background:linear-gradient(160deg,#fff,var(--wash));border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.kpi b{display:block;font-size:2rem;line-height:1.1;color:var(--brand-d);letter-spacing:-1px}
+.kpi span{font-size:.84rem;color:var(--ink-3);font-weight:700}
+.note{border-radius:var(--r);padding:16px 20px;margin:18px 0;font-size:.95rem;border:1px solid}
+.note.i{background:var(--brand-l);border-color:#b7e0e5;color:#063e47}
+.note.w{background:var(--warn-l);border-color:#f0d3ad;color:#6b3706}
+.note.r{background:var(--risk-l);border-color:#f3c3c9;color:#7d1724}
+.note.o{background:var(--ok-l);border-color:#bde0ca;color:#0d4a2e}
+.note b{font-weight:800}
+
+/* ---------- table ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:#fff;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:620px}
+th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--ink);color:#fff;font-size:.84rem;letter-spacing:.04em;position:sticky;top:0}
+tbody tr:nth-child(even){background:#fafcfe}
+tbody tr.dim{display:none}
+td b{color:var(--ink)}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 2px;align-items:center}
+.filterbar span.lbl{font-size:.82rem;font-weight:800;color:var(--ink-3)}
+.filterbar button{font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink-2)}
+.filterbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* ---------- accordion ---------- */
+.acc{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;margin:14px 0}
+.acc + .acc{margin-top:10px}
+.acc > button{
+  width:100%;text-align:left;font:inherit;font-weight:800;cursor:pointer;
+  padding:16px 54px 16px 20px;background:#fff;border:0;position:relative;color:var(--ink);font-size:1.02rem;
+  display:block;
+}
+.acc > button:hover{background:var(--brand-l)}
+.acc > button::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:400;color:var(--brand)}
+.acc.open > button::after{content:"\2212"}
+.acc > button .mini{display:block;font-weight:600;font-size:.84rem;color:var(--ink-3);margin-top:2px}
+.acc > div{display:none;padding:4px 22px 20px;border-top:1px solid var(--line);background:#fcfdfe}
+.acc.open > div{display:block}
+.acc > div p:first-child{margin-top:14px}
+.deftbl{margin:10px 0}
+.deftbl dt{font-weight:800;color:var(--brand-d);font-size:.92rem;margin-top:10px}
+.deftbl dd{margin:2px 0 0;font-size:.94rem;color:var(--ink-2)}
+.hint{display:inline-block;font-size:.8rem;font-weight:800;color:var(--accent);background:var(--accent-l);border-radius:8px;padding:3px 10px;margin-bottom:8px}
+
+/* ---------- stepper ---------- */
+.stepper{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+.stepper button{
+  font:inherit;font-size:.86rem;font-weight:800;cursor:pointer;flex:1 1 150px;
+  padding:13px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink-2);text-align:left;line-height:1.3;
+}
+.stepper button b{display:block;font-size:1.3rem;color:var(--brand);letter-spacing:-.5px}
+.stepper button[aria-current="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.stepper button[aria-current="true"] b{color:#fff}
+.steppanes > div{display:none;margin-top:16px;background:var(--wash);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.steppanes > div.on{display:block}
+
+/* ---------- quiz ---------- */
+.q{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:0 0 14px}
+.q p.stem{font-weight:800;margin:0 0 12px}
+.q p.stem i{color:var(--brand);font-style:normal}
+.opts{display:grid;gap:8px}
+.opts label{
+  display:flex;gap:10px;align-items:flex-start;cursor:pointer;
+  border:1px solid var(--line);border-radius:11px;padding:11px 15px;font-size:.95rem;background:#fff;
+}
+.opts label:hover{background:var(--brand-l);border-color:#9fd3da}
+.opts input{margin-top:.35em;flex:0 0 auto}
+.q.graded .opts label.right{background:var(--ok-l);border-color:#a8d8bb}
+.q.graded .opts label.wrong{background:var(--risk-l);border-color:#eeb3bb}
+.fb{display:none;margin-top:12px;font-size:.9rem;padding:12px 16px;border-radius:11px;background:var(--wash);border:1px solid var(--line);color:var(--ink-2)}
+.q.graded .fb{display:block}
+.quizbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.btn{font:inherit;font-weight:800;cursor:pointer;padding:12px 24px;border-radius:12px;border:1px solid var(--brand);background:var(--brand);color:#fff;font-size:.95rem}
+.btn:hover{background:var(--brand-d)}
+.btn.ghost{background:#fff;color:var(--brand-d)}
+.score{font-weight:800;color:var(--ink-2)}
+
+/* ---------- footer nav ---------- */
+.navbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;
+  padding:12px 18px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);
+}
+.navbar .nb{font:inherit;font-weight:800;cursor:pointer;padding:11px 22px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.navbar .nb:hover{border-color:var(--brand);color:var(--brand-d)}
+.navbar .nb[disabled]{opacity:.38;cursor:not-allowed}
+.counter{font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:124px;text-align:center}
+.counter b{color:var(--brand-d);font-size:1.25rem}
+.dots{display:flex;gap:5px;flex-wrap:wrap;max-width:420px;justify-content:center}
+.dots button{width:11px;height:11px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;padding:0}
+.dots button[aria-current="true"]{background:var(--brand);border-color:var(--brand);transform:scale(1.35)}
+.kbdhint{font-size:.78rem;color:var(--ink-3)}
+kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:.8em;font-family:inherit;font-weight:700}
+
+svg.fig{width:100%;height:auto;display:block;margin:10px 0 6px}
+
+@media (max-width:760px){
+  body{font-size:18px}
+  .slide{padding:30px 22px 34px}
+  .dots{display:none}
+}
+@media print{
+  body{background:#fff}
+  .topbar,.navbar{display:none}
+  .slide{display:block !important;page-break-after:always;box-shadow:none;border:0;min-height:0;padding:0 0 26px}
+  .acc > div{display:block !important}
+  .steppanes > div{display:block !important}
+  .fb{display:block !important}
+  tbody tr.dim{display:table-row !important}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<div class="topbar">
+  <div class="brandmark"><span class="dot"></span>Canva AI 教學 · 澳門科學館</div>
+  <div class="sp"></div>
+  <nav class="chipnav" id="chipnav" aria-label="章節導覽"></nav>
+  <div class="progress"><i id="bar"></i></div>
+</div>
+
+<div class="deck" id="deck">
+<!-- ================= 1 封面 ================= -->
+<section class="slide cover" data-nav="封面">
+  <p class="eyebrow">澳門科學館 · 教育員培訓 / 公眾課程</p>
+  <h1>用 <span>Canva AI</span><br>做好展覽與教育設計</h1>
+  <p class="sub">由「識用 Canva」到「用 AI 快手出稿」。全程以 Canva 官方說明中心查證嘅功能為準，附科學館實際應用案例同六十分鐘實作練習。</p>
+  <div class="metarow">
+    <div>📅 2026 年 10 月版</div>
+    <div>⏱️ 建議 90 分鐘</div>
+    <div>👥 教育員 · 展覽組 · 宣傳組</div>
+    <div>🎯 零程式基礎</div>
+  </div>
+  <p class="src" style="margin-top:26px">操作提示：按 <kbd>→</kbd> <kbd>←</kbd> 或底部按鈕翻頁；<kbd>F</kbd> 全螢幕；<kbd>P</kbd> 列印／存 PDF。本簡報可離線使用。</p>
+</section>
+
+<!-- ================= 2 課堂地圖 ================= -->
+<section class="slide" data-nav="課堂地圖">
+  <p class="eyebrow">Agenda</p>
+  <h2>今日課堂地圖</h2>
+  <p class="lede">我們唔會逐個掣教。重點係：你手上嘅工作（展板、海報、教材、社交媒體圖），有邊幾個 AI 功能真正幫得上手，同埋幾時唔應該用。</p>
+  <div class="grid">
+    <div class="card kb"><h4>① 一個心法</h4><p>AI 係「初稿機」，唔係「交稿機」。用佢省嘅係開頭嗰 70%。</p></div>
+    <div class="card kb"><h4>② 功能全景</h4><p>Canva AI 2.0、文字、圖像、影像編輯、改版、數據、互動六大類。</p></div>
+    <div class="card kb"><h4>③ 用量制度</h4><p>Standard / Premium / Ultra 三層額度，先搞清楚先唔會中途卡住。</p></div>
+    <div class="card ka"><h4>④ 提示語寫法</h4><p>四件事公式：對象、內容、風格、尺寸。</p></div>
+    <div class="card ka"><h4>⑤ 科學館案例</h4><p>展板、活動海報、教材簡報、社交媒體宣傳圖四條實際流程。</p></div>
+    <div class="card ka"><h4>⑥ 實作＋測驗</h4><p>60 分鐘動手做一套宣傳組合，10 題自我檢查。</p></div>
+  </div>
+  <div class="note i"><b>關於本簡報嘅資料來源：</b>所有功能名稱、分層同用量規則，均取自 Canva 官方說明中心（Canva Help Center）及官方新聞室頁面，最後查證日期為 2026 年 10 月 26 日。凡屬本簡報自行設計嘅教學例子、練習題或示範數據，均會明確標示 <mark class="tag a">示例</mark>。</div>
+</section>
+
+<!-- ================= 3 心法 ================= -->
+<section class="slide" data-nav="心法">
+  <p class="eyebrow">Mindset</p>
+  <h2>先講心法：AI 幫你做邊一段？</h2>
+  <p class="lede">做一塊展板，由零到可以交出去，大致分五段。AI 真正幫得上手嘅，係前面三段。</p>
+
+  <svg class="fig" viewBox="0 0 980 260" role="img" aria-label="設計流程五段，顯示 AI 介入程度由高至低">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0a7b8c"/><stop offset="55%" stop-color="#6c2bd9"/><stop offset="100%" stop-color="#c3ccd6"/>
+      </linearGradient>
+    </defs>
+    <rect x="30" y="40" width="920" height="16" rx="8" fill="url(#g1)"/>
+    <g font-family="sans-serif" font-size="15" font-weight="700" fill="#0d1b2a" text-anchor="middle">
+      <g><circle cx="110" cy="48" r="13" fill="#0a7b8c"/><text x="110" y="53" fill="#fff" font-size="13">1</text><text x="110" y="92">構思方向</text><text x="110" y="114" font-size="12.5" font-weight="500" fill="#5a6b7d">主題、角度、文案點</text><rect x="52" y="132" width="116" height="26" rx="13" fill="#e3f4f6"/><text x="110" y="150" font-size="12" fill="#055d6b">AI 幫到 90%</text></g>
+      <g><circle cx="320" cy="48" r="13" fill="#2a66a8"/><text x="320" y="53" fill="#fff" font-size="13">2</text><text x="320" y="92">出初稿</text><text x="320" y="114" font-size="12.5" font-weight="500" fill="#5a6b7d">版面、配圖、草擬文字</text><rect x="262" y="132" width="116" height="26" rx="13" fill="#e3f4f6"/><text x="320" y="150" font-size="12" fill="#055d6b">AI 幫到 80%</text></g>
+      <g><circle cx="530" cy="48" r="13" fill="#6c2bd9"/><text x="530" y="53" fill="#fff" font-size="13">3</text><text x="530" y="92">改版複製</text><text x="530" y="114" font-size="12.5" font-weight="500" fill="#5a6b7d">轉尺寸、轉語言</text><rect x="472" y="132" width="116" height="26" rx="13" fill="#f0e9fd"/><text x="530" y="150" font-size="12" fill="#6c2bd9">AI 幫到 70%</text></g>
+      <g><circle cx="740" cy="48" r="13" fill="#a8540a"/><text x="740" y="53" fill="#fff" font-size="13">4</text><text x="740" y="92">專業校訂</text><text x="740" y="114" font-size="12.5" font-weight="500" fill="#5a6b7d">科學準確性、用字</text><rect x="682" y="132" width="116" height="26" rx="13" fill="#fdf0e0"/><text x="740" y="150" font-size="12" fill="#a8540a">AI 幫到 20%</text></g>
+      <g><circle cx="910" cy="48" r="13" fill="#b22234"/><text x="910" y="53" fill="#fff" font-size="13">5</text><text x="910" y="92">審批出街</text><text x="910" y="114" font-size="12.5" font-weight="500" fill="#5a6b7d">館方簽核、對外責任</text><rect x="852" y="132" width="116" height="26" rx="13" fill="#fdeaec"/><text x="910" y="150" font-size="12" fill="#b22234">必須人手</text></g>
+    </g>
+    <text x="30" y="200" font-family="sans-serif" font-size="13" fill="#5a6b7d">AI 介入程度：由左至右遞減 ——— 越近出街，人嘅判斷越重要</text>
+    <rect x="30" y="216" width="920" height="34" rx="10" fill="#fdf0e0" stroke="#f0d3ad"/>
+    <text x="48" y="238" font-family="sans-serif" font-size="13.5" font-weight="700" fill="#6b3706">科學館嘅底線：任何 AI 生成嘅科學內容、數字、學名、年代，一定要人手核實過才可以印。</text>
+  </svg>
+
+  <div class="note r"><b>三條紅線，請記住：</b>① AI 生成嘅科學事實（物種名、年份、數據、定律表述）必須由同事核實，AI 會講錯得好有自信。② AI 生成嘅圖唔可以當真實標本照、歷史照或科學影像使用，必須標明係插畫／示意圖。③ 涉及真人肖像、館藏實物、合作機構商標，唔好交由 AI 生成或改圖。</div>
+  <p class="src">來源：Canva 官方說明中心於 Magic Activities 指引中明確要求「Review AI-generated activities before classroom use … always check for age-appropriateness, accuracy, and cultural sensitivity」；上述三條紅線為本館依此原則自行訂立嘅操作守則 <mark class="tag a">示例</mark>。</p>
+</section>
+
+<!-- ================= 4 功能全景 ================= -->
+<section class="slide" data-nav="功能全景">
+  <p class="eyebrow">Overview</p>
+  <h2>Canva AI 功能全景：六大類</h2>
+  <p class="lede">「Magic Studio」原本係 Canva 於 2023 年 10 月 4 日推出嘅 AI 功能總稱；而官方現時喺說明中心同設定頁，係以「Magic and AI」同 <b>Canva AI 2.0</b> 做主軸來組織呢批功能。以下按用途分六類，方便記。</p>
+
+  <div class="grid">
+    <div class="card kb"><h4>🧠 對話式總指揮</h4><p><b>Canva AI 2.0</b>　喺編輯器同 AI 對話，直接生成同修改整份設計。另有 Memory Library、Connectors、Web Research。</p></div>
+    <div class="card kb"><h4>✍️ 文字類</h4><p><b>Magic Write</b>、<b>Translate</b>、<b>Transform into Doc</b>、<b>Magic Activities</b>（教學活動生成）。</p></div>
+    <div class="card kb"><h4>🖼️ 圖像生成</h4><p><b>Magic Media</b>、<b>Dream Lab</b>、<b>Image to Video</b>、<b>AI Music &amp; Sound Effects</b>、<b>AI Voice</b>。</p></div>
+    <div class="card ka"><h4>🪄 影像編輯</h4><p><b>Magic Edit</b>、<b>Magic Eraser</b>、<b>Magic Grab</b>、<b>Grab Text</b>、<b>Magic Expand</b>、<b>Background Remover</b>、<b>Magic Layers</b>、<b>Image Upscaler</b>。</p></div>
+    <div class="card ka"><h4>🔁 改版與動態</h4><p><b>Magic Switch</b>／<b>Magic Resize</b>（轉尺寸、轉格式、轉語言）、<b>Magic Animate</b>、<b>Style Match</b>。</p></div>
+    <div class="card ka"><h4>📊 數據與互動</h4><p><b>Canva Sheets</b> 內嘅 <b>Magic Insights</b>、<b>Magic Charts</b>、<b>Magic Formulas</b>；加上 <b>Canva Code</b>、<b>AI Shapes</b>、<b>AI Charts</b>、Form generator。</p></div>
+  </div>
+
+  <div class="note i"><b>一句講清 Canva AI 1.0 同 2.0 嘅分別：</b>官方說明 —— 1.0 係「單一提示語出結果」；2.0 係「喺編輯器同 AI 傾，由佢做指揮，改動設計元素、整體潤飾、保持品牌一致」。即係由「落單」變成「同一個助理一路傾一路改」。</div>
+  <p class="src">來源：Canva Help Center「Change access to Magic and AI features」功能清單、「Get started with Canva AI」、「Understanding your AI usage」；Magic Studio 推出日期見 Canva Newsroom「Introducing Magic Studio」。</p>
+</section>
+
+<!-- ================= 5 功能對照表（互動篩選） ================= -->
+<section class="slide" data-nav="功能對照表">
+  <p class="eyebrow">Reference · 可篩選</p>
+  <h2>功能對照表：邊個做邊樣？</h2>
+  <p class="lede">呢張表係你日後最常翻返嚟睇嘅一頁。點下面嘅分類掣，可以只睇某一類功能。</p>
+
+  <div class="filterbar" id="fbar">
+    <span class="lbl">篩選：</span>
+    <button data-f="all" aria-pressed="true">全部顯示</button>
+    <button data-f="core" aria-pressed="false">對話總指揮</button>
+    <button data-f="text" aria-pressed="false">文字</button>
+    <button data-f="img" aria-pressed="false">圖像生成</button>
+    <button data-f="edit" aria-pressed="false">影像編輯</button>
+    <button data-f="switch" aria-pressed="false">改版動態</button>
+    <button data-f="data" aria-pressed="false">數據互動</button>
+  </div>
+
+  <div class="tblwrap">
+    <table id="ftbl">
+      <thead><tr><th style="min-width:150px">功能名稱</th><th style="min-width:230px">官方用途</th><th style="min-width:240px">科學館適用場景</th><th style="min-width:96px">額度層級</th></tr></thead>
+      <tbody>
+        <tr data-c="core"><td><b>Canva AI 2.0</b></td><td>喺編輯器以對話方式創建、潤飾、修改整份設計，並保持品牌一致；支援附加檔案、Web Research 取最新資料</td><td>一句講完需求，直接出活動簡報或海報初稿，再逐句傾住改</td><td><mark class="tag r">Ultra</mark></td></tr>
+        <tr data-c="core"><td><b>Memory Library</b></td><td>Canva AI 2.0 功能，毋須由零開始即可更新設計</td><td>同一系列活動物料，保持風格連貫</td><td><mark class="tag r">Ultra</mark></td></tr>
+        <tr data-c="core"><td><b>Magic Design</b></td><td>根據提示語或你上傳嘅素材，建議可編輯版面（簡報、社交帖文、影片、文件）</td><td>上傳展覽照片，即出一組版面選擇</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="text"><td><b>Magic Write</b></td><td>草擬、摘要、擴寫、改寫文字</td><td>展板說明初稿、活動簡介、新聞稿、社交帖文文案</td><td><mark class="tag o">Standard</mark></td></tr>
+        <tr data-c="text"><td><b>Translate</b></td><td>就地將設計內嘅文字翻譯成其他語言</td><td>中英雙語展板、對外宣傳物料</td><td><mark class="tag o">Standard</mark></td></tr>
+        <tr data-c="text"><td><b>Magic Activities</b></td><td>依學習目標生成教學活動；官方建議用「Students will be able to [動詞] about [主題]」句式</td><td>工作坊互動環節、學校團體導覽後嘅延伸活動</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="text"><td><b>Transform into Doc</b></td><td>將內容轉成文件格式</td><td>簡報轉成教案文字版、派發用講義</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="img"><td><b>Magic Media</b></td><td>文字生成圖像／影片</td><td>抽象科學概念嘅示意圖（黑洞、細胞、電路）</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="img"><td><b>Dream Lab</b></td><td>Canva 嘅 AI 圖像生成器；每個提示語出 4 張，可加參考圖引導風格、可追加指令修改、可 Boost resolution 提升解析度</td><td>需要統一插畫風格嘅一整套展覽視覺</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="img"><td><b>Image to Video</b></td><td>由靜態圖生成影片</td><td>社交媒體短片、展場循環播放畫面</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="img"><td><b>AI Music &amp; Sound Effects</b></td><td>生成音樂同音效</td><td>展區背景音、短片配樂（免版權煩惱）</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="img"><td><b>AI Voice</b></td><td>AI 語音生成</td><td>導覽旁白草稿、無障礙語音版說明</td><td><mark class="tag o">Standard</mark></td></tr>
+        <tr data-c="edit"><td><b>Magic Edit</b></td><td>塗抹或點選圖中範圍，描述想加／換嘅內容；可選 All、Brush、Click 三種選取方式</td><td>替換展場照片中嘅雜物、加入道具</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Magic Eraser</b></td><td>刷走圖中唔想要嘅物件</td><td>清走展場照片入面嘅路障、垃圾桶、臨時告示</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Magic Grab</b></td><td>將圖中物件抽出成可移動、可縮放嘅元素，<b>保留背景</b></td><td>將展品由照片抽出重新排版</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Grab Text</b></td><td>將圖片內嘅文字變成可編輯文字框</td><td>舊展板照片中嘅字直接改版重用</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Background Remover</b></td><td>移除背景，只留主體</td><td>展品去背，做海報主視覺</td><td><mark class="tag">付費方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Magic Expand</b></td><td>擴展圖像畫面範圍</td><td>橫圖補成直幅，夠位放展板標題</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="edit"><td><b>Magic Layers</b></td><td>分析設計整體結構與元素關係，將文字還原成可編輯文字框、元素分離並保留原版面；屬 Canva Design Model 新能力</td><td>把舊海報圖檔還原成可改嘅設計檔</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="edit"><td><b>Image Upscaler</b></td><td>提升圖像解析度</td><td>低解析舊檔案放大到可印刷尺寸</td><td><mark class="tag o">Standard</mark></td></tr>
+        <tr data-c="switch"><td><b>Magic Switch / Magic Resize</b></td><td>一鍵將設計轉成多種尺寸、格式，甚至轉換語言同內容形態</td><td>一份展覽主視覺 → 海報、IG 方圖、橫額、簡報頁</td><td><mark class="tag">付費方案</mark></td></tr>
+        <tr data-c="switch"><td><b>Magic Animate</b></td><td>分析設計內容後自動套用動畫</td><td>簡報動態效果、社交短片</td><td><mark class="tag">依方案</mark></td></tr>
+        <tr data-c="switch"><td><b>Style Match</b></td><td>套用既有風格到新設計</td><td>新物料對齊館方現有視覺調性</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="data"><td><b>Canva Sheets</b></td><td>Canva 內嘅試算表，整合 AI 數據工具</td><td>參觀人數、活動報名、問卷統計</td><td><mark class="tag">依工具</mark></td></tr>
+        <tr data-c="data"><td><b>Magic Insights</b></td><td>將 Canva Sheets 數據即時變成圖表、摘要同公式，毋須人手計算排版；留空提示語會出 data summary</td><td>月度參觀數據摘要、問卷結果重點</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="data"><td><b>Magic Charts</b></td><td>喺 Canva Sheets 即時將數據變成圖表，並與表格數據同步更新</td><td>年報圖表、展板數據視覺化</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="data"><td><b>Magic Formulas</b></td><td>由 AI 生成試算表函數同公式</td><td>唔記得公式寫法時直接用口語描述</td><td><mark class="tag o">Standard</mark></td></tr>
+        <tr data-c="data"><td><b>Canva Code</b></td><td>毋須寫程式即可做互動設計：可建完整互動 Code 設計（landing page、dashboard、portfolio）並發佈成網站；亦可做小測驗、計算機、圖表等互動元素嵌入其他設計重複使用</td><td>展場互動小測驗、線上教材、數據儀表板</td><td><mark class="tag">Premium</mark></td></tr>
+        <tr data-c="data"><td><b>AI Shapes / AI Charts</b></td><td>以 AI 生成形狀、3D、圖表、表單等元素</td><td>科學圖解、流程圖、報名表單</td><td><mark class="tag">Premium</mark></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src">來源：Canva Help Center 各功能說明頁（using-canva-ai、magic-features-admin-controls、using-magic-edit、using-magic-grab、generate-with-dreamlab、magic-activities、canva-sheets、magic-insights、magic-charts、canva-code、ai-access）及 canva.com/pro/magic-resize。「依方案」表示官方未就該項列明單一額度層級，實際以你帳戶方案同管理員設定為準。</p>
+</section>
+<!-- ================= 6 額度制度 ================= -->
+<section class="slide" data-nav="用量額度">
+  <p class="eyebrow">Plans &amp; Allowance</p>
+  <h2>用量額度：唔搞清楚會中途卡住</h2>
+  <p class="lede">Canva 官方明確講：<b>唔係用 credits 制</b>，而係每月一個「共用 AI 額度」（shared monthly AI allowance）。AI 工具分三層，用越強嘅工具，耗得越多。</p>
+
+  <div class="grid">
+    <div class="card kb"><h4><mark class="tag o">Standard AI</mark></h4><p>付費方案（Pro Lite 除外）用呢層<b>唔計入每月額度</b>。例如 Magic Write、Translate、AI Voice、Image Upscaler、Magic Formulas、Photo &amp; Video Animations。</p><p class="small">Canva Free 同 Pro Lite 用 Standard 工具<b>仍然會</b>扣額度，但耗得最少。</p></div>
+    <div class="card kb"><h4><mark class="tag">Premium AI</mark></h4><p>計入共用額度，較進階。例如 Magic Layers、用 Canva AI 生成設計／圖像、Canva Code 互動、AI 元素（形狀、3D、圖表、表單）、音樂音效生成、表單生成。</p></div>
+    <div class="card ka"><h4><mark class="tag r">Ultra AI</mark></h4><p>用最新模型，耗額度最多。包括 <b>Canva AI 2.0 對話式設計</b>同 <b>用 Canva AI 生成影片片段</b>。</p></div>
+  </div>
+
+  <h3>各方案可用額度（官方列出之上限範圍）</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>方案</th><th>Standard AI</th><th>Premium AI（每月上限）</th><th>Ultra AI（每月上限）</th></tr></thead>
+      <tbody>
+        <tr><td><b>Canva Free / Pro Lite</b></td><td>計入額度</td><td colspan="2">Standard 或 Premium 合共最多 <b>20 次</b>；<b>無法使用 Ultra</b></td></tr>
+        <tr><td><b>Canva Pro / Teams / Nonprofits</b></td><td>不計入額度</td><td>最多 <b>200 次</b></td><td>或最多 <b>20 次</b></td></tr>
+        <tr><td><b>Canva Business</b></td><td>不計入額度</td><td>最多 <b>400 次</b></td><td>或最多 <b>40 次</b></td></tr>
+        <tr><td><b>Canva Enterprise</b></td><td>不計入額度</td><td>最多 <b>400 次</b></td><td>或最多 <b>40 次</b></td></tr>
+        <tr><td><b>Canva for Education</b></td><td>不計入額度</td><td>最多 <b>200 次</b></td><td>或最多 <b>20 次</b></td></tr>
+        <tr><td><b>Pro / Business 試用期</b></td><td colspan="2">Standard 或 Premium 合共最多 <b>20 次</b></td><td><b>不可用</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note w"><b>讀表要留意：</b>表中數字係官方列出嘅「上限範圍」，成立前提係你只用同一層工具、提示語簡單、而且用嗰層之中最省嘅工具。實際上，提示語越複雜、引用嘅設計檔越大（官方舉例：40 頁簡報比 5 頁簡報耗更多），用到嘅工具越多，次數就會明顯少過上限。</div>
+
+  <h3>兩件實務上要知嘅事</h3>
+  <div class="grid two">
+    <div class="card"><h4>額度幾時重設？</h4><p>付費及 Nonprofits 方案：按<b>帳單日</b>每月重設（即使年繳亦然，例如年費續期日為 12 月 14 日，每月 14 號重設）。Canva Free：每月 1 號 UTC 時間 00:00 重設。</p></div>
+    <div class="card"><h4>點睇用剩幾多？</h4><p>首頁 → 個人頭像 → <b>Settings</b> → <b>Billing</b> → <b>AI usage</b>，可睇用量同餘額。注意：Canva 嘅額度只涵蓋 Canva 自己嘅 AI 工具，第三方 app 嘅額度要睇該 app。</p></div>
+    <div class="card"><h4>團隊額度係共用定各自？</h4><p>Teams、Business、Nonprofits、Education、Enterprise —— <b>每位成員有自己嘅額度</b>，唔會互相共用或合併。</p></div>
+    <div class="card"><h4>用爆會點？</h4><p>付費方案用 Standard 工具唔會停。Canva Free 用爆後，Standard 同 Premium 工具之間會出現短暫延遲；<b>Ultra 工具唔計入延遲機制，要等下月重設才可再用</b>。</p></div>
+  </div>
+  <p class="src">來源：Canva Help Center「Understanding your AI usage」(canva.com/help/ai-access)、「Get started with Canva AI」。</p>
+</section>
+
+<!-- ================= 7 教育帳戶權限 ================= -->
+<section class="slide" data-nav="教育帳戶">
+  <p class="eyebrow">Admin · 教育／團隊帳戶</p>
+  <h2>教育帳戶權限：為何同事見到嘅掣唔同？</h2>
+  <p class="lede">培訓現場最常出現嘅問題：「我部機點解冇呢個功能？」八成唔係壞機，係方案或管理員權限設定。</p>
+
+  <div class="grid two">
+    <div class="card kb"><h4>預設權限有分別</h4><p><b>Canva Teams / Business</b>：Magic 功能預設對全體成員開啟。</p><p><b>Canva Education</b>：預設只有<b>管理員同教師</b>有權限；學生預設只開放三項 —— <b>Magic Media、Dream Lab、Magic Insights</b>。</p></div>
+    <div class="card ka"><h4>管理員喺邊度改</h4><p>首頁 → 個人頭像 → <b>Settings</b> → <b>Controls and permissions</b> → <b>Permissions</b> → <b>Magic and AI</b>，逐項選擇可使用嘅人。權限控制僅限 Teams、Business、Enterprise、Education 嘅 owner 同 admin。</p></div>
+  </div>
+
+  <div class="note i"><b>三個「唔見功能」嘅官方成因：</b>① 你嘅方案唔包含該功能；② 管理員限制咗存取；③ 你嘅語言或地區暫未支援。官方亦註明：Magic 及 AI 功能可能受語言同地區影響，即使已開啟，部分用戶仍可能冇權限。</div>
+
+  <div class="note o"><b>Canva AI 支援語言（官方列出）：</b>English、Spanish、Portuguese、French、German、Italian、Dutch、Polish、Turkish、Arabic、Japanese、Korean、<b>Chinese（Simplified and Traditional）</b>、Indonesian、Thai、Vietnamese、Hindi。<b>繁體中文屬支援範圍</b>，但官方同時註明部分功能支援嘅語言可能較少。</div>
+
+  <h3>設定變更幾時生效？</h3>
+  <ul>
+    <li><b>只影響新設計</b>：權限改動套用於新設計；已經用過 Magic 功能嘅舊設計，該功能仍然可用。</li>
+    <li><b>品牌一致性相關</b>：若團隊使用 Brand Kits 同 Brand Templates，要留意 <b>Magic Design</b>（控制生成設計所用模型）同 <b>Canva AI</b>（控制 AI 體驗入口）兩項權限 —— 任一關閉，成員仍可手動用品牌素材設計，但可能無法用 AI 生成符合品牌嘅新設計。</li>
+    <li><b>Affinity 內嘅 Canva AI</b>：持 Canva 付費方案可喺 Affinity 使用 Canva AI 工具（如 Generative Fill、Image Generation）；Education 帳戶目前只有管理員同教師可用。</li>
+  </ul>
+  <p class="src">來源：Canva Help Center「Change access to Magic and AI features」、「Get started with Canva AI」。</p>
+</section>
+
+<!-- ================= 8 提示語（步驟導覽） ================= -->
+<section class="slide" data-nav="提示語">
+  <p class="eyebrow">Prompting · 互動步驟</p>
+  <h2>提示語四步公式</h2>
+  <p class="lede">官方提示技巧歸納為：講具體、拆細複雜需求、繼續對話逐步修正、附加檔案增加脈絡。下面係我們為科學館工作整理嘅四步寫法 <mark class="tag a">示例</mark>。點步驟掣睇示範。</p>
+
+  <div class="stepper" id="stepnav">
+    <button aria-current="true"><b>01</b>講明對象同用途</button>
+    <button aria-current="false"><b>02</b>講明具體內容</button>
+    <button aria-current="false"><b>03</b>講明風格同限制</button>
+    <button aria-current="false"><b>04</b>追問逐步修正</button>
+  </div>
+  <div class="steppanes" id="steppanes">
+    <div class="on">
+      <h3>第一步：講明對象同用途</h3>
+      <p>AI 唔知你係做緊展板、海報定教案。對象同用途一講，出嚟嘅語氣同資訊量就會對位。</p>
+      <p><b>❌ 太空泛：</b><code>寫一段關於太陽能嘅介紹</code></p>
+      <p><b>✅ 清楚：</b><code>為澳門科學館常設展一塊展板，寫一段向小學四至六年級參觀者介紹太陽能發電原理嘅說明文字</code></p>
+      <div class="note i">科學館場景常用嘅對象描述：小學中高年級參觀者、中學生團體、親子家庭、長者學員、教師同業、媒體記者、政府部門。</div>
+    </div>
+    <div>
+      <h3>第二步：講明具體內容</h3>
+      <p>字數、要包含嘅重點、要避開嘅術語，全部寫出嚟。官方亦建議：複雜需求拆成細步，唔好一次過塞。</p>
+      <p><b>✅ 例：</b><code>約 120 字繁體中文，要提到光電效應同日常應用兩點，避免用「半導體能隙」等專業術語，結尾加一句互動提問</code></p>
+      <div class="note w">提示：唔好一次叫 AI「做一整套展覽」。先要文字，再要圖，再要版面 —— 分開要，改起身容易得多，亦更省額度。</div>
+    </div>
+    <div>
+      <h3>第三步：講明風格同限制</h3>
+      <p>風格、情緒、用色、尺寸、留白位置都可以寫入提示語，尤其做圖嗰陣。</p>
+      <p><b>✅ 做圖例：</b><code>科學館展板插畫風格，扁平化幾何、藍綠色系、淺色背景、留白喺右上角以便放標題，橫向構圖</code></p>
+      <p><b>✅ 做版面例：</b><code>A1 直幅海報，標題區佔上方三分一，中間放主視覺，底部留位放日期同報名 QR 碼</code></p>
+      <div class="note o">Dream Lab 可以加<b>參考圖</b>引導風格或構圖 —— 想一整套展覽視覺統一，最快嘅方法就係放一張已定稿嘅圖做參考（官方註明：使用參考圖可能會耗用 AI 額度，視乎套用方式）。</div>
+    </div>
+    <div>
+      <h3>第四步：追問逐步修正</h3>
+      <p>唔好重新寫一次提示語由頭做。官方明確建議「繼續對話來修正結果」；Dream Lab 亦支援追加指令（官方例子：<code>Make the car blue.</code>）。</p>
+      <p><b>✅ 追問例：</b><code>短一半</code>　<code>語氣再親切少少，似同小朋友講話</code>　<code>標題改用兩行，第二行細一級</code>　<code>保留構圖，淨係換背景色做深藍</code></p>
+      <div class="note i"><b>Canva AI 2.0 嘅 Memory Library</b> 正係為咗呢一步：毋須由零開始即可更新設計。想保持同一系列物料風格一致，就留喺同一段對話裡面改。</div>
+    </div>
+  </div>
+  <p class="src">來源：Canva Help Center「Get started with Canva AI」之 Tips for better results、「Generate images with Dream Lab」；具體提示語例子為本簡報自行設計 <mark class="tag a">示例</mark>。</p>
+</section>
+<!-- ================= 9 功能辨異（手風琴） ================= -->
+<section class="slide" data-nav="功能辨異">
+  <p class="eyebrow">Compare · 可點擊展開</p>
+  <h2>最易撞板嘅四組「樣樣似」功能</h2>
+  <p class="lede">呢四組功能名字相近、入口相近，但做出嚟嘅結果完全唔同。官方說明中心亦專門寫咗對比。點標題展開睇。</p>
+
+  <div class="acc">
+    <button type="button">① Magic Grab vs Background Remover vs Magic Eraser<span class="mini">三個都係「由圖中拎走啲嘢」，分別在於留咩、走咩</span></button>
+    <div>
+      <dl class="deftbl">
+        <dt>Magic Grab</dt><dd>將圖中任何物件抽出，變成<b>可移動、可縮放嘅元素</b>，而且<b>保留背景</b>。即係原圖仍然完整，個物件變成一塊可以搬嘅「貼紙」。</dd>
+        <dt>Background Remover</dt><dd><b>移除背景，只剩主體</b>。官方註明屬付費方案功能。</dd>
+        <dt>Magic Eraser</dt><dd>刷走你唔想要嘅物件 —— 目標係<b>令佢消失</b>，唔係留嚟用。</dd>
+      </dl>
+      <div class="note o"><b>點揀：</b>想展品搬位 → Magic Grab。想展品去背做海報主視覺 → Background Remover。想清走展場照片裡嘅路障垃圾桶 → Magic Eraser。</div>
+      <p class="src">來源：Canva Help Center「Make your photo selectable and customizable with Magic Grab」、「Use Magic Edit to add, replace, and modify photos」之對比段落。</p>
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">② Magic Media vs Dream Lab<span class="mini">兩個都係文字生成圖像，Dream Lab 嘅控制力明顯多一截</span></button>
+    <div>
+      <dl class="deftbl">
+        <dt>Magic Media</dt><dd>文字生成圖像及影片，入口喺編輯器內，最直接。適合「要一張就得」嘅情況。</dd>
+        <dt>Dream Lab</dt><dd>Canva 專門嘅 AI 圖像生成器，為細緻視覺而設：每個提示語<b>一次出 4 個選項</b>、可加<b>參考圖</b>引導風格或構圖、可用<b>追加指令</b>修改、可 <b>Edit image</b> 作具體改動、可用 <b>Boost resolution</b> 提升清晰度（此項耗額度）。入口：首頁 → More → Dream Lab。</dd>
+      </dl>
+      <div class="note o"><b>點揀：</b>趕時間、要一張示意圖 → Magic Media。要做一整套風格統一嘅展覽視覺、需要反覆試 → Dream Lab。</div>
+      <p class="src">來源：Canva Help Center「Generate images with Dream Lab」；Magic Media 見功能權限清單。</p>
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">③ Magic Switch / Magic Resize vs Magic Layers<span class="mini">一個係「同一設計換多個尺寸」，一個係「把平面圖還原成可編輯設計」</span></button>
+    <div>
+      <dl class="deftbl">
+        <dt>Magic Switch（Magic Resize 升級版）</dt><dd>由你<b>手上已有嘅 Canva 設計</b>出發，一鍵轉成多種尺寸同格式，亦可轉換語言同內容形態（例如簡報轉成其他格式）。官方定位為多渠道發佈嘅主要理由。</dd>
+        <dt>Magic Layers</dt><dd>處理嘅係<b>一張平面圖檔</b>：分析設計整體結構同元素關係，將文字還原成<b>真正可編輯嘅文字框</b>、把元素分離，同時保留原本版面。官方說明佢並非單純描圖，而係 Canva Design Model 嘅新能力。</dd>
+      </dl>
+      <div class="note o"><b>點揀：</b>手上有 Canva 原始檔、要出多個尺寸 → Magic Switch。手上只剩一張 JPG／PNG 舊海報、想改字改圖 → Magic Layers。</div>
+      <p class="src">來源：canva.com/pro/magic-resize、Canva 功能權限清單；Magic Layers 定位見 Canva 關於 Magic Layers 之公開發佈說明。</p>
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">④ Magic Charts vs Magic Insights vs AI Charts<span class="mini">三個都同圖表有關，入口同輸出唔同</span></button>
+    <div>
+      <dl class="deftbl">
+        <dt>Magic Charts</dt><dd>喺 <b>Canva Sheets</b> 內將數據即時變成視覺圖表，並<b>與表格數據實時同步</b>。前提係數據已匯入並同步到 Canva Sheets。</dd>
+        <dt>Magic Insights</dt><dd>將 Canva Sheets 數據變成<b>圖表、摘要同公式</b>，省去人手計算同排版。官方註明：提示語<b>留空</b>時才會出現 data summary（數據摘要）。生成後嘅圖表同公式<b>可以再編輯</b>。</dd>
+        <dt>AI Charts / AI Shapes</dt><dd>屬「用 Canva AI 生成元素」一類（形狀、3D、圖表、表單等），屬 Premium AI 層級，用於設計檔內直接生成圖形元素。</dd>
+      </dl>
+      <div class="note o"><b>點揀：</b>數據會變、要圖表跟住更新 → Magic Charts。想 AI 幫你睇出重點同趨勢 → Magic Insights（記住留空提示語拿摘要）。單純要一個圖形元素放入設計 → AI Charts。</div>
+      <p class="src">來源：Canva Help Center「Use Magic Charts」、「Analyze and summarize Canva Sheets data with Magic Insights」、「Create and edit spreadsheets in Canva」、「Understanding your AI usage」。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 案例 A 展板 ================= -->
+<section class="slide" data-nav="案例·展板">
+  <p class="eyebrow">Case 1 / 4 <mark class="tag a">流程示例</mark></p>
+  <h2>案例一：常設展展板改版</h2>
+  <p class="lede">情境：一塊用咗三年嘅展板要更新內容，原始設計檔已經搵唔返，手上只有一張印刷廠發嚟嘅 JPG。</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th style="min-width:58px">步</th><th style="min-width:160px">用邊個功能</th><th>做咩</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>Magic Layers</td><td>上傳舊展板 JPG，還原成可編輯設計 —— 文字變返真正文字框，元素分離但版面不變。</td></tr>
+        <tr><td><b>2</b></td><td>Magic Write</td><td>把新嘅科學內容草擬成說明文字，指定字數同對象年齡層。</td></tr>
+        <tr><td><b>3</b></td><td>人手校訂 <mark class="tag r">必做</mark></td><td>由內容同事核實所有科學事實、單位、學名、年份。AI 初稿一律當未經核實處理。</td></tr>
+        <tr><td><b>4</b></td><td>Magic Media 或 Dream Lab</td><td>需要新示意圖時生成；要風格統一就用 Dream Lab 加參考圖。生成圖必須標明為示意圖／插畫。</td></tr>
+        <tr><td><b>5</b></td><td>Magic Eraser</td><td>若使用現場照片，清走臨時告示、路障等雜物。</td></tr>
+        <tr><td><b>6</b></td><td>Translate</td><td>就地生成英文版文字，再交由同事審校譯文。</td></tr>
+        <tr><td><b>7</b></td><td>Image Upscaler</td><td>舊圖解析度不足印刷要求時放大。</td></tr>
+        <tr><td><b>8</b></td><td>Magic Switch</td><td>同一主視覺另轉出導覽手冊頁同社交媒體方圖。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note w"><b>印刷前自檢三項：</b>① 所有 AI 生成圖已標示為示意圖；② 文字已有人手校訂簽核；③ 解析度符合印刷廠要求（展板通常需要實際尺寸 150 dpi 以上，具體以印刷廠規格為準）。</div>
+  <p class="src">流程中各功能用途以官方說明為據；本流程編排、步驟次序及印刷自檢項目為本簡報自行設計 <mark class="tag a">示例</mark>。</p>
+</section>
+
+<!-- ================= 11 案例 B C D ================= -->
+<section class="slide" data-nav="案例·海報教材">
+  <p class="eyebrow">Case 2–4 / 4 <mark class="tag a">流程示例</mark></p>
+  <h2>另外三條常用流程</h2>
+
+  <div class="acc">
+    <button type="button">案例二：活動海報 + 一套社交媒體宣傳圖<span class="mini">一個主視覺，出齊海報、IG 方圖、橫額、簡報頁</span></button>
+    <div>
+      <ol>
+        <li><b>Canva AI 2.0 或 Magic Design</b> —— 一句講清需求出版面初稿：<code>為澳門科學館親子天文觀測夜活動做 A2 直幅海報，深藍夜空色系，標題區在上方，底部留位放日期同報名 QR 碼</code></li>
+        <li><b>Dream Lab</b> —— 生成主視覺插畫，加參考圖令同系列物料風格一致。</li>
+        <li><b>Magic Write</b> —— 草擬活動簡介、社交帖文文案、報名須知三種長度版本。</li>
+        <li><b>Magic Switch</b> —— 一鍵轉出 IG 方圖、IG Story 直幅、Facebook 橫圖、展場電視橫幅、簡報頁。<b>呢步係最省時間嘅一步。</b></li>
+        <li><b>Magic Animate</b> —— 社交版本自動套用動畫；或用 <b>Image to Video</b> 把靜態主視覺變短片。</li>
+        <li><b>AI Music &amp; Sound Effects</b> —— 短片配樂，免去版權處理。</li>
+        <li><b>Translate</b> —— 出英文版對外物料。</li>
+      </ol>
+      <div class="note i"><b>省額度小技巧：</b>第 4 步嘅 Magic Switch 屬付費方案功能但唔屬 Ultra 層；而第 1 步若用 Canva AI 2.0 對話式設計屬 <b>Ultra</b>，耗額度最多。趕 deadline 又想留額度，可以用 Magic Design 出初稿，留 Ultra 額度喺真正需要反覆傾嘅項目。</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">案例三：教材簡報 + 工作坊互動環節<span class="mini">Magic Activities 配 Canva Code，做到可以真係喺課堂用嘅嘢</span></button>
+    <div>
+      <ol>
+        <li><b>Magic Activities</b> —— 依官方建議句式輸入學習目標：<code>Students will be able to investigate how air pressure affects a balloon rocket.</code>　官方亦提醒用 Bloom's Taxonomy 嘅強動詞（analyze、compare、evaluate、investigate、design、create、synthesize），每次聚焦<b>一個</b>學習目標。</li>
+        <li><b>Canva AI 2.0 / Magic Design</b> —— 生成簡報版面初稿。</li>
+        <li><b>Magic Write</b> —— 草擬每頁講解稿同提問。</li>
+        <li><b>Canva Code</b> —— 做課堂互動小測驗或計算機元素；亦可做成完整互動 Code 設計並發佈成網站，供學生自學。</li>
+        <li><b>Transform into Doc</b> —— 簡報轉成教案文字版，派發給帶團同事。</li>
+        <li><b>AI Voice</b> —— 生成旁白，做無障礙語音版教材。</li>
+      </ol>
+      <div class="note w"><b>官方對 Magic Activities 嘅三點提醒：</b>① 多步驟或過於複雜嘅提示語會令結果混亂，應拆開；② 對概念性科目（人文、科學）最有效，實作或表演類科目可能需要其他方式；③ <b>課堂使用前必須審閱</b>，檢查年齡適切性、準確性同文化敏感度 —— 官方明言「Teacher input is crucial」。</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <button type="button">案例四：參觀數據月報<span class="mini">Canva Sheets 三件套，由數字到可以放上展板嘅圖表</span></button>
+    <div>
+      <ol>
+        <li><b>Canva Sheets</b> —— 匯入並同步參觀人數、活動報名、問卷結果數據。</li>
+        <li><b>Magic Formulas</b> —— 唔記得公式寫法時，用口語描述由 AI 生成函數。屬 Standard 層，付費方案唔計額度，可以放心用。</li>
+        <li><b>Magic Insights</b> —— 找出趨勢同重點。<b>記住：想要 data summary 就要把提示語留空。</b>生成嘅圖表同公式可再編輯。</li>
+        <li><b>Magic Charts</b> —— 出圖表，並與表格數據實時同步 —— 數據更新，圖表跟住變，唔需要重做。</li>
+        <li><b>Magic Switch / Magic Design</b> —— 把圖表帶入年報版面或展板設計。</li>
+        <li><b>Canva Code</b> —— 需要對外互動版本時，做成 dashboard 並發佈成網站。</li>
+      </ol>
+      <div class="note r"><b>數據底線：</b>AI 生成嘅摘要係「幫你睇快啲」，唔係「幫你背書」。對外公佈嘅任何數字，一定要返回原始數據核對。</div>
+    </div>
+  </div>
+  <p class="src">各功能用途依官方說明；Magic Activities 句式同提示限制引自 Canva Help Center「Get better results with Magic Activities」。流程編排與活動主題為本簡報自行設計 <mark class="tag a">示例</mark>。</p>
+</section>
+<!-- ================= 12 實作練習 ================= -->
+<section class="slide" data-nav="實作練習">
+  <p class="eyebrow">Hands-on · 60 分鐘 <mark class="tag a">練習設計示例</mark></p>
+  <h2>實作練習：做一套活動宣傳組合</h2>
+  <p class="lede">題目：澳門科學館「夜探星空．親子天文觀測夜」活動宣傳。假設資料如下，全部為練習虛構設定。</p>
+
+  <div class="card" style="background:#fff;border-left:5px solid var(--accent)">
+    <h4>練習設定 <mark class="tag a">示例</mark></h4>
+    <p>活動名稱：夜探星空．親子天文觀測夜　｜　對象：6–12 歲兒童及家長　｜　日期：11 月下旬某星期六　｜　時間：19:00–21:30　｜　地點：澳門科學館天文館及戶外平台　｜　名額：40 組家庭　｜　重點：望遠鏡實測、星座辨認、天文館球幕節目</p>
+  </div>
+
+  <div class="stepper" id="labnav">
+    <button aria-current="true"><b>15′</b>第一段：文案</button>
+    <button aria-current="false"><b>15′</b>第二段：主視覺</button>
+    <button aria-current="false"><b>20′</b>第三段：出齊尺寸</button>
+    <button aria-current="false"><b>10′</b>第四段：互評</button>
+  </div>
+  <div class="steppanes" id="labpanes">
+    <div class="on">
+      <h3>第一段（15 分鐘）：用 Magic Write 寫三種長度文案</h3>
+      <ul>
+        <li><b>長版</b>（約 150 字）—— 放官網活動頁，交代活動內容同學習重點。</li>
+        <li><b>中版</b>（約 60 字）—— 放海報，要有吸引力同關鍵資訊。</li>
+        <li><b>短版</b>（約 25 字）—— 放 IG 帖文首句，要搶眼。</li>
+      </ul>
+      <p><b>提示語起手式：</b><code>為澳門科學館親子天文觀測夜活動寫海報文案，繁體中文，約 60 字，對象係 6 至 12 歲小朋友同家長，語氣親切帶少少期待感，要提到用望遠鏡實測同天文館球幕節目</code></p>
+      <div class="note o"><b>交付要求：</b>三個版本都要，而且<b>要用追問改過至少一次</b>（例如「短一半」、「語氣再親切少少」）。重點係練習第四步，唔係一次就收貨。</div>
+    </div>
+    <div>
+      <h3>第二段（15 分鐘）：用 Dream Lab 做主視覺</h3>
+      <ul>
+        <li>第一次提示語要寫齊：內容、風格、色系、構圖、留白位置。</li>
+        <li>由四張結果中揀一張，然後用<b>追加指令</b>修改至少兩次。</li>
+        <li>若要做同系列第二張圖，試用<b>參考圖</b>保持風格一致。</li>
+      </ul>
+      <p><b>提示語起手式：</b><code>親子天文觀測夜活動主視覺插畫，一家人用望遠鏡望星空嘅剪影，深藍夜空配暖黃燈光，扁平插畫風格，構圖留白喺上方三分一以便放標題，直幅</code></p>
+      <div class="note w"><b>注意：</b>生成圖只可當插畫／示意圖，<b>唔可以當真實天文攝影使用</b>。若要真實星空照，應使用館方自己拍攝或已獲授權嘅影像。</div>
+    </div>
+    <div>
+      <h3>第三段（20 分鐘）：出齊五個尺寸</h3>
+      <p>用 Magic Design 或 Canva AI 出 A2 直幅海報初稿，再用 <b>Magic Switch</b> 轉出下列尺寸，並逐個檢查版面有冇走位：</p>
+      <ul>
+        <li>A2 直幅海報（館內張貼）</li>
+        <li>IG 方圖 1:1</li>
+        <li>IG Story 直幅 9:16</li>
+        <li>Facebook 橫圖</li>
+        <li>展場電視橫幅</li>
+      </ul>
+      <div class="note i"><b>重點觀察：</b>Magic Switch 轉完之後，邊幾個尺寸需要人手調整？通常最極端嘅比例（9:16 同超寬橫幅）最易出問題。記錄落嚟 —— 呢個就係你日後嘅工作習慣。</div>
+    </div>
+    <div>
+      <h3>第四段（10 分鐘）：兩人互評</h3>
+      <p>同旁邊同事交換作品，按四條標準講一樣做得好、一樣要改：</p>
+      <div class="grid">
+        <div class="card"><h4>① 訊息清晰</h4><p>三秒內睇得出係咩活動、幾時、邊度報名？</p></div>
+        <div class="card"><h4>② 對象對位</h4><p>語氣同視覺係唔係真係講得入親子家庭？</p></div>
+        <div class="card"><h4>③ 準確與誠實</h4><p>所有資訊正確？AI 生成圖有標示為插畫？</p></div>
+        <div class="card"><h4>④ 館方調性</h4><p>放埋其他館方物料一齊，係唔係同一家機構出嘅嘢？</p></div>
+      </div>
+      <div class="note o"><b>收堂帶走：</b>把你今日最好用嘅三句提示語寫落便條，貼喺電腦邊。提示語係會累積嘅資產 —— 一個月後你會有一套自己嘅模板。</div>
+    </div>
+  </div>
+  <p class="src">練習活動、設定資料、提示語範例及評分標準均為本簡報自行設計 <mark class="tag a">示例</mark>，非實際活動資料。所引用功能行為依官方說明。</p>
+</section>
+
+<!-- ================= 13 小測驗 ================= -->
+<section class="slide" data-nav="自我測驗">
+  <p class="eyebrow">Check · 互動測驗</p>
+  <h2>自我測驗：十題</h2>
+  <p class="lede">揀完答案按「批改」，會即時顯示對錯同解釋。可以重做。</p>
+
+  <div id="quiz">
+    <div class="q" data-a="1">
+      <p class="stem"><i>Q1.</i> 想將展場照片裡嘅一件展品抽出嚟搬位，但<b>保留原本背景</b>，應該用邊個功能？</p>
+      <div class="opts">
+        <label><input type="radio" name="q1"><span>Background Remover</span></label>
+        <label><input type="radio" name="q1"><span>Magic Grab</span></label>
+        <label><input type="radio" name="q1"><span>Magic Eraser</span></label>
+        <label><input type="radio" name="q1"><span>Magic Expand</span></label>
+      </div>
+      <div class="fb"><b>答案：Magic Grab。</b>官方對比明確：Magic Grab 抽出物件可移動縮放而<b>保留背景</b>；Background Remover 係移除背景只剩主體；Magic Eraser 係令物件消失。</div>
+    </div>
+
+    <div class="q" data-a="2">
+      <p class="stem"><i>Q2.</i> 手上只剩一張印刷廠發嚟嘅舊海報 JPG，想改返入面嘅文字，最直接用邊個？</p>
+      <div class="opts">
+        <label><input type="radio" name="q2"><span>Magic Switch</span></label>
+        <label><input type="radio" name="q2"><span>Image Upscaler</span></label>
+        <label><input type="radio" name="q2"><span>Magic Layers</span></label>
+        <label><input type="radio" name="q2"><span>Magic Animate</span></label>
+      </div>
+      <div class="fb"><b>答案：Magic Layers。</b>它分析設計結構、把文字還原成可編輯文字框並分離元素，同時保留原版面。Magic Switch 係由你已有嘅 Canva 設計轉尺寸，唔係處理平面圖檔。</div>
+    </div>
+
+    <div class="q" data-a="0">
+      <p class="stem"><i>Q3.</i> 關於 Canva 嘅 AI 用量制度，以下邊項正確？</p>
+      <div class="opts">
+        <label><input type="radio" name="q3"><span>每月一個共用額度，分 Standard / Premium / Ultra 三層</span></label>
+        <label><input type="radio" name="q3"><span>用 credits 制，逐個功能單獨購買</span></label>
+        <label><input type="radio" name="q3"><span>團隊成員共用同一個額度池</span></label>
+        <label><input type="radio" name="q3"><span>所有方案都可以用 Ultra 工具</span></label>
+      </div>
+      <div class="fb"><b>答案：第一項。</b>官方明確說明唔用 credits，而係每月共用額度分三層。團隊各成員<b>有自己嘅額度，唔會共用或合併</b>。Canva Free、Pro Lite 同試用期<b>無法使用 Ultra</b>。</div>
+    </div>
+
+    <div class="q" data-a="3">
+      <p class="stem"><i>Q4.</i> 喺 Canva Education 帳戶，學生預設可以用邊三項功能？</p>
+      <div class="opts">
+        <label><input type="radio" name="q4"><span>Magic Write、Translate、Magic Design</span></label>
+        <label><input type="radio" name="q4"><span>全部 Magic 功能</span></label>
+        <label><input type="radio" name="q4"><span>Canva Code、Magic Layers、Magic Switch</span></label>
+        <label><input type="radio" name="q4"><span>Magic Media、Dream Lab、Magic Insights</span></label>
+      </div>
+      <div class="fb"><b>答案：Magic Media、Dream Lab、Magic Insights。</b>官方說明 Education 帳戶預設只有管理員同教師有權限，學生僅開放呢三項。</div>
+    </div>
+
+    <div class="q" data-a="2">
+      <p class="stem"><i>Q5.</i> 用 Magic Insights 想要「數據摘要」（data summary），關鍵條件係？</p>
+      <div class="opts">
+        <label><input type="radio" name="q5"><span>要先升級至 Enterprise 方案</span></label>
+        <label><input type="radio" name="q5"><span>要寫一段非常詳細嘅提示語</span></label>
+        <label><input type="radio" name="q5"><span>要把提示語留空</span></label>
+        <label><input type="radio" name="q5"><span>要先用 Magic Charts 出圖</span></label>
+      </div>
+      <div class="fb"><b>答案：把提示語留空。</b>官方註明「Data summary appears only when the prompt is left blank」。</div>
+    </div>
+
+    <div class="q" data-a="1">
+      <p class="stem"><i>Q6.</i> 以下邊個屬 <b>Ultra AI</b> 層級（耗額度最多）？</p>
+      <div class="opts">
+        <label><input type="radio" name="q6"><span>Magic Write</span></label>
+        <label><input type="radio" name="q6"><span>Canva AI 2.0 對話式設計</span></label>
+        <label><input type="radio" name="q6"><span>Magic Formulas</span></label>
+        <label><input type="radio" name="q6"><span>Image Upscaler</span></label>
+      </div>
+      <div class="fb"><b>答案：Canva AI 2.0 對話式設計。</b>官方列出 Ultra 層包括對話式設計同用 Canva AI 生成影片片段。Magic Write 屬 AI design tools、Magic Formulas 同 Image Upscaler 屬 Standard。</div>
+    </div>
+
+    <div class="q" data-a="0">
+      <p class="stem"><i>Q7.</i> 官方建議 Magic Activities 嘅提示語句式係？</p>
+      <div class="opts">
+        <label><input type="radio" name="q7"><span>Students will be able to [動詞] about [主題]</span></label>
+        <label><input type="radio" name="q7"><span>Make a fun activity about [主題]</span></label>
+        <label><input type="radio" name="q7"><span>[年級] + [科目] + [時長]</span></label>
+        <label><input type="radio" name="q7"><span>隨意描述即可，AI 會自己理解</span></label>
+      </div>
+      <div class="fb"><b>答案：第一項。</b>官方指明此句式有助 AI 理解預期學習成果，並建議用 Bloom's Taxonomy 強動詞，每次聚焦一個學習目標。官方亦明言課堂使用前必須審閱。</div>
+    </div>
+
+    <div class="q" data-a="2">
+      <p class="stem"><i>Q8.</i> 一份展覽主視覺要同時出海報、IG 方圖、Story 直幅同展場橫幅，最省時間嘅做法？</p>
+      <div class="opts">
+        <label><input type="radio" name="q8"><span>逐個尺寸重新開一個新設計</span></label>
+        <label><input type="radio" name="q8"><span>用 Dream Lab 逐個尺寸生成一次</span></label>
+        <label><input type="radio" name="q8"><span>用 Magic Switch 一次轉出多個尺寸，再人手微調</span></label>
+        <label><input type="radio" name="q8"><span>用 Magic Eraser 裁切</span></label>
+      </div>
+      <div class="fb"><b>答案：Magic Switch。</b>官方定位為一鍵轉多尺寸、多格式甚至多語言，係多渠道發佈嘅主要工具。但轉完仍要人手檢查極端比例嘅版面。</div>
+    </div>
+
+    <div class="q" data-a="3">
+      <p class="stem"><i>Q9.</i> 同事話「我部機搵唔到 Dream Lab」，以下邊個<b>唔屬</b>官方列出嘅可能成因？</p>
+      <div class="opts">
+        <label><input type="radio" name="q9"><span>方案唔包含該功能</span></label>
+        <label><input type="radio" name="q9"><span>管理員限制咗存取權限</span></label>
+        <label><input type="radio" name="q9"><span>所在語言或地區暫未支援</span></label>
+        <label><input type="radio" name="q9"><span>當月額度用完，功能會由介面消失</span></label>
+      </div>
+      <div class="fb"><b>答案：第四項唔屬成因。</b>官方列出三個成因：方案、管理員限制、語言或地區未支援。額度用完時係會出現提示橫幅同短暫延遲，而非功能消失。</div>
+    </div>
+
+    <div class="q" data-a="1">
+      <p class="stem"><i>Q10.</i> 用 AI 生成咗一張「深海熱泉生態」示意圖放上展板，以下做法最正確？</p>
+      <div class="opts">
+        <label><input type="radio" name="q10"><span>直接用，AI 圖好靚就得</span></label>
+        <label><input type="radio" name="q10"><span>標明為插畫／示意圖，並由同事核實所描繪嘅科學內容</span></label>
+        <label><input type="radio" name="q10"><span>標註為實地科研攝影以增加說服力</span></label>
+        <label><input type="radio" name="q10"><span>加上合作機構標誌以示權威</span></label>
+      </div>
+      <div class="fb"><b>答案：第二項。</b>AI 生成圖唔可以當真實科學影像；而官方亦就 AI 生成教學內容明確要求使用前審閱準確性。第三、四項涉及誤導同未經授權使用他人標誌，絕不可行。</div>
+    </div>
+  </div>
+
+  <div class="quizbar">
+    <button class="btn" id="grade" type="button">批改</button>
+    <button class="btn ghost" id="reset" type="button">重做</button>
+    <span class="score" id="score" role="status" aria-live="polite">未作答</span>
+  </div>
+</section>
+
+<!-- ================= 14 收堂 ================= -->
+<section class="slide" data-nav="收堂重點">
+  <p class="eyebrow">Wrap-up</p>
+  <h2>收堂：帶走五件事</h2>
+  <div class="kpi">
+    <div><b>6</b><span>大類功能（對話／文字／圖像／編輯／改版／數據互動）</span></div>
+    <div><b>3</b><span>層額度：Standard · Premium · Ultra</span></div>
+    <div><b>4</b><span>步提示語：對象 · 內容 · 風格 · 追問</span></div>
+    <div><b>1</b><span>條鐵律：AI 出初稿，人出判斷</span></div>
+  </div>
+
+  <div class="grid two">
+    <div class="card kb"><h4>① 日常最高回報嘅三個功能</h4><p>對科學館工作而言：<b>Magic Write</b>（文案初稿）、<b>Magic Switch</b>（一稿多尺寸）、<b>Magic Layers</b>（救返冇原始檔嘅舊設計）。呢三個省嘅時間最實在。</p></div>
+    <div class="card kb"><h4>② 開工前先睇額度</h4><p>Settings → Billing → AI usage。付費方案用 Magic Write、Translate 等 Standard 工具唔計額度，可以放心用；Ultra 嘅對話式設計要留住用喺真正需要反覆傾嘅項目。</p></div>
+    <div class="card ka"><h4>③ 提示語要儲落嚟</h4><p>寫得好嘅提示語係可以重用嘅資產。建議開一個共用文件，按用途（展板／海報／教材／社交）分類儲存，全組共用。</p></div>
+    <div class="card ka"><h4>④ 核實係我們嘅專業</h4><p>AI 唔會因為講錯而尷尬，但館方會。科學事實、數字、學名、年代，一律人手核實後才可出街。</p></div>
+  </div>
+
+  <div class="note i"><b>⑤ 建議嘅下一步：</b>揀一個真實、細規模、低風險嘅項目做第一次實戰 —— 例如下一場工作坊嘅內部通告或社交帖文圖，唔好一開始就攞常設展展板試刀。做完一次，再把學到嘅寫入組內嘅提示語文件。</div>
+
+  <div class="note o"><b>如果同事問「AI 會唔會取代設計？」</b>可以咁答：AI 令「出初稿」嘅成本接近零，所以價值就全部轉移到<b>判斷</b>上面 —— 揀邊個方向、改邊一句、邊張圖唔可以用、邊個數字要核實。呢啲全部係我們嘅專業，而且需求只會多咗。</div>
+</section>
+
+<!-- ================= 15 來源 ================= -->
+<section class="slide" data-nav="資料來源">
+  <p class="eyebrow">Sources · 查證日期 2026-10-26</p>
+  <h2>資料來源與使用說明</h2>
+  <p class="lede">本簡報所有功能名稱、功能行為、額度層級同方案限制，均取自下列 Canva 官方頁面。凡本簡報自行設計嘅教學例子均已標示 <mark class="tag a">示例</mark>。</p>
+
+  <h3>Canva 官方說明中心（Canva Help Center）</h3>
+  <ol>
+    <li>Change access to Magic and AI features — canva.com/help/magic-features-admin-controls（完整 Magic 及 AI 功能清單、Education 帳戶預設權限、語言地區限制）</li>
+    <li>Get started with Canva AI — canva.com/help/using-canva-ai（Canva AI 2.0、1.0 與 2.0 分別、方案資格、支援語言、提示技巧）</li>
+    <li>Understanding your AI usage — canva.com/help/ai-access（三層工具分類、各方案額度上限、重設規則、用爆後行為、額度查詢路徑）</li>
+    <li>Create interactive designs with Canva Code — canva.com/help/canva-code（互動 Code 設計與互動元素兩種用法）</li>
+    <li>Generate images with Dream Lab — canva.com/help/generate-with-dreamlab（四張結果、參考圖、追加指令、Boost resolution）</li>
+    <li>Use Magic Edit to add, replace, and modify photos — canva.com/help/using-magic-edit（All / Brush / Click 選取方式、與其他工具對比）</li>
+    <li>Make your photo selectable and customizable with Magic Grab — canva.com/help/using-magic-grab（與 Background Remover 及 Magic Eraser 之分別）</li>
+    <li>Get better results with Magic Activities — canva.com/help/magic-activities（提示語句式、Bloom's Taxonomy 動詞、提示限制、課堂前審閱要求）</li>
+    <li>Analyze and summarize Canva Sheets data with Magic Insights — canva.com/help/magic-insights（data summary 需留空提示語、生成內容可編輯）</li>
+    <li>Use Magic Charts — canva.com/help/magic-charts（即時圖表、與表格數據同步）</li>
+    <li>Create and edit spreadsheets in Canva — canva.com/help/canva-sheets（Canva Sheets 內各 AI 工具關係）</li>
+  </ol>
+
+  <h3>Canva 官方產品與新聞頁面</h3>
+  <ol start="12">
+    <li>Use Magic Resize™ to resize, transform, and translate your designs — canva.com/pro/magic-resize（Magic Switch 作為 Magic Resize 升級版之定位）</li>
+    <li>Introducing Magic Studio: the power of AI, all in one place — canva.com/newsroom/news/magic-studio（Magic Studio 於 2023 年 10 月 4 日推出；Magic Grab 等圖像編輯功能介紹）</li>
+    <li>Canva Sheets is here: Visualise, analyse, and create at scale — canva.com/newsroom/news/introducing-canva-sheets（Canva Sheets 連同 Magic Charts、Magic Insights、Magic Formulas 於 Canva Create 發表）</li>
+    <li>Free Formula Generator — canva.com/features/ai-formula-generator（Magic Formulas 與 Canva Sheets 其他 AI 工具關係）</li>
+    <li>Canva 關於 Magic Layers 之公開發佈說明（Magic Layers 分析設計結構、還原可編輯文字框、屬 Canva Design Model 能力）</li>
+  </ol>
+
+  <div class="note w"><b>兩點使用限制，請留意：</b>① Canva 功能更新頻密，功能名稱、分層同額度數字可能隨時變動，建議每次開新培訓前重新核對上述官方頁面。② 本簡報部分功能嘅額度層級標示為「依方案」，係因官方並未就該項列明單一層級 —— 實際可用性以你帳戶方案同管理員設定為準，請以 Settings → Billing → AI usage 以及 Permissions → Magic and AI 兩處嘅實際顯示為最終依據。</div>
+
+  <div class="note r"><b>本簡報嘅定位：</b>內部培訓用教材草稿。未經館方審核前，請勿作對外發佈或代表館方立場之用途。簡報內所有活動名稱、數據同練習設定均為虛構示例，非實際館方資料。</div>
+</section>
+
+</div><!-- /deck -->
+</div><!-- /wrap -->
+
+<nav class="navbar" aria-label="簡報導覽">
+  <button class="nb" id="prev" type="button">← 上一頁</button>
+  <span class="counter" id="counter"><b>1</b> / 15</span>
+  <button class="nb" id="next" type="button">下一頁 →</button>
+  <div class="dots" id="dots" aria-label="頁面快速跳轉"></div>
+  <span class="kbdhint"><kbd>←</kbd><kbd>→</kbd> 翻頁 · <kbd>F</kbd> 全螢幕 · <kbd>P</kbd> 列印／PDF</span>
+</nav>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total  = slides.length;
+  var idx    = 0;
+  var dots   = document.getElementById('dots');
+  var chip   = document.getElementById('chipnav');
+  var bar    = document.getElementById('bar');
+  var counter= document.getElementById('counter');
+  var prevB  = document.getElementById('prev');
+  var nextB  = document.getElementById('next');
+
+  /* build nav chips + dots */
+  slides.forEach(function(s, i){
+    var label = s.getAttribute('data-nav') || ('第 ' + (i+1) + ' 頁');
+
+    var c = document.createElement('button');
+    c.type = 'button';
+    c.textContent = label;
+    c.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+    c.addEventListener('click', function(){ go(i); });
+    chip.appendChild(c);
+
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.setAttribute('aria-label', '前往：' + label);
+    d.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+
+  var chips = Array.prototype.slice.call(chip.children);
+  var dotsA = Array.prototype.slice.call(dots.children);
+
+  function go(n){
+    if (n < 0) n = 0;
+    if (n > total - 1) n = total - 1;
+    slides[idx].classList.remove('is-on');
+    chips[idx].setAttribute('aria-current','false');
+    dotsA[idx].setAttribute('aria-current','false');
+    idx = n;
+    slides[idx].classList.add('is-on');
+    chips[idx].setAttribute('aria-current','true');
+    dotsA[idx].setAttribute('aria-current','true');
+    counter.innerHTML = '<b>' + (idx+1) + '</b> / ' + total;
+    bar.style.width = (((idx+1)/total)*100) + '%';
+    prevB.disabled = (idx === 0);
+    nextB.disabled = (idx === total-1);
+    if (chips[idx].scrollIntoView) {
+      try { chips[idx].scrollIntoView({block:'nearest', inline:'nearest'}); } catch(e){}
+    }
+    window.scrollTo(0,0);
+  }
+
+  prevB.addEventListener('click', function(){ go(idx-1); });
+  nextB.addEventListener('click', function(){ go(idx+1); });
+
+  document.addEventListener('keydown', function(e){
+    var t = e.target || {};
+    var tn = (t.tagName || '').toLowerCase();
+    if (tn === 'input' || tn === 'textarea' || tn === 'select') return;
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); go(idx+1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(idx-1); }
+    else if (k === 'Home') { e.preventDefault(); go(0); }
+    else if (k === 'End')  { e.preventDefault(); go(total-1); }
+    else if (k === 'f' || k === 'F') {
+      e.preventDefault();
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) { document.exitFullscreen(); }
+    }
+    else if (k === 'p' || k === 'P') { e.preventDefault(); window.print(); }
+  });
+
+  /* accordions */
+  Array.prototype.forEach.call(document.querySelectorAll('.acc > button'), function(b){
+    var box = b.parentNode;
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      var open = box.classList.toggle('open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  /* steppers (generic) */
+  function wireStepper(navId, paneId){
+    var nav = document.getElementById(navId);
+    var pan = document.getElementById(paneId);
+    if (!nav || !pan) return;
+    var btns  = Array.prototype.slice.call(nav.children);
+    var panes = Array.prototype.slice.call(pan.children);
+    btns.forEach(function(b, i){
+      b.type = 'button';
+      b.addEventListener('click', function(){
+        btns.forEach(function(x){ x.setAttribute('aria-current','false'); });
+        panes.forEach(function(x){ x.classList.remove('on'); });
+        b.setAttribute('aria-current','true');
+        if (panes[i]) panes[i].classList.add('on');
+      });
+    });
+  }
+  wireStepper('stepnav','steppanes');
+  wireStepper('labnav','labpanes');
+
+  /* table filter */
+  var fbar = document.getElementById('fbar');
+  if (fbar){
+    var fbtns = Array.prototype.slice.call(fbar.querySelectorAll('button'));
+    var rows  = Array.prototype.slice.call(document.querySelectorAll('#ftbl tbody tr'));
+    fbtns.forEach(function(b){
+      b.addEventListener('click', function(){
+        var f = b.getAttribute('data-f');
+        fbtns.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+        b.setAttribute('aria-pressed','true');
+        rows.forEach(function(r){
+          var show = (f === 'all') || (r.getAttribute('data-c') === f);
+          if (show) r.classList.remove('dim'); else r.classList.add('dim');
+        });
+      });
+    });
+  }
+
+  /* quiz */
+  var quiz  = document.getElementById('quiz');
+  var gradeB= document.getElementById('grade');
+  var resetB= document.getElementById('reset');
+  var scoreE= document.getElementById('score');
+  if (quiz && gradeB){
+    var qs = Array.prototype.slice.call(quiz.querySelectorAll('.q'));
+
+    gradeB.addEventListener('click', function(){
+      var correct = 0, answered = 0;
+      qs.forEach(function(q){
+        var want = parseInt(q.getAttribute('data-a'), 10);
+        var labels = Array.prototype.slice.call(q.querySelectorAll('.opts label'));
+        var picked = -1;
+        labels.forEach(function(l, i){
+          l.classList.remove('right','wrong');
+          var r = l.querySelector('input');
+          if (r && r.checked) picked = i;
+        });
+        if (picked > -1) answered++;
+        labels.forEach(function(l, i){
+          if (i === want) l.classList.add('right');
+          else if (i === picked) l.classList.add('wrong');
+        });
+        if (picked === want) correct++;
+        q.classList.add('graded');
+      });
+      var msg = '答對 ' + correct + ' / ' + qs.length + ' 題';
+      if (answered < qs.length) msg += '（尚有 ' + (qs.length - answered) + ' 題未作答）';
+      if (correct === qs.length) msg += ' — 滿分，可以開工了。';
+      else if (correct >= 7) msg += ' — 掌握得唔錯，重溫一下做錯嗰幾題。';
+      else msg += ' — 建議重看功能對照表同辨異那兩頁。';
+      scoreE.textContent = msg;
+    });
+
+    resetB.addEventListener('click', function(){
+      qs.forEach(function(q){
+        q.classList.remove('graded');
+        Array.prototype.forEach.call(q.querySelectorAll('input'), function(r){ r.checked = false; });
+        Array.prototype.forEach.call(q.querySelectorAll('.opts label'), function(l){ l.classList.remove('right','wrong'); });
+      });
+      scoreE.textContent = '未作答';
+    });
+  }
+
+  go(0);
+})();
+</script>
+</body>
+</html>
