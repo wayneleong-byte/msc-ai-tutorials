@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grok Bot 從零教學｜澳門科學館</title>
-<meta name="description" content="澳門科學館：由空白帳戶學起 Grok Bot——主 bot 規則、小隊、路由、連接器、桌面、群組、電郵、雲端機、權限與價錢。查證 2026-10-31。">
+<meta name="description" content="澳門科學館：由空白帳戶學起 Grok Bot——主 bot 規則、小隊、路由、連接器、Skill 技能、桌面、群組、電郵、雲端機、權限與價錢。Skill 查證 2026-11-01。">
 <style>
 :root{
   --bg:#0a1f2e;--panel:#0d2f44;--accent:#1a9e8f;--accent2:#f0b429;
@@ -176,7 +176,7 @@ table.t .ico-cell{font-size:1.4rem;text-align:center;width:3em}
   <span class="badge warn">查證 2026-10-31</span>
   <span class="badge">介面會改版</span>
   <h1>Grok Bot 從零教學</h1>
-  <p class="lead">由空白帳戶 → Primary Bot（主入口 bot）規則 → 專責小隊 → 路由卡<br>→ Connector（連接器）→ 桌面 → 群組 → 電郵 → VM（雲端虛擬機）→ 本機權限 → 價錢</p>
+  <p class="lead">由空白帳戶 → Primary Bot（主入口 bot）規則 → 專責小隊 → 路由卡<br>→ Connector（連接器）→ Skill（技能）→ 桌面 → 群組 → 電郵 → VM（雲端虛擬機）→ 本機權限 → 價錢</p>
   <div class="btn-row" style="justify-content:center">
     <a class="btn primary" href="https://x.ai/bot" target="_blank" rel="noopener">⬇️ 官方下載</a>
     <a class="btn ghost" href="https://x.ai/pricing" target="_blank" rel="noopener">💰 價錢比較</a>
@@ -191,19 +191,20 @@ table.t .ico-cell{font-size:1.4rem;text-align:center;width:3em}
 <!-- 2 學習路徑 -->
 <section class="slide" data-title="學習路徑">
 <h2>🗺️ 學習路徑（圖示總覽）</h2>
-<p class="lead">十一步走完；每步都有圖示與短說明。</p>
+<p class="lead">十二步走完；每步都有圖示與短說明。</p>
 <div class="steps-icons">
   <div class="step"><div class="n">1</div><span class="ico">⭐</span><div class="lbl">主 bot 規則</div></div>
   <div class="step"><div class="n">2</div><span class="ico">👥</span><div class="lbl">角色型 bot</div></div>
   <div class="step"><div class="n">3</div><span class="ico">🗺️</span><div class="lbl">路由卡</div></div>
   <div class="step"><div class="n">4</div><span class="ico">🔌</span><div class="lbl">Connector</div></div>
-  <div class="step"><div class="n">5</div><span class="ico">💻</span><div class="lbl">桌面巡禮</div></div>
-  <div class="step"><div class="n">6</div><span class="ico">📤</span><div class="lbl">分享模板</div></div>
-  <div class="step"><div class="n">7</div><span class="ico">💬</span><div class="lbl">群組</div></div>
-  <div class="step"><div class="n">8</div><span class="ico">✉️</span><div class="lbl">Grok mail</div></div>
-  <div class="step"><div class="n">9</div><span class="ico">☁️</span><div class="lbl">VM 雲端機</div></div>
-  <div class="step"><div class="n">10</div><span class="ico">🔐</span><div class="lbl">權限／內網</div></div>
-  <div class="step"><div class="n">11</div><span class="ico">💳</span><div class="lbl">價錢下載</div></div>
+  <div class="step"><div class="n">5</div><span class="ico">🧩</span><div class="lbl">Skill 技能</div></div>
+  <div class="step"><div class="n">6</div><span class="ico">💻</span><div class="lbl">桌面巡禮</div></div>
+  <div class="step"><div class="n">7</div><span class="ico">📤</span><div class="lbl">分享模板</div></div>
+  <div class="step"><div class="n">8</div><span class="ico">💬</span><div class="lbl">群組</div></div>
+  <div class="step"><div class="n">9</div><span class="ico">✉️</span><div class="lbl">Grok mail</div></div>
+  <div class="step"><div class="n">10</div><span class="ico">☁️</span><div class="lbl">VM 雲端機</div></div>
+  <div class="step"><div class="n">11</div><span class="ico">🔐</span><div class="lbl">權限／內網</div></div>
+  <div class="step"><div class="n">12</div><span class="ico">💳</span><div class="lbl">價錢下載</div></div>
 </div>
 <div class="callout info"><div class="h">最低門檻</div>要用 Grok Bot，最少訂閱 <strong>The X Subscription · Premium（US$30／月）</strong>；Free／Plus <strong>不包括</strong> Grok Bot。詳見 <a href="https://docs.x.ai/x-subscription/pricing" target="_blank" rel="noopener">docs 價錢</a>。</div>
 <p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
@@ -379,11 +380,81 @@ https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
   <div class="ph-title">🔌 Connectors 清單｜待 Oscar 補圖</div>
   <div class="ph-sub">建議截：Connect apps／Connectors 目錄全覽（遮蔽已連帳號電郵）</div>
 </div>
-<p class="hint">路徑概念：側欄 → Connect apps／Settings 相關項目。Skill（技能）可進一步擴充特定流程。</p>
+<p class="hint">路徑概念：側欄 → Connect apps／Settings 相關項目。下一頁起介紹 Skill（技能）如何安裝與使用。</p>
 <p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
 </section>
 
-<!-- 10 桌面巡禮 -->
+<!-- 10 Skill vs Routine -->
+<section class="slide" data-title="Skill 與 Routine">
+<h2>🧩 Skill（技能）vs Routine（排程／例行工作）</h2>
+<p class="lead">先弄清「怎麼做」與「何時跑」；建議順序：做成功一次 → 存成 Skill → 再自動化成 Routine。</p>
+<div class="callout warn"><div class="h">查證聲明（2026-11-01）</div>依據官方 <a href="https://docs.x.ai/grok-bot/skills-routines-and-automations" target="_blank" rel="noopener">Skills and routines</a>（頁面 last updated Oct 28, 2026）。介面會改版；不捏造未寫明的按鈕或快捷鍵。</div>
+<div class="compare">
+  <div class="c-card a">
+    <h3>🧩 Skill（技能）</h3>
+    <ul class="bullets">
+      <li>可重用的「<strong>怎麼做</strong>」說明</li>
+      <li>含步驟、決策規則、預期輸出、安全邊界</li>
+      <li>帳戶內各 Bot 可共用；某 Bot 可能需對應 app／登入才用得上</li>
+    </ul>
+  </div>
+  <div class="c-card b">
+    <h3>⏰ Routine（排程／例行工作）</h3>
+    <ul class="bullets">
+      <li>指定某個 Bot「<strong>何時跑</strong>」</li>
+      <li>排程（例如工作日早上）或事件觸發（Slack／電郵／webhook 等）</li>
+      <li>雲端執行；筆電可關機</li>
+    </ul>
+  </div>
+</div>
+<table class="t">
+  <thead><tr><th>對照</th><th>Skill（技能）</th><th>Routine（排程／例行工作）</th></tr></thead>
+  <tbody>
+    <tr><td>本質</td><td>方法／說明書</td><td>觸發器＋何時執行</td></tr>
+    <tr><td>問題</td><td>「要怎麼做這件事？」</td><td>「何時／因何事跑這流程？」</td></tr>
+    <tr class="hl"><td>建議順序</td><td colspan="2">先做一次成功 → 存成 Skill → 再自動化成 Routine</td></tr>
+  </tbody>
+</table>
+<div class="flow">
+  <div class="node">一次成功任務</div><div class="arr">→</div>
+  <div class="node alt">存成 Skill</div><div class="arr">→</div>
+  <div class="node warn">再設 Routine</div>
+</div>
+<p class="hint">官方原文概念：A skill is a reusable set of instructions；a routine tells one Bot when to run。</p>
+<p class="footer-note">澳門科學館 AI 學習資源 · Skill 查證 2026-11-01 · 介面會改版</p>
+</section>
+
+<!-- 11 Skill 安裝與使用 -->
+<section class="slide" data-title="Skill 安裝與使用">
+<h2>📥 安裝／啟用與使用 Skill（技能）</h2>
+<p class="lead">四種常見取得方式＋怎麼呼叫；團隊 Publish 僅簡述。查證 2026-11-01。</p>
+<div class="steps-icons">
+  <div class="step"><div class="n">1</div><span class="ico">🛒</span><div class="lbl">市集／套件安裝</div></div>
+  <div class="step"><div class="n">2</div><span class="ico">🔒</span><div class="lbl">Private skills 啟用</div></div>
+  <div class="step"><div class="n">3</div><span class="ico">💾</span><div class="lbl">自己存一條</div></div>
+  <div class="step"><div class="n">4</div><span class="ico">🎥</span><div class="lbl">Teach a task（可選）</div></div>
+</div>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">🛒</span><div class="ttl">1. 套件／市集型</div><div class="why">側欄 <strong>Connect apps（連接應用）</strong> → 發現並安裝支援的 apps 與 <strong>packaged skills（套裝技能）</strong>。</div></div>
+  <div class="icard"><span class="ico">🔒</span><div class="ttl">2. 私人 Skill 庫</div><div class="why"><strong>Private skills（私人技能）</strong> 為帳戶共用。若某 Bot 找不到：Connect apps → 點標題旁「已連接數量」→ 在 Private skills 為<strong>目前這個 Bot</strong>啟用。</div></div>
+  <div class="icard"><span class="ico">💾</span><div class="ttl">3. 自己存一條</div><div class="why">任務成功後對 Bot 說：「把剛才流程存成名為……的 skill」。要求含：何時用、輸入與權限、步驟、如何驗收、回傳什麼、哪些要批准。</div></div>
+  <div class="icard"><span class="ico">🎥</span><div class="ttl">4. Teach a task（示範教任務）</div><div class="why"><span class="badge warn">功能可能逐步開放</span> 一對一對話＋電腦畫面 → Teach a task → 描述目標 → 示範一次 → 停止錄製 → 審閱草稿 Skill → 安全例子測試後再排程。若看不到此控制，改用文字請 Bot 依完成任務建立 Skill。</div></div>
+</div>
+<div class="callout info"><div class="h">使用方式</div>用<strong>名稱</strong>請 Bot 執行該 Skill。官方寫明：用 <code>@</code> 呼叫 Bot、群組、Routine、apps。勿捏造未寫明的快捷鍵／斜線指令。</div>
+<div class="callout info"><div class="h">團隊分享（簡述）</div>Connect apps → 已連接數 → 開啟 skill → <strong>Publish（發佈）</strong>；需有 description（說明）。app／模板附帶的 skill <strong>不可</strong> Publish。</div>
+<div class="ph" data-ph="Connect apps／Private skills｜待 Oscar 補圖（側欄連接數＋Private skills 啟用）" tabindex="0" role="button" title="點擊查看說明">
+  <div class="ph-title">🧩 Connect apps／Private skills｜待 Oscar 補圖</div>
+  <div class="ph-sub">建議截：側欄 Connect apps、標題旁已連接數量、Private skills 為目前 Bot 啟用（遮蔽帳號電郵）</div>
+</div>
+<div class="prompt-box">
+  <div class="prompt-head"><span>示範：請 Bot 存成 Skill（可複製）</span><button type="button" class="copy-btn" data-copy="skill-save">複製</button></div>
+  <pre class="prompt-text" id="skill-save">請把我們剛才完成的流程存成 skill，名稱為「每週帳戶健康檢查」。請寫明：何時使用、需要哪些來源系統與權限、步驟順序、如何驗收結果、應回傳什麼格式、以及哪些動作必須先經我批准（例如聯絡客戶）。</pre>
+</div>
+<p class="hint">來源：<a href="https://docs.x.ai/grok-bot/skills-routines-and-automations" target="_blank" rel="noopener">docs.x.ai · Skills and routines</a> · 查證 2026-11-01 · 介面會改版</p>
+<p class="footer-note">澳門科學館 AI 學習資源 · Skill 查證 2026-11-01 · 介面會改版</p>
+</section>
+
+<!-- 12 桌面巡禮 -->
 <section class="slide" data-title="桌面功能巡禮">
 <h2>💻 電腦版功能巡禮（總覽）</h2>
 <p class="lead">側邊欄是指揮台。以下為示意＋佔位；真 UI 截圖待補。</p>
@@ -393,7 +464,7 @@ https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
 </div>
 <div class="grid grid-3">
   <div class="icard sm"><span class="ico">➕</span><div class="ttl">建 bot</div><div class="why">短名＋一句職責＋怎麼做</div></div>
-  <div class="icard sm"><span class="ico">🔌</span><div class="ttl">Connect apps</div><div class="why">電郵、模板、Connector（連接器）</div></div>
+  <div class="icard sm"><span class="ico">🔌</span><div class="ttl">Connect apps</div><div class="why">電郵、模板、Connector、packaged skills</div></div>
   <div class="icard sm"><span class="ico">⚙️</span><div class="ttl">Settings（設定）</div><div class="why">General／Computer／Vault／Usage／Updates</div></div>
   <div class="icard sm"><span class="ico">📚</span><div class="ttl">Library／Pages</div><div class="why">Pages（互動網頁／報告頁）與產物</div></div>
   <div class="icard sm"><span class="ico">⏰</span><div class="ttl">Routines</div><div class="why">定時／觸發；新人先停用</div></div>
@@ -678,8 +749,9 @@ https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
 <div class="grid grid-2">
   <div class="icard"><span class="ico">1️⃣</span><div class="ttl">建／設主 bot</div><div class="why">套用 10 規則；或直接匯入模板；貼自檢指令。</div></div>
   <div class="icard"><span class="ico">2️⃣</span><div class="ttl">連一個 Connector</div><div class="why">例如 Calendar 或 Drive；確認授權範圍。</div></div>
-  <div class="icard"><span class="ico">3️⃣</span><div class="ttl">建兩 bot 小組</div><div class="why">練習 @ 點名與開場白分工。</div></div>
-  <div class="icard"><span class="ico">4️⃣</span><div class="ttl">申請電郵（可選）</div><div class="why">想清楚名字；不可改刪。</div></div>
+  <div class="icard"><span class="ico">3️⃣</span><div class="ttl">存／啟用一個 Skill</div><div class="why">做成功一次後請 Bot 存成 skill；或於 Connect apps 啟用 Private／套裝技能。</div></div>
+  <div class="icard"><span class="ico">4️⃣</span><div class="ttl">建兩 bot 小組</div><div class="why">練習 @ 點名與開場白分工。</div></div>
+  <div class="icard"><span class="ico">5️⃣</span><div class="ttl">申請電郵（可選）</div><div class="why">想清楚名字；不可改刪。</div></div>
 </div>
 <figure class="shot">
   <img src="assets/04-docs-get-started.png" alt="官方 Get started 文件截圖" loading="lazy">
@@ -727,7 +799,7 @@ https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
 
 <!-- 25 測驗 -->
 <section class="slide" data-title="小測驗">
-<h2>📝 小測驗（4 題）</h2>
+<h2>📝 小測驗（5 題）</h2>
 <div id="quiz">
   <div class="q" data-ans="1">
     <p><strong>1.</strong> 哪個個人方案起包括 Grok Bot？</p>
@@ -752,6 +824,12 @@ https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
     <button type="button" class="quiz-opt" data-i="0">共用一部雲端機（螢幕各有、檔案／登入共）</button>
     <button type="button" class="quiz-opt" data-i="1">每 bot 獨立雲端機完全隔離</button>
     <button type="button" class="quiz-opt" data-i="2">只有 Primary 有雲端機</button>
+  </div>
+  <div class="q" data-ans="1" style="margin-top:18px">
+    <p><strong>5.</strong> Skill（技能）是什麼？若 Private skill 找不到，正確做法較接近？</p>
+    <button type="button" class="quiz-opt" data-i="0">排程觸發器；到 Settings → Timezone 啟用</button>
+    <button type="button" class="quiz-opt" data-i="1">可重用的「怎麼做」說明；Connect apps → 已連接數 → Private skills 為目前 Bot 啟用</button>
+    <button type="button" class="quiz-opt" data-i="2">只有 Primary Bot 能用的斜線指令／快捷鍵</button>
   </div>
 </div>
 <p class="hint" id="quiz-score" style="margin-top:14px"></p>
