@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grok Bot 從零教學｜澳門科學館</title>
+<meta name="description" content="澳門科學館：由空白帳戶學起 Grok Bot——主 bot 規則、小隊、路由、桌面、群組、電郵、雲端機、權限與價錢。查證 2026-10-31。">
+<style>
+:root{
+  --bg:#070b14;--panel:#0e1628;--side:#0a1220;--card:#121c30;
+  --line:#1e2d4a;--text:#e8eef8;--muted:#8b9bb8;
+  --accent:#5b8cff;--accent2:#22d3ee;--warn:#f59e0b;--danger:#f87171;--ok:#34d399;
+  --radius:14px;--side-w:260px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+a{color:var(--accent2);word-break:break-all}
+a:hover{filter:brightness(1.15)}
+.app{display:grid;grid-template-columns:var(--side-w) 1fr;grid-template-rows:52px 1fr 64px;height:100%}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:0 16px;background:linear-gradient(90deg,#0a1220,#121c38);border-bottom:1px solid var(--line);z-index:20}
+.brand{font-weight:800;font-size:.95rem;letter-spacing:.02em;white-space:nowrap}
+.brand span{color:var(--accent2)}
+.progress-wrap{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s}
+.counter{font-size:.95rem;font-weight:700;min-width:4.5em;text-align:right;opacity:.9}
+.btn-icon{background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff;width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1.1rem}
+.btn-icon:hover{background:rgba(91,140,255,.25)}
+.sidebar{background:var(--side);border-right:1px solid var(--line);overflow:auto;padding:12px 10px 24px}
+.sidebar h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:8px 10px 6px}
+.side-link{display:block;width:100%;text-align:left;background:transparent;border:0;color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer;font-size:.88rem;line-height:1.35;font-family:inherit}
+.side-link:hover,.side-link.active{background:rgba(91,140,255,.15);color:#fff}
+.side-link.active{border-left:3px solid var(--accent2);padding-left:7px;font-weight:700}
+.stage{overflow:auto;-webkit-overflow-scrolling:touch;padding:18px 20px 20px;background:
+  radial-gradient(ellipse at 80% 0%,rgba(91,140,255,.12),transparent 50%),
+  radial-gradient(ellipse at 10% 90%,rgba(34,211,238,.08),transparent 45%),
+  var(--bg)}
+.slide{display:none;max-width:980px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px 34px;min-height:min(68vh,720px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.slide.active{display:block;animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+.slide h1{font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.25;margin-bottom:12px;font-weight:800}
+.slide h2{font-size:clamp(1.45rem,2.8vw,1.95rem);margin-bottom:14px;font-weight:800;color:#fff}
+.slide h3{font-size:1.15rem;margin:14px 0 8px;color:var(--accent2)}
+.slide p,.slide li{line-height:1.65;font-size:1.08rem;color:var(--text)}
+.lead{font-size:1.2rem!important;color:var(--muted);margin-bottom:16px}
+.hint{font-size:.95rem;color:var(--muted);margin-top:10px}
+.badge{display:inline-block;font-size:.78rem;padding:3px 10px;border-radius:99px;font-weight:700;margin:0 4px 6px 0;background:rgba(91,140,255,.2);color:var(--accent2);border:1px solid rgba(91,140,255,.35)}
+.badge.warn{background:rgba(245,158,11,.15);color:var(--warn);border-color:rgba(245,158,11,.4)}
+.badge.danger{background:rgba(248,113,113,.15);color:var(--danger);border-color:rgba(248,113,113,.4)}
+.badge.ok{background:rgba(52,211,153,.15);color:var(--ok);border-color:rgba(52,211,153,.4)}
+.grid{display:grid;gap:12px;margin:14px 0}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:900px){.grid-3,.grid-5{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+@media(max-width:560px){.grid-3,.grid-5,.grid-2{grid-template-columns:1fr}}
+.icard{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px;min-height:110px}
+.icard .ico{font-size:1.7rem;line-height:1;margin-bottom:2px}
+.icard .ttl{font-weight:800;font-size:1.02rem;color:#fff}
+.icard .why{font-size:.92rem;color:var(--muted);line-height:1.45}
+.icard.sm{min-height:auto;padding:12px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:18px 0}
+.flow .node{background:rgba(91,140,255,.15);border:1px solid rgba(91,140,255,.4);border-radius:12px;padding:12px 16px;font-weight:700;text-align:center;min-width:100px}
+.flow .node.alt{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4)}
+.flow .node.warn{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.45)}
+.flow .arr{color:var(--accent2);font-size:1.4rem;font-weight:800}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+@media(max-width:700px){.dual{grid-template-columns:1fr}}
+.panel{border-radius:12px;padding:16px;border:1px solid var(--line);background:rgba(0,0,0,.25)}
+.panel.local{border-color:rgba(91,140,255,.5)}
+.panel.cloud{border-color:rgba(34,211,238,.5)}
+.panel h3{margin-top:0;display:flex;align-items:center;gap:8px}
+.steps-icons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;justify-content:center}
+.step{width:140px;text-align:center;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px 8px}
+.step .n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-bottom:6px}
+.step .ico{font-size:1.5rem;display:block;margin:4px 0}
+.step .lbl{font-size:.88rem;font-weight:700;line-height:1.35}
+table.t{width:100%;border-collapse:collapse;font-size:.98rem;margin:12px 0;overflow:auto;display:block}
+table.t thead,table.t tbody{display:table;width:100%;table-layout:fixed}
+table.t th,table.t td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+table.t th{background:rgba(91,140,255,.18);color:#fff;font-weight:800}
+table.t tr.hl td{background:rgba(34,211,238,.08)}
+table.t td.ok{color:var(--ok);font-weight:700}
+table.t td.no{color:var(--danger);font-weight:700}
+.callout{margin:14px 0;padding:12px 16px;border-radius:10px;border:1px solid var(--line);font-size:1.02rem;line-height:1.55}
+.callout.info{background:rgba(91,140,255,.1);border-color:rgba(91,140,255,.35)}
+.callout.warn{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.4)}
+.callout.danger{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.4)}
+.callout .h{font-weight:800;margin-bottom:4px}
+.prompt-box{margin:12px 0;border:1px solid rgba(34,211,238,.35);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.3)}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(34,211,238,.12);font-weight:700}
+.copy-btn{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:7px 14px;cursor:pointer;font-weight:700;font-size:.9rem}
+.copy-btn.copied{background:var(--ok)}
+.prompt-text{padding:12px 14px;white-space:pre-wrap;word-break:break-word;font-size:.95rem;line-height:1.6;max-height:240px;overflow:auto;color:#c8d4ea;font-family:ui-monospace,Menlo,Consolas,monospace}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:800;font-size:1rem;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.primary{background:linear-gradient(135deg,var(--accent),#7c5cff);color:#fff}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.disabled,.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.shot{margin:12px 0}
+.shot img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block;cursor:zoom-in;background:#000}
+.shot figcaption{font-size:.88rem;color:var(--muted);margin-top:6px}
+.mock{border:1px dashed rgba(139,155,184,.5);border-radius:12px;padding:14px;background:rgba(0,0,0,.2);margin:12px 0}
+.mock-tag{display:inline-block;font-size:.75rem;font-weight:800;background:rgba(245,158,11,.2);color:var(--warn);padding:2px 8px;border-radius:6px;margin-bottom:8px}
+.mock-ui{display:flex;gap:8px;min-height:120px}
+.mock-side{width:90px;background:#0a0f18;border-radius:8px;padding:8px;font-size:.7rem;color:var(--muted)}
+.mock-side div{padding:4px 6px;border-radius:4px;margin-bottom:4px}
+.mock-side .on{background:rgba(91,140,255,.3);color:#fff}
+.mock-main{flex:1;background:#0d1422;border-radius:8px;padding:10px;font-size:.85rem}
+.cover{text-align:center;padding:20px 8px 8px}
+.cover .logo{font-size:3rem;margin-bottom:8px}
+.nav{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:10px;padding:8px;background:rgba(7,11,20,.95);border-top:1px solid var(--line);z-index:30}
+.nav button{background:var(--accent);color:#fff;border:0;padding:11px 22px;border-radius:10px;font-size:1.05rem;cursor:pointer;min-width:100px;font-weight:800;font-family:inherit}
+.nav button:hover{filter:brightness(1.08)}
+.nav button:disabled{opacity:.35;cursor:default}
+.nav .toc-btn{background:rgba(255,255,255,.1)}
+.footer-note{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted);text-align:center;line-height:1.55}
+.quiz-opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);cursor:pointer;font-size:1.02rem;font-family:inherit}
+.quiz-opt:hover{border-color:var(--accent)}
+.quiz-opt.correct{border-color:var(--ok);background:rgba(52,211,153,.12)}
+.quiz-opt.wrong{border-color:var(--danger);background:rgba(248,113,113,.1)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.9);display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 12px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:96vw;max-height:85vh;object-fit:contain;border-radius:6px}
+.side-toggle{display:none}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none;position:fixed;inset:52px auto 64px 0;width:min(280px,88vw);z-index:50;box-shadow:4px 0 24px rgba(0,0,0,.5)}
+  .sidebar.open{display:block}
+  .side-toggle{display:inline-flex}
+  .slide{padding:20px 16px 28px}
+  .stage{padding:10px 8px}
+}
+.bullets{margin:8px 0 8px 1.2em}.bullets li{margin:.4em 0}
+.kv{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button type="button" class="btn-icon side-toggle" id="side-open" title="目錄" aria-label="目錄">☰</button>
+    <div class="brand">澳門科學館 · <span>Grok Bot</span> 從零</div>
+    <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+    <span class="counter" id="counter">1 / 1</span>
+  </header>
+
+  <nav class="sidebar" id="sidebar" aria-label="章節目錄"></nav>
+
+  <main class="stage" id="stage">
+
+<!-- ========== 0 封面 ========== -->
+<section class="slide active" data-title="封面" data-ch="0">
+<div class="cover">
+  <div class="logo">🤖✨</div>
+  <span class="badge">澳門科學館 · AI 學習資源</span>
+  <span class="badge warn">查證 2026-10-31</span>
+  <span class="badge">介面會改版</span>
+  <h1>Grok Bot 從零教學</h1>
+  <p class="lead">由空白帳戶 → 主 bot 規則 → 專責小隊 → 路由 → 桌面功能<br>→ 群組 → 電郵 → 雲端機 → 本機權限 → 內聯網 → 價錢</p>
+  <div class="btn-row" style="justify-content:center">
+    <a class="btn primary" href="https://x.ai/bot" target="_blank" rel="noopener">⬇️ 官方下載</a>
+    <a class="btn ghost" href="https://x.ai/pricing" target="_blank" rel="noopener">💰 價錢比較</a>
+    <a class="btn ghost" href="https://x.ai/bot/guides" target="_blank" rel="noopener">📘 官方指南</a>
+  </div>
+  <p class="hint">← → 鍵或下方按鈕翻頁 · 左側／☰ 跳章<br>對象：教師／同事／公眾（正式繁體中文）</p>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 這頁教什麼 ========== -->
+<section class="slide" data-title="這頁教什麼" data-ch="0">
+<h2>🗺️ 學習路徑（圖示總覽）</h2>
+<p class="lead">十步走完；每步都有圖示與短說明。</p>
+<div class="steps-icons">
+  <div class="step"><div class="n">1</div><span class="ico">⭐</span><div class="lbl">主 bot 10 規則</div></div>
+  <div class="step"><div class="n">2</div><span class="ico">👥</span><div class="lbl">角色型 bot</div></div>
+  <div class="step"><div class="n">3</div><span class="ico">🗺️</span><div class="lbl">路由卡</div></div>
+  <div class="step"><div class="n">4</div><span class="ico">💻</span><div class="lbl">桌面巡禮</div></div>
+  <div class="step"><div class="n">5</div><span class="ico">💬</span><div class="lbl">群組</div></div>
+  <div class="step"><div class="n">6</div><span class="ico">✉️</span><div class="lbl">Grok mail</div></div>
+  <div class="step"><div class="n">7</div><span class="ico">☁️</span><div class="lbl">雲端機 VM</div></div>
+  <div class="step"><div class="n">8</div><span class="ico">🔐</span><div class="lbl">本機權限</div></div>
+  <div class="step"><div class="n">9</div><span class="ico">🏢</span><div class="lbl">內聯網</div></div>
+  <div class="step"><div class="n">10</div><span class="ico">💳</span><div class="lbl">價錢下載</div></div>
+</div>
+<div class="callout info"><div class="h">最低門檻</div>要用 Grok Bot，最少訂閱 <strong>The X Subscription · Premium（US$30／月）</strong>；Free／Plus <strong>不包括</strong> Grok Bot。詳見 <a href="https://docs.x.ai/x-subscription/pricing" target="_blank" rel="noopener">docs 價錢</a>。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 下載入口 ========== -->
+<section class="slide" data-title="下載與起步入口" data-ch="0">
+<h2>⬇️ 下載與官方入口</h2>
+<div class="steps-icons">
+  <div class="step"><div class="n">1</div><span class="ico">💻</span><div class="lbl">下載桌面 app</div></div>
+  <div class="step"><div class="n">2</div><span class="ico">🔑</span><div class="lbl">Sign in with Cursor</div></div>
+  <div class="step"><div class="n">3</div><span class="ico">⭐</span><div class="lbl">開／設 Primary Bot</div></div>
+  <div class="step"><div class="n">4</div><span class="ico">📝</span><div class="lbl">用訊息交任務</div></div>
+</div>
+<div class="btn-row">
+  <a class="btn primary" href="https://x.ai/bot" target="_blank" rel="noopener">x.ai/bot 下載</a>
+  <a class="btn ghost" href="https://cursor.com/dashboard/bot" target="_blank" rel="noopener">Cursor dashboard</a>
+  <a class="btn ghost" href="https://docs.x.ai/grok-bot/get-started" target="_blank" rel="noopener">Get started</a>
+</div>
+<figure class="shot">
+  <img src="assets/01-xai-bot-download.png" alt="x.ai/bot 官方下載頁截圖" loading="lazy">
+  <figcaption>官方頁 x.ai/bot（2026-10-31 公開截圖）· 按鈕文字隨作業系統而變</figcaption>
+</figure>
+<p class="hint">手機可於 App Store／Play 安裝；若已有可用方案，<strong>不要</strong>在手機內再買一次。</p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 1 主 bot 10 規則 ========== -->
+<section class="slide" data-title="主 bot：10 條規則（上）" data-ch="1">
+<h2>⭐ 主 bot 起步：10 條規則（1–5）</h2>
+<p class="lead">主 bot＝入口／路由／閘／物證。每卡：做什麼 → 為什麼。</p>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">🎯</span><div class="ttl">1. 一件事一句職責</div><div class="why">做：只當入口與閘，不做所有 domain。<br>為何：避免雜訊與權限過大。</div></div>
+  <div class="icard"><span class="ico">🌐</span><div class="ttl">2. 繁中／時區／安靜</div><div class="why">做：繁中、Asia/Macau；週末／noop 安靜。<br>為何：減少打擾、時間一致。</div></div>
+  <div class="icard"><span class="ico">📨</span><div class="ttl">3. 外發一律草稿</div><div class="why">做：電郵／Slack／發帖先 draft。<br>為何：人把關，防誤寄。</div></div>
+  <div class="icard"><span class="ico">🧾</span><div class="ttl">4. Status ≠ evidence</div><div class="why">做：要截圖／URL／mtime。<br>為何：不信「已完成」自報。</div></div>
+  <div class="icard"><span class="ico">🔒</span><div class="ttl">5. 密碼不入 chat</div><div class="why">做：用 Vault／安全表單。<br>為何：防洩漏進記憶與記錄。</div></div>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="主 bot：10 條規則（下）" data-ch="1">
+<h2>⭐ 主 bot 起步：10 條規則（6–10）</h2>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">☁️</span><div class="ttl">6. 共用雲端機邊界</div><div class="why">做：知一站登入＝隊內可用。<br>為何：勿把「分 bot」當保安邊界。</div></div>
+  <div class="icard"><span class="ico">🛡️</span><div class="ttl">7. Auto-review／批准卡</div><div class="why">做：高風險先問；Always 要慎。<br>為何：雲端動作有閘。</div></div>
+  <div class="icard"><span class="ico">⏰</span><div class="ttl">8. Routines 先停再啟</div><div class="why">做：新人先看排程再開。<br>為何：防未知定時亂跑。</div></div>
+  <div class="icard"><span class="ico">♻️</span><div class="ttl">9. 一職一果／reuse 先</div><div class="why">做：多 bot 由主 bot 統籌。<br>為何：減少重疊與干擾。</div></div>
+  <div class="icard"><span class="ico">📘</span><div class="ttl">10. 讀官方三篇自檢</div><div class="why">做：讀完貼自檢指令（下頁）。<br>為何：對齊官方最佳做法。</div></div>
+</div>
+<div class="btn-row">
+  <a class="btn ghost" href="https://x.ai/bot/guides/grok-bot-101" target="_blank" rel="noopener">101</a>
+  <a class="btn ghost" href="https://x.ai/bot/guides/grok-bot-for-work" target="_blank" rel="noopener">For Work</a>
+  <a class="btn ghost" href="https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots" target="_blank" rel="noopener">Multi-team</a>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="自檢指令與模板" data-ch="1">
+<h2>📋 貼給主 bot 的自檢指令</h2>
+<p class="lead">自寫版本；貼上 Primary／主 bot 即可。</p>
+<div class="prompt-box">
+  <div class="prompt-head"><span>自檢指令（繁中）</span><button type="button" class="copy-btn" data-copy="chk">複製</button></div>
+  <pre class="prompt-text" id="chk">請細讀這三篇官方指南後，檢查我現有的 Bot 設計（先報告，未經同意勿修改任何 Bot；用繁體書面中文）：
+https://x.ai/bot/guides/grok-bot-101
+https://x.ai/bot/guides/grok-bot-for-work
+https://x.ai/bot/guides/how-i-run-multiple-teams-of-grok-bots
+
+請輸出：
+1) 各 Bot 名稱與一句職責
+2) 職責重疊或不清之處
+3) 權限過大處（例如可不經批准外發）
+4) 建議合併／拆分／新增（每項附指南根據）
+5) Routines 是否預設停用、外發是否草稿優先</pre>
+</div>
+<div class="btn-row">
+  <a class="btn disabled" href="#" aria-disabled="true" title="模板連結待補">📦 匯入主 bot／CoS 起步模板</a>
+  <span class="badge warn">模板連結待補</span>
+</div>
+<figure class="shot">
+  <img src="assets/03-bot-guides.png" alt="官方指南總覽截圖" loading="lazy">
+  <figcaption>官方指南總覽 x.ai/bot/guides（2026-10-31）</figcaption>
+</figure>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 2 角色型 ========== -->
+<section class="slide" data-title="建立 bot：角色型" data-ch="2">
+<h2>👥 建立 bot 的規則與角色型</h2>
+<p class="lead">概念＋一句職責；Import 模板＝副本，不帶登入與對話。</p>
+<div class="grid grid-3">
+  <div class="icard"><span class="ico">🩺</span><div class="ttl">對話健康檢查</div><div class="why">監察過長／紅燈，催 digest 或重生。</div></div>
+  <div class="icard"><span class="ico">📜</span><div class="ttl">規則 companion</div><div class="why">只保管規則與交接，不代操作。</div></div>
+  <div class="icard"><span class="ico">📅</span><div class="ttl">排程核對</div><div class="why">registry、誰何時跑、證據、漏跑催辦。</div></div>
+  <div class="icard"><span class="ico">✏️</span><div class="ttl">Bot 設計師</div><div class="why">只寫 brief／規格，不 Create。</div></div>
+  <div class="icard"><span class="ico">🏗️</span><div class="ttl">bot生成／建立</div><div class="why">真正 Create／Update bot。</div></div>
+  <div class="icard"><span class="ico">🏪</span><div class="ttl">Marketplace 模板</div><div class="why">Connect apps → Bot templates；分享前清 secrets。</div></div>
+</div>
+<div class="callout info"><div class="h">起步小隊建議</div>主 bot ＋ 健康檢查 ＋ 規則 companion ＋ 1–2 個專責（例如研究／寫作）。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 3 路由 ========== -->
+<section class="slide" data-title="路由卡" data-ch="3">
+<h2>🗺️ 路由卡：任務 → 哪個 bot</h2>
+<p class="lead">主 bot 薄路由；人不用記「找誰」。先 keyword 夠用。</p>
+<div class="flow">
+  <div class="node">📥 任務進來</div><span class="arr">→</span>
+  <div class="node alt">⭐ 主 bot</div><span class="arr">→</span>
+  <div class="node">🔍 keyword／trigger</div><span class="arr">→</span>
+  <div class="node alt">🎯 專責 bot</div>
+</div>
+<div class="flow">
+  <div class="node warn">❓ 無匹配</div><span class="arr">→</span>
+  <div class="node">fallback（主 bot 自做或問人）</div>
+</div>
+<div class="callout warn"><div class="h">Denial 要寫清</div>哪些事<strong>不</strong>交出去（例如付款、刪檔、對外公佈）寫在路由卡，避免誤派。</div>
+<table class="t">
+  <thead><tr><th>虛構角色</th><th>關鍵詞例</th><th>職責一句</th></tr></thead>
+  <tbody>
+    <tr><td>🔬 研究助手</td><td>查資料、來源、對照</td><td>蒐集與核對公開資料</td></tr>
+    <tr><td>✍️ 寫作助手</td><td>草稿、改寫、摘要</td><td>產出可審的文字稿</td></tr>
+    <tr class="hl"><td>✅ 審核助手</td><td>檢查、清單、風險</td><td>對照規則挑問題</td></tr>
+  </tbody>
+</table>
+<p class="hint">示例為虛構角色名；勿貼真實機構路由表／id。</p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 4 桌面巡禮 ========== -->
+<section class="slide" data-title="電腦版功能巡禮" data-ch="4">
+<h2>💻 電腦版功能巡禮（總覽）</h2>
+<p class="lead">側邊欄是指揮台。以下為<strong>示意圖</strong>，非真截圖。</p>
+<div class="mock">
+  <span class="mock-tag">示意圖</span>
+  <div class="mock-ui">
+    <div class="mock-side">
+      <div class="on">⭐ 主 bot</div>
+      <div>＋ New bot</div>
+      <div>🔌 Connect</div>
+      <div>📚 Library</div>
+      <div>⏰ Routines</div>
+      <div>⚙️ Settings</div>
+    </div>
+    <div class="mock-main">
+      <strong>對話區</strong><br>
+      · Auto-review 批准卡出現於此<br>
+      · Take over computer：你親自操作雲端螢幕<br>
+      · 語音／分享模板／Hidden／Sections 見下頁
+    </div>
+  </div>
+</div>
+<div class="grid grid-3">
+  <div class="icard sm"><span class="ico">➕</span><div class="ttl">建 bot</div><div class="why">短名＋一句職責＋怎麼做</div></div>
+  <div class="icard sm"><span class="ico">🔌</span><div class="ttl">Connect apps</div><div class="why">電郵、模板、第三方連接</div></div>
+  <div class="icard sm"><span class="ico">⚙️</span><div class="ttl">Settings</div><div class="why">General／Computer／Vault／Usage／Updates</div></div>
+  <div class="icard sm"><span class="ico">📚</span><div class="ttl">Library／Pages</div><div class="why">該 bot 產物與互動頁</div></div>
+  <div class="icard sm"><span class="ico">⏰</span><div class="ttl">Routines</div><div class="why">定時／觸發；新人先停用</div></div>
+  <div class="icard sm"><span class="ico">🛡️</span><div class="ttl">Auto-review</div><div class="why">雲端高風險動作閘</div></div>
+</div>
+<p class="hint">詳見 <a href="https://docs.x.ai/grok-bot/settings-and-notifications" target="_blank" rel="noopener">Settings</a> · <a href="https://docs.x.ai/grok-bot/computer-and-apps" target="_blank" rel="noopener">Computer &amp; apps</a></p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="桌面：進階控制" data-ch="4">
+<h2>🎛️ Take over · 語音 · 模板 · Hidden · Sections</h2>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">🖱️</span><div class="ttl">Take over computer</div><div class="why">你暫時接管雲端螢幕（登入／2FA）。密碼不給 bot 看。</div></div>
+  <div class="icard"><span class="ico">🎙️</span><div class="ttl">語音</div><div class="why">可用語音交代任務（以當日 app 為準）。</div></div>
+  <div class="icard"><span class="ico">📤</span><div class="ttl">分享／匯入模板</div><div class="why">Public template＝副本；清 secrets 再分享。</div></div>
+  <div class="icard"><span class="ico">🙈</span><div class="ttl">Hidden bots</div><div class="why">隱藏少用 bot，側邊欄更清。</div></div>
+  <div class="icard"><span class="ico">📁</span><div class="ttl">Sections 分組</div><div class="why">側邊欄分區管理多 bot。</div></div>
+  <div class="icard"><span class="ico">📊</span><div class="ttl">Usage／Updates</div><div class="why">看用量；跟 changelog 更新。</div></div>
+</div>
+<div class="btn-row">
+  <a class="btn ghost" href="https://docs.x.ai/grok-bot/approvals-security-and-privacy" target="_blank" rel="noopener">Approvals／安全</a>
+  <a class="btn ghost" href="https://x.ai/changelog/bot" target="_blank" rel="noopener">Changelog</a>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 5 群組 ========== -->
+<section class="slide" data-title="群組" data-ch="5">
+<h2>💬 Bot 群組</h2>
+<div class="steps-icons">
+  <div class="step"><div class="n">1</div><span class="ico">🆕</span><div class="lbl">New group chat</div></div>
+  <div class="step"><div class="n">2</div><span class="ico">🤖</span><div class="lbl">選 2–6 隻 bot</div></div>
+  <div class="step"><div class="n">3</div><span class="ico">📣</span><div class="lbl">開場白分工</div></div>
+  <div class="step"><div class="n">4</div><span class="ico">＠</span><div class="lbl">@ 點名少用 everyone</div></div>
+</div>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">⌨️</span><div class="ttl">桌面建立</div><div class="why">New chat／Cmd+Shift+N／Cmd+K → New group chat</div></div>
+  <div class="icard"><span class="ico">📱</span><div class="ttl">手機限制</div><div class="why">新版可能無法<strong>新建</strong>群；已有群多可開。以 <a href="https://cursor.com/help/grok-bot/group-chats" target="_blank" rel="noopener">官方 help</a> 為準。</div></div>
+</div>
+<div class="callout danger"><div class="h">群內看不到的東西</div>批准卡／秘密／電郵草稿<strong>不出現在群</strong>。Bot 互傳圖請用 1:1。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 6 Grok mail ========== -->
+<section class="slide" data-title="Grok mail" data-ch="6">
+<h2>✉️ Grok mail</h2>
+<div class="flow">
+  <div class="node">問 bot「申請電郵」</div><span class="arr">→</span>
+  <div class="node alt">或 Connect apps → Email</div><span class="arr">→</span>
+  <div class="node">名字@mail.grokbot.com</div>
+</div>
+<div class="kv">
+  <span class="chip">每帳戶一個</span>
+  <span class="chip">不可改名／刪除</span>
+  <span class="chip">全 bot 共用此址</span>
+  <span class="chip">+tag 分流</span>
+</div>
+<table class="t">
+  <thead><tr><th>用途</th><th>短做法</th></tr></thead>
+  <tbody>
+    <tr><td>🛒 代登記服務</td><td>用 bot 址註冊；驗證由 bot 讀（會問你）</td></tr>
+    <tr><td>↪️ 轉寄即報告</td><td>長信轉寄 → 摘要重點</td></tr>
+    <tr><td>🧾 集中收據</td><td>網購收據定期表</td></tr>
+    <tr><td>🗣️ 聯絡商戶</td><td>查價／跟進（多為草稿）</td></tr>
+    <tr><td>📅 約時間</td><td>來回郵件找空檔</td></tr>
+    <tr><td>📰 電子報摘要</td><td>+news 標籤＋週例行</td></tr>
+  </tbody>
+</table>
+<div class="callout warn"><div class="h">草稿規則</div>對話寄信可能經 Auto-review 後寄出；<strong>例行產物多為草稿</strong>，你按 Send 才寄。無獨立收件箱 UI——問 bot 查信。詳見 <a href="https://cursor.com/help/grok-bot/agent-email" target="_blank" rel="noopener">Agent email</a>。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 7 VM ========== -->
+<section class="slide" data-title="雲端機 VM" data-ch="7">
+<h2>☁️ VM：全部 bot 共用一部雲端機</h2>
+<p class="lead">各 bot 有自己螢幕；檔案／登入共用。持久檔放 <code>/workspace</code>。</p>
+<div class="dual">
+  <div class="panel local">
+    <h3>🖥️ Your computer（本機）</h3>
+    <ul class="bullets">
+      <li><strong>Execution</strong>：Ask／Always／Never</li>
+      <li><strong>Route traffic</strong>：流量經本機 → 對方見本機 IP</li>
+      <li>適合：內網、要你地區 IP 的站</li>
+    </ul>
+  </div>
+  <div class="panel cloud">
+    <h3>☁️ Bot's computer（雲端）</h3>
+    <ul class="bullets">
+      <li><strong>Update／Reset／Recover</strong></li>
+      <li>常見為資料中心 IP（如美國等地）</li>
+      <li>適合：需該區 IP 的服務情境</li>
+    </ul>
+  </div>
+</div>
+<div class="callout danger"><div class="h">只作架構說明</div>地區 IP 能力<strong>不教</strong>規避服務條款。請遵守各站條款與當地法律。私人／VPN 位址預設可能被擋，除非組織允許。</div>
+<p class="hint">Settings → Computer · <a href="https://docs.x.ai/grok-bot/computer-and-apps" target="_blank" rel="noopener">Computer &amp; apps</a></p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="VM 工具" data-ch="7">
+<h2>🧰 可在 VM 使用的工具（概念）</h2>
+<div class="grid grid-3">
+  <div class="icard"><span class="ico">🍒</span><div class="ttl">Cherry Studio</div><div class="why">多模型客戶端；可在雲端機安裝使用（以當日相容為準）。</div></div>
+  <div class="icard"><span class="ico">⌨️</span><div class="ttl">OpenCode</div><div class="why">終端／編程助理類工具，適合 CLI 工作流。</div></div>
+  <div class="icard"><span class="ico">🤝</span><div class="ttl">Workbuddy</div><div class="why">站內另有教學可互連。</div></div>
+</div>
+<div class="btn-row">
+  <a class="btn primary" href="../workbuddy/" target="_blank" rel="noopener">📘 站內 Workbuddy 教學</a>
+</div>
+<div class="callout info"><div class="h">Update 差別</div><strong>software update</strong> 多保留已裝 app；<strong>computer update／重建</strong> 可能清已裝 app／套件——之後要重裝。</div>
+<div class="mock">
+  <span class="mock-tag">示意圖 · Settings → Computer</span>
+  <div style="font-size:.95rem;line-height:1.7;color:var(--muted)">
+    [ Your computer ] Ask every time ▾ &nbsp;|&nbsp; Route traffic ☐<br>
+    [ Bot's computer ] Update · Reset · Recover
+  </div>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 8 穩定性 ========== -->
+<section class="slide" data-title="WeChat／WhatsApp 穩定性" data-ch="8">
+<h2>📡 即時通訊穩定性（如實）</h2>
+<div class="dual">
+  <div class="panel" style="border-color:var(--danger)">
+    <h3>⚠️ WeChat</h3>
+    <p><span class="badge danger">極不穩</span></p>
+    <p>VM 上登入／掃碼／session 極易斷。建議<strong>盡量不靠</strong>，或改本機專責策略。</p>
+  </div>
+  <div class="panel" style="border-color:var(--warn)">
+    <h3>⚠️ WhatsApp</h3>
+    <p><span class="badge warn">稍不穩</span></p>
+    <p>偶發斷線／要重連 QR。固定轉發要有<strong>重連檢查</strong>。</p>
+  </div>
+</div>
+<div class="callout warn"><div class="h">實務</div>不保證永遠 online。重要流程要有<strong>證據</strong>與<strong>補跑</strong>機制。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 9 本機權限 ========== -->
+<section class="slide" data-title="本機控制權限" data-ch="9">
+<h2>🔐 本機控制權限 vs Auto-review</h2>
+<div class="dual">
+  <div class="panel local">
+    <h3>🖥️ 本機 Execution</h3>
+    <div class="kv">
+      <span class="chip">Ask（預設）</span>
+      <span class="chip">Always</span>
+      <span class="chip">Never</span>
+    </div>
+    <p style="margin-top:10px">可跑指令、讀寫本機檔、檔案來回（類 CopyToBox／FromBox）。</p>
+  </div>
+  <div class="panel cloud">
+    <h3>🛡️ Auto-review</h3>
+    <p>管<strong>雲端機</strong>高風險動作；與本機 Execution <strong>分開</strong>。</p>
+    <p style="margin-top:8px">詳見 <a href="https://docs.x.ai/grok-bot/approvals-security-and-privacy" target="_blank" rel="noopener">Approvals</a>。</p>
+  </div>
+</div>
+<div class="callout danger"><div class="h">建議</div>無明確本機檔案需求 → 選 <strong>Never allow</strong>。團隊 admin 可設上限；第一次批准卡看清楚選項。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 10 內聯網 ========== -->
+<section class="slide" data-title="連內聯網" data-ch="10">
+<h2>🏢 連機構內聯網（概念）</h2>
+<p class="lead">雲端機預設公網。到內網通常靠下列之一：</p>
+<div class="flow">
+  <div class="node">☁️ 雲端機</div><span class="arr">↛</span>
+  <div class="node warn">內網資源</div>
+</div>
+<div class="steps-icons">
+  <div class="step"><span class="ico">🔀</span><div class="lbl">經本機路由</div></div>
+  <div class="step"><span class="ico">🛡️</span><div class="lbl">VPN／允許清單</div></div>
+  <div class="step"><span class="ico">🖥️</span><div class="lbl">本機執行</div></div>
+</div>
+<div class="callout info"><div class="h">佔位示例（非真實位址）</div><code>http://內部主機/路徑/…</code> — <strong>勿</strong>把真實 IP／端口寫進公開教學或 bot 規則。</div>
+<div class="callout danger"><div class="h">風險</div>開本機路由／本機執行＝bot 可能摸到內網 → 審批要嚴。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 11 Primary ========== -->
+<section class="slide" data-title="Primary 星號與新功能" data-ch="11">
+<h2>⭐ Primary Bot 與近期能力（精簡）</h2>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">⭐</span><div class="ttl">Primary 星號</div><div class="why">側邊欄有星：日常先找它；可主動提議代勞（仍經批准）。Team Bot 不能設為 Primary。</div></div>
+  <div class="icard"><span class="ico">📄</span><div class="ttl">Pages</div><div class="why">互動報告／追蹤頁；可分享連結或 PDF。</div></div>
+  <div class="icard"><span class="ico">📊</span><div class="ttl">簡報</div><div class="why">選樣板 → PPT／Google Slides（Slides 需連 Google）。</div></div>
+  <div class="icard"><span class="ico">🖼️</span><div class="ttl">生圖／短片</div><div class="why">多比例圖片；影片最長約 15 秒（以當日為準）。</div></div>
+  <div class="icard"><span class="ico">𝕏</span><div class="ttl">X 公開搜尋</div><div class="why">不必連 X 帳戶也可搜公開帖。</div></div>
+  <div class="icard"><span class="ico">🎨</span><div class="ttl">Canva 卡</div><div class="why">連接後對話內操作；補生圖「文字不準」。</div></div>
+</div>
+<p class="hint">功能隨版本推出；見 <a href="https://x.ai/changelog/bot" target="_blank" rel="noopener">changelog</a>。</p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 12 Vault ========== -->
+<section class="slide" data-title="Vault 與安全" data-ch="12">
+<h2>🔐 Vault 與安全習慣</h2>
+<div class="grid grid-3">
+  <div class="icard"><span class="ico">🏦</span><div class="ttl">用 Vault</div><div class="why">登入資料／必要密鑰放 Vault，不貼 chat。</div></div>
+  <div class="icard"><span class="ico">🚫</span><div class="ttl">不貼 key</div><div class="why">API key、密碼、token 禁止進對話／memory。</div></div>
+  <div class="icard"><span class="ico">🖱️</span><div class="ttl">Take over 登入</div><div class="why">2FA／驗證碼由你在螢幕完成。</div></div>
+</div>
+<div class="callout warn"><div class="h">付款與信用卡</div>Bot 可能存卡並代付（每次金額卡）。<strong>不建議</strong>交主要信用卡；每次金額自己看清再批。</div>
+<div class="callout info"><div class="h">共用登入</div>一 bot 登入某站 → 同雲端機其他 bot 也可能用到該站。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 13 故障 FAQ 練習 ========== -->
+<section class="slide" data-title="故障排除" data-ch="13">
+<h2>🔧 故障次序（先溫和）</h2>
+<div class="flow">
+  <div class="node">1 Quit 重開</div><span class="arr">→</span>
+  <div class="node alt">2 Update</div><span class="arr">→</span>
+  <div class="node">3 Recover</div><span class="arr">→</span>
+  <div class="node warn">4 Reset</div>
+</div>
+<p class="hint">Reset 破壞性較高；先備份／workspace 重要檔。電腦重建可能清已裝套件。</p>
+<div class="callout info"><div class="h">常見 FAQ</div>
+<ul class="bullets">
+  <li><strong>Free／Plus 能用 Bot？</strong> 不能；最少 Premium。</li>
+  <li><strong>手機再買？</strong> 已有方案不要在商店再買。</li>
+  <li><strong>為何看不到新功能？</strong> 先更新 app；對照 changelog。</li>
+  <li><strong>外發會直接寄？</strong> 例行多草稿；對話寄信看批准／Auto-review。</li>
+</ul>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="下一步練習" data-ch="13">
+<h2>✅ 下一步練習（清單）</h2>
+<div class="grid grid-2">
+  <div class="icard"><span class="ico">1️⃣</span><div class="ttl">建／設主 bot</div><div class="why">套用 10 規則；貼自檢指令。</div></div>
+  <div class="icard"><span class="ico">2️⃣</span><div class="ttl">匯入一個官方模板</div><div class="why">Connect apps → Bot templates；檢查 Routines 先停。</div></div>
+  <div class="icard"><span class="ico">3️⃣</span><div class="ttl">建兩 bot 小組</div><div class="why">練習 @ 點名與開場白分工。</div></div>
+  <div class="icard"><span class="ico">4️⃣</span><div class="ttl">申請電郵（可選）</div><div class="why">想清楚名字；不可改刪。</div></div>
+</div>
+<figure class="shot">
+  <img src="assets/04-docs-get-started.png" alt="官方 Get started 文件截圖" loading="lazy">
+  <figcaption>docs Get started（2026-10-31）</figcaption>
+</figure>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 15 價錢 ========== -->
+<section class="slide" data-title="價錢與下載" data-ch="15">
+<h2>💳 The X Subscription（個人）</h2>
+<p class="lead">查證 2026-10-31 · 美元未連稅 · 以結帳頁為準</p>
+<table class="t">
+  <thead><tr><th>方案</th><th>月費</th><th>年費</th><th>Grok Bot</th><th>用量相對 Plus</th></tr></thead>
+  <tbody>
+    <tr><td>Free</td><td>$0</td><td>—</td><td class="no">不包括</td><td>Limited</td></tr>
+    <tr><td>Plus</td><td>$8</td><td>$80</td><td class="no">不包括</td><td>Base</td></tr>
+    <tr class="hl"><td>⭐ Premium</td><td>$30</td><td>$300</td><td class="ok">包括</td><td>4×</td></tr>
+    <tr><td>Super</td><td>$100</td><td>$1000</td><td class="ok">包括</td><td>15×</td></tr>
+    <tr><td>Ultra</td><td>$200</td><td>$2000</td><td class="ok">包括</td><td>50×</td></tr>
+  </tbody>
+</table>
+<div class="grid grid-3">
+  <div class="icard sm"><span class="ico">📅</span><div class="ttl">每週重置</div><div class="why">用量週期每週</div></div>
+  <div class="icard sm"><span class="ico">🏊</span><div class="ttl">共用池</div><div class="why">Grok／Bot／Cursor</div></div>
+  <div class="icard sm"><span class="ico">🧩</span><div class="ttl">第三方另計</div><div class="why">Claude／GPT 等</div></div>
+</div>
+<div class="btn-row">
+  <a class="btn primary" href="https://x.ai/pricing" target="_blank" rel="noopener">x.ai/pricing</a>
+  <a class="btn ghost" href="https://docs.x.ai/x-subscription/pricing" target="_blank" rel="noopener">docs 價錢</a>
+  <a class="btn ghost" href="https://docs.x.ai/x-subscription/grok-bot" target="_blank" rel="noopener">Grok Bot 與方案</a>
+  <a class="btn ghost" href="https://x.ai/bot" target="_blank" rel="noopener">下載</a>
+</div>
+<figure class="shot">
+  <img src="assets/02-xai-pricing.png" alt="x.ai/pricing 截圖" loading="lazy">
+  <figcaption>x.ai/pricing（2026-10-31）</figcaption>
+</figure>
+<figure class="shot">
+  <img src="assets/05-docs-pricing.png" alt="docs 訂閱價錢截圖" loading="lazy">
+  <figcaption>docs.x.ai 訂閱價錢（2026-10-31）</figcaption>
+</figure>
+<div class="callout warn"><div class="h">舊方案</div>舊 Cursor Pro 等可繼續；轉 X Subscription <strong>永久</strong>。手機已有方案勿在 App Store／Play 再買。</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<!-- ========== 測驗 ========== -->
+<section class="slide" data-title="小測驗" data-ch="15">
+<h2>📝 小測驗（4 題）</h2>
+<div id="quiz">
+  <div class="q" data-ans="1">
+    <p><strong>1.</strong> 哪個個人方案起包括 Grok Bot？</p>
+    <button type="button" class="quiz-opt" data-i="0">Plus（$8）</button>
+    <button type="button" class="quiz-opt" data-i="1">Premium（$30）</button>
+    <button type="button" class="quiz-opt" data-i="2">Free</button>
+  </div>
+  <div class="q" data-ans="1" style="margin-top:18px">
+    <p><strong>2.</strong> 例行工作產生的外發電郵，通常應？</p>
+    <button type="button" class="quiz-opt" data-i="0">直接寄出</button>
+    <button type="button" class="quiz-opt" data-i="1">先成草稿，人按 Send</button>
+    <button type="button" class="quiz-opt" data-i="2">自動刪除</button>
+  </div>
+  <div class="q" data-ans="2" style="margin-top:18px">
+    <p><strong>3.</strong> 無本機檔案需求時，本機 Execution 建議？</p>
+    <button type="button" class="quiz-opt" data-i="0">Always</button>
+    <button type="button" class="quiz-opt" data-i="1">Ask</button>
+    <button type="button" class="quiz-opt" data-i="2">Never</button>
+  </div>
+  <div class="q" data-ans="0" style="margin-top:18px">
+    <p><strong>4.</strong> 全部 bot 的雲端電腦關係是？</p>
+    <button type="button" class="quiz-opt" data-i="0">共用一部雲端機（螢幕各有、檔案／登入共）</button>
+    <button type="button" class="quiz-opt" data-i="1">每 bot 獨立雲端機完全隔離</button>
+    <button type="button" class="quiz-opt" data-i="2">只有 Primary 有雲端機</button>
+  </div>
+</div>
+<p class="hint" id="quiz-score" style="margin-top:14px"></p>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版</p>
+</section>
+
+<section class="slide" data-title="完" data-ch="15">
+<div class="cover">
+  <div class="logo">🎓</div>
+  <h1>學完了</h1>
+  <p class="lead">記住：主 bot 薄路由 · 外發草稿 · Status≠evidence · 密碼進 Vault<br>本機無需求就 Never · 介面會改版，以官方為準</p>
+  <div class="btn-row" style="justify-content:center">
+    <a class="btn primary" href="https://x.ai/bot" target="_blank" rel="noopener">下載 Grok Bot</a>
+    <a class="btn ghost" href="https://x.ai/bot/guides" target="_blank" rel="noopener">官方指南</a>
+    <a class="btn ghost" href="../workbuddy/" target="_blank" rel="noopener">Workbuddy</a>
+  </div>
+</div>
+<p class="footer-note">澳門科學館 AI 學習資源 · 查證 2026-10-31 · 介面會改版<br>本頁為自製教學，排版與內容非 grokbot.hked.ai 複製。</p>
+</section>
+
+  </main>
+
+  <nav class="nav">
+    <button type="button" class="toc-btn" id="toc-btn">目錄</button>
+    <button type="button" id="prev" disabled>← 上一頁</button>
+    <button type="button" id="next">下一頁 →</button>
+  </nav>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-label="放大圖"><img alt=""><span class="hint" style="color:#aaa;margin-top:8px">點空白關閉</span></div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const progress=document.getElementById('progress');
+  const counter=document.getElementById('counter');
+  const prev=document.getElementById('prev');
+  const next=document.getElementById('next');
+  const sidebar=document.getElementById('sidebar');
+  let i=0;
+
+  // sidebar by chapter
+  const chNames={0:'0 封面／入口',1:'1 主 bot 規則',2:'2 角色型 bot',3:'3 路由卡',4:'4 桌面巡禮',5:'5 群組',6:'6 Grok mail',7:'7 雲端機 VM',8:'8 穩定性',9:'9 本機權限',10:'10 內聯網',11:'11 Primary／功能',12:'12 Vault 安全',13:'13 故障／練習',15:'15 價錢／測驗'};
+  const seen=new Set();
+  let html='<h3>章節</h3>';
+  slides.forEach((s,idx)=>{
+    const ch=s.dataset.ch;
+    if(!seen.has(ch)){
+      seen.add(ch);
+      html+=`<button type="button" class="side-link" data-jump="${idx}">${chNames[ch]||s.dataset.title}</button>`;
+    }
+  });
+  html+='<h3>本頁</h3>';
+  slides.forEach((s,idx)=>{
+    html+=`<button type="button" class="side-link sub" data-jump="${idx}">${idx+1}. ${s.dataset.title}</button>`;
+  });
+  sidebar.innerHTML=html;
+
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    progress.style.width=((i+1)/slides.length*100)+'%';
+    counter.textContent=(i+1)+' / '+slides.length;
+    prev.disabled=i===0;
+    next.disabled=i===slides.length-1;
+    sidebar.querySelectorAll('.side-link').forEach(a=>{
+      a.classList.toggle('active', +a.dataset.jump===i);
+    });
+    document.querySelector('.stage').scrollTop=0;
+  }
+  prev.onclick=()=>show(i-1);
+  next.onclick=()=>show(i+1);
+  sidebar.addEventListener('click',e=>{
+    const t=e.target.closest('[data-jump]');
+    if(!t)return;
+    show(+t.dataset.jump);
+    sidebar.classList.remove('open');
+  });
+  document.getElementById('toc-btn').onclick=()=>sidebar.classList.toggle('open');
+  document.getElementById('side-open').onclick=()=>sidebar.classList.toggle('open');
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();show(i+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1)}
+    if(e.key==='Escape'){document.getElementById('lb').classList.remove('open');sidebar.classList.remove('open')}
+  });
+
+  // copy
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      const id=btn.dataset.copy;
+      const text=document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent='已複製';btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent='複製';btn.classList.remove('copied')},1500);
+      });
+    };
+  });
+
+  // lightbox
+  const lb=document.getElementById('lb');
+  document.querySelectorAll('.shot img').forEach(img=>{
+    img.onclick=e=>{e.stopPropagation();lb.querySelector('img').src=img.src;lb.classList.add('open')};
+  });
+  lb.onclick=()=>lb.classList.remove('open');
+
+  // quiz
+  document.querySelectorAll('.q').forEach(q=>{
+    const ans=+q.dataset.ans;
+    q.querySelectorAll('.quiz-opt').forEach(opt=>{
+      opt.onclick=()=>{
+        if(q.dataset.done)return;
+        q.dataset.done='1';
+        const ok=+opt.dataset.i===ans;
+        opt.classList.add(ok?'correct':'wrong');
+        q.querySelectorAll('.quiz-opt').forEach(o=>{
+          if(+o.dataset.i===ans)o.classList.add('correct');
+        });
+        const done=[...document.querySelectorAll('.q')].filter(x=>x.dataset.done).length;
+        const right=[...document.querySelectorAll('.q')].filter(x=>{
+          const a=x.querySelector('.quiz-opt.correct');
+          return x.dataset.done && a && !x.querySelector('.wrong');
+        }).length;
+        // recount properly
+        let r=0,t=0;
+        document.querySelectorAll('.q').forEach(qq=>{
+          if(!qq.dataset.done)return;t++;
+          const wrong=qq.querySelector('.wrong');
+          if(!wrong)r++;
+        });
+        document.getElementById('quiz-score').textContent='目前答對 '+r+' / '+t+'（共 4 題）';
+      };
+    });
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>
